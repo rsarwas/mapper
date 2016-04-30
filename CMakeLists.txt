@@ -107,9 +107,9 @@ endif()
 option(Mapper_DEVELOPMENT_BUILD "Configure development build (loading resource from the build directory)" ${Mapper_DEVELOPMENT_BUILD_DEFAULT})
 mark_as_advanced(Mapper_DEVELOPMENT_BUILD)
 
-option(Mapper_AUTORUN_UNIT_TESTS "Run the unit tests as part of the default target"   ${Mapper_DEVELOPMENT_BUILD})
-option(Mapper_AUTORUN_SYSTEM_TESTS "Run the system tests as part of the default target" OFF)
-mark_as_advanced(Mapper_AUTORUN_UNIT_TESTS Mapper_AUTORUN_SYSTEM_TESTS)
+option(Mapper_AUTORUN_SYSTEM_TESTS "Run the system tests as part of the Mapper_Test target" ${Mapper_DEVELOPMENT_BUILD})
+option(Mapper_AUTORUN_MANUAL_TESTS "Run the system tests as part of the Mapper_Test target" OFF)
+mark_as_advanced(Mapper_AUTORUN_SYSTEM_TESTS Mapper_AUTORUN_MANUAL_TESTS)
 
 option(Mapper_BUILD_PACKAGE     "Create a target for building packages"                ${Mapper_BUILD_PACKAGE_DEFAULT})
 option(Mapper_PACKAGE_PROJ      "Include all required Proj components in the packages" ${Mapper_BUILD_PROJ})
@@ -253,6 +253,9 @@ include_directories(${QT_INCLUDES} ${CMAKE_CURRENT_BINARY_DIR} ${PROJ_INCLUDE_DI
 
 if(Mapper_DEVELOPMENT_BUILD)
 	add_definitions(-DMAPPER_DEVELOPMENT_BUILD)
+	include(EnableSanitize)
+	enable_sanitize(address undefined)
+	configure_file(suppress.txt.in suppress.txt COPY_ONLY)
 else()
 	add_definitions(-DQT_NO_DEBUG -DQT_NO_DEBUG_OUTPUT -DQT_NO_WARNING_OUTPUT -DNDEBUG)
 endif()

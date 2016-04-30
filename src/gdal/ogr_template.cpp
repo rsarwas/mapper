@@ -22,6 +22,7 @@
 #include <QFile>
 #include <QXmlStreamReader>
 
+#include "gdal_manager.h"
 #include "ogr_file_format_p.h"
 #include "../map.h"
 #include "../object.h"
@@ -29,9 +30,7 @@
 
 const std::vector<QByteArray>& OgrTemplate::supportedExtensions()
 {
-	/// \todo Build from driver list in GDAL/OGR >= 2.0
-	static std::vector<QByteArray> extensions = { "dxf", "shp", "shx", "dbf" };
-	return extensions;
+	return GdalManager().supportedVectorExtensions();
 }
 
 
@@ -49,9 +48,9 @@ OgrTemplate::~OgrTemplate()
 }
 
 
-QString OgrTemplate::getTemplateType() const
+const char* OgrTemplate::getTemplateType() const
 {
-	return QLatin1String("OgrTemplate");
+	return "OgrTemplate";
 }
 
 
@@ -76,7 +75,7 @@ bool OgrTemplate::loadTemplateFileImpl(bool configuring)
 			for (auto& warning : importer.warnings())
 			{
 				message.append(warning);
-				message.append('\n');
+				message.append(QLatin1Char{'\n'});
 			}
 			message.chop(1);
 			setErrorString(message);
@@ -86,7 +85,7 @@ bool OgrTemplate::loadTemplateFileImpl(bool configuring)
 	}
 	catch (FileFormatException& e)
 	{
-		setErrorString(e.what());
+		setErrorString(QString::fromUtf8(e.what()));
 		return false;
 	}
 }

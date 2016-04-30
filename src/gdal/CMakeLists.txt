@@ -22,17 +22,28 @@ find_package(Qt5Gui REQUIRED)
 find_package(Qt5Widgets REQUIRED) # TODO: Remove, once Symbol headers don't need it.
  
 qt_wrap_cpp(mapper-gdal MAPPER_GDAL_MOC
+  gdal_settings_page.h
   ogr_file_format_p.h
   ogr_template.h
 )
 
 add_library(mapper-gdal STATIC
   ${MAPPER_GDAL_MOC}
+  gdal_manager.h
+  gdal_manager.cpp
+  gdal_settings_page.h
+  gdal_settings_page.cpp
   ogr_file_format.h
   ogr_file_format_p.h
   ogr_file_format.cpp
   ogr_template.h
   ogr_template.cpp
+)
+
+target_compile_definitions(mapper-gdal PRIVATE
+  QT_NO_CAST_FROM_ASCII
+  QT_NO_CAST_TO_ASCII
+  QT_USE_QSTRINGBUILDER
 )
 
 target_compile_definitions(mapper-gdal INTERFACE MAPPER_USE_GDAL)

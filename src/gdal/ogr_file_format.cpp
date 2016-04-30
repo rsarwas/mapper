@@ -31,6 +31,7 @@
 #include <QRegularExpression>
 #include <QtMath>
 
+#include "gdal_manager.h"
 #include "../core/georeferencing.h"
 #include "../map.h"
 #include "../object_text.h"
@@ -71,24 +72,6 @@ namespace ogr
 
 namespace
 {
-	/**
-	 * OGR driver setup utility.
-	 */
-	class OgrDriverSetup
-	{
-	public:
-		OgrDriverSetup()
-		{
-			// Options for debugging and for some drivers
-			//CPLSetConfigOption("CPL_DEBUG", "ON");
-			CPLSetConfigOption("USE_PROJ_480_FEATURES", "YES");
-			CPLSetConfigOption("OSM_USE_CUSTOM_INDEXING", "NO");
-			
-			// GDAL 2.0: GDALAllRegister();
-			OGRRegisterAll();
-		}
-	};
-	
 	void applyPenWidth(OGRStyleToolH tool, LineSymbol* line_symbol)
 	{
 		int is_null;
@@ -151,7 +134,7 @@ namespace
 		if (!is_null)
 		{
 			auto pattern = QString::fromLatin1(raw_pattern);
-			auto sub_pattern_re = QRegularExpression("([0-9.]+)([a-z]*) *([0-9.]+)([a-z]*)");
+			auto sub_pattern_re = QRegularExpression(QString::fromLatin1("([0-9.]+)([a-z]*) *([0-9.]+)([a-z]*)"));
 			auto match = sub_pattern_re.match(pattern);
 			double length_0, length_1;
 			bool ok = match.hasMatch();
@@ -176,7 +159,7 @@ namespace
 	int getFontSize(const char* font_size_string)
 	{
 		auto pattern = QString::fromLatin1(font_size_string);
-		auto sub_pattern_re = QRegularExpression("([0-9.]+)([a-z]*)");
+		auto sub_pattern_re = QRegularExpression(QString::fromLatin1("([0-9.]+)([a-z]*)"));
 		auto match = sub_pattern_re.match(pattern);
 		double font_size;
 		bool ok = match.hasMatch();
@@ -252,13 +235,10 @@ namespace
 // ### OgrFileFormat ###
 
 OgrFileFormat::OgrFileFormat()
- : FileFormat(OgrFile, "OGR", ImportExport::tr("Geospatial vector data"), QString::null, ImportSupported)
+ : FileFormat(OgrFile, "OGR", ImportExport::tr("Geospatial vector data"), QString{}, ImportSupported)
 {
-	static OgrDriverSetup setup;
-	
-	/// \todo Query GDAL/OGR 2.0 for drivers and extensions
-	addExtension(QLatin1String("dxf"));
-	addExtension(QLatin1String("shp"));
+	for (const auto extension : GdalManager().supportedVectorExtensions())
+		addExtension(QString::fromLatin1(extension));
 }
 
 bool OgrFileFormat::understands(const unsigned char*, size_t) const
@@ -281,6 +261,8 @@ OgrFileImport::OgrFileImport(QIODevice* stream, Map* map, MapView* view, bool dr
  , manager{ OGR_SM_Create(nullptr) }
  , drawing_from_projected{ drawing_from_projected }
 {
+	GdalManager().configure();
+	
 	setOption(QLatin1String{ "Separate layers" }, QVariant{ false });
 	
 	auto spec = QByteArray::fromRawData("WGS84", 6);
@@ -300,12 +282,12 @@ OgrFileImport::OgrFileImport(QIODevice* stream, Map* map, MapView* view, bool dr
 	// Reasonable default?
 	
 	// OGR feature style defaults
-	default_pen_color = new MapColor("Black", 0); 
+	default_pen_color = new MapColor(tr("Black"), 0); 
 	default_pen_color->setRgb({0.0, 0.0, 0.0});
 	default_pen_color->setCmykFromRgb();
 	map->addColor(default_pen_color, 0);
 	
-	auto default_brush_color = new MapColor("Black 50%", 0);
+	auto default_brush_color = new MapColor(tr("Black") + QLatin1String(" 50%"), 0);
 	default_brush_color->setRgb({0.5, 0.5, 0.5});
 	default_brush_color->setCmykFromRgb();
 	map->addColor(default_brush_color, 1);
@@ -387,11 +369,11 @@ void OgrFileImport::import(bool load_symbols_only)
 				{
 					if (part->getNumObjects() == 0)
 					{
-						part->setName(OGR_L_GetName(layer));
+						part->setName(QString::fromUtf8(OGR_L_GetName(layer)));
 					}
 					else
 					{
-						part = new MapPart(OGR_L_GetName(layer), map);
+						part = new MapPart(QString::fromUtf8(OGR_L_GetName(layer)), map);
 						auto index = map->getNumParts();
 						map->addPart(part, index);
 						map->setCurrentPartIndex(index);
@@ -411,7 +393,7 @@ void OgrFileImport::import(bool load_symbols_only)
 	if (no_transformation)
 	{
 		addWarning(tr("Unable to load %n objects, reason: %1", nullptr, no_transformation)
-		           .arg(tr("Can't determine the coordinate transformation: %1").arg(CPLGetLastErrorMsg())));
+		           .arg(tr("Can't determine the coordinate transformation: %1").arg(QString::fromUtf8(CPLGetLastErrorMsg()))));
 	}
 	if (failed_transformation)
 	{
@@ -502,7 +484,7 @@ void OgrFileImport::importFeature(MapPart* map_part, OGRFeatureDefnH feature_def
 			if (value && qstrlen(value) > 0)
 			{
 				auto field_definition = OGR_FD_GetFieldDefn(feature_definition, i);
-				object->setTag(OGR_Fld_GetNameRef(field_definition), value);
+				object->setTag(QString::fromUtf8(OGR_Fld_GetNameRef(field_definition)), QString::fromUtf8(value));
 			}
 		}
 	}
@@ -565,14 +547,14 @@ Object* OgrFileImport::importPointGeometry(MapPart* map_part, OGRFeatureH featur
 		Q_ASSERT(split < length);
 		
 		auto label = description.right(length - split - 1);
-		if (label.startsWith('{') && label.endsWith('}'))
+		if (label.startsWith(QLatin1Char{'{'}) && label.endsWith(QLatin1Char{'}'}))
 		{
-			label.remove(0,1);
+			label.remove(0, 1);
 			label.chop(1);
 			int index = OGR_F_GetFieldIndex(feature, label.toLatin1());
 			if (index >= 0)
 			{
-				label = QString(OGR_F_GetFieldAsString(feature, index));
+				label = QString::fromUtf8(OGR_F_GetFieldAsString(feature, index));
 			}
 		}
 		if (!label.isEmpty())
@@ -580,8 +562,8 @@ Object* OgrFileImport::importPointGeometry(MapPart* map_part, OGRFeatureH featur
 			auto object = new TextObject(symbol);
 			object->setAnchorPosition(toMapCoord(OGR_G_GetX(geometry, 0), OGR_G_GetY(geometry, 0)));
 			// DXF observation
-			label.replace(QRegularExpression("(\\\\[^;]*;)*", QRegularExpression::MultilineOption), QString::null);
-			label.replace(QLatin1String("^I"), "\t");
+			label.replace(QRegularExpression(QString::fromLatin1("(\\\\[^;]*;)*"), QRegularExpression::MultilineOption), QString{});
+			label.replace(QLatin1String("^I"), QLatin1String("\t"));
 			object->setText(label);
 			
 			bool ok;
@@ -722,7 +704,7 @@ MapColor* OgrFileImport::makeColor(OGRStyleToolH tool, const char* color_string)
 		}
 		else if (a > 0)
 		{
-			color = new MapColor(color_string, map->getNumColors());
+			color = new MapColor(QString::fromUtf8(color_string), map->getNumColors());
 			color->setRgb(QColor{ r, g, b });
 			color->setCmykFromRgb();
 			map->addColor(color, map->getNumColors());
@@ -978,7 +960,7 @@ TextSymbol* OgrFileImport::getSymbolForLabel(OGRStyleToolH tool, const QByteArra
 	description.append(QString::number(100 + anchor));
 	description.append(QString::number(angle, 'g', 1));
 	description.append(QLatin1Char(' '));
-	description.append(label_string);
+	description.append(QString::fromUtf8(label_string));
 	text_symbol->setDescription(description);
 	
 	return text_symbol;
