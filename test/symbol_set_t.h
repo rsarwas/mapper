@@ -1,5 +1,5 @@
 /*
- *    Copyright 2014, 2015 Kai Pastor
+ *    Copyright 2014-2017 Kai Pastor
  *
  *    This file is part of OpenOrienteering.
  *
@@ -20,34 +20,74 @@
 #ifndef OPENORIENTEERING_SYMBOL_SET_T_H
 #define OPENORIENTEERING_SYMBOL_SET_T_H
 
-#include <QtTest/QtTest>
+#include <vector>
+
+#include <QDir>
+#include <QObject>
+#include <QString>
+
+class QXmlStreamWriter;
 
 /**
- * @test Updates compressed and scaled symbol sets and examples files.
+ * @test Updates compressed and scaled symbol sets, examples and test files,
+ *       and update map symbol translation files.
  * 
  * This tool overwrites the .omap symbol set files in the symbol set directory.
  * This is not only a test uncovering changes in the standard file format but
  * also helps to maintain the released compact symbol sets from a minimum set
  * of verbose source symbol sets.
  * 
- * This tool also creates compressed example files out of orignal .xmap files.
+ * This tool also creates compressed example files out of original .xmap files.
+ * 
+ * In addition it creates and updates map symbol translation files for all
+ * symbol names and descriptions in the symbol set files. The symbol set file
+ * name is used to determine language and translation "context". The translation
+ * "comment" field is used to identify strings independent of symbol name and
+ * description.
  * 
  * The target files remain untouched if there is no change.
  */
 class SymbolSetTool : public QObject
 {
 Q_OBJECT
+
+public:	
+	struct TranslationEntry
+	{
+		struct Translation
+		{
+			QString language;
+			QString translation;
+			QString type;
+		};
+
+		QString context;
+		QString source;
+		QString comment;
+		std::vector<Translation> translations;
+		
+		void write(QXmlStreamWriter& xml, const QString& language);
+	};
 	
 private slots:
 	void initTestCase();
 	void processSymbolSet_data();
 	void processSymbolSet();
+	void processSymbolSetTranslations();
 	void processExamples_data();
 	void processExamples();
+	void processTestData_data();
+	void processTestData();
 	
 private:
+	std::vector<TranslationEntry> translation_entries;
+	bool translations_complete;
+	
 	QDir symbol_set_dir;
 	QDir examples_dir;
+	QDir test_data_dir;
+	QDir translations_dir;
+	
 };
 
 #endif // OPENORIENTEERING_SYMBOL_SET_T_H

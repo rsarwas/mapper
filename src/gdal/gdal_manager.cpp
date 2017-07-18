@@ -1,5 +1,5 @@
 /*
- *    Copyright 2016 Kai Pastor
+ *    Copyright 2016-2017 Kai Pastor
  *
  *    This file is part of OpenOrienteering.
  *
@@ -19,13 +19,20 @@
 
 #include "gdal_manager.h"
 
-#include <ogr_api.h>
 #include <cpl_conv.h>
+#include <gdal.h> // IWYU pragma: keep
+#include <ogr_api.h>
 
+#include <QtGlobal>
 #include <QByteArray>
+#include <QDir>
+#include <QFileInfo>
 #include <QSettings>
+#include <QString>
+#include <QStringList>
+#include <QVariant>
 
-#include "../mapper_resource.h"
+#include "util/backports.h"
 
 
 
@@ -44,7 +51,7 @@ namespace
 class GdalManager::GdalManagerPrivate
 {
 public:
-	GdalManagerPrivate()
+	GdalManagerPrivate() noexcept
 	: dirty{ true }
 	{
 		// GDAL 2.0: GDALAllRegister();
@@ -112,21 +119,21 @@ public:
 	const std::vector<QByteArray>& supportedVectorExtensions() const
 	{
 		if (dirty)
-			update();
+			const_cast<GdalManagerPrivate*>(this)->update();
 		return enabled_vector_extensions;
 	}
 	
 	QStringList parameterKeys() const
 	{
 		if (dirty)
-			update();
+			const_cast<GdalManagerPrivate*>(this)->update();
 		return applied_parameters;
 	}
 	
 	QString parameterValue(const QString& key) const
 	{
 		if (dirty)
-			update();
+			const_cast<GdalManagerPrivate*>(this)->update();
 		QSettings settings;
 		settings.beginGroup(gdal_configuration_group);
 		return settings.value(key).toString();
@@ -149,11 +156,44 @@ public:
 	}
 	
 private:
-	void update() const
+	void update()
 	{
 		QSettings settings;
 		
-		/// \todo Build from driver list in GDAL/OGR >= 2.0
+#ifdef GDAL_DMD_EXTENSIONS
+		// GDAL >= 2.0
+		settings.beginGroup(gdal_manager_group);
+		auto count = GDALGetDriverCount();
+		enabled_vector_extensions.clear();
+		enabled_vector_extensions.reserve(std::size_t(count));
+		for (auto i = 0; i < count; ++i)
+		{
+			auto driver_data = GDALGetDriver(i);
+			auto type = GDALGetMetadataItem(driver_data, GDAL_DCAP_VECTOR, nullptr);
+			if (qstrcmp(type, "YES") != 0)
+				continue;
+			
+			auto extensions_raw = GDALGetMetadataItem(driver_data, GDAL_DMD_EXTENSIONS, nullptr);
+			auto extensions = QByteArray::fromRawData(extensions_raw, int(qstrlen(extensions_raw)));
+			for (auto pos = 0; pos >= 0; )
+			{
+				auto start = pos;
+				pos = extensions.indexOf(' ', start+1);
+				auto extension = extensions.mid(start, pos - start);
+				if (extension.isEmpty())
+					continue;
+				if (extension == "dxf" && !settings.value(gdal_dxf_key).toBool())
+					continue;
+				if (extension == "gpx" && !settings.value(gdal_gpx_key).toBool())
+					continue;
+				if (extension == "osm" && !settings.value(gdal_osm_key).toBool())
+					continue;
+				enabled_vector_extensions.emplace_back(extension);
+			}
+		}
+		settings.endGroup();
+#else
+		// GDAL < 2.0 does not provide the supported extensions 
 		static const std::vector<QByteArray> default_extensions = { "shp", "shx" };
 		enabled_vector_extensions.reserve(default_extensions.size() + 3);
 		enabled_vector_extensions = default_extensions;
@@ -166,40 +206,76 @@ private:
 		if (settings.value(gdal_osm_key).toBool())
 			enabled_vector_extensions.push_back("osm");
 		settings.endGroup();
+#endif
 		
-		auto gdal_data = MapperResource::locate(MapperResource::GDAL_DATA);
-		if (!gdal_data.isEmpty())
+		// Using osmconf.ini to detect a directory with data from gdal. The
+		// data:/gdal directory will always exist, due to mapper-osmconf.ini.
+		auto osm_conf_ini = QFileInfo(QLatin1String("data:/gdal/osmconf.ini"));
+		if (osm_conf_ini.exists())
 		{
+			auto gdal_data = osm_conf_ini.absolutePath();
+			Q_ASSERT(!gdal_data.contains(QStringLiteral("data:")));
 			// The user may overwrite this default in the settings.
-			CPLSetConfigOption("GDAL_DATA", gdal_data.toLatin1());
+			CPLSetConfigOption("GDAL_DATA", QDir::toNativeSeparators(gdal_data).toLocal8Bit());
 		}
 		
 		settings.beginGroup(gdal_configuration_group);
-		QStringList new_parameters = settings.childKeys();
-		if (new_parameters.isEmpty())
+		
+		const char* defaults[][2] = {
+		    { "CPL_DEBUG",               "OFF" },
+		    { "USE_PROJ_480_FEATURES",   "YES" },
+		    { "OSM_USE_CUSTOM_INDEXING", "NO"  },
+		    { "GPX_ELE_AS_25D",          "YES" },
+		};
+		for (const auto setting : defaults)
 		{
-			// Default options for debugging and for some drivers
-			settings.setValue(QString::fromLatin1("CPL_DEBUG"), QVariant{QLatin1String("OFF")});
-			settings.setValue(QString::fromLatin1("USE_PROJ_480_FEATURES"), QVariant{QLatin1String("YES")});
-			settings.setValue(QString::fromLatin1("OSM_USE_CUSTOM_INDEXING"), QVariant{QLatin1String("NO")});
-			new_parameters = settings.childKeys();
+			const auto key = QString::fromLatin1(setting[0]);
+			if (!settings.contains(key))
+			{
+				settings.setValue(key, QVariant{QLatin1String(setting[1])});
+			}
 		}
 		
-		new_parameters.sort();
-		for (auto parameter : new_parameters)
+		osm_conf_ini = QFileInfo(QLatin1String("data:/gdal/mapper-osmconf.ini"));
+		if (osm_conf_ini.exists())
 		{
-			CPLSetConfigOption(parameter.toLatin1(), settings.value(parameter).toByteArray());
+			auto osm_conf_ini_path = QDir::toNativeSeparators(osm_conf_ini.absoluteFilePath()).toLocal8Bit();
+			auto key = QString::fromLatin1("OSM_CONFIG_FILE");
+			auto update_settings = !settings.contains(key);
+			if (!update_settings)
+			{
+				auto current = settings.value(key).toByteArray();
+				settings.beginGroup(QLatin1String("default"));
+				auto current_default = settings.value(key).toByteArray();
+				settings.endGroup();
+				update_settings = (current == current_default && current != osm_conf_ini_path);
+			}
+			if (update_settings)
+			{
+				settings.setValue(key, osm_conf_ini_path);
+				settings.beginGroup(QLatin1String("default"));
+				settings.setValue(key, osm_conf_ini_path);
+				settings.endGroup();
+			}
 		}
-		for (auto parameter : static_cast<const QStringList&>(applied_parameters))
+		
+		auto new_parameters = settings.childKeys();
+		new_parameters.sort();
+		for (const auto& parameter : qAsConst(new_parameters))
+		{
+			CPLSetConfigOption(parameter.toLatin1().constData(), settings.value(parameter).toByteArray().constData());
+		}
+		for (const auto& parameter : qAsConst(applied_parameters))
 		{
 			if (!new_parameters.contains(parameter)
 			    && parameter != QLatin1String{ "GDAL_DATA" })
 			{
-				CPLSetConfigOption(parameter.toLatin1(), nullptr);
+				CPLSetConfigOption(parameter.toLatin1().constData(), nullptr);
 			}
 		}
 		applied_parameters.swap(new_parameters);
 		
+		CPLFinderClean(); // force re-initialization of file finding tools
 		dirty = false;
 	}
 	

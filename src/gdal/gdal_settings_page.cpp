@@ -1,5 +1,5 @@
 /*
- *    Copyright 2016 Kai Pastor
+ *    Copyright 2016-2017 Kai Pastor
  *
  *    This file is part of OpenOrienteering.
  *
@@ -20,17 +20,24 @@
 
 #include "gdal_settings_page.h"
 
+#include <QAbstractItemModel>
 #include <QCheckBox>
 #include <QFormLayout>
 #include <QHeaderView>
+#include <QLabel>
+#include <QSignalBlocker>
+#include <QSpacerItem>
+#include <QStringList>
 #include <QTableWidget>
+#include <QTableWidgetItem>
 #include <QVBoxLayout>
 
-#include "gdal_manager.h"
-#include "ogr_file_format.h"
-#include "../util_gui.h"
-#include "../file_format_registry.h"
-#include "../util/scoped_signals_blocker.h"
+#include "fileformats/file_format_registry.h"
+#include "gdal/gdal_manager.h"
+#include "gdal/ogr_file_format.h"
+#include "gui/util_gui.h"
+#include "util/backports.h"
+
 
 
 GdalSettingsPage::GdalSettingsPage(QWidget* parent)
@@ -106,7 +113,7 @@ void GdalSettingsPage::apply()
 			manager.setParameterValue(key, value.trimmed());
 		}
 	}
-	for (const auto key : old_parameters)
+	for (const auto& key : qAsConst(old_parameters))
 	{
 		if (!new_parameters.contains(key))
 		{
@@ -131,7 +138,7 @@ void GdalSettingsPage::updateWidgets()
 	options.sort();
 	parameters->setRowCount(options.size() + 1);
 	auto row = 0;
-	for (auto item : static_cast<const QStringList&>(options))
+	for (const auto& item : qAsConst(options))
 	{
 		auto key_item = new QTableWidgetItem(item);
 		parameters->setItem(row, 0, key_item);

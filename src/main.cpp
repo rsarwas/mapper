@@ -1,6 +1,6 @@
 /*
  *    Copyright 2012, 2013 Thomas Schöps
- *    Copyright 2012-2016 Kai Pastor
+ *    Copyright 2012-2017 Kai Pastor
  *
  *    This file is part of OpenOrienteering.
  *
@@ -20,38 +20,45 @@
 
 
 #include <clocale>
+#include <memory>
 
-#include <QLibraryInfo>
+#include <Qt>
+#include <QtGlobal>
+#include <QApplication>
 #include <QLocale>
-#include <QSettings>
+#include <QObject>
+#include <QPointer>
+#include <QSettings>  // IWYU pragma: keep
+#include <QString>
+#include <QStringList>
 #include <QStyle>
 #include <QStyleFactory>
 #include <QTranslator>
 
-#ifdef Q_OS_ANDROID
-#include <QtAndroid>
-#include <QAndroidJniObject>
-#include <QLabel>
-#include <QUrl>
-#endif
-
 #include <mapper_config.h>
 
 #if defined(QT_NETWORK_LIB)
-#define MAPPER_USE_QTSINGLEAPPLICATION 1
-#include <QtSingleApplication>
+#  define MAPPER_USE_QTSINGLEAPPLICATION 1
+#  include <QtSingleApplication>  // IWYU pragma: keep
 #else
-#define MAPPER_USE_QTSINGLEAPPLICATION 0
-#include <QApplication>
+#  define MAPPER_USE_QTSINGLEAPPLICATION 0
 #endif
 
 #include "global.h"
+#include "mapper_resource.h"
 #include "gui/home_screen_controller.h"
 #include "gui/main_window.h"
 #include "gui/widgets/mapper_proxystyle.h"
-#include "settings.h"
-#include "util_translation.h"
-#include "util/recording_translator.h"
+#include "util/backports.h"
+#include "util/recording_translator.h"  // IWYU pragma: keep
+#include "util/translation_util.h"
+
+// IWYU pragma: no_forward_declare QTranslator
+
+
+// From map.h
+extern QPointer<QTranslator> map_symbol_translator;
+
 
 int main(int argc, char** argv)
 {
@@ -69,32 +76,31 @@ int main(int argc, char** argv)
 #endif
 	
 	// Load resources
-#ifdef MAPPER_USE_QT_CONF_QRC
-	Q_INIT_RESOURCE(qt);
-#endif
 	Q_INIT_RESOURCE(resources);
-	Q_INIT_RESOURCE(licensing);
 	
 	// QSettings on OS X benefits from using an internet domain here.
-	QCoreApplication::setOrganizationName(QString::fromLatin1("OpenOrienteering.org"));
-	QCoreApplication::setApplicationName(QString::fromLatin1("Mapper"));
+	QApplication::setOrganizationName(QString::fromLatin1("OpenOrienteering.org"));
+	QApplication::setApplicationName(QString::fromLatin1("Mapper"));
 	qapp.setApplicationDisplayName(APP_NAME + QString::fromUtf8(" " APP_VERSION));
-	
-	// Set settings defaults
-	Settings& settings = Settings::getInstance();
-	settings.applySettings();
 	
 #ifdef WIN32
 	// Load plugins on Windows
 	qapp.addLibraryPath(QCoreApplication::applicationDirPath() + QLatin1String("/plugins"));
 #endif
 	
+	MapperResource::setSeachPaths();
+	
 	// Localization
-	TranslationUtil::setBaseName(QString::fromLatin1("OpenOrienteering"));
-	QLocale::Language lang = (QLocale::Language)settings.getSetting(Settings::General_Language).toInt();
-	QString translation_file = settings.getSetting(Settings::General_TranslationFile).toString();
-	TranslationUtil translation(lang, translation_file);
-	QLocale::setDefault(translation.getLocale());
+	QSettings settings;
+	TranslationUtil::setBaseName(QLatin1String("OpenOrienteering"));
+	TranslationUtil translation(settings);
+	QLocale::setDefault(QLocale(translation.code()));
+#if defined(Q_OS_MACOS)
+	// Normally this is done in Settings::apply() because it is too late here.
+	// But Mapper 0.6.2/0.6.3 accidently wrote a string instead of a list. This
+	// error caused crashes when opening native dialogs (i.e. the open-file dialog!).
+	settings.setValue(QString::fromLatin1("AppleLanguages"), QStringList{ translation.code() });
+#endif
 #if defined(Mapper_DEBUG_TRANSLATIONS)
 	if (!translation.getAppTranslator().isEmpty())
 	{
@@ -104,6 +110,9 @@ int main(int argc, char** argv)
 #endif
 	qapp.installTranslator(&translation.getQtTranslator());
 	qapp.installTranslator(&translation.getAppTranslator());
+	map_symbol_translator = translation.load(QString::fromLatin1("map_symbols")).release();
+	if (map_symbol_translator)
+		map_symbol_translator->setParent(&qapp);
 	
 	// Avoid numeric issues in libraries such as GDAL
 	setlocale(LC_NUMERIC, "C");
@@ -112,8 +121,8 @@ int main(int argc, char** argv)
 	doStaticInitializations();
 	
 	QStyle* base_style = nullptr;
-#if !defined(Q_OS_WIN) && !defined(Q_OS_OSX)
-	if (QGuiApplication::platformName() == QLatin1String("xcb"))
+#if !defined(Q_OS_WIN) && !defined(Q_OS_MACOS)
+	if (QApplication::platformName() == QLatin1String("xcb"))
 	{
 		// Use the modern 'fusion' style instead of the 
 		// default "windows" style on X11.
@@ -121,7 +130,7 @@ int main(int argc, char** argv)
 	}
 #endif
 	QApplication::setStyle(new MapperProxyStyle(base_style));
-#if !defined(Q_OS_OSX)
+#if !defined(Q_OS_MACOS)
 	QApplication::setPalette(QApplication::style()->standardPalette());
 #endif
 	
@@ -130,31 +139,6 @@ int main(int argc, char** argv)
 	first_window.setAttribute(Qt::WA_DeleteOnClose, false);
 	first_window.setController(new HomeScreenController());
 	
-	bool no_files_given = true;
-#ifdef Q_OS_ANDROID
-	QAndroidJniObject activity = QtAndroid::androidActivity();
-	QAndroidJniObject intent = activity.callObjectMethod("getIntent", "()Landroid/content/Intent;");
-	const QString action = intent.callObjectMethod<jstring>("getAction").toString();
-	static const QString action_edit =
-	  QAndroidJniObject::getStaticObjectField<jstring>("android/content/Intent", "ACTION_EDIT").toString();
-	static const QString action_view =
-	  QAndroidJniObject::getStaticObjectField<jstring>("android/content/Intent", "ACTION_VIEW").toString();
-	if (action == action_edit || action == action_view)
-	{
-		const QString data_string = intent.callObjectMethod<jstring>("getDataString").toString();
-		const QString local_file  = QUrl(data_string).toLocalFile();
-		first_window.setHomeScreenDisabled(true);
-		first_window.setCentralWidget(new QLabel(MainWindow::tr("Loading %1...").arg(local_file)));
-		first_window.setVisible(true);
-		first_window.raise();
-		// Empircal tested: We need to process the loop twice.
-		QApplication::processEvents(QEventLoop::ExcludeUserInputEvents);
-		QApplication::processEvents(QEventLoop::ExcludeUserInputEvents);
-		if (!first_window.openPath(local_file))
-			return -1;
-		return qapp.exec();
-	}
-#else
 	// Open given files later, i.e. after the initial home screen has been
 	// displayed. In this way, error messages for missing files will show on 
 	// top of a regular main window (home screen or other file).
@@ -162,28 +146,17 @@ int main(int argc, char** argv)
 	// Treat all program parameters as files to be opened
 	QStringList args(qapp.arguments());
 	args.removeFirst(); // the program name
-	for (auto&& arg : args)
+	for (const auto& arg : qAsConst(args))
 	{
-		if (arg[0] != QLatin1Char{'-'})
-		{
-			first_window.openPathLater(arg);
-			no_files_given = false;
-		}
+		first_window.openPathLater(arg);
 	}
-#endif
 	
-	// Optionally open most recently used file on startup
-	if (no_files_given && settings.getSettingCached(Settings::General_OpenMRUFile).toBool())
-	{
-		QStringList files(settings.getSettingCached(Settings::General_RecentFilesList).toStringList());
-		if (!files.isEmpty())
-			first_window.openPathLater(files[0]);
-	}
+	first_window.applicationStateChanged();
 	
 #if MAPPER_USE_QTSINGLEAPPLICATION
 	// If we need to respond to a second app launch, do so, but also accept a file open request.
 	qapp.setActivationWindow(&first_window);
-	QObject::connect(&qapp, SIGNAL(messageReceived(const QString&)), &first_window, SLOT(openPath(const QString &)));
+	QObject::connect(&qapp, &QtSingleApplication::messageReceived, &first_window, &MainWindow::openPath);
 #endif
 	
 	// Let application run
@@ -191,11 +164,3 @@ int main(int argc, char** argv)
 	first_window.raise();
 	return qapp.exec();
 }
-
-#ifdef _MSC_VER
-#include "Windows.h"
-int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nCmdShow)
-{
-	return main(__argc, __argv);
-}
-#endif

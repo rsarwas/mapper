@@ -1,5 +1,5 @@
 /*
- *    Copyright 2013-2015 Kai Pastor
+ *    Copyright 2013-2017 Kai Pastor
  *
  *    This file is part of OpenOrienteering.
  *
@@ -19,24 +19,47 @@
 
 #include "map_t.h"
 
-#include "../src/map.h"
-#include "../src/core/map_color.h"
-#include "../src/core/map_printer.h"
-#include "../src/core/map_view.h"
+#include <QBuffer>
+#include <QMessageBox>
+#include <QTextStream>
+
+#include "global.h"
+#include "core/map.h"
+#include "core/map_color.h"
+#include "core/map_printer.h"
+#include "core/map_view.h"
+#include "core/objects/symbol_rule_set.h"
 
 namespace
 {
 	static QDir examples_dir;
+	static QDir symbol_set_dir;
 }
+
 
 void MapTest::initTestCase()
 {
 	Q_INIT_RESOURCE(resources);
+	
 	doStaticInitializations();
+	
 	examples_dir.cd(QFileInfo(QString::fromUtf8(__FILE__)).dir().absoluteFilePath(QString::fromLatin1("../examples")));
+	QVERIFY(examples_dir.exists());
+	
+	symbol_set_dir.cd(QFileInfo(QString::fromUtf8(__FILE__)).dir().absoluteFilePath(QString::fromLatin1("../symbol sets")));
+	QVERIFY(symbol_set_dir.exists());
+	
 	// Static map initializations
 	Map map;
+	
+	// Accept any message boxes
+	connect(qApp, &QApplication::focusChanged, [](QWidget*, QWidget* w) {
+		if (w && qobject_cast<QMessageBox*>(w->window()))
+			QTimer::singleShot(0, w->window(), SLOT(accept()));
+	});
 }
+
+
 
 void MapTest::printerConfigTest()
 {
@@ -50,46 +73,46 @@ void MapTest::printerConfigTest()
 
 void MapTest::specialColorsTest()
 {
-	QVERIFY(Map::getCoveringRed() != NULL);
+	QVERIFY(Map::getCoveringRed() != nullptr);
 	QCOMPARE(Map::getCoveringWhite()->getPriority(), static_cast<int>(MapColor::CoveringWhite));
 	
-	QVERIFY(Map::getCoveringWhite() != NULL);
+	QVERIFY(Map::getCoveringWhite() != nullptr);
 	QCOMPARE(Map::getCoveringRed()->getPriority(), static_cast<int>(MapColor::CoveringRed));
 	
-	QVERIFY(Map::getUndefinedColor() != NULL);
+	QVERIFY(Map::getUndefinedColor() != nullptr);
 	QCOMPARE(Map::getUndefinedColor()->getPriority(), static_cast<int>(MapColor::Undefined));
 	
-	QVERIFY(Map::getRegistrationColor() != NULL);
+	QVERIFY(Map::getRegistrationColor() != nullptr);
 	QCOMPARE(Map::getRegistrationColor()->getPriority(), static_cast<int>(MapColor::Registration));
 	
 	Map map;               // non-const
 	const Map& cmap(map);  // const
-	QCOMPARE(map.getMapColor(MapColor::CoveringWhite), (MapColor*)NULL);
-	QCOMPARE(cmap.getMapColor(MapColor::CoveringWhite), (MapColor*)NULL);
+	QCOMPARE(map.getMapColor(MapColor::CoveringWhite), static_cast<MapColor*>(nullptr));
+	QCOMPARE(cmap.getMapColor(MapColor::CoveringWhite), static_cast<MapColor*>(nullptr));
 	QCOMPARE(map.getColor(MapColor::CoveringWhite), Map::getCoveringWhite());
 	QCOMPARE(cmap.getColor(MapColor::CoveringWhite), Map::getCoveringWhite());
-	QCOMPARE(map.getMapColor(MapColor::CoveringRed), (MapColor*)NULL);
-	QCOMPARE(cmap.getMapColor(MapColor::CoveringRed), (MapColor*)NULL);
+	QCOMPARE(map.getMapColor(MapColor::CoveringRed), static_cast<MapColor*>(nullptr));
+	QCOMPARE(cmap.getMapColor(MapColor::CoveringRed), static_cast<MapColor*>(nullptr));
 	QCOMPARE(map.getColor(MapColor::CoveringRed), Map::getCoveringRed());
 	QCOMPARE(cmap.getColor(MapColor::CoveringRed), Map::getCoveringRed());
-	QCOMPARE(map.getMapColor(MapColor::Undefined), (MapColor*)NULL);
-	QCOMPARE(cmap.getMapColor(MapColor::Undefined), (MapColor*)NULL);
+	QCOMPARE(map.getMapColor(MapColor::Undefined), static_cast<MapColor*>(nullptr));
+	QCOMPARE(cmap.getMapColor(MapColor::Undefined), static_cast<MapColor*>(nullptr));
 	QCOMPARE(map.getColor(MapColor::Undefined), Map::getUndefinedColor());
 	QCOMPARE(cmap.getColor(MapColor::Undefined), Map::getUndefinedColor());
-	QCOMPARE(map.getMapColor(MapColor::Registration), (MapColor*)NULL);
-	QCOMPARE(cmap.getMapColor(MapColor::Registration), (MapColor*)NULL);
+	QCOMPARE(map.getMapColor(MapColor::Registration), static_cast<MapColor*>(nullptr));
+	QCOMPARE(cmap.getMapColor(MapColor::Registration), static_cast<MapColor*>(nullptr));
 	QCOMPARE(map.getColor(MapColor::Registration), Map::getRegistrationColor());
 	QCOMPARE(cmap.getColor(MapColor::Registration), Map::getRegistrationColor());
 	
-	QCOMPARE(map.getMapColor(MapColor::Reserved), (MapColor*)NULL);
-	QCOMPARE(cmap.getMapColor(MapColor::Reserved), (MapColor*)NULL);
-	QCOMPARE(map.getColor(MapColor::Reserved), (MapColor*)NULL);
-	QCOMPARE(cmap.getColor(MapColor::Reserved), (MapColor*)NULL);
+	QCOMPARE(map.getMapColor(MapColor::Reserved), static_cast<MapColor*>(nullptr));
+	QCOMPARE(cmap.getMapColor(MapColor::Reserved), static_cast<MapColor*>(nullptr));
+	QCOMPARE(map.getColor(MapColor::Reserved), static_cast<MapColor*>(nullptr));
+	QCOMPARE(cmap.getColor(MapColor::Reserved), static_cast<MapColor*>(nullptr));
 	
-	QCOMPARE(map.getMapColor(map.getNumColors()), (MapColor*)NULL);
-	QCOMPARE(cmap.getMapColor(cmap.getNumColors()), (MapColor*)NULL);
-	QCOMPARE(map.getColor(map.getNumColors()), (MapColor*)NULL);
-	QCOMPARE(cmap.getColor(cmap.getNumColors()), (MapColor*)NULL);
+	QCOMPARE(map.getMapColor(map.getNumColors()), static_cast<MapColor*>(nullptr));
+	QCOMPARE(cmap.getMapColor(cmap.getNumColors()), static_cast<MapColor*>(nullptr));
+	QCOMPARE(map.getColor(map.getNumColors()), static_cast<MapColor*>(nullptr));
+	QCOMPARE(cmap.getColor(cmap.getNumColors()), static_cast<MapColor*>(nullptr));
 }
 
 void MapTest::importTest_data()
@@ -97,9 +120,9 @@ void MapTest::importTest_data()
 	QTest::addColumn<QString>("first_file");
 	QTest::addColumn<QString>("imported_file");
 
-	QTest::newRow("complete map, sprint sample")  << "complete map.omap" << "sprint sample.omap";
 	QTest::newRow("complete map, overprinting")   << "complete map.omap" << "overprinting.omap";
 	QTest::newRow("overprinting, forest sample")  << "overprinting.omap" << "forest sample.omap";
+	QTest::newRow("forest sample, complete map")   << "forest sample.omap" << "complete map.omap";
 }
 
 void MapTest::importTest()
@@ -109,20 +132,15 @@ void MapTest::importTest()
 	
 	QString first_path = examples_dir.absoluteFilePath(first_file);
 	Map map;
-	MapView view(&map);
+	MapView view{ &map };
 	QVERIFY(map.loadFrom(first_path, nullptr, &view, false, false));
 	
 	auto original_size = map.getNumObjects();
 	auto original_num_colors = map.getNumColors();
-#if IMPORT_MAP_DOES_NOT_USE_GUI
 	Map empty_map;
 	map.importMap(&empty_map, Map::CompleteImport);
 	QCOMPARE(map.getNumObjects(), original_size);
 	QCOMPARE(map.getNumColors(), original_num_colors);
-#else
-	map.color_set->importSet(*map.color_set, {});
-	QCOMPARE(map.getNumColors(), original_num_colors);
-#endif
 	
 	map.importMap(&map, Map::ColorImport);
 	QCOMPARE(map.getNumObjects(), original_size);
@@ -135,20 +153,129 @@ void MapTest::importTest()
 	QString imported_path = examples_dir.absoluteFilePath(imported_file);
 	Map imported_map;
 	QVERIFY(imported_map.loadFrom(imported_path, nullptr, nullptr, false, false));
+	QVERIFY(imported_map.getNumSymbols() > 0);
 	
 	original_size = map.getNumObjects();
-	imported_map.changeScale(map.getScaleDenominator(), {}, true, true, true, true);
-	map.importMap(&imported_map, Map::CompleteImport);
+	QHash<const Symbol*, Symbol*> symbol_map;
+	map.importMap(&imported_map, Map::CompleteImport, nullptr, nullptr, -1, false, &symbol_map);
 	QCOMPARE(map.getNumObjects(), original_size + imported_map.getNumObjects());
+	QCOMPARE(symbol_map.size(), imported_map.getNumSymbols());
 }
 
+
+
+void MapTest::crtFileTest()
+{
+	auto original =  symbol_set_dir.absoluteFilePath(QString::fromLatin1("15000/ISOM2000_15000.omap"));
+	Map original_map;
+	original_map.loadFrom(original, nullptr, nullptr, false, false);
+	QVERIFY(original_map.getNumSymbols() > 100);
+	
+	auto crt_data = QByteArray{
+	                "101     104\n"
+	                "102     105_text \n"
+	                "123456  106 \n"
+	};
+	QBuffer buffer{&crt_data};
+	buffer.open(QIODevice::ReadOnly);
+	QTextStream stream{&buffer};
+	auto r = SymbolRuleSet::loadCrt(stream, original_map);
+	QCOMPARE(stream.status(), QTextStream::Ok);
+	QCOMPARE(r.size(), std::size_t(3));
+	
+	QCOMPARE(r[0].type, SymbolRule::DefinedAssignment);
+	QCOMPARE(r[0].symbol->getNumberAsString(), QString::fromLatin1("101"));
+	QCOMPARE(r[0].query.getOperator(), ObjectQuery::OperatorSearch);
+	QCOMPARE(r[0].query.tagOperands()->value, QString::fromLatin1("104"));
+	QVERIFY(r[0].query.tagOperands()->key.isEmpty());
+	
+	QCOMPARE(r[1].type, SymbolRule::DefinedAssignment);
+	QCOMPARE(r[1].symbol->getNumberAsString(), QString::fromLatin1("102"));
+	QCOMPARE(r[1].query.getOperator(), ObjectQuery::OperatorSearch);
+	QCOMPARE(r[1].query.tagOperands()->value, QString::fromLatin1("105_text"));
+	QVERIFY(r[1].query.tagOperands()->key.isEmpty());
+	
+	QCOMPARE(r[2].type, SymbolRule::NoAssignment); // no 123456 in ISOM2000
+	QCOMPARE(r[2].query.getOperator(), ObjectQuery::OperatorSearch);
+	QCOMPARE(r[2].query.tagOperands()->value, QString::fromLatin1("106"));
+	QVERIFY(r[2].query.tagOperands()->key.isEmpty());
+	
+	QCOMPARE(r.squeezed().size(), std::size_t(2));
+	
+	QBuffer out_buffer;
+	out_buffer.open(QIODevice::WriteOnly);
+	QTextStream out_stream{&out_buffer};
+	r.writeCrt(out_stream);
+	out_stream.flush();
+	out_buffer.close();
+	const auto result = QString::fromLatin1(out_buffer.buffer());
+	QVERIFY(result.contains(QRegularExpression(QLatin1String("^101 *104$", QRegularExpression::MultilineOption))));
+	QVERIFY(result.contains(QRegularExpression(QLatin1String("102 *105_text$", QRegularExpression::MultilineOption))));
+	QVERIFY(!result.contains(QLatin1String("123456")));
+	QVERIFY(!result.contains(QLatin1String("106")));
+}
+
+
+
+void MapTest::matchQuerySymbolNumberTest_data()
+{
+	QTest::addColumn<QString>("original");
+	QTest::addColumn<QString>("replacement");
+	QTest::addColumn<int>("matching");
+
+	QTest::newRow("ISOM>ISMTBOM")
+	        << symbol_set_dir.absoluteFilePath(QString::fromLatin1("15000/ISOM2000_15000.omap"))
+	        << symbol_set_dir.absoluteFilePath(QString::fromLatin1("15000/ISMTBOM_15000.omap"))
+	        << 157; // Our ISMTBOM set has a (maybe hidden) match for every ISOM symbol.
+	
+	QTest::newRow("ISOM>ISSOM")
+	        << symbol_set_dir.absoluteFilePath(QString::fromLatin1("15000/ISOM2000_15000.omap"))
+	        << symbol_set_dir.absoluteFilePath(QString::fromLatin1("5000/ISSOM_5000.omap"))
+	        << 104; // Many ISOM symbol do not have a same-number counterpart in ISSOM.
+	
+}
+
+
+void MapTest::matchQuerySymbolNumberTest()
+{
+	QFETCH(QString, original);
+	QFETCH(QString, replacement);
+	QFETCH(int, matching);
+	
+	Map original_map;
+	original_map.loadFrom(original, nullptr, nullptr, false, false);
+	QVERIFY(original_map.getNumSymbols() > 0);
+	
+	auto r = SymbolRuleSet::forOriginalSymbols(original_map);
+	QCOMPARE(r.size(), std::size_t(original_map.getNumSymbols()));
+	QCOMPARE(r.squeezed().size(), std::size_t(0));
+	
+	r.matchQuerySymbolNumber(original_map);
+	QCOMPARE(r.size(), std::size_t(original_map.getNumSymbols()));
+	QCOMPARE(r.squeezed().size(), std::size_t(original_map.getNumSymbols()));
+	
+	Map replacement_map;
+	replacement_map.loadFrom(replacement, nullptr, nullptr, false, false);
+	QVERIFY(replacement_map.getNumSymbols() > 100);
+	
+	r = SymbolRuleSet::forOriginalSymbols(original_map);
+	r.matchQuerySymbolNumber(replacement_map);
+	QCOMPARE(r.squeezed().size(), std::size_t(matching));
+}
+
+
+
 /*
- * We select a non-standard QPA because we don't need a real GUI window.
+ * We don't need a real GUI window.
  * 
- * Normally, the "offscreen" plugin would be the correct one.
- * However, it bails out with a QFontDatabase error (cf. QTBUG-33674)
+ * But we discovered QTBUG-58768 macOS: Crash when using QPrinter
+ * while running with "minimal" platform plugin.
  */
-auto qpa_selected = qputenv("QT_QPA_PLATFORM", "minimal");
+#ifndef Q_OS_MACOS
+namespace  {
+	auto qpa_selected = qputenv("QT_QPA_PLATFORM", "minimal");
+}
+#endif
 
 
 QTEST_MAIN(MapTest)

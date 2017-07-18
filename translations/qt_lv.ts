@@ -1,13 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.0" language="lv">
-<context>
-    <name>CloseButton</name>
-    <message>
-        <source>Close Tab</source>
-        <translation>Aizvērt sadaļu</translation>
-    </message>
-</context>
+<TS version="2.1" language="lv_LV">
 <context>
     <name>QAbstractSpinBox</name>
     <message>
@@ -49,7 +42,7 @@
 <context>
     <name>QDialog</name>
     <message>
-        <source>What&apos;s This?</source>
+        <source>What's This?</source>
         <translation>Kas tas?</translation>
     </message>
     <message>
@@ -152,7 +145,7 @@
         <translation>Jā &amp;visiem</translation>
     </message>
     <message>
-        <source>Don&apos;t Save</source>
+        <source>Don't Save</source>
         <translation>Nesaglabāt</translation>
     </message>
 </context>
@@ -250,6 +243,7 @@
 <context>
     <name>QFileDialog</name>
     <message>
+        <location filename="../src/gui/text_browser_dialog.cpp" line="58"/>
         <source>Back</source>
         <translation>Atpakaļ</translation>
     </message>
@@ -286,14 +280,14 @@
         <translation>Rādīt </translation>
     </message>
     <message>
-        <source>&apos;%1&apos; is write protected.
+        <source>'%1' is write protected.
 Do you want to delete it anyway?</source>
         <translation>%1 ir aizsargāts pret ierakstu.
 Vai vēlies to dzēst?</translation>
     </message>
     <message>
-        <source>Are you sure you want to delete &apos;%1&apos;?</source>
-        <translation>Vai tiešām vēlies dzēst &apos;%1&apos;?</translation>
+        <source>Are you sure you want to delete '%1'?</source>
+        <translation>Vai tiešām vēlies dzēst '%1'?</translation>
     </message>
     <message>
         <source>List of places and bookmarks</source>
@@ -486,8 +480,8 @@ Pārbaudi vai datnes nosaukums ir uzrādīts korekti.</translation>
         <translation>Visas datnes (*.*)</translation>
     </message>
     <message>
-        <source>Are sure you want to delete &apos;%1&apos;?</source>
-        <translation>Vai tiešām vēlies dzēst &apos;%1&apos;?</translation>
+        <source>Are sure you want to delete '%1'?</source>
+        <translation>Vai tiešām vēlies dzēst '%1'?</translation>
     </message>
 </context>
 <context>
@@ -525,8 +519,8 @@ Pārbaudi vai datnes nosaukums ir uzrādīts korekti.</translation>
         <translation>%1 TB</translation>
     </message>
     <message>
-        <source>&lt;b&gt;The name &quot;%1&quot; can not be used.&lt;/b&gt;&lt;p&gt;Try using another name, with fewer characters or no punctuations marks.</source>
-        <translation>&lt;b&gt; Nosaukumu &quot;%1&quot; nevar izmantot.&lt;/b&gt;&lt;p&gt;Mēģini izmantot citu nosaukumu, lietojot mazāk simbolus un bez pieturzīmēm.</translation>
+        <source>&lt;b&gt;The name "%1" can not be used.&lt;/b&gt;&lt;p&gt;Try using another name, with fewer characters or no punctuations marks.</source>
+        <translation>&lt;b&gt; Nosaukumu "%1" nevar izmantot.&lt;/b&gt;&lt;p&gt;Mēģini izmantot citu nosaukumu, lietojot mazāk simbolus un bez pieturzīmēm.</translation>
     </message>
     <message>
         <source>%1 bytes</source>
@@ -604,36 +598,36 @@ Pārbaudi vai datnes nosaukums ir uzrādīts korekti.</translation>
         <translation>Neizdevās ielasīt bibliotēku %1: %2</translation>
     </message>
     <message>
-        <source>&apos;%1&apos; is not an ELF object (%2)</source>
-        <translation>&apos;%1&apos; nav ELF objekts (%2)</translation>
+        <source>'%1' is not an ELF object (%2)</source>
+        <translation>'%1' nav ELF objekts (%2)</translation>
     </message>
     <message>
-        <source>The plugin &apos;%1&apos; uses incompatible Qt library. (%2.%3.%4) [%5]</source>
-        <translation>Spraudnis &apos;%1&apos; lieto nesaderīgu Qt bibliotēku. (%2.%3.%4) [%5]</translation>
+        <source>The plugin '%1' uses incompatible Qt library. (%2.%3.%4) [%5]</source>
+        <translation>Spraudnis '%1' lieto nesaderīgu Qt bibliotēku. (%2.%3.%4) [%5]</translation>
     </message>
     <message>
-        <source>Cannot resolve symbol &quot;%1&quot; in %2: %3</source>
-        <translation>Neizdevās izšķirt simbolu &quot;%1&quot;, kas atradās %2: %3</translation>
+        <source>Cannot resolve symbol "%1" in %2: %3</source>
+        <translation>Neizdevās izšķirt simbolu "%1", kas atradās %2: %3</translation>
     </message>
     <message>
-        <source>Plugin verification data mismatch in &apos;%1&apos;</source>
-        <translation>Spraudņa pārbaudes datu nesaderība &apos;%1&apos;</translation>
+        <source>Plugin verification data mismatch in '%1'</source>
+        <translation>Spraudņa pārbaudes datu nesaderība '%1'</translation>
     </message>
     <message>
-        <source>&apos;%1&apos; is an invalid ELF object (%2)</source>
-        <translation>&apos;%1&apos; ir nepieļaujams ELF objekts (%2)</translation>
+        <source>'%1' is an invalid ELF object (%2)</source>
+        <translation>'%1' ir nepieļaujams ELF objekts (%2)</translation>
     </message>
     <message>
-        <source>The plugin &apos;%1&apos; uses incompatible Qt library. (Cannot mix debug and release libraries.)</source>
-        <translation>Spraudnis &apos;%1&apos; lieto nesaderīgu Qt bibliotēku. (Nevar miksēt skaņošanas un izlaides bibliotēkas.)</translation>
+        <source>The plugin '%1' uses incompatible Qt library. (Cannot mix debug and release libraries.)</source>
+        <translation>Spraudnis '%1' lieto nesaderīgu Qt bibliotēku. (Nevar miksēt skaņošanas un izlaides bibliotēkas.)</translation>
     </message>
     <message>
-        <source>&apos;%1&apos; is not an ELF object</source>
-        <translation>&apos;%1&apos; nav ELF objekts</translation>
+        <source>'%1' is not an ELF object</source>
+        <translation>'%1' nav ELF objekts</translation>
     </message>
     <message>
-        <source>The file &apos;%1&apos; is not a valid Qt plugin.</source>
-        <translation>Datne &apos;%1&apos; nav pieļaujams Qt spraudnis.</translation>
+        <source>The file '%1' is not a valid Qt plugin.</source>
+        <translation>Datne '%1' nav pieļaujams Qt spraudnis.</translation>
     </message>
     <message>
         <source>The shared library was not found.</source>
@@ -644,8 +638,8 @@ Pārbaudi vai datnes nosaukums ir uzrādīts korekti.</translation>
         <translation>Nezināma kļūda</translation>
     </message>
     <message>
-        <source>The plugin &apos;%1&apos; uses incompatible Qt library. Expected build key &quot;%2&quot;, got &quot;%3&quot;</source>
-        <translation>Spraudnis &apos;%1&apos; lieto nesaderīgu Qt bibliotēku. Izveides atslēgas &quot;%2&quot; vietā bija &quot;%3&quot;</translation>
+        <source>The plugin '%1' uses incompatible Qt library. Expected build key "%2", got "%3"</source>
+        <translation>Spraudnis '%1' lieto nesaderīgu Qt bibliotēku. Izveides atslēgas "%2" vietā bija "%3"</translation>
     </message>
 </context>
 <context>
@@ -706,8 +700,8 @@ Pārbaudi vai datnes nosaukums ir uzrādīts korekti.</translation>
         <translation>&lt;h3&gt;Par Qt&lt;/h3&gt;&lt;p&gt;Šī programma izmanto Qt versiju %1.&lt;/p&gt;</translation>
     </message>
     <message>
-        <source>&lt;p&gt;Qt is a C++ toolkit for cross-platform application development.&lt;/p&gt;&lt;p&gt;Qt provides single-source portability across MS&amp;nbsp;Windows, Mac&amp;nbsp;OS&amp;nbsp;X, Linux, and all major commercial Unix variants. Qt is also available for embedded devices as Qt for Embedded Linux and Qt for Windows CE.&lt;/p&gt;&lt;p&gt;Qt is available under three different licensing options designed to accommodate the needs of our various users.&lt;/p&gt;&lt;p&gt;Qt licensed under our commercial license agreement is appropriate for development of proprietary/commercial software where you do not want to share any source code with third parties or otherwise cannot comply with the terms of the GNU LGPL version 2.1 or GNU GPL version 3.0.&lt;/p&gt;&lt;p&gt;Qt licensed under the GNU LGPL version 2.1 is appropriate for the development of Qt applications (proprietary or open source) provided you can comply with the terms and conditions of the GNU LGPL version 2.1.&lt;/p&gt;&lt;p&gt;Qt licensed under the GNU General Public License version 3.0 is appropriate for the development of Qt applications where you wish to use such applications in combination with software subject to the terms of the GNU GPL version 3.0 or where you are otherwise willing to comply with the terms of the GNU GPL version 3.0.&lt;/p&gt;&lt;p&gt;Please see &lt;a href=&quot;http://qt.nokia.com/products/licensing&quot;&gt;qt.nokia.com/products/licensing&lt;/a&gt; for an overview of Qt licensing.&lt;/p&gt;&lt;p&gt;Copyright (C) 2012 Nokia Corporation and/or its subsidiary(-ies).&lt;/p&gt;&lt;p&gt;Qt is a Nokia product. See &lt;a href=&quot;http://qt.nokia.com/&quot;&gt;qt.nokia.com&lt;/a&gt; for more information.&lt;/p&gt;</source>
-        <translation>&lt;p&gt;Qt is a C++ toolkit for cross-platform application development.&lt;/p&gt;&lt;p&gt;Qt provides single-source portability across MS&amp;nbsp;Windows, Mac&amp;nbsp;OS&amp;nbsp;X, Linux, and all major commercial Unix variants. Qt is also available for embedded devices as Qt for Embedded Linux and Qt for Windows CE.&lt;/p&gt;&lt;p&gt;Qt is available under three different licensing options designed to accommodate the needs of our various users.&lt;/p&gt;&lt;p&gt;Qt licensed under our commercial license agreement is appropriate for development of proprietary/commercial software where you do not want to share any source code with third parties or otherwise cannot comply with the terms of the GNU LGPL version 2.1 or GNU GPL version 3.0.&lt;/p&gt;&lt;p&gt;Qt licensed under the GNU LGPL version 2.1 is appropriate for the development of Qt applications (proprietary or open source) provided you can comply with the terms and conditions of the GNU LGPL version 2.1.&lt;/p&gt;&lt;p&gt;Qt licensed under the GNU General Public License version 3.0 is appropriate for the development of Qt applications where you wish to use such applications in combination with software subject to the terms of the GNU GPL version 3.0 or where you are otherwise willing to comply with the terms of the GNU GPL version 3.0.&lt;/p&gt;&lt;p&gt;Please see &lt;a href=&quot;http://qt.nokia.com/products/licensing&quot;&gt;qt.nokia.com/products/licensing&lt;/a&gt; for an overview of Qt licensing.&lt;/p&gt;&lt;p&gt;Copyright (C) 2012 Nokia Corporation and/or its subsidiary(-ies).&lt;/p&gt;&lt;p&gt;Qt is a Nokia product. See &lt;a href=&quot;http://qt.nokia.com/&quot;&gt;qt.nokia.com&lt;/a&gt; for more information.&lt;/p&gt;</translation>
+        <source>&lt;p&gt;Qt is a C++ toolkit for cross-platform application development.&lt;/p&gt;&lt;p&gt;Qt provides single-source portability across MS&amp;nbsp;Windows, Mac&amp;nbsp;OS&amp;nbsp;X, Linux, and all major commercial Unix variants. Qt is also available for embedded devices as Qt for Embedded Linux and Qt for Windows CE.&lt;/p&gt;&lt;p&gt;Qt is available under three different licensing options designed to accommodate the needs of our various users.&lt;/p&gt;&lt;p&gt;Qt licensed under our commercial license agreement is appropriate for development of proprietary/commercial software where you do not want to share any source code with third parties or otherwise cannot comply with the terms of the GNU LGPL version 2.1 or GNU GPL version 3.0.&lt;/p&gt;&lt;p&gt;Qt licensed under the GNU LGPL version 2.1 is appropriate for the development of Qt applications (proprietary or open source) provided you can comply with the terms and conditions of the GNU LGPL version 2.1.&lt;/p&gt;&lt;p&gt;Qt licensed under the GNU General Public License version 3.0 is appropriate for the development of Qt applications where you wish to use such applications in combination with software subject to the terms of the GNU GPL version 3.0 or where you are otherwise willing to comply with the terms of the GNU GPL version 3.0.&lt;/p&gt;&lt;p&gt;Please see &lt;a href="http://qt.nokia.com/products/licensing"&gt;qt.nokia.com/products/licensing&lt;/a&gt; for an overview of Qt licensing.&lt;/p&gt;&lt;p&gt;Copyright (C) 2012 Nokia Corporation and/or its subsidiary(-ies).&lt;/p&gt;&lt;p&gt;Qt is a Nokia product. See &lt;a href="http://qt.nokia.com/"&gt;qt.nokia.com&lt;/a&gt; for more information.&lt;/p&gt;</source>
+        <translation>&lt;p&gt;Qt is a C++ toolkit for cross-platform application development.&lt;/p&gt;&lt;p&gt;Qt provides single-source portability across MS&amp;nbsp;Windows, Mac&amp;nbsp;OS&amp;nbsp;X, Linux, and all major commercial Unix variants. Qt is also available for embedded devices as Qt for Embedded Linux and Qt for Windows CE.&lt;/p&gt;&lt;p&gt;Qt is available under three different licensing options designed to accommodate the needs of our various users.&lt;/p&gt;&lt;p&gt;Qt licensed under our commercial license agreement is appropriate for development of proprietary/commercial software where you do not want to share any source code with third parties or otherwise cannot comply with the terms of the GNU LGPL version 2.1 or GNU GPL version 3.0.&lt;/p&gt;&lt;p&gt;Qt licensed under the GNU LGPL version 2.1 is appropriate for the development of Qt applications (proprietary or open source) provided you can comply with the terms and conditions of the GNU LGPL version 2.1.&lt;/p&gt;&lt;p&gt;Qt licensed under the GNU General Public License version 3.0 is appropriate for the development of Qt applications where you wish to use such applications in combination with software subject to the terms of the GNU GPL version 3.0 or where you are otherwise willing to comply with the terms of the GNU GPL version 3.0.&lt;/p&gt;&lt;p&gt;Please see &lt;a href="http://qt.nokia.com/products/licensing"&gt;qt.nokia.com/products/licensing&lt;/a&gt; for an overview of Qt licensing.&lt;/p&gt;&lt;p&gt;Copyright (C) 2012 Nokia Corporation and/or its subsidiary(-ies).&lt;/p&gt;&lt;p&gt;Qt is a Nokia product. See &lt;a href="http://qt.nokia.com/"&gt;qt.nokia.com&lt;/a&gt; for more information.&lt;/p&gt;</translation>
     </message>
 </context>
 <context>
@@ -802,6 +796,14 @@ Pārbaudi vai datnes nosaukums ir uzrādīts korekti.</translation>
     <message>
         <source>Height:</source>
         <translation>Augstums:</translation>
+    </message>
+</context>
+<context>
+    <name>QPlatformTheme</name>
+    <message>
+        <location filename="../src/gui/text_browser_dialog.cpp" line="63"/>
+        <source>Close</source>
+        <translation type="unfinished">Aizvērt</translation>
     </message>
 </context>
 <context>
@@ -980,8 +982,8 @@ Vai vēlies to pārrakstīt?</translation>
         <translation>Executive</translation>
     </message>
     <message>
-        <source>The &apos;From&apos; value cannot be greater than the &apos;To&apos; value.</source>
-        <translation>&apos;No&apos; vērtība nevar būt lielāka par &apos;Līdz&apos; vērtibu.</translation>
+        <source>The 'From' value cannot be greater than the 'To' value.</source>
+        <translation>'No' vērtība nevar būt lielāka par 'Līdz' vērtibu.</translation>
     </message>
     <message>
         <source>US Common #10 Envelope</source>
@@ -1508,10 +1510,6 @@ Izvēlies citu datnes nosaukumu.</translation>
         <translation>+</translation>
     </message>
     <message>
-        <source>CD</source>
-        <translation>CD</translation>
-    </message>
-    <message>
         <source>Go</source>
         <translation>Iet</translation>
     </message>
@@ -1530,10 +1528,6 @@ Izvēlies citu datnes nosaukumu.</translation>
     <message>
         <source>F%1</source>
         <translation>F%1</translation>
-    </message>
-    <message>
-        <source>DOS</source>
-        <translation>DOS</translation>
     </message>
     <message>
         <source>Del</source>
@@ -1558,10 +1552,6 @@ Izvēlies citu datnes nosaukumu.</translation>
     <message>
         <source>Tab</source>
         <translation>Tab</translation>
-    </message>
-    <message>
-        <source>WWW</source>
-        <translation>WWW</translation>
     </message>
     <message>
         <source>Yes</source>
@@ -1601,10 +1591,6 @@ Izvēlies citu datnes nosaukumu.</translation>
         <translation>Apmest</translation>
     </message>
     <message>
-        <source>Game</source>
-        <translation>Spēle</translation>
-    </message>
-    <message>
         <source>Help</source>
         <translation>Palīdzība</translation>
     </message>
@@ -1625,10 +1611,6 @@ Izvēlies citu datnes nosaukumu.</translation>
         <translation>Meta</translation>
     </message>
     <message>
-        <source>News</source>
-        <translation>Jaunumi</translation>
-    </message>
-    <message>
         <source>PgUp</source>
         <translation>PgUp</translation>
     </message>
@@ -1641,16 +1623,8 @@ Izvēlies citu datnes nosaukumu.</translation>
         <translation>Sūtīt</translation>
     </message>
     <message>
-        <source>Shop</source>
-        <translation>Veikals</translation>
-    </message>
-    <message>
         <source>Stop</source>
         <translation>Apturēt</translation>
-    </message>
-    <message>
-        <source>Time</source>
-        <translation>Laiks</translation>
     </message>
     <message>
         <source>XFer</source>
@@ -1661,10 +1635,6 @@ Izvēlies citu datnes nosaukumu.</translation>
         <translation>Skats</translation>
     </message>
     <message>
-        <source>Split Screen</source>
-        <translation>Sadalīt ekrānu</translation>
-    </message>
-    <message>
         <source>Clear</source>
         <translation>Notīrīt</translation>
     </message>
@@ -1673,20 +1643,8 @@ Izvēlies citu datnes nosaukumu.</translation>
         <translation>Aizvērt</translation>
     </message>
     <message>
-        <source>Eject</source>
-        <translation>Izmest</translation>
-    </message>
-    <message>
         <source>Enter</source>
         <translation>Enter</translation>
-    </message>
-    <message>
-        <source>Kanji</source>
-        <translation>Kanji</translation>
-    </message>
-    <message>
-        <source>Music</source>
-        <translation>Mūzika</translation>
     </message>
     <message>
         <source>Paste</source>
@@ -1697,16 +1655,8 @@ Izvēlies citu datnes nosaukumu.</translation>
         <translation>Pause</translation>
     </message>
     <message>
-        <source>Phone</source>
-        <translation>Telefons</translation>
-    </message>
-    <message>
         <source>Print</source>
         <translation>Print</translation>
-    </message>
-    <message>
-        <source>Reply</source>
-        <translation>Atbilde</translation>
     </message>
     <message>
         <source>Right</source>
@@ -1717,12 +1667,8 @@ Izvēlies citu datnes nosaukumu.</translation>
         <translation>Shift</translation>
     </message>
     <message>
-        <source>Sleep</source>
-        <translation>Snauda</translation>
-    </message>
-    <message>
         <source>Space</source>
-        <extracomment>This and all following &quot;incomprehensible&quot; strings in QShortcut context are key names. Please use the localized names appearing on actual keyboards or whatever is commonly used.</extracomment>
+        <extracomment>This and all following "incomprehensible" strings in QShortcut context are key names. Please use the localized names appearing on actual keyboards or whatever is commonly used.</extracomment>
         <translation>tukšumsimbols</translation>
     </message>
     <message>
@@ -1730,191 +1676,16 @@ Izvēlies citu datnes nosaukumu.</translation>
         <translation>Rīki</translation>
     </message>
     <message>
-        <source>Video</source>
-        <translation>Video</translation>
-    </message>
-    <message>
-        <source>Hiragana</source>
-        <translation>Hiragana</translation>
-    </message>
-    <message>
-        <source>Wireless</source>
-        <translation>Bezvadu</translation>
-    </message>
-    <message>
-        <source>Media Record</source>
-        <translation>Nesēja ieraksts</translation>
-    </message>
-    <message>
-        <source>Multiple Candidate</source>
-        <translation>Daudzi kandidāti</translation>
-    </message>
-    <message>
-        <source>Zenkaku</source>
-        <translation>Zenkaku</translation>
-    </message>
-    <message>
         <source>Print Screen</source>
         <translation>Ekrānšāviņš</translation>
-    </message>
-    <message>
-        <source>Audio Rewind</source>
-        <translation>Audio atritināšana</translation>
-    </message>
-    <message>
-        <source>Audio Repeat</source>
-        <translation>Audio atkārtojums</translation>
-    </message>
-    <message>
-        <source>Toggle Call/Hangup</source>
-        <extracomment>Button that will hang up if we&apos;re in call, or make a call if we&apos;re not.</extracomment>
-        <translation>Pārslēgt Zvanu/Gaidīšanu</translation>
     </message>
     <message>
         <source>Zoom In</source>
         <translation>Pietuvināt</translation>
     </message>
     <message>
-        <source>Camera Shutter</source>
-        <extracomment>Button to trigger the camera shutter (take a picture)</extracomment>
-        <translation>Kameras slēdzis</translation>
-    </message>
-    <message>
-        <source>Ultra Wide Band</source>
-        <translation>Ultra plaša josla</translation>
-    </message>
-    <message>
-        <source>Hangul Special</source>
-        <translation>Hangul speciālais</translation>
-    </message>
-    <message>
-        <source>Treble Down</source>
-        <translation>Augstie toņi mazāk</translation>
-    </message>
-    <message>
         <source>Scroll Lock</source>
         <translation>Slēgt ritināšanu</translation>
-    </message>
-    <message>
-        <source>Media Pause</source>
-        <extracomment>Media player pause button</extracomment>
-        <translation>Atskaņošanas pauze</translation>
-    </message>
-    <message>
-        <source>Word Processor</source>
-        <translation>Teksta procesors</translation>
-    </message>
-    <message>
-        <source>Volume Down</source>
-        <translation>Klusāk</translation>
-    </message>
-    <message>
-        <source>Volume Mute</source>
-        <translation>Izslēgt skaņu</translation>
-    </message>
-    <message>
-        <source>Kana Shift</source>
-        <translation>Kana augšējais</translation>
-    </message>
-    <message>
-        <source>Media Previous</source>
-        <translation>Atskaņot iepriekšējo</translation>
-    </message>
-    <message>
-        <source>Home Page</source>
-        <translation>Mājaslapa</translation>
-    </message>
-    <message>
-        <source>Meeting</source>
-        <translation>Tikšanās</translation>
-    </message>
-    <message>
-        <source>Volume Up</source>
-        <translation>Skaļāk</translation>
-    </message>
-    <message>
-        <source>Menu PB</source>
-        <translation>Izvēlne PB</translation>
-    </message>
-    <message>
-        <source>Keyboard Brightness Up</source>
-        <translation>Увеличить яркость подсветки клавиатуры</translation>
-    </message>
-    <message>
-        <source>Hangul PostHanja</source>
-        <translation>Lielāks klaviatūras apgaismojums</translation>
-    </message>
-    <message>
-        <source>Kana Lock</source>
-        <translation>Slēgt Kana</translation>
-    </message>
-    <message>
-        <source>Community</source>
-        <translation>Biedrība</translation>
-    </message>
-    <message>
-        <source>Launch (6)</source>
-        <translation>Palaidējs (6)</translation>
-    </message>
-    <message>
-        <source>Launch (7)</source>
-        <translation>Palaidējs (7)</translation>
-    </message>
-    <message>
-        <source>Launch (8)</source>
-        <translation>Palaidējs (8)</translation>
-    </message>
-    <message>
-        <source>Launch (9)</source>
-        <translation>Palaidējs (9)</translation>
-    </message>
-    <message>
-        <source>Launch (2)</source>
-        <translation>Palaidējs (2)</translation>
-    </message>
-    <message>
-        <source>Launch (3)</source>
-        <translation>Palaidējs (3)</translation>
-    </message>
-    <message>
-        <source>Launch (4)</source>
-        <translation>Palaidējs (4)</translation>
-    </message>
-    <message>
-        <source>Launch (5)</source>
-        <translation>Palaidējs (5)</translation>
-    </message>
-    <message>
-        <source>Launch (0)</source>
-        <translation>Palaidējs (0)</translation>
-    </message>
-    <message>
-        <source>Launch (1)</source>
-        <translation>Palaidējs (1)</translation>
-    </message>
-    <message>
-        <source>Launch (F)</source>
-        <translation>Palaidējs (F)</translation>
-    </message>
-    <message>
-        <source>Launch (B)</source>
-        <translation>Palaidējs (B)</translation>
-    </message>
-    <message>
-        <source>Launch (C)</source>
-        <translation>Palaidējs (C)</translation>
-    </message>
-    <message>
-        <source>Launch (D)</source>
-        <translation>Palaidējs (D)</translation>
-    </message>
-    <message>
-        <source>Launch (E)</source>
-        <translation>Palaidējs (E)</translation>
-    </message>
-    <message>
-        <source>Launch (A)</source>
-        <translation>Palaidējs (A)</translation>
     </message>
     <message>
         <source>Delete</source>
@@ -1925,50 +1696,8 @@ Izvēlies citu datnes nosaukumu.</translation>
         <translation>Atcelt</translation>
     </message>
     <message>
-        <source>Audio Random Play</source>
-        <translation>Audio nejaušas izlases atskaņošana</translation>
-    </message>
-    <message>
-        <source>Hangul</source>
-        <translation>Hangul</translation>
-    </message>
-    <message>
-        <source>Hangup</source>
-        <extracomment>Button to end a call (note: a separate button is used to start the call)</extracomment>
-        <translation>Nolikt klausuli</translation>
-    </message>
-    <message>
-        <source>Henkan</source>
-        <translation>Henkan</translation>
-    </message>
-    <message>
         <source>Insert</source>
         <translation>Ievietot</translation>
-    </message>
-    <message>
-        <source>Home Office</source>
-        <translation>Mājas Birojs</translation>
-    </message>
-    <message>
-        <source>Last Number Redial</source>
-        <extracomment>Button to redial the last number called</extracomment>
-        <translation>Pēdējā numura atkārtojums</translation>
-    </message>
-    <message>
-        <source>Logoff</source>
-        <translation>Atteikšanās</translation>
-    </message>
-    <message>
-        <source>Market</source>
-        <translation>Tirgus</translation>
-    </message>
-    <message>
-        <source>Massyo</source>
-        <translation>Massyo</translation>
-    </message>
-    <message>
-        <source>Bass Boost</source>
-        <translation>Pastiprināt basus</translation>
     </message>
     <message>
         <source>Option</source>
@@ -1987,10 +1716,6 @@ Izvēlies citu datnes nosaukumu.</translation>
         <translation>Return</translation>
     </message>
     <message>
-        <source>Romaji</source>
-        <translation>Romaji</translation>
-    </message>
-    <message>
         <source>Search</source>
         <translation>Meklēt</translation>
     </message>
@@ -2003,56 +1728,12 @@ Izvēlies citu datnes nosaukumu.</translation>
         <translation>SysReq</translation>
     </message>
     <message>
-        <source>Travel</source>
-        <translation>Ceļojums</translation>
-    </message>
-    <message>
         <source>NumLock</source>
         <translation>NumLock</translation>
     </message>
     <message>
-        <source>Audio Forward</source>
-        <translation>Audio uz priekšu</translation>
-    </message>
-    <message>
-        <source>WebCam</source>
-        <translation>Webkamera</translation>
-    </message>
-    <message>
-        <source>Hiragana Katakana</source>
-        <translation>Hiragana Katakana</translation>
-    </message>
-    <message>
-        <source>Top Menu</source>
-        <translation>Augšējā izvēlne</translation>
-    </message>
-    <message>
         <source>ScrollLock</source>
         <translation>ScrollLock</translation>
-    </message>
-    <message>
-        <source>Hot Links</source>
-        <translation>Populāras saites</translation>
-    </message>
-    <message>
-        <source>Audio Cycle Track</source>
-        <translation>Audio Ciklisks treks</translation>
-    </message>
-    <message>
-        <source>Context1</source>
-        <translation>Konteksts1</translation>
-    </message>
-    <message>
-        <source>Context2</source>
-        <translation>Konteksts2</translation>
-    </message>
-    <message>
-        <source>Context3</source>
-        <translation>Konteksts3</translation>
-    </message>
-    <message>
-        <source>Context4</source>
-        <translation>Konteksts4</translation>
     </message>
     <message>
         <source>Zoom Out</source>
@@ -2063,62 +1744,8 @@ Izvēlies citu datnes nosaukumu.</translation>
         <translation>Lappusi uz augšu</translation>
     </message>
     <message>
-        <source>Open URL</source>
-        <translation>Atvērt vietrādi</translation>
-    </message>
-    <message>
-        <source>iTouch</source>
-        <translation>iTouch</translation>
-    </message>
-    <message>
-        <source>Previous Candidate</source>
-        <translation>Iepriekšējais kandidāts</translation>
-    </message>
-    <message>
-        <source>Toggle Media Play/Pause</source>
-        <extracomment>Media player button to toggle between playing and paused</extracomment>
-        <translation>Pārslēgt Atskaņošanu/Pauzi</translation>
-    </message>
-    <message>
         <source>Caps Lock</source>
         <translation>Caps Lock</translation>
-    </message>
-    <message>
-        <source>Eisu Shift</source>
-        <translation>Eisu augšējais</translation>
-    </message>
-    <message>
-        <source>Code input</source>
-        <translation>Koda ievads</translation>
-    </message>
-    <message>
-        <source>Camera Focus</source>
-        <extracomment>Button to focus the camera</extracomment>
-        <translation>Kameras fokuss</translation>
-    </message>
-    <message>
-        <source>Adjust Brightness</source>
-        <translation>Pielāgot spožumu</translation>
-    </message>
-    <message>
-        <source>Spreadsheet</source>
-        <translation>Izklājlapa</translation>
-    </message>
-    <message>
-        <source>Eisu toggle</source>
-        <translation>Eisu pārslēgt</translation>
-    </message>
-    <message>
-        <source>Keyboard Brightness Down</source>
-        <translation>Уменьшить яркость подсветки клавиатуры</translation>
-    </message>
-    <message>
-        <source>Clear Grab</source>
-        <translation>Dzēst satverto</translation>
-    </message>
-    <message>
-        <source>Monitor Brightness Up</source>
-        <translation>Увеличить яркость монитора</translation>
     </message>
     <message>
         <source>System Request</source>
@@ -2133,201 +1760,8 @@ Izvēlies citu datnes nosaukumu.</translation>
         <translation>Backtab</translation>
     </message>
     <message>
-        <source>Bass Up</source>
-        <translation>Basu skaļāk</translation>
-    </message>
-    <message>
-        <source>Battery</source>
-        <translation>Baterija</translation>
-    </message>
-    <message>
-        <source>Katakana</source>
-        <translation>Katakana</translation>
-    </message>
-    <message>
-        <source>Refresh</source>
-        <translation>Atjaunot</translation>
-    </message>
-    <message>
-        <source>Hibernate</source>
-        <translation>Iemidzināt</translation>
-    </message>
-    <message>
-        <source>Application Left</source>
-        <translation>Lietotne pa kreisi</translation>
-    </message>
-    <message>
-        <source>Voice Dial</source>
-        <extracomment>Button to trigger voice dialing</extracomment>
-        <translation>Balss numura sastādīšana</translation>
-    </message>
-    <message>
-        <source>Browser</source>
-        <translation>Pārlūks</translation>
-    </message>
-    <message>
-        <source>Keyboard Menu</source>
-        <translation>Klaviatūras izvēlne</translation>
-    </message>
-    <message>
-        <source>Back Forward</source>
-        <translation>Atpakaļ Uz priekšu</translation>
-    </message>
-    <message>
-        <source>Launch Mail</source>
-        <translation>Palaist pasta lietotni</translation>
-    </message>
-    <message>
-        <source>Keyboard Light On/Off</source>
-        <translation>Вкл./Откл. подсветку клавиатуры</translation>
-    </message>
-    <message>
         <source>Backspace</source>
         <translation>Backspace</translation>
-    </message>
-    <message>
-        <source>Bass Down</source>
-        <translation>Basu klusāk</translation>
-    </message>
-    <message>
-        <source>Mail Forward</source>
-        <translation>Pārsūtīt pastu</translation>
-    </message>
-    <message>
-        <source>Messenger</source>
-        <translation>Ziņotājs</translation>
-    </message>
-    <message>
-        <source>Hangul Banja</source>
-        <translation>Hangul Banja</translation>
-    </message>
-    <message>
-        <source>Hangul Hanja</source>
-        <translation>Hangul Hanja</translation>
-    </message>
-    <message>
-        <source>Standby</source>
-        <translation>Gaidīšanas režīms</translation>
-    </message>
-    <message>
-        <source>Hangul Start</source>
-        <translation>Hangul starts</translation>
-    </message>
-    <message>
-        <source>Rotation KB</source>
-        <translation>Rotācijas KB</translation>
-    </message>
-    <message>
-        <source>Rotation PB</source>
-        <translation>Rotācijas PB</translation>
-    </message>
-    <message>
-        <source>Documents</source>
-        <translation>Dokumenti</translation>
-    </message>
-    <message>
-        <source>Calculator</source>
-        <translation>Kalkulators</translation>
-    </message>
-    <message>
-        <source>Support</source>
-        <translation>Atbalsts</translation>
-    </message>
-    <message>
-        <source>Suspend</source>
-        <translation>Atlikt</translation>
-    </message>
-    <message>
-        <source>Display</source>
-        <translation>Parādīt</translation>
-    </message>
-    <message>
-        <source>Hangul Romaja</source>
-        <translation>Hangul Romaja</translation>
-    </message>
-    <message>
-        <source>My Sites</source>
-        <translation>Manas vietas</translation>
-    </message>
-    <message>
-        <source>Rotate Windows</source>
-        <translation>Pagriezt logus</translation>
-    </message>
-    <message>
-        <source>Touroku</source>
-        <translation>Touroku</translation>
-    </message>
-    <message>
-        <source>Zenkaku Hankaku</source>
-        <translation>Zenkaku Hankaku</translation>
-    </message>
-    <message>
-        <source>Hangul Jeonja</source>
-        <translation>Hangul Jeonja</translation>
-    </message>
-    <message>
-        <source>Treble Up</source>
-        <translation>Augšas skaļāk</translation>
-    </message>
-    <message>
-        <source>Subtitle</source>
-        <translation>Apakšvirsraksts</translation>
-    </message>
-    <message>
-        <source>Hangul Jamo</source>
-        <translation>Hangul Jamo</translation>
-    </message>
-    <message>
-        <source>Bluetooth</source>
-        <translation>Bluetooth</translation>
-    </message>
-    <message>
-        <source>Muhenkan</source>
-        <translation>Muhenkan</translation>
-    </message>
-    <message>
-        <source>Num Lock</source>
-        <translation>Num slēgts</translation>
-    </message>
-    <message>
-        <source>Screensaver</source>
-        <translation>Ekrānsargs</translation>
-    </message>
-    <message>
-        <source>Number Lock</source>
-        <translation>Skaitļu slēgšana</translation>
-    </message>
-    <message>
-        <source>Spellchecker</source>
-        <translation>Pareizrakstības pārbaude</translation>
-    </message>
-    <message>
-        <source>Hangul PreHanja</source>
-        <translation>Hangul PreHanja</translation>
-    </message>
-    <message>
-        <source>Terminal</source>
-        <translation>Terminālis</translation>
-    </message>
-    <message>
-        <source>Add Favorite</source>
-        <translation>Pievienot iecienīto</translation>
-    </message>
-    <message>
-        <source>Finance</source>
-        <translation>Finanses</translation>
-    </message>
-    <message>
-        <source>Task Panel</source>
-        <translation>Uzdevumu panelis</translation>
-    </message>
-    <message>
-        <source>Favorites</source>
-        <translation>Iecienītie</translation>
-    </message>
-    <message>
-        <source>Forward</source>
-        <translation>Uz priekšu</translation>
     </message>
     <message>
         <source>Page Down</source>
@@ -2338,52 +1772,8 @@ Izvēlies citu datnes nosaukumu.</translation>
         <translation>Пробуждение</translation>
     </message>
     <message>
-        <source>Power Off</source>
-        <translation>Отключение питания</translation>
-    </message>
-    <message>
-        <source>LightBulb</source>
-        <translation>Spuldze</translation>
-    </message>
-    <message>
-        <source>Hankaku</source>
-        <translation>Hankaku</translation>
-    </message>
-    <message>
-        <source>Hangul End</source>
-        <translation>Hangul beigas</translation>
-    </message>
-    <message>
         <source>Monitor Brightness Down</source>
         <translation>Уменьшить яркость монитора</translation>
-    </message>
-    <message>
-        <source>History</source>
-        <translation>Vēsture</translation>
-    </message>
-    <message>
-        <source>Media Play</source>
-        <translation>Atskaņot</translation>
-    </message>
-    <message>
-        <source>Media Stop</source>
-        <translation>Apturēt atskaņošanu</translation>
-    </message>
-    <message>
-        <source>Media Next</source>
-        <translation>Atskaņot nākošo</translation>
-    </message>
-    <message>
-        <source>Launch Media</source>
-        <translation>Palaist atskaņotāju</translation>
-    </message>
-    <message>
-        <source>Application Right</source>
-        <translation>Lietotne pa labi</translation>
-    </message>
-    <message>
-        <source>Pictures</source>
-        <translation>Attēli</translation>
     </message>
 </context>
 <context>
@@ -2579,7 +1969,7 @@ Izvēlies citu datnes nosaukumu.</translation>
 <context>
     <name>QWhatsThisAction</name>
     <message>
-        <source>What&apos;s This?</source>
+        <source>What's This?</source>
         <translation>Kas tas?</translation>
     </message>
 </context>

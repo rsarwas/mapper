@@ -1,5 +1,5 @@
 /*
- *    Copyright 2012-2015 Kai Pastor
+ *    Copyright 2012-2017 Kai Pastor
  *
  *    This file is part of OpenOrienteering.
  *
@@ -26,6 +26,7 @@
 #include <QDir>
 #include <QLineEdit>
 #include <QLocale>
+#include <QSignalBlocker>
 #include <QSpinBox>
 #include <QTemporaryDir>
 #include <QXmlStreamAttributes>
@@ -34,13 +35,11 @@
 
 #include <proj_api.h>
 
-#include "crs_template.h"
-#include "../file_format.h"
-#include "../file_format_xml.h"
-#include "../mapper_resource.h"
-#include "../util_gui.h"
-#include "../util/xml_stream_util.h"
-#include "../util/scoped_signals_blocker.h"
+#include "core/crs_template.h"
+#include "fileformats/file_format.h"
+#include "fileformats/xml_file_format.h"
+#include "gui/util_gui.h"
+#include "util/xml_stream_util.h"
 
 
 // ### A namespace which collects various string constants of type QLatin1String. ###
@@ -85,14 +84,13 @@ namespace
 	public:
 		ProjSetup()
 		{
-			QVarLengthArray<QByteArray,3> buffer;
-			QVarLengthArray<const char*,3> data;
-			for (auto&& location : MapperResource::getLocations(MapperResource::PROJ_DATA))
+			auto proj_data = QFileInfo(QLatin1String("data:/proj"));
+			if (proj_data.exists())
 			{
-				buffer.append(location.toLocal8Bit());
-				data.append(buffer.back().data());
+				static const auto location = proj_data.absoluteFilePath().toLocal8Bit();
+				static auto data = location.constData();
+				pj_set_searchpath(1, &data);
 			}
-			pj_set_searchpath(data.size(), data.data());
 			
 #if defined(Q_OS_ANDROID)
 			// Register file finder function needed by Proj.4
@@ -135,7 +133,7 @@ const QString Georeferencing::geographic_crs_spec(QString::fromLatin1("+proj=lat
 
 Georeferencing::Georeferencing()
 : state(Local),
-  scale_denominator(1),
+  scale_denominator{1000},
   grid_scale_factor{1.0},
   declination(0.0),
   grivation(0.0),
@@ -730,7 +728,7 @@ MapCoordF Georeferencing::toMapCoordF(const LatLon& lat_lon, bool* ok) const
 	return toMapCoordF(toProjectedCoords(lat_lon, ok));
 }
 
-MapCoordF Georeferencing::toMapCoordF(Georeferencing* other, const MapCoordF& map_coords, bool* ok) const
+MapCoordF Georeferencing::toMapCoordF(const Georeferencing* other, const MapCoordF& map_coords, bool* ok) const
 {
 	if (other == NULL)
 	{
@@ -842,7 +840,7 @@ extern "C"
 	{
 		if (temp_dir->isValid())
 		{
-			QString path = QDir(temp_dir->path()).filePath(name);
+			QString path = QDir(temp_dir->path()).filePath(QString::fromUtf8(name));
 			QFile file(path);
 			if (file.exists() || QFile::copy(QLatin1String("assets:/proj/") + QLatin1String(name), path))
 			{

@@ -27,7 +27,7 @@
 #include <QXmlStreamReader>
 #include <QXmlStreamWriter>
 
-#include "../util/xml_stream_util.h"
+#include "util/xml_stream_util.h"
 
 
 static_assert(sizeof(qint32) <= sizeof(int), 
@@ -233,6 +233,21 @@ MapCoord MapCoord::load(QXmlStreamReader& xml)
 	return MapCoord { static_cast<qint32>(x64), static_cast<qint32>(y64), flags };
 }
 
+MapCoord MapCoord::load(qreal x, qreal y, int flags)
+{
+	auto x64 = qRound64(x * 1000);
+	auto y64 = qRound64(y * 1000);
+	
+	handleBoundsOffset(x64, y64);
+	ensureBoundsForQint32(x64, y64);
+	return MapCoord { static_cast<qint32>(x64), static_cast<qint32>(y64), flags };
+}
+
+MapCoord MapCoord::load(QPointF p, int flags)
+{
+	return MapCoord::load(p.x(), p.y(), flags);
+}
+
 #ifndef NO_NATIVE_FILE_FORMAT
 	
 MapCoord::MapCoord(const LegacyMapCoord& coord)
@@ -408,8 +423,8 @@ MapCoord::MapCoord(QStringRef& text)
 		}
 	}
 	
-	handleBoundsOffset(y64, y64);
-	ensureBoundsForQint32(y64, y64);
+	handleBoundsOffset(x64, y64);
+	ensureBoundsForQint32(x64, y64);
 	xp = static_cast<qint32>(x64);
 	yp = static_cast<qint32>(y64);
 	

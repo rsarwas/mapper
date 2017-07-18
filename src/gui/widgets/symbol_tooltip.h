@@ -1,5 +1,6 @@
 /*
  *    Copyright 2012, 2013 Thomas Schöps
+ *    Copyright 2017 Kai Pastor
  *
  *    This file is part of OpenOrienteering.
  *
@@ -18,17 +19,27 @@
  */
 
 
-#ifndef _OPENORIENTEERING_SYMBOL_TOOLTIP_H_
-#define _OPENORIENTEERING_SYMBOL_TOOLTIP_H_
+#ifndef OPENORIENTEERING_SYMBOL_TOOLTIP_H
+#define OPENORIENTEERING_SYMBOL_TOOLTIP_H
 
+#include <QtGlobal>
+#include <QObject>
+#include <QRect>
 #include <QTimer>
 #include <QWidget>
 
 QT_BEGIN_NAMESPACE
+class QEvent;
+class QHideEvent;
 class QLabel;
+class QPaintEvent;
+class QRect;
 class QShortcut;
+class QShowEvent;
+// IWYU pragma: no_forward_declare QWidget
 QT_END_NAMESPACE
 
+class Map;
 class Symbol;
 
 
@@ -61,13 +72,13 @@ public:
 	 * Constructs a new SymbolToolTip.
 	 * The optional shortcut will trigger the description to be shown.
 	 */
-	SymbolToolTip(QWidget* parent = NULL, QShortcut* shortcut = NULL);
+	SymbolToolTip(QWidget* parent = nullptr, QShortcut* shortcut = nullptr);
 	
 	/**
 	 * Schedules the tooltip for the symbol to be shown close to
 	 * but not covering the region given by rect.
 	 */
-	void scheduleShow(const Symbol* symbol, QRect rect);
+	void scheduleShow(const Symbol* symbol, const Map* map, QRect rect);
 	
 	/**
 	 * Resets the tooltip.
@@ -77,7 +88,7 @@ public:
 	
 	/**
 	 * Returns the symbol for which the tooltip is currently shown or
-	 * scheduled to be shown, or NULL.
+	 * scheduled to be shown, or nullptr.
 	 */
 	const Symbol* getSymbol() const;
 	
@@ -93,23 +104,23 @@ protected:
 	 * Hides the tooltip when the mouse enters it.
 	 * This is neccessary to let the user select another symbol.
 	 */
-	virtual void enterEvent(QEvent* event);
+	void enterEvent(QEvent* event) override;
 	
 	/**
 	 * Enables the shortcut when the tooltip is shown.
 	 */
-	virtual void showEvent(QShowEvent* event);
+	void showEvent(QShowEvent* event) override;
 	
 	/**
 	 * Resets the tooltip's state on hiding the tooltip.
 	 * Disables the shortcut.
 	 */
-	virtual void hideEvent(QHideEvent* event);
+	void hideEvent(QHideEvent* event) override;
 	
 	/**
 	 * Draws the tooltip's background.
 	 */
-	virtual void paintEvent(QPaintEvent* event);
+	void paintEvent(QPaintEvent* event) override;
 	
 private:
 	/**
@@ -118,13 +129,13 @@ private:
 	 */
 	void adjustPosition();
 	
+	QTimer tooltip_timer;      /// The timer which triggers the delayed showing.
 	QShortcut* shortcut;       /// An optional shortcut for showing the description.
-	const Symbol* symbol;      /// The current symbol, or NULL.
-	QRect icon_rect;           /// The region to be considered when determining position.
-	bool description_shown;    /// If true, the full description is visible.
+	const Symbol* symbol;      /// The current symbol, or nullptr.
 	QLabel* name_label;        /// The label displaying the symbol's name.
 	QLabel* description_label; /// The label displaying the symbol's description.
-	QTimer tooltip_timer;      /// The timer which triggers the delayed showing.
+	QRect icon_rect;           /// The region to be considered when determining position.
+	bool description_shown;    /// If true, the full description is visible.
 	
 };
 

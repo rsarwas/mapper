@@ -2,43 +2,43 @@
 
 ![Mapper Screenshot](http://openorienteering.github.io/mapper-manual/pages/images/main_window.png)
 
-OpenOrienteering Mapper is an orienteering mapmaking program and provides a free and open source alternative to existing commercial software. OpenOrienteering Mapper runs on Android, Windows, Mac OS X and Linux.
+OpenOrienteering Mapper is an orienteering mapmaking program and provides
+a free and open source alternative to existing commercial software.
+OpenOrienteering Mapper runs on Android, Windows, Mac OS X and Linux.
 
- - [Manual](http://openorienteering.org/mapper-manual/)
+ - [Mapper Homepage](http://www.openorienteering.org/apps/mapper/)
+ - [Manual](http://www.openorienteering.org/mapper-manual/)
  - [Downloads](https://github.com/OpenOrienteering/mapper/releases)
- - [Blog](http://openorienteering.github.io/)
+ - [OpenOrienteering Blog](http://www.openorienteering.org/)
+
+
+## Reporting Issues and Asking for Help
+
+Issues and possible improvements can be posted to our public [Ticket system](https://github.com/OpenOrienteering/mapper/issues).
+Please make sure you provide all relevant information about your problem or idea.
 
 
 ## Contributing
 
-### Writing Code
-
-For building Mapper from source see [`INSTALL.md`](https://github.com/OpenOrienteering/mapper/blob/master/INSTALL.md). Pull requests are very welcome.
-
- - [Ticket system](https://github.com/OpenOrienteering/mapper/issues)
- - [API documentation](http://openorienteering.github.io/api-docs/mapper/)
- - [Unstable Builds](http://openorienteering.github.io/news/2015/mapper-unstable-packages/)
- - [Developer mailing list](https://lists.sourceforge.net/lists/listinfo/oorienteering-devel)
- - [Developer wiki](https://github.com/OpenOrienteering/mapper/wiki)
-
-
 ### Translating
 
-The translations for Mapper are stored in `translations/OpenOrienteering_lang.ts`. The easiest way to edit those files is by using [Qt Linguist for translation](http://doc.qt.io/qt-5/linguist-translators.html). The translations can also be edited with any XML editor.
-
-Adding a new translation is done by making a new copy of `OpenOrienteering_template.ts` and replacing `template` in the file name with the relevant language code. The new file also has to be added to `translations/CMakeLists.txt`.
-
-Some strings such as basic buttons and colors has its translation within the Qt Framework, for translating those see [Qt Localization](https://wiki.qt.io/Qt_Localization).
+Translations can be edited online on [Weblate](https://hosted.weblate.org/projects/openorienteering/mapper/). You can register/login with your Github account. Find out more about translation in our [wiki](https://github.com/OpenOrienteering/mapper/wiki/Translation).
 
 
 ### Writing Documentation
 
-The Mapper manual lives in its [own repository](https://github.com/OpenOrienteering/mapper-manual) witch contains all information for you to get started.
+The Mapper manual lives in its [own repository](https://github.com/OpenOrienteering/mapper-manual)
+which contains all information for you to get started.
 
 
-### Reporting Issues
+### Writing Code
 
-Issues and possible improvements can be posted to our public [Ticket system](https://github.com/OpenOrienteering/mapper/issues), please make sure you provide all relevant information about your problem or idea.
+For building Mapper from source see [`INSTALL.md`](https://github.com/OpenOrienteering/mapper/blob/master/INSTALL.md).
+Pull requests are very welcome.
+
+ - [Issue tracker](https://github.com/OpenOrienteering/mapper/issues)
+ - [API documentation](http://www.openorienteering.org/api-docs/mapper/)
+ - [Developer wiki](https://github.com/OpenOrienteering/mapper/wiki)
 
 
 ## License

@@ -1,6 +1,6 @@
 /*
  *    Copyright 2012, 2013, 2014 Thomas Schöps
- *    Copyright 2012-2016 Kai Pastor
+ *    Copyright 2012-2017 Kai Pastor
  *
  *    This file is part of OpenOrienteering.
  *
@@ -37,7 +37,9 @@
 #include <QWhatsThis>
 
 #if defined(Q_OS_ANDROID)
-#  include <QtAndroidExtras/QAndroidJniObject>
+#  include <QtAndroid>
+#  include <QAndroidJniObject>
+#  include <QUrl>
 #endif
 
 #include <mapper_config.h>
@@ -46,18 +48,17 @@
 #include "autosave_dialog.h"
 #include "home_screen_controller.h"
 #include "settings_dialog.h"
-#include "text_browser_dialog.h"
-#include "../file_format_registry.h"
-#include "../file_import_export.h"
-#include "../map.h"
-#include "../map_dialog_new.h"
-#include "../map_editor.h"
-#include "../mapper_resource.h"
-#include "../file_format.h"
+#include "../core/map_view.h"
+#include "../fileformats/file_format_registry.h"
+#include "../fileformats/file_import_export.h"
+#include "core/map.h"
+#include "gui/map/new_map_dialog.h"
+#include "gui/map/map_editor.h"
+#include "../fileformats/file_format.h"
 #include "../settings.h"
-#include "../symbol.h"
-#include "../undo_manager.h"
-#include "../util.h"
+#include "core/symbols/symbol.h"
+#include "undo/undo_manager.h"
+#include "util/util.h"
 #include "../util/backports.h"
 
 
@@ -108,7 +109,10 @@ MainWindow::MainWindow(bool as_main_window, QWidget* parent, Qt::WindowFlags fla
 #endif
 	
 	connect(&Settings::getInstance(), &Settings::settingsChanged, this, &MainWindow::settingsChanged);
+	connect(qApp, &QGuiApplication::applicationStateChanged, this, &MainWindow::applicationStateChanged);
 }
+
+
 
 MainWindow::~MainWindow()
 {
@@ -125,24 +129,64 @@ void MainWindow::settingsChanged()
 	updateRecentFileActions();
 }
 
+
+
+void MainWindow::applicationStateChanged()
+{
+#ifdef Q_OS_ANDROID
+	// The Android app may be started or resumed when the user triggers a suitable "intent".
+	if (QGuiApplication::applicationState() == Qt::ApplicationActive)
+	{
+		auto activity = QtAndroid::androidActivity();
+		auto intent_path = activity.callObjectMethod<jstring>("takeIntentPath").toString();
+		if (!intent_path.isEmpty())
+		{
+			const auto local_file = QUrl(intent_path).toLocalFile();
+			if (!hasOpenedFile())
+			{
+				openPathLater(local_file);
+			}
+			else if (currentPath() != local_file)
+			{
+				showStatusBarMessage(tr("You must close the current file before you can open another one."));
+			}
+			return;
+		}
+	}
+#endif
+	
+	// Only on startup, we may need to load the most recently used file.
+	static bool starting_up = true;
+	if (starting_up)
+	{
+		starting_up = false;
+		QSettings settings;
+		if (path_backlog.isEmpty()
+		    && settings.value(QLatin1String("openMRUFile")).toBool())
+		{
+			const auto files = settings.value(QLatin1String("recentFileList")).toStringList();
+			if (!files.isEmpty())
+				openPathLater(files[0]);
+		}
+	}
+}
+
+
+
 QString MainWindow::appName() const
 {
 	return APP_NAME;
 }
 
-bool MainWindow::mobileMode() const
+#ifndef Q_OS_ANDROID
+bool MainWindow::mobileMode()
 {
-#ifdef Q_OS_ANDROID
-	static bool mobile_mode = qEnvironmentVariableIsSet("MAPPER_MOBILE_GUI")
-	                          ? (qgetenv("MAPPER_MOBILE_GUI") != "0")
-	                          : 1;
-#else
 	static bool mobile_mode = qEnvironmentVariableIsSet("MAPPER_MOBILE_GUI")
 	                          ? (qgetenv("MAPPER_MOBILE_GUI") != "0")
 	                          : 0;
-#endif
 	return mobile_mode;
 }
+#endif
 
 void MainWindow::setCentralWidget(QWidget* widget)
 {
@@ -206,7 +250,7 @@ void MainWindow::setController(MainWindowController* new_controller, bool has_fi
 	if (create_menu)
 		createHelpMenu();
 	
-#if defined(Q_OS_MAC)
+#if defined(Q_OS_MACOS)
 	if (isVisible() && qApp->activeWindow() == this)
 	{
 		// Force a menu synchronisation,
@@ -342,17 +386,20 @@ void MainWindow::setCurrentPath(const QString& path)
 {
 	Q_ASSERT(has_opened_file || path.isEmpty());
 	
-	QString window_file_path;
-	current_path.clear();
-	if (has_opened_file)
+	if (path != current_path)
 	{
-		window_file_path = QFileInfo(path).canonicalFilePath();
-		if (window_file_path.isEmpty())
-			window_file_path = tr("Unsaved file");
-		else
-			current_path = window_file_path;
+		QString window_file_path;
+		current_path.clear();
+		if (has_opened_file)
+		{
+			window_file_path = QFileInfo(path).canonicalFilePath();
+			if (window_file_path.isEmpty())
+				window_file_path = tr("Unsaved file");
+			else
+				current_path = window_file_path;
+		}
+		setWindowFilePath(window_file_path);
 	}
-	setWindowFilePath(window_file_path);
 }
 
 void MainWindow::setMostRecentlyUsedFile(const QString& path)
@@ -610,6 +657,7 @@ void MainWindow::showNewMapWizard()
 		return;
 	
 	Map* new_map = new Map();
+	MapView tmp_view { nullptr, new_map };
 	QString symbol_set_path = newMapDialog.getSelectedSymbolSetPath();
 	if (symbol_set_path.isEmpty())
 	{
@@ -617,7 +665,7 @@ void MainWindow::showNewMapWizard()
 	}
 	else
 	{
-		new_map->loadFrom(symbol_set_path, this, nullptr, true);
+		new_map->loadFrom(symbol_set_path, this, &tmp_view, true);
 		if (new_map->getScaleDenominator() != newMapDialog.getSelectedScale())
 		{
 			if (QMessageBox::question(this, tr("Warning"), tr("The selected map scale is 1:%1, but the chosen symbol set has a nominal scale of 1:%2.\n\nDo you want to scale the symbols to the selected scale?").arg(newMapDialog.getSelectedScale()).arg(new_map->getScaleDenominator()),  QMessageBox::Yes | QMessageBox::No) == QMessageBox::Yes)
@@ -640,11 +688,15 @@ void MainWindow::showNewMapWizard()
 			}
 		}
 	}
+	
+	auto map_view = new MapView { new_map };
+	map_view->setGridVisible(tmp_view.isGridVisible());
+	
 	new_map->setHasUnsavedChanges(false);
 	new_map->undoManager().clear();
 	
 	MainWindow* new_window = hasOpenedFile() ? new MainWindow() : this;
-	new_window->setController(new MapEditorController(MapEditorController::MapEditor, new_map), QString());
+	new_window->setController(new MapEditorController(MapEditorController::MapEditor, new_map, map_view), QString());
 	
 	new_window->show();
 	new_window->raise();
@@ -661,11 +713,13 @@ void MainWindow::showOpenDialog()
 
 bool MainWindow::openPath(const QString &path)
 {
-#ifndef Q_OS_ANDROID
 	// Empty path does nothing. This also helps with the single instance application code.
 	if (path.isEmpty())
 		return true;
 	
+#ifdef Q_OS_ANDROID
+	showStatusBarMessage(tr("Opening %1").arg(QFileInfo(path).fileName()));
+#else
 	MainWindow* const existing = findMainWindow(path);
 	if (existing)
 	{
@@ -798,7 +852,7 @@ void MainWindow::switchActualPath(const QString& path)
 void MainWindow::openPathLater(const QString& path)
 {
 	path_backlog.push_back(path);
-	QTimer::singleShot(0, this, SLOT(openPathBacklog()));
+	QTimer::singleShot(10, this, SLOT(openPathBacklog()));
 }
 
 void MainWindow::openPathBacklog()
@@ -1078,14 +1132,7 @@ void MainWindow::showAbout()
 
 void MainWindow::showHelp()
 {
-#ifdef Q_OS_ANDROID
-	const QString manual_path = MapperResource::locate(MapperResource::MANUAL, QString::fromLatin1("index.html"));
-	const QUrl help_url = QUrl::fromLocalFile(manual_path);
-	TextBrowserDialog help_dialog(help_url, this);
-	help_dialog.exec();
-#else
 	Util::showHelp(this);
-#endif
 }
 
 void MainWindow::linkClicked(const QString &link)
@@ -1097,10 +1144,7 @@ void MainWindow::linkClicked(const QString &link)
 	else if (link.compare(QLatin1String("about:"), Qt::CaseInsensitive) == 0)
 		showAbout();
 	else if (link.startsWith(QLatin1String("examples:"), Qt::CaseInsensitive))
-	{
-		auto example = link.midRef(9);
-		openPathLater(MapperResource::locate(MapperResource::EXAMPLE) + QLatin1Char('/') + example);
-	}
+		openPathLater(QLatin1String("data:/examples/") + link.midRef(9));
 	else
 		QDesktopServices::openUrl(link);
 }

@@ -1,5 +1,5 @@
 /*
- *    Copyright 2012, 2013, 2014 Kai Pastor
+ *    Copyright 2012-2016 Kai Pastor
  *
  *    This file is part of OpenOrienteering.
  *
@@ -18,16 +18,16 @@
  */
 
 
-#ifndef _OPENORIENTEERING_GEOREFERENCING_H_
-#define _OPENORIENTEERING_GEOREFERENCING_H_
+#ifndef OPENORIENTEERING_GEOREFERENCING_H
+#define OPENORIENTEERING_GEOREFERENCING_H
 
 #include <QPointF>
 #include <QString>
 #include <QTransform>
 
 #include "latlon.h"
-#include "../core/map_coord.h"
-#include "../file_format.h"
+#include "map_coord.h"
+#include "../fileformats/file_format.h"
 
 class QDebug;
 class QXmlStreamReader;
@@ -437,7 +437,7 @@ public:
 	 * Transforms map coordinates from the other georeferencing to
 	 * map coordinates of this georeferencing, if possible. 
 	 */
-	MapCoordF toMapCoordF(Georeferencing* other, const MapCoordF& map_coords, bool* ok = NULL) const;
+	MapCoordF toMapCoordF(const Georeferencing* other, const MapCoordF& map_coords, bool* ok = NULL) const;
 	
 	
 	/**

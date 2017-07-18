@@ -26,8 +26,10 @@
 #include <limits>
 
 #include <QButtonGroup>
-#include <QDialogButtonBox>
+#include <QCheckBox>
 #include <QComboBox>
+#include <QDialogButtonBox>
+#include <QDoubleSpinBox>
 #include <QFileDialog>
 #include <QFileInfo>
 #include <QFormLayout>
@@ -41,6 +43,7 @@
 #include <QRadioButton>
 #include <QScrollArea>
 #include <QScrollBar>
+#include <QSpinBox>
 #include <QToolButton>
 #include <QXmlStreamReader>
 #include <QXmlStreamWriter>
@@ -51,12 +54,13 @@
 #include "print_progress_dialog.h"
 #include "print_tool.h"
 #include "../core/map_printer.h"
-#include "../map.h"
-#include "../map_editor.h"
-#include "../map_widget.h"
+#include "core/map.h"
+#include "gui/map/map_editor.h"
+#include "gui/map/map_widget.h"
 #include "../settings.h"
-#include "../util.h"
-#include "../util_gui.h"
+#include "../templates/template.h"
+#include "util/util.h"
+#include "util_gui.h"
 #include "../util/backports.h"
 #include "../util/scoped_signals_blocker.h"
 
@@ -194,7 +198,7 @@ PrintWidget::PrintWidget(Map* map, MainWindow* main_window, MapView* main_view, 
 	
 	dpi_combo = new QComboBox();
 	dpi_combo->setEditable(true);
-	dpi_combo->setValidator(new QRegExpValidator(QRegExp(QString::fromLatin1("^[1-9]\\d{1,4} dpi$|^[1-9]\\d{1,4}$")), dpi_combo));
+	dpi_combo->setValidator(new QRegExpValidator(QRegExp(QLatin1String("^[1-9]\\d{0,4}$|^[1-9]\\d{0,4} ")+tr("dpi")+QLatin1Char('$')), dpi_combo));
 	// TODO: Implement spinbox-style " dpi" suffix
 	layout->addRow(tr("Resolution:"), dpi_combo);
 	
@@ -284,7 +288,7 @@ PrintWidget::PrintWidget(Map* map, MainWindow* main_window, MapView* main_view, 
 	connect(overlap_edit, QOverload<double>::of(&QDoubleSpinBox::valueChanged), this, &PrintWidget::overlapEdited);
 	
 	connect(mode_button_group, QOverload<QAbstractButton*>::of(&QButtonGroup::buttonClicked), this, &PrintWidget::printModeChanged);
-	connect(dpi_combo->lineEdit(), &QLineEdit::editingFinished, this, &PrintWidget::resolutionEdited);
+	connect(dpi_combo->lineEdit(), &QLineEdit::textEdited, this, &PrintWidget::resolutionEdited);
 	connect(different_scale_check, &QAbstractButton::clicked, this, &PrintWidget::differentScaleClicked);
 	connect(different_scale_edit, QOverload<int>::of(&QSpinBox::valueChanged), this, &PrintWidget::differentScaleEdited);
 	connect(show_templates_check, &QAbstractButton::clicked, this, &PrintWidget::showTemplatesClicked);
@@ -416,7 +420,7 @@ void PrintWidget::setActive(bool active)
 			// Save the current state of the map view.
 			saved_view_state.clear();
 			QXmlStreamWriter writer(&saved_view_state);
-			main_view->save(writer, QLatin1String("saved_view"));
+			main_view->save(writer, QLatin1String("saved_view"), false);
 			
 			editor->setViewOptionsEnabled(false);
 			
@@ -425,6 +429,7 @@ void PrintWidget::setActive(bool active)
 			
 			// Update the map view from the current options
 			setOptions(map_printer->getOptions());
+			connect(main_view, &MapView::visibilityChanged, this, &PrintWidget::onVisibilityChanged);
 			
 			// Set reasonable zoom.
 			bool zoom_to_map = true;
@@ -451,6 +456,8 @@ void PrintWidget::setActive(bool active)
 		}
 		else
 		{
+			disconnect(main_view, &MapView::visibilityChanged, this, &PrintWidget::onVisibilityChanged);
+			
 			editor->setEditingInProgress(false);
 			editor->setOverrideTool(nullptr);
 			print_tool = nullptr;
@@ -486,6 +493,7 @@ void PrintWidget::updateTargets()
 			target_combo->setCurrentIndex(0);
 			
 			// Printers
+#if QT_VERSION < 0x050300
 			printers = QPrinterInfo::availablePrinters();
 			for (int i = 0; i < printers.size(); ++i)
 			{
@@ -495,6 +503,19 @@ void PrintWidget::updateTargets()
 					default_printer_index = target_combo->count();
 				target_combo->addItem(printers[i].printerName(), i);
 			}
+#else
+			auto default_printer_name = QPrinterInfo::defaultPrinterName();
+			printers = QPrinterInfo::availablePrinterNames();
+			for (int i = 0; i < printers.size(); ++i)
+			{
+				const QString& name = printers[i];
+				if (name == saved_printer_name)
+					saved_target_index = target_combo->count();
+				if (name == default_printer_name)
+					default_printer_index = target_combo->count();
+				target_combo->addItem(name, i);
+			}
+#endif
 		}
 		
 		// Restore selected target if possible and exit on success
@@ -532,7 +553,11 @@ void PrintWidget::setTarget(const QPrinterInfo* target)
 	{
 		for (; target_index >= 0; target_index--)
 		{
+#if QT_VERSION < 0x050300
 			if (target && printers[target_index].printerName() == target->printerName())
+#else
+			if (target && printers[target_index] == target->printerName())
+#endif
 				break;
 			else if (!target)
 				break;
@@ -578,15 +603,19 @@ void PrintWidget::targetChanged(int index) const
 	Q_ASSERT(target_index >= -2);
 	Q_ASSERT(target_index < printers.size());
 	
-	const QPrinterInfo* target = nullptr;
 	if (target_index == PdfExporter)
-		target = MapPrinter::pdfTarget();
+		map_printer->setTarget(MapPrinter::pdfTarget());
 	else if (target_index == ImageExporter)
-		target = MapPrinter::imageTarget();
+		map_printer->setTarget(MapPrinter::imageTarget());
 	else
-		target = &printers[target_index];
-	
-	map_printer->setTarget(target);
+#if QT_VERSION < 0x050300
+		map_printer->setTarget(&printers[target_index]);
+#else
+	{
+		auto info = QPrinterInfo::printerInfo(printers[target_index]);
+		map_printer->setTarget(&info);
+	}
+#endif
 }
 
 // slot
@@ -594,9 +623,10 @@ void PrintWidget::propertiesClicked()
 {
 	if (map_printer && map_printer->isPrinter())
 	{
+		std::shared_ptr<void> buffer; // must not be destroyed before printer.
 		auto printer = map_printer->makePrinter();
 		Q_ASSERT(printer->outputFormat() == QPrinter::NativeFormat);
-		if (PlatformPrinterProperties::execDialog(printer.get(), this) == QDialog::Accepted)
+		if (PlatformPrinterProperties::execDialog(printer.get(), buffer, this) == QDialog::Accepted)
 			map_printer->takePrinterSettings(printer.get());
 	}
 }
@@ -842,7 +872,7 @@ void PrintWidget::setOptions(const MapPrinterOptions& options)
 		setEnabledAndChecked(show_templates_check, options.show_templates);
 		setEnabledAndChecked(show_grid_check,      options.show_grid);
 		setDisabledAndChecked(overprinting_check,  options.simulate_overprinting);
-		main_view->setHideAllTemplates(!options.show_templates);
+		main_view->setAllTemplatesHidden(!options.show_templates);
 		main_view->setGridVisible(options.show_grid);
 		main_view->setOverprintingSimulationEnabled(false);
 		break;
@@ -851,7 +881,7 @@ void PrintWidget::setOptions(const MapPrinterOptions& options)
 		setEnabledAndChecked(show_templates_check, options.show_templates);
 		setEnabledAndChecked(show_grid_check,      options.show_grid);
 		setEnabledAndChecked(overprinting_check,   options.simulate_overprinting);
-		main_view->setHideAllTemplates(!options.show_templates);
+		main_view->setAllTemplatesHidden(!options.show_templates);
 		main_view->setGridVisible(options.show_grid);
 		main_view->setOverprintingSimulationEnabled(options.simulate_overprinting);
 		break;
@@ -860,7 +890,7 @@ void PrintWidget::setOptions(const MapPrinterOptions& options)
 		setDisabledAndChecked(show_templates_check, options.show_templates);
 		setDisabledAndChecked(show_grid_check,      options.show_grid);
 		setDisabledAndChecked(overprinting_check,   options.simulate_overprinting);
-		main_view->setHideAllTemplates(true);
+		main_view->setAllTemplatesHidden(true);
 		main_view->setGridVisible(false);
 		main_view->setOverprintingSimulationEnabled(true);
 		break;
@@ -885,21 +915,22 @@ void PrintWidget::setOptions(const MapPrinterOptions& options)
 	static QString dpi_template(QLatin1String("%1 ") + tr("dpi"));
 	dpi_combo->setEditText(dpi_template.arg(options.resolution));
 	
-	if (different_scale_edit->value() != int(options.scale))
+	if (options.scale != map->getScaleDenominator())
 	{
-		different_scale_edit->setValue(int(options.scale));
-		if (options.scale != map->getScaleDenominator())
-		{
-			different_scale_check->setChecked(true);
-			different_scale_edit->setEnabled(true);
-		}
-		applyPrintAreaPolicy();
+		different_scale_check->setChecked(true);
+		different_scale_edit->setEnabled(true);
 	}
-	else
-	{
-		applyCenterPolicy();
-	}
-	main_view->updateAllMapWidgets();
+	
+	auto scale = int(options.scale);
+	different_scale_edit->setValue(scale);
+	differentScaleEdited(scale);
+}
+
+void PrintWidget::onVisibilityChanged()
+{
+	map_printer->setPrintTemplates(!main_view->areAllTemplatesHidden());
+	map_printer->setPrintGrid(main_view->isGridVisible());
+	map_printer->setSimulateOverprinting(main_view->isOverprintingSimulationEnabled());
 }
 
 void PrintWidget::updateResolutions(const QPrinterInfo* target) const
@@ -949,11 +980,15 @@ void PrintWidget::updateColorMode()
 // slot
 void PrintWidget::resolutionEdited()
 {
-	QString resolution_text = dpi_combo->currentText();
-	int index_of_space = resolution_text.indexOf(QLatin1Char(' '));
-	auto dpi_value = resolution_text.left(index_of_space).toUInt();
+	auto resolution_text = dpi_combo->currentText();
+	auto index_of_space = resolution_text.indexOf(QLatin1Char(' '));
+	auto dpi_value = resolution_text.leftRef(index_of_space).toInt();
 	if (dpi_value > 0)
+	{
+		auto pos = dpi_combo->lineEdit()->cursorPosition();
 		map_printer->setResolution(dpi_value);
+		dpi_combo->lineEdit()->setCursorPosition(pos);
+	}
 }
 
 // slot
@@ -969,11 +1004,7 @@ void PrintWidget::differentScaleClicked(bool checked)
 void PrintWidget::differentScaleEdited(int value)
 {
 	map_printer->setScale(static_cast<unsigned int>(value));
-	if (policy == SinglePage)
-	{
-		// Adjust the print area.
-		applyPrintAreaPolicy();
-	}
+	applyPrintAreaPolicy();
 	
 	if (different_scale_edit->value() < 500)
 	{
@@ -1015,7 +1046,7 @@ void PrintWidget::printModeChanged(QAbstractButton* button)
 // slot
 void PrintWidget::showTemplatesClicked(bool checked)
 {
-	map_printer->setPrintTemplates(checked, main_view);
+	map_printer->setPrintTemplates(checked);
 	checkTemplateConfiguration();
 }
 
@@ -1225,7 +1256,7 @@ void PrintWidget::print()
 	// Print the map
 	if (!map_printer->printMap(printer.get()))
 	{
-		QMessageBox::warning(main_window, tr("Error"), tr("An error occured during printing."));
+		QMessageBox::warning(main_window, tr("Error"), tr("An error occurred during printing."));
 	}
 	else if (!progress.wasCanceled())
 	{

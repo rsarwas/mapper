@@ -1,5 +1,5 @@
 /*
- *    Copyright 2013, 2014 Kai Pastor
+ *    Copyright 2013-2017 Kai Pastor
  *
  *    This file is part of OpenOrienteering.
  *
@@ -17,23 +17,90 @@
  *    along with OpenOrienteering.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef _OPENORIENTEERING_XML_STREAM_UTIL_H_
-#define _OPENORIENTEERING_XML_STREAM_UTIL_H_
+#ifndef OPENORIENTEERING_XML_STREAM_UTIL_H
+#define OPENORIENTEERING_XML_STREAM_UTIL_H
 
 #include <vector>
 
+#include <QtGlobal>
 #include <QHash>
 #include <QRectF>
+#include <QSizeF>
 #include <QString>
+#include <QStringRef>
+#include <QXmlStreamAttributes>
 #include <QXmlStreamReader>
 #include <QXmlStreamWriter>
 
-#include "../file_format.h"
-
-
-// Originally defined in map_coord.h, but we want to avoid the depedency.
 class MapCoord;
-typedef std::vector<MapCoord> MapCoordVector;
+using MapCoordVector = std::vector<MapCoord>;
+
+// IWYU pragma: no_forward_declare QRectF
+// IWYU pragma: no_forward_declare QSizeF
+// IWYU pragma: no_forward_declare QXmlStreamReader
+// IWYU pragma: no_forward_declare QXmlStreamWriter
+
+
+/**
+ * Writes a line break to the XML stream unless auto formatting is active.
+ */
+void writeLineBreak(QXmlStreamWriter& xml);
+
+
+
+/**
+ * This class provides recovery from invalid characters in an XML stream.
+ * 
+ * Some characters are not allowed in well-formed XML 1.0 (cf.
+ * https://www.w3.org/TR/2008/REC-xml-20081126/#NT-Char). While QXmlStreamWriter
+ * will not complain when writing such characters, QXmlStreamReader will raise
+ * a NotWellFormedError. This class will remove offending characters from the
+ * input and reset the stream reader to the state it had when the helper object
+ * was initialized.
+ * 
+ * In a single recovery attempt, the utility tries to handle all offending
+ * characters from the element for wich the tool was constructed. For each
+ * offending character, the whole XML data is parsed again from the start.
+ * That's why multiple corrections may take a long time to run.
+ * 
+ * The XML stream must be based on a QIODevice which supports QIODevice::seek.
+ * 
+ * Synopsis:
+ * 
+ *     XmlRecoveryHelper recovery(xml);
+ *     auto text = xml.readElementText();
+ *     if (xml.hasError() && recovery())
+ *     {
+ *         addWarning(tr("Some invalid characters had to be removed.");
+ *         text = xml.readElementText();
+ *     }
+ */
+class XmlRecoveryHelper
+{
+public:
+	/**
+	 * Constructs a new recovery helper for the given xml stream.
+	 * 
+	 * Captures the current position in the XML stream (QXmlStreamReader::characterOffset()).
+	 */
+	XmlRecoveryHelper(QXmlStreamReader& xml) : xml (xml), recovery_start {xml.characterOffset()} {}
+	
+	/**
+	 * Checks the stream for an error which this utility can handle,
+	 * applies corrections, and resets the stream.
+	 * 
+	 * If this operator returns false if either there was a different type of
+	 * error, or if recovery failed. If it returns true, the stream was modified
+	 * in order to fix the errors which are handled by this utility, and a new
+	 * attempt can be made to parse the remainder of the stream.
+	 */
+	bool operator() ();
+	
+private:
+	QXmlStreamReader& xml;
+	const qint64 recovery_start;
+};
+
 
 
 /**
@@ -378,13 +445,13 @@ void XmlElementWriter::writeAttribute(const QLatin1String& qualifiedName, const 
 inline
 void XmlElementWriter::writeAttribute(const QLatin1String& qualifiedName, const float value)
 {
-	xml.writeAttribute(qualifiedName, QString::number(value));
+	xml.writeAttribute(qualifiedName, QString::number(double(value)));
 }
 
 inline
 void XmlElementWriter::writeAttribute(const QLatin1String& qualifiedName, const float value, int precision)
 {
-	xml.writeAttribute(qualifiedName, QString::number(value, 'f', precision));
+	xml.writeAttribute(qualifiedName, QString::number(double(value), 'f', precision));
 }
 
 inline
@@ -555,7 +622,7 @@ long unsigned int XmlElementReader::attribute(const QLatin1String& qualifiedName
 	unsigned int value = 0;
 	const QStringRef ref = attributes.value(qualifiedName);
 	if (ref.size())
-		value = QString::fromRawData(ref.data(), ref.size()).toULong();
+		value = QString::fromRawData(ref.data(), ref.size()).toUInt();
 	return value;
 }
 

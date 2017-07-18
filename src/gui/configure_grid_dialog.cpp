@@ -29,6 +29,7 @@
 #include <QComboBox>
 #include <QDebug>
 #include <QDialogButtonBox>
+#include <QDoubleSpinBox>
 #include <QFormLayout>
 #include <QGroupBox>
 #include <QPushButton>
@@ -37,9 +38,9 @@
 #include <QXmlStreamWriter>
 
 #include "../core/georeferencing.h"
-#include "../map.h"
-#include "../util.h"
-#include "../util_gui.h"
+#include "core/map.h"
+#include "util/util.h"
+#include "util_gui.h"
 
 
 ConfigureGridDialog::ConfigureGridDialog(QWidget* parent, const Map& map, bool grid_visible)

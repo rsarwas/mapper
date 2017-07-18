@@ -93,10 +93,12 @@ include(ExternalProject)
 ExternalProject_Add(
   Clipper
   ${CLIPPER_SOURCE}
-  # Check that the license hasn't changed.
-  UPDATE_COMMAND ${CMAKE_COMMAND} -E compare_files <SOURCE_DIR>/License.txt "${CLIPPER_LICENSE_FILE}"
-  # Force source file timestamp update.
-  CONFIGURE_COMMAND ${CMAKE_COMMAND} -E copy <SOURCE_DIR>/cpp/clipper.cpp "${CMAKE_CURRENT_BINARY_DIR}/clipper.cpp"
+  CONFIGURE_COMMAND
+    # Check that the license hasn't changed.
+    ${CMAKE_COMMAND} -E compare_files <SOURCE_DIR>/License.txt "${CLIPPER_LICENSE_FILE}"
+  COMMAND
+    # Force source file timestamp update.
+    ${CMAKE_COMMAND} -E copy <SOURCE_DIR>/cpp/clipper.cpp "${CMAKE_CURRENT_BINARY_DIR}/clipper.cpp"
   BUILD_COMMAND ""
   INSTALL_COMMAND ""
 )
@@ -104,6 +106,9 @@ ExternalProject_Get_Property(Clipper SOURCE_DIR)
 
 
 # The actual library build
+
+set(CMAKE_CXX_CLANG_TIDY "")
+set(CMAKE_CXX_INCLUDE_WHAT_YOU_USE "")
 
 if(CMAKE_COMPILER_IS_GNUCXX)
 	string(REPLACE "-Wpedantic" "" CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS}")

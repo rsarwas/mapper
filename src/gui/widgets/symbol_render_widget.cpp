@@ -34,17 +34,17 @@
 #include <QResizeEvent>
 #include <QScopedValueRollback>
 
-#include "../../core/map_color.h"
-#include "../../map.h"
-#include "../../object.h"
+#include "core/map_color.h"
+#include "core/map.h"
+#include "core/objects/object.h"
 #include "../../settings.h"
-#include "../../symbol.h"
-#include "../../symbol_area.h"
-#include "../../symbol_combined.h"
-#include "../../symbol_line.h"
-#include "../../symbol_point.h"
-#include "../../symbol_setting_dialog.h"
-#include "../../symbol_text.h"
+#include "core/symbols/symbol.h"
+#include "core/symbols/area_symbol.h"
+#include "core/symbols/combined_symbol.h"
+#include "core/symbols/line_symbol.h"
+#include "core/symbols/point_symbol.h"
+#include "gui/symbols/symbol_setting_dialog.h"
+#include "core/symbols/text_symbol.h"
 #include "../../util/overriding_shortcut.h"
 #include "symbol_tooltip.h"
 
@@ -251,8 +251,8 @@ SymbolRenderWidget::SymbolRenderWidget(Map* map, bool mobile_mode, QWidget* pare
 	copy_action = context_menu->addAction(QIcon(QStringLiteral(":/images/copy.png")), tr("Copy"), this, SLOT(copySymbols()));
 	paste_action = context_menu->addAction(QIcon(QStringLiteral(":/images/paste.png")), tr("Paste"), this, SLOT(pasteSymbols()));
 	context_menu->addSeparator();
-	switch_symbol_action = context_menu->addAction(QIcon(QStringLiteral(":/images/tool-switch-symbol.png")), tr("Switch symbol of selected object(s)"), this, SIGNAL(switchSymbolClicked()));
-	fill_border_action = context_menu->addAction(QIcon(QStringLiteral(":/images/tool-fill-border.png")), tr("Fill / Create border for selected object(s)"), this, SIGNAL(fillBorderClicked()));
+	switch_symbol_action = context_menu->addAction(QIcon(QStringLiteral(":/images/tool-switch-symbol.png")), tr("Switch symbol of selected objects"), this, SIGNAL(switchSymbolClicked()));
+	fill_border_action = context_menu->addAction(QIcon(QStringLiteral(":/images/tool-fill-border.png")), tr("Fill / Create border for selected objects"), this, SIGNAL(fillBorderClicked()));
 	// text will be filled in by updateContextMenuState()
 	select_objects_action = context_menu->addAction(QIcon(QStringLiteral(":/images/tool-edit.png")), {}, this, SLOT(selectObjectsExclusively()));
 	select_objects_additionally_action = context_menu->addAction(QIcon(QStringLiteral(":/images/tool-edit.png")), {}, this, SLOT(selectObjectsAdditionally()));
@@ -433,7 +433,7 @@ void SymbolRenderWidget::hover(QPoint pos)
 			if (tooltip->getSymbol() != symbol)
 			{
 				const QRect icon_rect(mapToGlobal(iconPosition(hover_symbol_index)), QSize(icon_size, icon_size));
-				tooltip->scheduleShow(symbol, icon_rect);
+				tooltip->scheduleShow(symbol, map, icon_rect);
 			}
 		}
 		else
@@ -893,8 +893,7 @@ void SymbolRenderWidget::editSymbol()
 	dialog.setWindowModality(Qt::WindowModal);
 	if (dialog.exec() == QDialog::Accepted)
 	{
-		symbol = dialog.getNewSymbol();
-		map->setSymbol(symbol, current_symbol_index);
+		map->setSymbol(dialog.getNewSymbol().release(), current_symbol_index);
 	}
 }
 
@@ -903,7 +902,7 @@ void SymbolRenderWidget::scaleSymbol()
 	Q_ASSERT(!selected_symbols.empty());
 	
 	bool ok;
-	double percent = QInputDialog::getDouble(this, tr("Scale symbol(s)"), tr("Scale to percentage:"), 100, 0, 999999, 6, &ok);
+	double percent = QInputDialog::getDouble(this, tr("Scale symbols"), tr("Scale to percentage:"), 100, 0, 999999, 6, &ok);
 	if (!ok || percent == 100)
 		return;
 	
@@ -1183,9 +1182,8 @@ bool SymbolRenderWidget::newSymbol(Symbol* prototype)
 	if (dialog.exec() == QDialog::Rejected)
 		return false;
 	
-	Symbol* new_symbol = dialog.getNewSymbol();
 	int pos = (current_symbol_index >= 0) ? current_symbol_index : map->getNumSymbols();
-	map->addSymbol(new_symbol, pos);
+	map->addSymbol(dialog.getNewSymbol().release(), pos);
 	// Ensure that a change in selection is detected
 	selectSingleSymbol(-1);
 	selectSingleSymbol(pos);

@@ -1,5 +1,6 @@
 #
-#    Copyright 2012, 2013, 2014 Thomas Schöps, Kai Pastor
+#    Copyright 2012, 2013 Thomas Schöps
+#    Copyright 2012-2017 Kai Pastor
 #    
 #    This file is part of OpenOrienteering.
 # 
@@ -20,85 +21,83 @@ message(STATUS "Configuring ${PROJECT_NAME} translations")
 
 find_package(Qt5LinguistTools REQUIRED)
 
-# Qt translations which are not yet available from upstream
-set(Mapper_QT_TRANS
+# Translation files which are updated by lupdate.
+set(Mapper_translations
+  OpenOrienteering_cs.ts
+  OpenOrienteering_da.ts
+  OpenOrienteering_de.ts
+  OpenOrienteering_en.ts
+  OpenOrienteering_eo.ts
+  OpenOrienteering_es.ts
+  OpenOrienteering_fi.ts
+  OpenOrienteering_fr.ts
+  OpenOrienteering_hu.ts
+  OpenOrienteering_id.ts
+  OpenOrienteering_it.ts
+  OpenOrienteering_ja.ts
+  OpenOrienteering_lv.ts
+  OpenOrienteering_nb.ts
+  OpenOrienteering_nl.ts
+  OpenOrienteering_pl.ts
+  OpenOrienteering_pt_BR.ts
+  OpenOrienteering_ru.ts
+  OpenOrienteering_sv.ts
+  OpenOrienteering_uk.ts
+  OpenOrienteering_zh_CN.ts
+)
+
+# Translation files which are updated but not deployed.
+set(Mapper_translations_template
+  OpenOrienteering_et.ts
+  OpenOrienteering_eu.ts
+  OpenOrienteering_he.ts
+  OpenOrienteering_template.ts
+)
+
+# Translation files which are updated by SymbolSetTool.
+set(map_symbols_translations
+  map_symbols_cs.ts
+  map_symbols_de.ts
+  map_symbols_fi.ts
+  map_symbols_fr.ts
+  map_symbols_ru.ts
+  map_symbols_sv.ts
+  map_symbols_uk.ts
+)
+
+# Translation files which are updated but not deployed.
+set(map_symbols_translations_template
+  map_symbols_template.ts
+)
+
+# Translation files which are maintained by hand.
+set(qt_translations
+  qt_eo.ts
+  qt_et.ts
+  qt_id.ts
+  qt_lv.ts
   qt_nb.ts
-)
-if (${Qt5LinguistTools_VERSION} VERSION_LESS 5.4.0)
-	list(APPEND Mapper_QT_TRANS qt_lv.ts)
-endif()
-
-set(Mapper_TRANS
- OpenOrienteering_cs.ts
- OpenOrienteering_de.ts
- OpenOrienteering_en.ts
- OpenOrienteering_es.ts
- OpenOrienteering_fi.ts
- OpenOrienteering_fr.ts
- OpenOrienteering_hu.ts
- OpenOrienteering_it.ts
- OpenOrienteering_ja.ts
- OpenOrienteering_lv.ts
- OpenOrienteering_nb.ts
- OpenOrienteering_pl.ts
- OpenOrienteering_ru.ts
- OpenOrienteering_sv.ts
- OpenOrienteering_uk.ts
- CACHE INTERNAL "Translation files"
-)
-qt5_add_translation(Mapper_QM ${Mapper_TRANS} ${Mapper_QT_TRANS})
-
-set(Mapper_TRANS_TEMPLATE
- OpenOrienteering_template.ts
- CACHE INTERNAL "Translation template file"
+  qt_nl.ts
 )
 
-set(Mapper_TRANS_DIR
- ${CMAKE_CURRENT_SOURCE_DIR}
- CACHE INTERNAL "Translations build directory"
+qt5_add_translation(translations_qm ${Mapper_translations} ${map_symbols_translations} ${qt_translations})
+
+# A target which builds all translations.
+add_custom_target(Mapper_translations ALL DEPENDS ${translations_qm})
+
+install(
+  FILES ${translations_qm}
+  DESTINATION "${MAPPER_DATA_DESTINATION}/translations"
 )
-
-if(Mapper_TRANSLATIONS_EMBEDDED)
-	set(Mapper_TRANS_QRC "${CMAKE_CURRENT_BINARY_DIR}/translations.qrc")
-	file(WRITE "${Mapper_TRANS_QRC}.tmp"
-	  "<!DOCTYPE RCC><RCC version=\"1.0\">\n <qresource>\n")
-	foreach(_qm_file ${Mapper_QM})
-		get_filename_component(_qm_filename "${_qm_file}" NAME)
-		file(APPEND "${Mapper_TRANS_QRC}.tmp"
-		  "  <file alias=\"translations/${_qm_filename}\">${_qm_file}</file>\n")
-	endforeach(_qm_file)
-	file(APPEND "${Mapper_TRANS_QRC}.tmp"
-	  " </qresource>\n</RCC>\n")
-	execute_process(COMMAND "${CMAKE_COMMAND}" -E copy_if_different "${Mapper_TRANS_QRC}.tmp" "${Mapper_TRANS_QRC}")
-	qt5_add_resources(Mapper_TRANSLATIONS_RCC "${Mapper_TRANS_QRC}" OPTIONS -no-compress)
-
-	# A library is a top-level target, the generated source file isn't.
-	add_library(Mapper_translations STATIC ${Mapper_TRANSLATIONS_RCC})
-	add_dependencies(Mapper_translations ${Mapper_QM})
-
-	set(Mapper_LIBRARIES 
-	  Mapper_translations 
-	  ${Mapper_LIBRARIES}
-	  PARENT_SCOPE)
-
-else()
-	# A target which builds all translations.
-	add_custom_target(Mapper_translations ALL DEPENDS ${Mapper_QM})
-
-	install(
-	  FILES ${Mapper_QM}
-	  DESTINATION "${MAPPER_DATA_DESTINATION}/translations")
-
-endif(Mapper_TRANSLATIONS_EMBEDDED)
 
 if(APPLE)
 	# Localized resources just to enable localized native dialogs.
-	foreach(_mapper_trans en ${Mapper_TRANS})
-		get_filename_component(_mapper_lang ${_mapper_trans} NAME_WE)
-		string(REPLACE OpenOrienteering_ "" LANGUAGE_CODE ${_mapper_lang})
-		configure_file(locversion.plist.in ${LANGUAGE_CODE}.lproj/locversion.plist @ONLY)
+	foreach(mapper_trans en ${Mapper_translations})
+		get_filename_component(mapper_lang ${mapper_trans} NAME_WE)
+		string(REPLACE OpenOrienteering_ "" language_code ${mapper_lang})
+		configure_file(locversion.plist.in ${language_code}.lproj/locversion.plist @ONLY)
 		install(
-		  DIRECTORY "${CMAKE_CURRENT_BINARY_DIR}/${LANGUAGE_CODE}.lproj"
+		  DIRECTORY "${CMAKE_CURRENT_BINARY_DIR}/${language_code}.lproj"
 		  DESTINATION "${MAPPER_DATA_DESTINATION}")
 	endforeach()
 endif()
@@ -107,50 +106,100 @@ endif()
 add_dependencies(Mapper_translations Mapper_prerequisites)
 
 
-# A target which updates all translations.
 
-add_custom_target(${PROJECT_NAME}_translations_update)
-
-
-# A temporary file which lists the source files to be translated.
-
-set(${PROJECT_NAME}_TRANSLATIONS_LISTFILE ${CMAKE_CURRENT_BINARY_DIR}/translations_sourcefiles.txt
-	CACHE INTERNAL "A temporary file which lists the source files to be translated")
-file(WRITE "${${PROJECT_NAME}_TRANSLATIONS_LISTFILE}")
+# We need lupdate >= 5.6.1 for updates from source
+if(TARGET ${Qt5_LUPDATE_EXECUTABLE})
+	get_property(Qt5_LUPDATE_EXECUTABLE TARGET ${Qt5_LUPDATE_EXECUTABLE} PROPERTY IMPORTED_LOCATION)
+endif()
+execute_process(
+  COMMAND "${Qt5_LUPDATE_EXECUTABLE}" -version
+  OUTPUT_VARIABLE lupdate_version
+)
+string(REGEX REPLACE "^.*([0-9]\\.[0-9]\\.[0-9]).*" "\\1" lupdate_version "${lupdate_version}")
+if(lupdate_version VERSION_LESS 5.6.1)
+	message(AUTHOR_WARNING "lupdate version ${lupdate_version} is less than 5.6.1. Updates disabled.")
+else()
+	# A target which updates all translations.
+	add_custom_target(Mapper_translations_update)
+	
+	set(listfile "${CMAKE_CURRENT_BINARY_DIR}/translations_sourcefiles.txt")
+	set_property(SOURCE "${listfile}" PROPERTY GENERATED TRUE)
+	set_property(TARGET Mapper_translations_update PROPERTY listfile "${listfile}")
+	file(WRITE "${listfile}"
+	  "${PROJECT_SOURCE_DIR}/translations/future_translations.cpp\n"
+	  "${PROJECT_SOURCE_DIR}/packaging/translations.cpp\n"
+	)
+	
+	# One target for each translation.
+	foreach(translation ${Mapper_translations} ${Mapper_translations_template})
+		set(lupdate_options -locations absolute)
+		get_filename_component(ts_filename ${translation} NAME_WE)
+		if("${ts_filename}" STREQUAL "OpenOrienteering_en")
+			list(APPEND lupdate_options -pluralonly)
+		endif()
+		if("${ts_filename}" STREQUAL "OpenOrienteering_template")
+			list(APPEND lupdate_options -no-obsolete)
+		endif()
+		add_custom_target(Mapper_${ts_filename}_update
+		  # SOURCES are displayed in Qt Creator
+		  SOURCES "${PROJECT_SOURCE_DIR}/translations/future_translations.cpp"
+		          "${PROJECT_SOURCE_DIR}/packaging/translations.cpp"
+		          "${listfile}"
+		  COMMAND "${Qt5_LUPDATE_EXECUTABLE}" ${lupdate_options} "@${listfile}" -ts "${CMAKE_CURRENT_SOURCE_DIR}/${translation}"
+		  COMMAND sed -i -e "/<name>Q[A-Z]/,/<context>/d" "${CMAKE_CURRENT_SOURCE_DIR}/${translation}"
+		  # Reformat for Weblate to minimize git noise
+		  COMMAND sed -i -e "/<source\\|<translation\\|<[a-z]*comment/,/\\/source>\\|\\/translation>\\|\\/[a-z]*comment>/{s/&apos;/'/g;s/&quot;/\"/g}" ${CMAKE_CURRENT_SOURCE_DIR}/${translation}
+		  VERBATIM
+		)
+		add_dependencies(Mapper_translations_update Mapper_${ts_filename}_update)
+	endforeach()
+endif()
 
 #
-# A macro for registering translations sources and creating update targets.
+# A macro for collecting translations sources.
 #
 # Synopsis:
 #
-# QT5_TRANSLATIONS_SOURCES(SOURCES a.cpp b.cpp)
+# MAPPER_TRANSLATIONS_SOURCES(a.cpp b.cpp)
 #
-macro(QT5_TRANSLATIONS_SOURCES)
-	find_package(Qt5LinguistTools REQUIRED QUIET) # Provides Qt5_LUPDATE_EXECUTABLE
-	set(_DO_SOURCES FALSE)
-	foreach(_arg ${Mapper_TRANS} ${Mapper_TRANS_TEMPLATE} ${ARGN})
-		if("${_arg}" STREQUAL "SOURCES")
-			set(_DO_SOURCES TRUE)
-		elseif(_DO_SOURCES)
-			get_source_file_property(_abs_path ${_arg} LOCATION)
-			file(APPEND "${${PROJECT_NAME}_TRANSLATIONS_LISTFILE}" "${_abs_path}\n")
-		else()
-			get_filename_component(_ts_filename ${_arg} NAME_WE)
-			set(LUPDATE_OPTIONS -locations absolute)
-			if("${_ts_filename}" STREQUAL "OpenOrienteering_en")
-				list(APPEND LUPDATE_OPTIONS -pluralonly)
-			endif()
-			if("${_ts_filename}" STREQUAL "OpenOrienteering_template")
-				list(APPEND LUPDATE_OPTIONS -no-obsolete)
-			endif()
-			add_custom_target(${PROJECT_NAME}_${_ts_filename}_update
-			  COMMAND ${Qt5_LUPDATE_EXECUTABLE} ${LUPDATE_OPTIONS} @${${PROJECT_NAME}_TRANSLATIONS_LISTFILE} -ts ${Mapper_TRANS_DIR}/${_arg}
-			  COMMAND sed -i -e "/<name>Q[A-Z]/,/<context>/d" ${Mapper_TRANS_DIR}/${_arg}
-			  DEPENDS ${${PROJECT_NAME}_TRANSLATIONS_LISTFILE}
-			  VERBATIM)
-			add_dependencies(${PROJECT_NAME}_translations_update ${PROJECT_NAME}_${_ts_filename}_update)
-		endif()
-	endforeach()
+macro(MAPPER_TRANSLATIONS_SOURCES)
+	if (TARGET Mapper_translations_update)
+		get_property(listfile TARGET Mapper_translations_update PROPERTY listfile)
+		foreach(arg ${ARGN})
+			get_source_file_property(_abs_path ${arg} LOCATION)
+			file(APPEND "${listfile}" "${_abs_path}\n")
+		endforeach()
+	endif()
 endmacro()
 
-message(STATUS "Configuring ${PROJECT_NAME} translations - done")
+
+
+if(UNIX AND NOT APPLE)
+	set(update_source )
+	if(Mapper_DEVELOPMENT_BUILD)
+		# Only development builds are allowed to update the source directories.
+		set(update_sources
+		  COMMAND "${CMAKE_COMMAND}" -E copy_if_different "../packaging/linux/Mapper.desktop" "${PROJECT_SOURCE_DIR}/packaging/linux/"
+		  COMMAND "${CMAKE_COMMAND}" -E copy_if_different "../packaging/linux/openorienteering-mapper.xml" "${PROJECT_SOURCE_DIR}/packaging/linux/"
+		)
+	endif()
+	set(translations )
+	foreach(translation ${Mapper_translations})
+		list(APPEND translations "${CMAKE_CURRENT_SOURCE_DIR}/${translation}")
+	endforeach()
+	add_custom_command(OUTPUT text-files.stamp
+	    desktop_file_comment.txt mime_type_comment.txt
+	  COMMAND "${CMAKE_COMMAND}" -E make_directory "../packaging/linux"
+	  COMMAND "${CMAKE_COMMAND}" -E copy "${PROJECT_SOURCE_DIR}/packaging/linux/Mapper.desktop" "../packaging/linux/"
+	  COMMAND "${CMAKE_COMMAND}" -E copy "${PROJECT_SOURCE_DIR}/packaging/linux/openorienteering-mapper.xml" "../packaging/linux/"
+	  COMMAND "${CMAKE_CURRENT_SOURCE_DIR}/translate_text_files.sh" ${translations}
+	  ${update_sources}
+	  COMMAND "${CMAKE_COMMAND}" -E touch text-files.stamp
+	  DEPENDS translate_text_files.sh ${translations}
+	  WORKING_DIRECTORY "${CMAKE_CURRENT_BINARY_DIR}"
+	)
+	add_custom_target(translate-text-files
+	  DEPENDS "${CMAKE_CURRENT_BINARY_DIR}/text-files.stamp"
+	)
+	add_dependencies(Mapper_translations translate-text-files)
+endif()

@@ -23,9 +23,10 @@
 #include <QCheckBox>
 #include <QComboBox>
 #include <QFormLayout>
+#include <QSpinBox>
 
 #include "../modifier_key.h"
-#include "../../util_gui.h"
+#include "gui/util_gui.h"
 
 
 EditorSettingsPage::EditorSettingsPage(QWidget* parent)

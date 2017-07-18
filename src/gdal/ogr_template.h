@@ -1,5 +1,5 @@
 /*
- *    Copyright 2016 Kai Pastor
+ *    Copyright 2016-2017 Kai Pastor
  *
  *    This file is part of OpenOrienteering.
  *
@@ -20,10 +20,23 @@
 #ifndef OPENORIENTEERING_OGR_TEMPLATE_H
 #define OPENORIENTEERING_OGR_TEMPLATE_H
 
-#include "../template_map.h"
+#include <vector>
 
-#include "../core/georeferencing.h"
+#include <QtGlobal>
+#include <QObject>
+#include <QString>
 
+#include "templates/template_map.h"
+
+QT_BEGIN_NAMESPACE
+class QByteArray;
+class QWidget;
+class QXmlStreamReader;
+class QXmlStreamWriter;
+QT_END_NAMESPACE
+
+class Map;
+class Template;
 
 /**
  * Template displaying a file supported by OGR.
@@ -42,8 +55,11 @@ public:
 	
 	const char* getTemplateType() const override;
 	
+	bool preLoadConfiguration(QWidget* dialog_parent) override;
 	
 	bool loadTemplateFileImpl(bool configuring) override;
+	
+	bool postLoadConfiguration(QWidget* dialog_parent, bool& out_center_in_view) override;
 	
 protected:
 	Template* duplicateImpl() const override;
@@ -53,7 +69,10 @@ protected:
 	void saveTypeSpecificTemplateConfiguration(QXmlStreamWriter& xml) const override;
 	
 private:
-	bool migrating_from_template_track;
+	QString crs_spec;
+	bool migrating_from_pre_v07;  /// Some files saved with unstable snapshots < v0.7
+	bool use_real_coords;
+	bool center_in_view;
 };
 
 #endif // OPENORIENTEERING_OGR_TEMPLATE_H

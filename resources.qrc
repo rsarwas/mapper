@@ -47,6 +47,7 @@
         <file>images/group.png</file>
         <file>images/help.png</file>
         <file>images/magnifying-glass.png</file>
+        <file>images/map-parts.png</file>
         <file>images/mapper.png</file>
         <file>images/minus.png</file>
         <file>images/move.png</file>
@@ -70,6 +71,7 @@
         <file>images/settings.png</file>
         <file>images/symbols.png</file>
         <file>images/symbol_point_explanation.png</file>
+        <file>images/tag-selector.png</file>
         <file>images/templates.png</file>
         <file>images/text-align-left.png</file>
         <file>images/text-align-hcenter.png</file>
@@ -119,6 +121,9 @@
     </qresource>
     <qresource prefix="/" lang="fr">
         <file alias="help/tip-of-the-day/tips.txt">help/tip-of-the-day/tips_fr.txt</file>
+    </qresource>
+    <qresource prefix="/" lang="ru">
+        <file alias="help/tip-of-the-day/tips.txt">help/tip-of-the-day/tips_ru.txt</file>
     </qresource>
     <qresource prefix="/" lang="uk">
         <file alias="help/tip-of-the-day/tips.txt">help/tip-of-the-day/tips_uk.txt</file>

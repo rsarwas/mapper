@@ -25,7 +25,7 @@
 #include <QMainWindow>
 
 #include "../core/autosave.h"
-#include "../file_format.h"
+#include "../fileformats/file_format.h"
 
 QT_BEGIN_NAMESPACE
 class QLabel;
@@ -76,10 +76,17 @@ public:
 	/**
 	 * Returns whether the window is operating in mobile mode.
 	 * 
-	 * Mobile mode is the default on Android. The default may be overwritten by
+	 * On the desktop, the default (desktop) mode may be overwritten by
 	 * setting the environment variable MAPPER_MOBILE_GUI to 0 or 1.
+	 * 
+	 * For Android, this evaluates to constexpr true so that the compiler
+	 * may optimize away desktop code in conditional blocks.
 	 */
-	bool mobileMode() const;
+#ifndef Q_OS_ANDROID
+	static bool mobileMode();
+#else
+	static constexpr bool mobileMode() { return true; }
+#endif
 	
 	
 	/**
@@ -217,6 +224,20 @@ public:
 	
 public slots:
 	/**
+	 * Reacts to application state changes.
+	 * 
+	 * On Android, when the application state becomes Qt::ApplicationActive,
+	 * this method looks for the Android activity's current intent and triggers
+	 * the loading of a given file (if there is not already another file loaded).
+	 * 
+	 * In general, when called for the first time after application start, it
+	 * opens the most recently used file, unless this feature is disabled in the
+	 * settings, and unless other files are registered for opening (i.e. files
+	 * given as command line parameters.)
+	 */
+	void applicationStateChanged();
+	
+	/**
 	 * Show a wizard for creating new maps.
 	 * 
 	 * May open a new main window.
@@ -300,7 +321,7 @@ public slots:
 	 */
 	void showAbout();
 	
-	/** Show the index page of the manual in Qt assistant.
+	/** Show the index page of the manual in the help browser.
 	 */
 	void showHelp();
 	

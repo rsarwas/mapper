@@ -1,5 +1,5 @@
 /*
- *    Copyright 2012, 2013, 2014 Kai Pastor
+ *    Copyright 2012, 2013, 2014, 2017 Kai Pastor
  *
  *    This file is part of OpenOrienteering.
  *
@@ -18,23 +18,31 @@
  */
 
 
-#ifndef _OPENORIENTEERING_COLOR_DIALOG_H_
-#define _OPENORIENTEERING_COLOR_DIALOG_H_
+#ifndef OPENORIENTEERING_COLOR_DIALOG_H
+#define OPENORIENTEERING_COLOR_DIALOG_H
 
 #include <vector>
 
+#include <Qt>
+#include <QtGlobal>
 #include <QDialog>
+#include <QObject>
 
-#include "../core/map_color.h"
+#include "core/map_color.h"
 
+QT_BEGIN_NAMESPACE
 class QAbstractButton;
 class QCheckBox;
+class QComboBox;
 class QDoubleSpinBox;
 class QGridLayout;
 class QLabel;
 class QLineEdit;
+class QPushButton;
 class QRadioButton;
 class QTabWidget;
+class QWidget;
+QT_END_NAMESPACE
 
 class ColorDropDown;
 class Map;
@@ -47,7 +55,9 @@ class ColorDialog: public QDialog
 Q_OBJECT
 public:
 	/** Constructs a new dialog for the given map and color. */
-	ColorDialog(const Map& map, const MapColor& source_color, QWidget* parent = 0, Qt::WindowFlags f = 0);
+	ColorDialog(const Map& map, const MapColor& source_color, QWidget* parent = nullptr, Qt::WindowFlags f = {});
+	
+	~ColorDialog() override;
 	
 	/**
 	 * Returns the edited color. 
@@ -55,11 +65,15 @@ public:
 	const MapColor& getColor() const { return color; }
 	
 protected slots:
-	void accept();
+	void accept() override;
 	
 	void reset();
 	
 	void showHelp();
+	
+	void languageChanged();
+	
+	void editClicked();
 	
 	void mapColorNameChanged();
 	
@@ -84,6 +98,8 @@ protected slots:
 protected:
 	void setColorModified(bool modified);
 	
+	void updateColorLabel();
+	
 	void updateWidgets();
 	
 	void updateButtons();
@@ -97,7 +113,10 @@ protected:
 	bool react_to_changes;
 	
 	QLabel* color_preview_label;
+	QLabel* color_name_label;
 	QLineEdit* mc_name_edit;
+	QComboBox* language_combo;
+	QPushButton* name_edit_button;
 	
 	QRadioButton* full_tone_option;
 	QRadioButton* composition_option;
@@ -124,8 +143,6 @@ protected:
 	
 	QAbstractButton* ok_button;
 	QAbstractButton* reset_button;
-	
-	static const int icon_size = 32;
 	
 	std::vector< ColorDropDown* > component_colors;
 	std::vector< QDoubleSpinBox* > component_halftone;

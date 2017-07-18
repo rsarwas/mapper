@@ -1,13 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.0" language="nb">
-<context>
-    <name>CloseButton</name>
-    <message>
-        <source>Close Tab</source>
-        <translation>Lukk fane</translation>
-    </message>
-</context>
+<TS version="2.1" language="nb_NO">
 <context>
     <name>QAbstractSpinBox</name>
     <message>
@@ -41,7 +34,7 @@
 <context>
     <name>QDialog</name>
     <message>
-        <source>What&apos;s This?</source>
+        <source>What's This?</source>
         <translation>Hva er dette?</translation>
     </message>
 </context>
@@ -140,7 +133,7 @@
         <translation>Ja til &amp;alt</translation>
     </message>
     <message>
-        <source>Don&apos;t Save</source>
+        <source>Don't Save</source>
         <translation>Ikke lagre</translation>
     </message>
 </context>
@@ -224,6 +217,7 @@
 <context>
     <name>QFileDialog</name>
     <message>
+        <location filename="../src/gui/text_browser_dialog.cpp" line="58"/>
         <source>Back</source>
         <translation>Tilbake</translation>
     </message>
@@ -260,14 +254,14 @@
         <translation>Vis </translation>
     </message>
     <message>
-        <source>&apos;%1&apos; is write protected.
+        <source>'%1' is write protected.
 Do you want to delete it anyway?</source>
-        <translation type="unfinished">&apos;%1&apos; er skrivebeskyttet.
+        <translation>'%1' er skrivebeskyttet.
 Do you want to delete it anyway?</translation>
     </message>
     <message>
-        <source>Are you sure you want to delete &apos;%1&apos;?</source>
-        <translation>Vil du virkelig slette &apos;%1&apos;?</translation>
+        <source>Are you sure you want to delete '%1'?</source>
+        <translation>Vil du virkelig slette '%1'?</translation>
     </message>
     <message>
         <source>List of places and bookmarks</source>
@@ -471,7 +465,7 @@ Vennligst sjekk at riktig filnavn ble angitt.</translation>
         <translation>%1 TB</translation>
     </message>
     <message>
-        <source>&lt;b&gt;The name &quot;%1&quot; can not be used.&lt;/b&gt;&lt;p&gt;Try using another name, with fewer characters or no punctuations marks.</source>
+        <source>&lt;b&gt;The name "%1" can not be used.&lt;/b&gt;&lt;p&gt;Try using another name, with fewer characters or no punctuations marks.</source>
         <translation>&lt;b&gt;Kan ikke bruke navnet «%1».&lt;/b&gt;&lt;p&gt;Prøv et annet navn, med færre tegn, eller uten tegnsetting.</translation>
     </message>
     <message>
@@ -540,35 +534,35 @@ Vennligst sjekk at riktig filnavn ble angitt.</translation>
         <translation>Kan ikke laste biblioteket %1: %2</translation>
     </message>
     <message>
-        <source>&apos;%1&apos; is not an ELF object (%2)</source>
+        <source>'%1' is not an ELF object (%2)</source>
         <translation>«%1» er ikke et ELF-objekt (%2)</translation>
     </message>
     <message>
-        <source>The plugin &apos;%1&apos; uses incompatible Qt library. (%2.%3.%4) [%5]</source>
+        <source>The plugin '%1' uses incompatible Qt library. (%2.%3.%4) [%5]</source>
         <translation>Programtillegget «%1» bruker inkompatibelt Qt-bibliotek. (%2.%3.%4) [%5]</translation>
     </message>
     <message>
-        <source>Cannot resolve symbol &quot;%1&quot; in %2: %3</source>
+        <source>Cannot resolve symbol "%1" in %2: %3</source>
         <translation>Klarte ikke slå opp symbolet «%1» i %2: %3</translation>
     </message>
     <message>
-        <source>Plugin verification data mismatch in &apos;%1&apos;</source>
+        <source>Plugin verification data mismatch in '%1'</source>
         <translation>Ikke samsvar i data for programtillegg-verifisering i «%1»</translation>
     </message>
     <message>
-        <source>&apos;%1&apos; is an invalid ELF object (%2)</source>
+        <source>'%1' is an invalid ELF object (%2)</source>
         <translation>«%1» er et ugyldig ELF-objekt (%2)</translation>
     </message>
     <message>
-        <source>The plugin &apos;%1&apos; uses incompatible Qt library. (Cannot mix debug and release libraries.)</source>
+        <source>The plugin '%1' uses incompatible Qt library. (Cannot mix debug and release libraries.)</source>
         <translation>Programtillegget «%1» bruker inkompatibelt Qt-bibliotek. (Kan ikke blande biblioteker for feilsøking og utgave.)</translation>
     </message>
     <message>
-        <source>&apos;%1&apos; is not an ELF object</source>
+        <source>'%1' is not an ELF object</source>
         <translation>«%1» er ikke et ELF-objekt</translation>
     </message>
     <message>
-        <source>The file &apos;%1&apos; is not a valid Qt plugin.</source>
+        <source>The file '%1' is not a valid Qt plugin.</source>
         <translation>Fila «%1» er ikke et gyldig Qt-programtillegg.</translation>
     </message>
     <message>
@@ -730,6 +724,14 @@ Vennligst sjekk at riktig filnavn ble angitt.</translation>
     <message>
         <source>Height:</source>
         <translation>Høyde:</translation>
+    </message>
+</context>
+<context>
+    <name>QPlatformTheme</name>
+    <message>
+        <location filename="../src/gui/text_browser_dialog.cpp" line="63"/>
+        <source>Close</source>
+        <translation>Lukk</translation>
     </message>
 </context>
 <context>
@@ -908,7 +910,7 @@ Vil du skrive over den?</translation>
         <translation>Executive</translation>
     </message>
     <message>
-        <source>The &apos;From&apos; value cannot be greater than the &apos;To&apos; value.</source>
+        <source>The 'From' value cannot be greater than the 'To' value.</source>
         <translation>«Fra»-verdien kan ikke være større enn «Til»-verdien.</translation>
     </message>
     <message>
@@ -1256,10 +1258,6 @@ Velg et annet navn.</translation>
         <translation>+</translation>
     </message>
     <message>
-        <source>CD</source>
-        <translation>CD</translation>
-    </message>
-    <message>
         <source>Go</source>
         <translation>Gå</translation>
     </message>
@@ -1278,10 +1276,6 @@ Velg et annet navn.</translation>
     <message>
         <source>F%1</source>
         <translation>F%1</translation>
-    </message>
-    <message>
-        <source>DOS</source>
-        <translation>DOS</translation>
     </message>
     <message>
         <source>Del</source>
@@ -1306,10 +1300,6 @@ Velg et annet navn.</translation>
     <message>
         <source>Tab</source>
         <translation>Tabulator</translation>
-    </message>
-    <message>
-        <source>WWW</source>
-        <translation>WWW</translation>
     </message>
     <message>
         <source>Yes</source>
@@ -1348,10 +1338,6 @@ Velg et annet navn.</translation>
         <translation>Vend</translation>
     </message>
     <message>
-        <source>Game</source>
-        <translation>Spill</translation>
-    </message>
-    <message>
         <source>Help</source>
         <translation>Hjelp</translation>
     </message>
@@ -1372,10 +1358,6 @@ Velg et annet navn.</translation>
         <translation>Meta</translation>
     </message>
     <message>
-        <source>News</source>
-        <translation>Nyheter</translation>
-    </message>
-    <message>
         <source>PgUp</source>
         <translation>PgUp</translation>
     </message>
@@ -1388,16 +1370,8 @@ Velg et annet navn.</translation>
         <translation>Send</translation>
     </message>
     <message>
-        <source>Shop</source>
-        <translation>Handle</translation>
-    </message>
-    <message>
         <source>Stop</source>
         <translation>Stopp</translation>
-    </message>
-    <message>
-        <source>Time</source>
-        <translation>Tid</translation>
     </message>
     <message>
         <source>XFer</source>
@@ -1408,10 +1382,6 @@ Velg et annet navn.</translation>
         <translation>Vis</translation>
     </message>
     <message>
-        <source>Split Screen</source>
-        <translation>Delt visning</translation>
-    </message>
-    <message>
         <source>Clear</source>
         <translation>Tøm</translation>
     </message>
@@ -1420,20 +1390,8 @@ Velg et annet navn.</translation>
         <translation>Lukk</translation>
     </message>
     <message>
-        <source>Eject</source>
-        <translation>Løs ut</translation>
-    </message>
-    <message>
         <source>Enter</source>
         <translation>Enter</translation>
-    </message>
-    <message>
-        <source>Kanji</source>
-        <translation>Kanji</translation>
-    </message>
-    <message>
-        <source>Music</source>
-        <translation>Musikk</translation>
     </message>
     <message>
         <source>Paste</source>
@@ -1444,16 +1402,8 @@ Velg et annet navn.</translation>
         <translation>Pause</translation>
     </message>
     <message>
-        <source>Phone</source>
-        <translation>Telefon</translation>
-    </message>
-    <message>
         <source>Print</source>
         <translation>Skriv ut</translation>
-    </message>
-    <message>
-        <source>Reply</source>
-        <translation>Svar</translation>
     </message>
     <message>
         <source>Right</source>
@@ -1464,10 +1414,6 @@ Velg et annet navn.</translation>
         <translation>Shift</translation>
     </message>
     <message>
-        <source>Sleep</source>
-        <translation>Hvile</translation>
-    </message>
-    <message>
         <source>Space</source>
         <translation>Mellomrom</translation>
     </message>
@@ -1476,188 +1422,16 @@ Velg et annet navn.</translation>
         <translation>Verktøy</translation>
     </message>
     <message>
-        <source>Video</source>
-        <translation>Video</translation>
-    </message>
-    <message>
-        <source>Hiragana</source>
-        <translation>Hiragana</translation>
-    </message>
-    <message>
-        <source>Wireless</source>
-        <translation>Trådløs</translation>
-    </message>
-    <message>
-        <source>Media Record</source>
-        <translation>Media opptak</translation>
-    </message>
-    <message>
-        <source>Multiple Candidate</source>
-        <translation>Flere kandidater</translation>
-    </message>
-    <message>
-        <source>Zenkaku</source>
-        <translation>Zenkaku</translation>
-    </message>
-    <message>
         <source>Print Screen</source>
-        <translation>Print Screen</translation>
-    </message>
-    <message>
-        <source>Audio Rewind</source>
-        <translation>Spol lyd bakover</translation>
-    </message>
-    <message>
-        <source>Audio Repeat</source>
-        <translation>Lyd gjenta</translation>
-    </message>
-    <message>
-        <source>Toggle Call/Hangup</source>
-        <translation>Veksle ring/legg på</translation>
+        <translation>Skjermutskrift</translation>
     </message>
     <message>
         <source>Zoom In</source>
         <translation>Forstørr</translation>
     </message>
     <message>
-        <source>Camera Shutter</source>
-        <translation>Kameralukker</translation>
-    </message>
-    <message>
-        <source>Ultra Wide Band</source>
-        <translation>UWB</translation>
-    </message>
-    <message>
-        <source>Hangul Special</source>
-        <translation>Hangul Special</translation>
-    </message>
-    <message>
-        <source>Treble Down</source>
-        <translation>Mindre diskant</translation>
-    </message>
-    <message>
         <source>Scroll Lock</source>
         <translation>Scroll Lock</translation>
-    </message>
-    <message>
-        <source>Media Pause</source>
-        <translation>Media pause</translation>
-    </message>
-    <message>
-        <source>Word Processor</source>
-        <translation>Tekstbehandler</translation>
-    </message>
-    <message>
-        <source>Volume Down</source>
-        <translation>Lavere lyd</translation>
-    </message>
-    <message>
-        <source>Volume Mute</source>
-        <translation>Demp lyd</translation>
-    </message>
-    <message>
-        <source>Kana Shift</source>
-        <translation>Kana Shift</translation>
-    </message>
-    <message>
-        <source>Media Previous</source>
-        <translation>Media forrige</translation>
-    </message>
-    <message>
-        <source>Home Page</source>
-        <translation>Hjemmeside</translation>
-    </message>
-    <message>
-        <source>Meeting</source>
-        <translation>Møte</translation>
-    </message>
-    <message>
-        <source>Volume Up</source>
-        <translation>Høyere lyd</translation>
-    </message>
-    <message>
-        <source>Menu PB</source>
-        <translation>Meny PB</translation>
-    </message>
-    <message>
-        <source>Keyboard Brightness Up</source>
-        <translation>Lysere tastaturlys</translation>
-    </message>
-    <message>
-        <source>Hangul PostHanja</source>
-        <translation>Hangul PostHanja</translation>
-    </message>
-    <message>
-        <source>Kana Lock</source>
-        <translation>Kana lås</translation>
-    </message>
-    <message>
-        <source>Community</source>
-        <translation>Fellesskap</translation>
-    </message>
-    <message>
-        <source>Launch (6)</source>
-        <translation>Start (6)</translation>
-    </message>
-    <message>
-        <source>Launch (7)</source>
-        <translation>Start (7)</translation>
-    </message>
-    <message>
-        <source>Launch (8)</source>
-        <translation>Start /8)</translation>
-    </message>
-    <message>
-        <source>Launch (9)</source>
-        <translation>Start (9)</translation>
-    </message>
-    <message>
-        <source>Launch (2)</source>
-        <translation>Start (2)</translation>
-    </message>
-    <message>
-        <source>Launch (3)</source>
-        <translation>Start (3)</translation>
-    </message>
-    <message>
-        <source>Launch (4)</source>
-        <translation>Start (4)</translation>
-    </message>
-    <message>
-        <source>Launch (5)</source>
-        <translation>Start (5)</translation>
-    </message>
-    <message>
-        <source>Launch (0)</source>
-        <translation>Start (0)</translation>
-    </message>
-    <message>
-        <source>Launch (1)</source>
-        <translation>Start (1)</translation>
-    </message>
-    <message>
-        <source>Launch (F)</source>
-        <translation>Start (F)</translation>
-    </message>
-    <message>
-        <source>Launch (B)</source>
-        <translation>Start (B)</translation>
-    </message>
-    <message>
-        <source>Launch (C)</source>
-        <translation>Start (C)</translation>
-    </message>
-    <message>
-        <source>Launch (D)</source>
-        <translation>Start (D)</translation>
-    </message>
-    <message>
-        <source>Launch (E)</source>
-        <translation>Start (E)</translation>
-    </message>
-    <message>
-        <source>Launch (A)</source>
-        <translation>Start (A)</translation>
     </message>
     <message>
         <source>Delete</source>
@@ -1668,48 +1442,8 @@ Velg et annet navn.</translation>
         <translation>Escape</translation>
     </message>
     <message>
-        <source>Audio Random Play</source>
-        <translation>Lyd tilfeldig</translation>
-    </message>
-    <message>
-        <source>Hangul</source>
-        <translation>Hangul</translation>
-    </message>
-    <message>
-        <source>Hangup</source>
-        <translation>Legg på</translation>
-    </message>
-    <message>
-        <source>Henkan</source>
-        <translation>Henkan</translation>
-    </message>
-    <message>
         <source>Insert</source>
         <translation>Insert</translation>
-    </message>
-    <message>
-        <source>Home Office</source>
-        <translation>Hjemmekontor</translation>
-    </message>
-    <message>
-        <source>Last Number Redial</source>
-        <translation>Ring siste ringte nummer</translation>
-    </message>
-    <message>
-        <source>Logoff</source>
-        <translation>Logg ut</translation>
-    </message>
-    <message>
-        <source>Market</source>
-        <translation>Marked</translation>
-    </message>
-    <message>
-        <source>Massyo</source>
-        <translation>Massyo</translation>
-    </message>
-    <message>
-        <source>Bass Boost</source>
-        <translation>Bassforsterking</translation>
     </message>
     <message>
         <source>Option</source>
@@ -1728,10 +1462,6 @@ Velg et annet navn.</translation>
         <translation>Enter</translation>
     </message>
     <message>
-        <source>Romaji</source>
-        <translation>Romaji</translation>
-    </message>
-    <message>
         <source>Search</source>
         <translation>Søk</translation>
     </message>
@@ -1744,56 +1474,12 @@ Velg et annet navn.</translation>
         <translation>SysReq</translation>
     </message>
     <message>
-        <source>Travel</source>
-        <translation>Reise</translation>
-    </message>
-    <message>
         <source>NumLock</source>
         <translation>Num Lock</translation>
     </message>
     <message>
-        <source>Audio Forward</source>
-        <translation>Lyd forover</translation>
-    </message>
-    <message>
-        <source>WebCam</source>
-        <translation>Vevkamera</translation>
-    </message>
-    <message>
-        <source>Hiragana Katakana</source>
-        <translation>Hiragana Katakana</translation>
-    </message>
-    <message>
-        <source>Top Menu</source>
-        <translation>Toppmeny</translation>
-    </message>
-    <message>
         <source>ScrollLock</source>
         <translation>Scroll Lock</translation>
-    </message>
-    <message>
-        <source>Hot Links</source>
-        <translation>Hurtiglenker</translation>
-    </message>
-    <message>
-        <source>Audio Cycle Track</source>
-        <translation>Gjenta lydspor</translation>
-    </message>
-    <message>
-        <source>Context1</source>
-        <translation>Kontekst1</translation>
-    </message>
-    <message>
-        <source>Context2</source>
-        <translation>Kontekst2</translation>
-    </message>
-    <message>
-        <source>Context3</source>
-        <translation>Kontekst3</translation>
-    </message>
-    <message>
-        <source>Context4</source>
-        <translation>Kontekst4</translation>
     </message>
     <message>
         <source>Zoom Out</source>
@@ -1804,60 +1490,8 @@ Velg et annet navn.</translation>
         <translation>Side opp</translation>
     </message>
     <message>
-        <source>Open URL</source>
-        <translation>Åpne nettadresse</translation>
-    </message>
-    <message>
-        <source>iTouch</source>
-        <translation>iTouch</translation>
-    </message>
-    <message>
-        <source>Previous Candidate</source>
-        <translation>Forrige kandidat</translation>
-    </message>
-    <message>
-        <source>Toggle Media Play/Pause</source>
-        <translation>Veksle media spill/pause</translation>
-    </message>
-    <message>
         <source>Caps Lock</source>
         <translation>Caps Lock</translation>
-    </message>
-    <message>
-        <source>Eisu Shift</source>
-        <translation>Eisu Shift</translation>
-    </message>
-    <message>
-        <source>Code input</source>
-        <translation>Kode inn</translation>
-    </message>
-    <message>
-        <source>Camera Focus</source>
-        <translation>Kamerafokus</translation>
-    </message>
-    <message>
-        <source>Adjust Brightness</source>
-        <translation>Juster lysstyrke</translation>
-    </message>
-    <message>
-        <source>Spreadsheet</source>
-        <translation>Regneark</translation>
-    </message>
-    <message>
-        <source>Eisu toggle</source>
-        <translation>Eisu vend</translation>
-    </message>
-    <message>
-        <source>Keyboard Brightness Down</source>
-        <translation>Mørkere tastaturlys</translation>
-    </message>
-    <message>
-        <source>Clear Grab</source>
-        <translation>Tøm fanget</translation>
-    </message>
-    <message>
-        <source>Monitor Brightness Up</source>
-        <translation>Lysere skjerm</translation>
     </message>
     <message>
         <source>System Request</source>
@@ -1872,200 +1506,8 @@ Velg et annet navn.</translation>
         <translation>Tilbaketab</translation>
     </message>
     <message>
-        <source>Bass Up</source>
-        <translation>Mer bass</translation>
-    </message>
-    <message>
-        <source>Battery</source>
-        <translation>Batteri</translation>
-    </message>
-    <message>
-        <source>Katakana</source>
-        <translation>Katakana</translation>
-    </message>
-    <message>
-        <source>Refresh</source>
-        <translation>Oppdater</translation>
-    </message>
-    <message>
-        <source>Hibernate</source>
-        <translation>Dvalemodus</translation>
-    </message>
-    <message>
-        <source>Application Left</source>
-        <translation>Program venstre</translation>
-    </message>
-    <message>
-        <source>Voice Dial</source>
-        <translation>Stemmeanrop</translation>
-    </message>
-    <message>
-        <source>Browser</source>
-        <translation>Nettleser</translation>
-    </message>
-    <message>
-        <source>Keyboard Menu</source>
-        <translation>Tastaturmeny</translation>
-    </message>
-    <message>
-        <source>Back Forward</source>
-        <translation>Spol framover</translation>
-    </message>
-    <message>
-        <source>Launch Mail</source>
-        <translation>Start e-post</translation>
-    </message>
-    <message>
-        <source>Keyboard Light On/Off</source>
-        <translation>Tastaturlys på/av</translation>
-    </message>
-    <message>
         <source>Backspace</source>
         <translation>Rettetast</translation>
-    </message>
-    <message>
-        <source>Bass Down</source>
-        <translation>Mindre bass</translation>
-    </message>
-    <message>
-        <source>Mail Forward</source>
-        <translation>Videresend e-post</translation>
-    </message>
-    <message>
-        <source>Messenger</source>
-        <translation>Lynmeldinger</translation>
-    </message>
-    <message>
-        <source>Hangul Banja</source>
-        <translation>Hangul Banja</translation>
-    </message>
-    <message>
-        <source>Hangul Hanja</source>
-        <translation>Hangul Hanja</translation>
-    </message>
-    <message>
-        <source>Standby</source>
-        <translation>Ventemodus</translation>
-    </message>
-    <message>
-        <source>Hangul Start</source>
-        <translation>Hangul Start</translation>
-    </message>
-    <message>
-        <source>Rotation KB</source>
-        <translation>Rotasjon KB</translation>
-    </message>
-    <message>
-        <source>Rotation PB</source>
-        <translation>Rotasjon PB</translation>
-    </message>
-    <message>
-        <source>Documents</source>
-        <translation>Dokumenter</translation>
-    </message>
-    <message>
-        <source>Calculator</source>
-        <translation>Kalkulator</translation>
-    </message>
-    <message>
-        <source>Support</source>
-        <translation>Støtte</translation>
-    </message>
-    <message>
-        <source>Suspend</source>
-        <translation>Hvilemodus</translation>
-    </message>
-    <message>
-        <source>Display</source>
-        <translation>Vis</translation>
-    </message>
-    <message>
-        <source>Hangul Romaja</source>
-        <translation>Hangul Romaja</translation>
-    </message>
-    <message>
-        <source>My Sites</source>
-        <translation>Mine nettsteder</translation>
-    </message>
-    <message>
-        <source>Rotate Windows</source>
-        <translation>Roter vinduer</translation>
-    </message>
-    <message>
-        <source>Touroku</source>
-        <translation>Touroku</translation>
-    </message>
-    <message>
-        <source>Zenkaku Hankaku</source>
-        <translation>Zenkaku Hankaku</translation>
-    </message>
-    <message>
-        <source>Hangul Jeonja</source>
-        <translation>Hangul Jeonja</translation>
-    </message>
-    <message>
-        <source>Treble Up</source>
-        <translation>Mer diskant</translation>
-    </message>
-    <message>
-        <source>Subtitle</source>
-        <translation>Undertekst</translation>
-    </message>
-    <message>
-        <source>Hangul Jamo</source>
-        <translation>Hangul Jamo</translation>
-    </message>
-    <message>
-        <source>Bluetooth</source>
-        <translation>Blåtann</translation>
-    </message>
-    <message>
-        <source>Muhenkan</source>
-        <translation>Muhenkan</translation>
-    </message>
-    <message>
-        <source>Num Lock</source>
-        <translation>Num Lock</translation>
-    </message>
-    <message>
-        <source>Screensaver</source>
-        <translation>Pauseskjerm</translation>
-    </message>
-    <message>
-        <source>Number Lock</source>
-        <translation>Num Lock</translation>
-    </message>
-    <message>
-        <source>Spellchecker</source>
-        <translation>Stavekontroll</translation>
-    </message>
-    <message>
-        <source>Hangul PreHanja</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>Terminal</source>
-        <translation>Terminal</translation>
-    </message>
-    <message>
-        <source>Add Favorite</source>
-        <translation>Legg til favoritt</translation>
-    </message>
-    <message>
-        <source>Finance</source>
-        <translation>Finans</translation>
-    </message>
-    <message>
-        <source>Task Panel</source>
-        <translation>Oppgavelinje</translation>
-    </message>
-    <message>
-        <source>Favorites</source>
-        <translation>Favoritter</translation>
-    </message>
-    <message>
-        <source>Forward</source>
-        <translation>Forover</translation>
     </message>
     <message>
         <source>Page Down</source>
@@ -2076,52 +1518,8 @@ Velg et annet navn.</translation>
         <translation>Vekk opp maskinen</translation>
     </message>
     <message>
-        <source>Power Off</source>
-        <translation>Slå av maskinen</translation>
-    </message>
-    <message>
-        <source>LightBulb</source>
-        <translation>Lyspære</translation>
-    </message>
-    <message>
-        <source>Hankaku</source>
-        <translation>Hankaku</translation>
-    </message>
-    <message>
-        <source>Hangul End</source>
-        <translation>Hangul End</translation>
-    </message>
-    <message>
         <source>Monitor Brightness Down</source>
         <translation>Mørkere skjerm</translation>
-    </message>
-    <message>
-        <source>History</source>
-        <translation>Historie</translation>
-    </message>
-    <message>
-        <source>Media Play</source>
-        <translation>Medie spill</translation>
-    </message>
-    <message>
-        <source>Media Stop</source>
-        <translation>Medie stopp</translation>
-    </message>
-    <message>
-        <source>Media Next</source>
-        <translation>Media neste</translation>
-    </message>
-    <message>
-        <source>Launch Media</source>
-        <translation>Start media</translation>
-    </message>
-    <message>
-        <source>Application Right</source>
-        <translation>Program høyre</translation>
-    </message>
-    <message>
-        <source>Pictures</source>
-        <translation>Bilder</translation>
     </message>
 </context>
 <context>
@@ -2297,7 +1695,7 @@ Velg et annet navn.</translation>
 <context>
     <name>QWhatsThisAction</name>
     <message>
-        <source>What&apos;s This?</source>
+        <source>What's This?</source>
         <translation>Hva er dette?</translation>
     </message>
 </context>

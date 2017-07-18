@@ -5,7 +5,7 @@ keywords: Android
 
 [Toolbars]: toolbars.md
 
-On startup, the app shows a list of available map files. In case there are no map files, you probably misspelled the map folder name (see previous section). To start editing a map, touch its filename.
+On startup, the app shows a list of map files available from the [supported storage locations](android-storage.md). To start editing a map, touch its filename.
 
 This will show a map editor screen which is similar to the desktop version. In the following, only the functionality which differs from the desktop version will be explained. To find out about the other symbols, see [Toolbars] in the desktop application's manual.
 
@@ -65,14 +65,15 @@ Depending on the screen size of your device, some of the symbols available not f
 (10) Record temporary GPS trace
 
 This symbol is enabled when the GPS position display is active. It records a temporary trace of the GPS position, which is intended to act as a guideline for drawings. Using the GPS trace directly is rarely useful because of the GPS uncertainty.
+Note that the temporary trace is not saved in the map.
 
-(11) Record temporary GPS position
+(11) Clear temporary GPS markers
 
-This records a single point at your current GPS position to act as drawing help.
+This removes the traces and markers created with (10) and (12). (They will also be discarded when closing the map file.)
 
-(12) Clear temporary GPS markers
+(12) Record temporary GPS position
 
-This removes the markers created with (10) and (11) again. Note that markers are not saved in map files, so they will also disappear when closing the map file.
+This records a single point at your current GPS position to act as drawing help. Note that this marker is not saved in the map.
 
 (13) Paint-on-template settings
 
@@ -89,3 +90,8 @@ Sets a point object at the GPS position. Selecting this button first enters an a
 (16) Symbol selector
 
 Displays the active symbol, and opens the symbol selection screen when touched.
+
+(17) Map parts selector
+
+This button opens a popup for changing the active map part.
+

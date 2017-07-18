@@ -24,9 +24,10 @@
 #include <QApplication>
 #include <QPainter>
 #include <QSignalMapper>
+#include <QSpinBox>
 #include <QTextDocument>
 
-#include "../util_gui.h"
+#include "gui/util_gui.h"
 
 
 // ### ColorItemDelegate ###

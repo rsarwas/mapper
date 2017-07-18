@@ -112,6 +112,9 @@ public slots:
 	/** Sets output options: resolution, overprinting. */
 	void setOptions(const MapPrinterOptions& parameters);
 	
+	/** Listens to view feature changes. */
+	void onVisibilityChanged();
+	
 signals:
 	/**
 	 * This signal is emitted when the type of task changes.
@@ -298,7 +301,11 @@ private:
 	QPushButton* print_button;
 	QPushButton* export_button;
 	
+#if QT_VERSION < 0x050300
 	QList<QPrinterInfo> printers;
+#else
+	QStringList printers;
+#endif
 	
 	PrintAreaPolicy policy;
 	

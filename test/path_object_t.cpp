@@ -20,8 +20,9 @@
 
 #include "path_object_t.h"
 
-#include "../src/map.h"
-#include "../src/symbol_line.h"
+#include "global.h"
+#include "core/map.h"
+#include "core/symbols/line_symbol.h"
 
 class DummyPathObject : public PathObject
 {
@@ -461,4 +462,10 @@ void PathObjectTest::atypicalPathTest()
 }
 	
 
-QTEST_GUILESS_MAIN(PathObjectTest)
+/*
+ * We don't need a real GUI window.
+ */
+auto qpa_selected = qputenv("QT_QPA_PLATFORM", "minimal");
+
+
+QTEST_MAIN(PathObjectTest)

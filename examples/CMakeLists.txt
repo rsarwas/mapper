@@ -1,5 +1,5 @@
 #
-#    Copyright 2013-2015 Kai Pastor
+#    Copyright 2013-2017 Kai Pastor
 #    
 #    This file is part of OpenOrienteering.
 # 
@@ -19,20 +19,24 @@
 set(Mapper_EXAMPLES
   overprinting.omap
   forest\ sample.omap
-  sprint\ sample.omap
   complete\ map.omap
 )
 
+if(ANDROID)
+	# \todo Support overprinting simulation in the mobile app.
+	list(REMOVE_ITEM Mapper_EXAMPLES overprinting.omap)
+endif()
+
 install(
   FILES ${Mapper_EXAMPLES}
-  DESTINATION "${MAPPER_DATA_DESTINATION}/examples/${_dir}"
+  DESTINATION "${MAPPER_DATA_DESTINATION}/examples"
 )
 
-foreach(_example ${Mapper_EXAMPLES})
+foreach(_example ${Mapper_EXAMPLES} examples.qrc)
 	configure_file(${_example} ${_example} COPYONLY)
 endforeach()
 
 if(Mapper_DEVELOPMENT_BUILD)
 	configure_file(overprinting.omap autosave-test.omap COPYONLY)
-	configure_file(sprint\ sample.omap autosave-test.omap.autosave COPYONLY)
+	configure_file(complete\ map.omap autosave-test.omap.autosave COPYONLY)
 endif()

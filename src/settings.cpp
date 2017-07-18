@@ -28,7 +28,7 @@
 #include <QSettings>
 #include <QStringList>
 
-#include "util.h"
+#include "util/util.h"
 
 
 Settings::Settings()
@@ -77,14 +77,14 @@ Settings::Settings()
 	registerSetting(ActionGridBar_ButtonSizeMM, "ActionGridBar/button_size_mm", touch_button_minimum_size_default);
 	registerSetting(SymbolWidget_IconSizeMM, "SymbolWidget/icon_size_mm", symbol_widget_icon_size_mm_default);
 	
-	registerSetting(General_RetainCompatiblity, "retainCompatiblity", true);
+	registerSetting(General_RetainCompatiblity, "retainCompatiblity", false);
 	registerSetting(General_AutosaveInterval, "autosave", 15); // unit: minutes
-	registerSetting(General_Language, "language", QVariant((int)QLocale::system().language()));
+	registerSetting(General_Language, "language", QLocale::system().name().left(2));
 	registerSetting(General_PixelsPerInch, "pixelsPerInch", ppi);
 	registerSetting(General_TranslationFile, "translationFile", QVariant(QString{}));
 	registerSetting(General_RecentFilesList, "recentFileList", QVariant(QStringList()));
 	registerSetting(General_OpenMRUFile, "openMRUFile", false);
-	registerSetting(General_Local8BitEncoding, "local_8bit_encoding", QLatin1String("Windows-1252"));
+	registerSetting(General_Local8BitEncoding, "local_8bit_encoding", QLatin1String("Default"));
 	registerSetting(General_NewOcd8Implementation, "new_ocd8_implementation", true);
 	registerSetting(General_StartDragDistance, "startDragDistance", start_drag_distance_default);
 	
@@ -98,7 +98,7 @@ Settings::Settings()
 	static bool migration_checked = false;
 	if (!migration_checked)
 	{
-		QVariant current_version { QLatin1String("0.5.9") };
+		QVariant current_version { QLatin1String("0.7") };
 		QSettings settings;
 		if (settings.value(QString::fromLatin1("version")) != current_version)
 		{
@@ -110,6 +110,15 @@ Settings::Settings()
 			// Remove/reset to default
 			settings.remove(QString::fromLatin1("new_ocd8_implementation_v0.6"));
 			settings.remove(QString::fromLatin1("new_ocd8_implementation"));
+		}
+		
+		bool have_language_number;
+		auto language_number = getSetting(General_Language).toInt(&have_language_number);
+		if (have_language_number)
+		{
+			// Migrate old numeric language setting
+			auto language = QLocale(QLocale::Language(language_number)).name().left(2);
+			setSetting(Settings::General_Language, language);
 		}
 		
 		migration_checked = true;

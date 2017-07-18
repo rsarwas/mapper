@@ -44,7 +44,7 @@ void HomeScreenController::attach(MainWindow* window)
 {
 	this->window = window;
 	
-	if (window->mobileMode())
+	if (MainWindow::mobileMode())
 	{
 		widget = new HomeScreenWidgetMobile(this);
 	}
@@ -64,7 +64,7 @@ void HomeScreenController::attach(MainWindow* window)
 
 void HomeScreenController::detach()
 {
-	if (!window->mobileMode())
+	if (!MainWindow::mobileMode())
 	{
 		window->statusBar()->show();
 	}
@@ -142,7 +142,7 @@ void HomeScreenController::goToTip(int index)
 	
 	if (tips.isEmpty())
 	{
-		// Some error may have occured during reading the tips file.
+		// Some error may have occurred during reading the tips file.
 		// Display a welcome text.
 		widget->setTipOfTheDay(QString::fromLatin1("<h2>%1</h2>").arg(tr("Welcome to OpenOrienteering Mapper!")));
 	}

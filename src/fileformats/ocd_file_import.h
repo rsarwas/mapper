@@ -23,7 +23,7 @@
 #ifndef OPENORIENTEERING_OCD_FILE_IMPORT
 #define OPENORIENTEERING_OCD_FILE_IMPORT
 
-#include "../file_import_export.h"
+#include "file_import_export.h"
 
 #include <cmath>
 
@@ -32,13 +32,13 @@
 
 #include "ocd_types.h"
 #include "ocd_types_v8.h"
-#include "../object.h"
-#include "../object_text.h"
-#include "../symbol.h"
-#include "../symbol_area.h"
-#include "../symbol_line.h"
-#include "../symbol_point.h"
-#include "../symbol_text.h"
+#include "core/objects/object.h"
+#include "core/objects/text_object.h"
+#include "core/symbols/symbol.h"
+#include "core/symbols/area_symbol.h"
+#include "core/symbols/line_symbol.h"
+#include "core/symbols/point_symbol.h"
+#include "core/symbols/text_symbol.h"
 
 class Georeferencing;
 class MapColor;
@@ -98,6 +98,7 @@ protected:
 		
 	public:
 		OcdImportedPathObject(Symbol* symbol = nullptr) : PathObject(symbol) { }
+		~OcdImportedPathObject() override;
 	};
 	
 public:
@@ -105,30 +106,41 @@ public:
 	
 	virtual ~OcdFileImport() override;
 	
-	void setCustom8BitEncoding(const char *encoding);
+	
+	void setCustom8BitEncoding(QTextCodec* encoding);
+	
 	
 	template< std::size_t N >
 	QString convertOcdString(const Ocd::PascalString<N>& src) const;
 	
 	template< std::size_t N >
-	QString convertOcdString(const Ocd::Utf8PascalString< N >& src) const;
+	QString convertOcdString(const Ocd::Utf8PascalString<N>& src) const;
+	
+	template< std::size_t N >
+	QString convertOcdString(const Ocd::Utf16PascalString<N>& src) const;
 	
 	template< class E >
-	QString convertOcdString(const char* src, std::size_t len) const;
+	QString convertOcdString(const char* src, uint len) const;
 	
 	template< class E >
 	QString convertOcdString(const QByteArray& data) const;
 	
-	QString convertOcdString(const QChar* src) const;
+	QString convertOcdString(const QChar* src, uint maxlen) const;
 	
 	MapCoord convertOcdPoint(const Ocd::OcdPoint32& ocd_point) const;
 	
 	float convertAngle(int ocd_angle) const;
 	
-	template< class T >
-	qint64 convertLength(T ocd_length) const;
+	int convertLength(qint16 ocd_length) const;
+	
+	int convertLength(quint16 ocd_length) const;
+	
+	template< class T, class R = qint64 >
+	R convertLength(T ocd_length) const;
 	
 	MapColor* convertColor(int ocd_color);
+	
+	void addSymbolWarning(const AreaSymbol* symbol, const QString& warning);
 	
 	void addSymbolWarning(const LineSymbol* symbol, const QString& warning);
 	
@@ -145,13 +157,24 @@ protected:
 	void importImplementation(bool load_symbols_only);
 	
 	
+	struct StringHandler
+	{
+		using Callback = void (OcdFileImport::*)(const QString&, int);
+		qint32   type;
+		Callback callback;
+	};
+	
+	template< class F >
+	void handleStrings(const OcdFile< F >& file, std::initializer_list<StringHandler> handlers);
+	
+	
 	void importGeoreferencing(const OcdFile<Ocd::FormatV8>& file);
 	
 	template< class F >
 	void importGeoreferencing(const OcdFile< F >& file);
 	
 	/// Imports string 1039.
-	void importGeoreferencing(const QString& param_string);
+	void importGeoreferencing(const QString& param_string, int ocd_version);
 	
 	/// Imports string 1039 field i.
 	void applyGridAndZone(Georeferencing& georef, const QString& combined_grid_zone);
@@ -162,11 +185,13 @@ protected:
 	template< class F >
 	void importColors(const OcdFile< F >& file);
 	
-	MapColor* importColor(const QString& param_string);
+	void importColor(const QString& param_string, int ocd_version);
 	
 	
 	template< class F >
 	void importSymbols(const OcdFile< F >& file);
+	
+	void resolveSubsymbols();
 	
 	
 	void importObjects(const OcdFile<Ocd::FormatV8>& file);
@@ -178,7 +203,7 @@ protected:
 	template< class F >
 	void importTemplates(const OcdFile< F >& file);
 	
-	Template* importTemplate(const QString& param_string, const int ocd_version);
+	void importTemplate(const QString& param_string, int ocd_version);
 	
 	
 	void importExtras(const OcdFile<Ocd::FormatV8>& file);
@@ -186,13 +211,17 @@ protected:
 	template< class F >
 	void importExtras(const OcdFile< F >& file);
 	
+	static const std::initializer_list<StringHandler> extraStringHandlers;
+	
+	void appendNotes(const QString& param_string, int ocd_version);
+	
 	
 	void importView(const OcdFile<Ocd::FormatV8>& file);
 	
 	template< class F >
 	void importView(const OcdFile< F >& file);
 	
-	void importView(const QString& param_string);
+	void importView(const QString& param_string, int ocd_version);
 	
 	
 	// Symbol import
@@ -215,10 +244,10 @@ protected:
 	
 	void mergeLineSymbol(CombinedSymbol* full_line, LineSymbol* main_line, LineSymbol* framing_line, LineSymbol* double_line);
 	
-	AreaSymbol* importAreaSymbol(const Ocd::AreaSymbolV8& ocd_symbol, int ocd_version);
+	Symbol* importAreaSymbol(const Ocd::AreaSymbolV8& ocd_symbol, int ocd_version);
 	
 	template< class S >
-	AreaSymbol* importAreaSymbol(const S& ocd_symbol, int ocd_version);
+	Symbol* importAreaSymbol(const S& ocd_symbol, int ocd_version);
 	
 	void setupAreaSymbolCommon(
 	        OcdImportedAreaSymbol* symbol,
@@ -261,13 +290,13 @@ protected:
 	
 	// Some helper functions that are used in multiple places
 	
-	void setPointFlags(OcdImportedPathObject* object, quint16 pos, bool is_area, const Ocd::OcdPoint32& ocd_point);
+	void setPointFlags(OcdImportedPathObject* object, quint32 pos, bool is_area, const Ocd::OcdPoint32& ocd_point);
 	
-	void setPathHolePoint(OcdFileImport::OcdImportedPathObject* object, int i);
+	void setPathHolePoint(OcdFileImport::OcdImportedPathObject* object, quint32 i);
 	
-	void fillPathCoords(OcdFileImport::OcdImportedPathObject* object, bool is_area, quint16 num_points, const Ocd::OcdPoint32* ocd_points);
+	void fillPathCoords(OcdFileImport::OcdImportedPathObject* object, bool is_area, quint32 num_points, const Ocd::OcdPoint32* ocd_points);
 	
-	bool fillTextPathCoords(TextObject* object, TextSymbol* symbol, quint16 npts, const Ocd::OcdPoint32* ocd_points);
+	bool fillTextPathCoords(TextObject* object, TextSymbol* symbol, quint32 npts, const Ocd::OcdPoint32* ocd_points);
 	
 	void setBasicAttributes(OcdImportedTextSymbol* symbol, const QString& font_name, const Ocd::BasicTextAttributesV8& attributes);
 	
@@ -290,7 +319,7 @@ protected:
 	QHash<int, MapColor *> color_index;
 	
 	/// maps OCD symbol number to oo-mapper symbol object
-	QHash<int, Symbol *> symbol_index;
+	QHash<unsigned int, Symbol *> symbol_index;
 	
 	/// maps OO Mapper text symbol pointer to OCD defined horizontal alignment (stored in objects instead of symbols in OO Mapper)
 	QHash<Symbol*, TextObject::HorizontalAlignment> text_halign_map;
@@ -299,7 +328,7 @@ protected:
 	QHash<Symbol*, TextObject::VerticalAlignment> text_valign_map;
 	
 	/// maps OCD symbol number to rectangle information struct
-	QHash<int, RectangleInfo> rectangle_info;
+	QHash<unsigned int, RectangleInfo> rectangle_info;
 };
 
 
@@ -318,20 +347,27 @@ QString OcdFileImport::convertOcdString(const Ocd::Utf8PascalString<N>& src) con
 	return QString::fromUtf8(src.data, src.length);
 }
 
-template< >
-inline
-QString OcdFileImport::convertOcdString< Ocd::Custom8BitEncoding >(const char* src, std::size_t len) const
+template< std::size_t N >
+QString OcdFileImport::convertOcdString(const Ocd::Utf16PascalString<N>& src) const
 {
-	len = qstrnlen(src, len);
-	return custom_8bit_encoding->toUnicode(src, len);
+	Q_STATIC_ASSERT(N <= std::numeric_limits<unsigned int>::max() / 2);
+	return convertOcdString(src.data, N);
 }
 
 template< >
 inline
-QString OcdFileImport::convertOcdString< Ocd::Utf8Encoding >(const char* src, std::size_t len) const
+QString OcdFileImport::convertOcdString< Ocd::Custom8BitEncoding >(const char* src, uint len) const
 {
-	len = qstrnlen(src, len);
-	return QString::fromUtf8(src, len);
+	len = qMin(uint(std::numeric_limits<int>::max()), qstrnlen(src, len));
+	return custom_8bit_encoding->toUnicode(src, int(len));
+}
+
+template< >
+inline
+QString OcdFileImport::convertOcdString< Ocd::Utf8Encoding >(const char* src, uint len) const
+{
+	len = qMin(uint(std::numeric_limits<int>::max()), qstrnlen(src, len));
+	return QString::fromUtf8(src, int(len));
 }
 
 template< class E >
@@ -341,15 +377,22 @@ QString OcdFileImport::convertOcdString(const QByteArray& data) const
 }
 
 inline
-QString OcdFileImport::convertOcdString(const QChar* src) const
-{
-	return QString(src);
-}
-
-inline
 MapCoord OcdFileImport::convertOcdPoint(const Ocd::OcdPoint32& ocd_point) const
 {
-	return MapCoord::fromNative((ocd_point.x >> 8) * 10, (ocd_point.y >> 8) * -10);
+	qint32 ocad_x = ocd_point.x >> 8;
+	qint32 ocad_y = ocd_point.y >> 8;
+	// Recover from broken coordinate export from Mapper 0.6.2 ... 0.6.4 (#749)
+	// Cf. broken::convertPointMember in file_format_ocad8.cpp:
+	// The values -4 ... -1 (-0.004 mm ... -0.001 mm) were converted to 0x80000000u instead of 0.
+	// This is the maximum value. Thus it is okay to assume it won't occur in regular data,
+	// and we can safely replace it with 0 here.
+	// But the input parameter were already subject to right shift ...
+	constexpr auto invalid_value = qint32(0x80000000u) >> 8; // ... so we use this value here.
+	if (ocad_x == invalid_value)
+		ocad_x = 0;
+	if (ocad_y == invalid_value)
+		ocad_y = 0;
+	return MapCoord::fromNative(ocad_x * 10, ocad_y * -10);
 }
 
 inline
@@ -361,13 +404,25 @@ float OcdFileImport::convertAngle(int ocd_angle) const
 	return (M_PI / 1800) * ((ocd_angle + 3600) % 3600);
 }
 
-template< class T >
 inline
-qint64 OcdFileImport::convertLength(T ocd_length) const
+int OcdFileImport::convertLength(qint16 ocd_length) const
+{
+	return convertLength<qint16, int>(ocd_length);
+}
+
+inline
+int OcdFileImport::convertLength(quint16 ocd_length) const
+{
+	return convertLength<quint16, int>(ocd_length);
+}
+
+template< class T, class R >
+inline
+R OcdFileImport::convertLength(T ocd_length) const
 {
 	// OC*D uses hundredths of a millimeter.
 	// oo-mapper uses 1/1000 mm
-	return ((qint64)ocd_length) * 10;
+	return static_cast<R>(ocd_length) * 10;
 }
 
 inline

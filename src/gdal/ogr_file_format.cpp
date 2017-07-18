@@ -1,5 +1,5 @@
 /*
- *    Copyright 2016 Kai Pastor
+ *    Copyright 2016-2017 Kai Pastor
  *
  *    This file is part of OpenOrienteering.
  *
@@ -20,25 +20,51 @@
 #include "ogr_file_format.h"
 #include "ogr_file_format_p.h"
 
+#include <algorithm>
+#include <iterator>
 #include <memory>
+#include <vector>
+// IWYU pragma: no_include <type_traits>
 
 #include <cpl_error.h>
 #include <cpl_conv.h>
+#include <ogr_api.h>
 #include <ogr_srs_api.h>
+// IWYU pragma: no_include "ogr_core.h"
 
-#include <QFile>
-#include <QFileInfo>
-#include <QRegularExpression>
+#include <QtGlobal>
 #include <QtMath>
+#include <QByteArray>
+#include <QColor>
+#include <QFile>
+#include <QHash>
+#include <QIODevice>
+#include <QLatin1Char>
+#include <QObject>
+#include <QPointF>
+#include <QRegularExpression>
+#include <QScopedValueRollback>
+#include <QString>
+#include <QStringRef>
+#include <QVariant>
 
-#include "gdal_manager.h"
-#include "../core/georeferencing.h"
-#include "../map.h"
-#include "../object_text.h"
-#include "../symbol_area.h"
-#include "../symbol_line.h"
-#include "../symbol_point.h"
-#include "../symbol_text.h"
+#include "core/georeferencing.h"
+#include "core/latlon.h"
+#include "core/map.h"
+#include "core/map_color.h"
+#include "core/map_coord.h"
+#include "core/map_part.h"
+#include "core/objects/object.h"
+#include "core/objects/text_object.h"
+#include "core/symbols/area_symbol.h"
+#include "core/symbols/line_symbol.h"
+#include "core/symbols/point_symbol.h"
+#include "core/symbols/symbol.h"
+#include "core/symbols/text_symbol.h"
+#include "fileformats/file_import_export.h"
+#include "gdal/gdal_manager.h"
+
+// IWYU pragma: no_forward_declare QFile
 
 
 namespace ogr
@@ -67,6 +93,19 @@ namespace ogr
 	
 	/** A convenience class for OGR C API feature handles, similar to std::unique_ptr. */
 	using unique_feature = std::unique_ptr<typename std::remove_pointer<OGRFeatureH>::type, OGRFeatureHDeleter>;
+	
+	
+	class OGRGeometryHDeleter
+	{
+	public:
+		void operator()(OGRGeometryH geometry) const
+		{
+			OGR_G_DestroyGeometry(geometry);
+		}
+	};
+	
+	/** A convenience class for OGR C API geometry handles, similar to std::unique_ptr. */
+	using unique_geometry = std::unique_ptr<typename std::remove_pointer<OGRGeometryH>::type, OGRGeometryHDeleter>;
 	
 }
 
@@ -136,7 +175,7 @@ namespace
 			auto pattern = QString::fromLatin1(raw_pattern);
 			auto sub_pattern_re = QRegularExpression(QString::fromLatin1("([0-9.]+)([a-z]*) *([0-9.]+)([a-z]*)"));
 			auto match = sub_pattern_re.match(pattern);
-			double length_0, length_1;
+			double length_0{}, length_1{};
 			bool ok = match.hasMatch();
 			if (ok)
 				length_0 = match.capturedRef(1).toDouble(&ok);
@@ -156,6 +195,7 @@ namespace
 		}
 	}
 	
+#if 0
 	int getFontSize(const char* font_size_string)
 	{
 		auto pattern = QString::fromLatin1(font_size_string);
@@ -191,6 +231,7 @@ namespace
 		}
 		return font_size;
 	}
+#endif
 	
 	void applyLabelAnchor(int anchor, TextObject* text_object)
 	{
@@ -237,7 +278,7 @@ namespace
 OgrFileFormat::OgrFileFormat()
  : FileFormat(OgrFile, "OGR", ImportExport::tr("Geospatial vector data"), QString{}, ImportSupported)
 {
-	for (const auto extension : GdalManager().supportedVectorExtensions())
+	for (const auto& extension : GdalManager().supportedVectorExtensions())
 		addExtension(QString::fromLatin1(extension));
 }
 
@@ -255,11 +296,12 @@ Importer* OgrFileFormat::createImporter(QIODevice* stream, Map *map, MapView *vi
 
 // ### OgrFileImport ###
 
-OgrFileImport::OgrFileImport(QIODevice* stream, Map* map, MapView* view, bool drawing_from_projected)
+OgrFileImport::OgrFileImport(QIODevice* stream, Map* map, MapView* view, UnitType unit_type)
  : Importer(stream, map, view)
  , map_srs{ OSRNewSpatialReference(nullptr) }
  , manager{ OGR_SM_Create(nullptr) }
- , drawing_from_projected{ drawing_from_projected }
+ , unit_type{ unit_type }
+ , georeferencing_import_enabled{ true }
 {
 	GdalManager().configure();
 	
@@ -270,7 +312,7 @@ OgrFileImport::OgrFileImport(QIODevice* stream, Map* map, MapView* view, bool dr
 	if (!map->getGeoreferencing().isLocal() && !error)
 	{
 		spec = map->getGeoreferencing().getProjectedCRSSpec().toLatin1();
-		error = OSRImportFromProj4(map_srs.get(), spec);
+		error = OSRImportFromProj4(map_srs.get(), spec.constData());
 	}
 	
 	if (error)
@@ -282,20 +324,23 @@ OgrFileImport::OgrFileImport(QIODevice* stream, Map* map, MapView* view, bool dr
 	// Reasonable default?
 	
 	// OGR feature style defaults
-	default_pen_color = new MapColor(tr("Black"), 0); 
-	default_pen_color->setRgb({0.0, 0.0, 0.0});
-	default_pen_color->setCmykFromRgb();
+	default_pen_color = new MapColor(tr("Purple"), 0); 
+	default_pen_color->setSpotColorName(QLatin1String{"PURPLE"});
+	default_pen_color->setCmyk({0.2f, 1.0, 0.0, 0.0});
+	default_pen_color->setRgbFromCmyk();
 	map->addColor(default_pen_color, 0);
 	
-	auto default_brush_color = new MapColor(tr("Black") + QLatin1String(" 50%"), 0);
-	default_brush_color->setRgb({0.5, 0.5, 0.5});
-	default_brush_color->setCmykFromRgb();
+	auto default_brush_color = new MapColor(default_pen_color->getName() + QLatin1String(" 50%"), 0);
+	default_brush_color->setSpotColorComposition({ {default_pen_color, 0.5f} });
+	default_brush_color->setCmykFromSpotColors();
+	default_brush_color->setRgbFromSpotColors();
 	map->addColor(default_brush_color, 1);
 	
 	default_point_symbol = new PointSymbol();
 	default_point_symbol->setName(tr("Point"));
 	default_point_symbol->setNumberComponent(0, 1);
 	default_point_symbol->setInnerColor(default_pen_color);
+	default_point_symbol->setInnerRadius(500); // (um)
 	map->addSymbol(default_point_symbol, 0);
 	
 	default_line_symbol = new LineSymbol();
@@ -320,10 +365,17 @@ OgrFileImport::OgrFileImport(QIODevice* stream, Map* map, MapView* view, bool dr
 	map->addSymbol(default_text_symbol, 3);
 }
 
-OgrFileImport::~OgrFileImport()
+
+OgrFileImport::~OgrFileImport() = default;  // not inlined
+
+
+
+void OgrFileImport::setGeoreferencingImportEnabled(bool enabled)
 {
-	// nothing
+	georeferencing_import_enabled = enabled;
 }
+
+
 
 void OgrFileImport::import(bool load_symbols_only)
 {
@@ -335,11 +387,11 @@ void OgrFileImport::import(bool load_symbols_only)
 	
 	auto filename = file->fileName();
 	// GDAL 2.0: ... = GDALOpenEx(template_path.toLatin1(), GDAL_OF_VECTOR, nullptr, nullptr, nullptr);
-	auto data_source = ogr::unique_datasource(OGROpen(filename.toLatin1(), 0, nullptr));
+	auto data_source = ogr::unique_datasource(OGROpen(filename.toUtf8().constData(), 0, nullptr));
 	if (data_source == nullptr)
 	{
-		throw FileFormatException(Importer::tr("Could not read '%1'")
-		                          .arg(filename));
+		throw FileFormatException(Importer::tr("Could not read '%1': %2")
+		                          .arg(filename, QString::fromLatin1(CPLGetLastErrorMsg())));
 	}
 	
 	empty_geometries = 0;
@@ -348,10 +400,16 @@ void OgrFileImport::import(bool load_symbols_only)
 	unsupported_geometry_type = 0;
 	too_few_coordinates = 0;
 	
+	if (georeferencing_import_enabled)
+		importGeoreferencing(data_source.get());
+	
 	importStyles(data_source.get());
 
 	if (!load_symbols_only)
 	{
+		QScopedValueRollback<MapCoord::BoundsOffset> rollback { MapCoord::boundsOffset() };
+		MapCoord::boundsOffset().reset(true);
+		
 		auto num_layers = OGR_DS_GetLayerCount(data_source.get());
 		for (int i = 0; i < num_layers; ++i)
 		{
@@ -359,6 +417,13 @@ void OgrFileImport::import(bool load_symbols_only)
 			if (!layer)
 			{
 				addWarning(tr("Unable to load layer %1.").arg(i));
+				continue;
+			}
+			
+			if (qstrcmp(OGR_L_GetName(layer), "track_points") == 0)
+			{
+				// Skip GPX track points as points. Track line is separate.
+				/// \todo Use hooks and delegates per file format
 				continue;
 			}
 			
@@ -374,7 +439,7 @@ void OgrFileImport::import(bool load_symbols_only)
 					else
 					{
 						part = new MapPart(QString::fromUtf8(OGR_L_GetName(layer)), map);
-						auto index = map->getNumParts();
+						auto index = std::size_t(map->getNumParts());
 						map->addPart(part, index);
 						map->setCurrentPartIndex(index);
 					}
@@ -382,6 +447,18 @@ void OgrFileImport::import(bool load_symbols_only)
 			}
 				
 			importLayer(part, layer);
+		}
+		
+		const auto& offset = MapCoord::boundsOffset();
+		if (!offset.isZero())
+		{
+			// We need to adjust the georeferencing.
+			auto offset_f  = MapCoordF { offset.x / 1000.0, offset.y / 1000.0 };
+			auto georef = map->getGeoreferencing();
+			auto ref_point = MapCoordF { georef.getMapRefPoint() };
+			auto new_projected = georef.toProjectedCoords(ref_point + offset_f);
+			georef.setProjectedRefPoint(new_projected, false);
+			map->setGeoreferencing(georef);
 		}
 	}
 	
@@ -412,6 +489,72 @@ void OgrFileImport::import(bool load_symbols_only)
 	}
 }
 
+
+
+void OgrFileImport::importGeoreferencing(OGRDataSourceH data_source)
+{
+	auto wgs84 = ogr::unique_srs { OSRNewSpatialReference(nullptr) };
+	OSRSetWellKnownGeogCS(wgs84.get(), "WGS84");
+	
+	auto data_srs = ogr::unique_srs { nullptr };
+	
+	// Find any SRS which can be transformed to WGS84,
+	// but prefer projected SRS.
+	auto num_layers = OGR_DS_GetLayerCount(data_source);
+	for (int i = 0; i < num_layers; ++i)
+	{
+		auto layer = OGR_DS_GetLayer(data_source, i);
+		if (!layer)
+		    continue;
+		             
+		auto spatial_reference = OGR_L_GetSpatialRef(layer);
+		if (!spatial_reference)
+			continue;
+		
+		auto transformation = OCTNewCoordinateTransformation(spatial_reference, wgs84.get());
+		if (transformation)
+		{
+			OCTDestroyCoordinateTransformation(transformation);
+			if (!data_srs)
+			{
+				data_srs.reset(OSRClone(spatial_reference));
+				if (OSRIsProjected(spatial_reference))
+					break;
+			}
+		}
+	}
+	
+	if (data_srs && !OSRIsProjected(data_srs.get()))
+	{
+		// Found a suitable SRS but it is not projected.
+		// Setting up a local orthographic projection.
+		auto center = calcAverageLatLon(data_source);
+		auto latitude = 0.001 * qRound(1000 * center.latitude());
+		auto longitude = 0.001 * qRound(1000 * center.longitude());
+		auto ortho_georef = Georeferencing();
+		ortho_georef.setScaleDenominator(int(map->getScaleDenominator()));
+		ortho_georef.setProjectedCRS(QString{}, QString::fromLatin1("+proj=ortho +datum=WGS84 +lat_0=%1 +lon_0=%2")
+		                                        .arg(latitude).arg(longitude));
+		ortho_georef.setGeographicRefPoint(LatLon{ latitude, longitude }, false);
+		map->setGeoreferencing(ortho_georef);
+		OSRImportFromProj4(map_srs.get(), ortho_georef.getProjectedCRSSpec().toLatin1());
+	}
+	else if (data_srs) {
+		char* data = nullptr;
+		auto error = OSRExportToProj4(data_srs.get(), &data);
+		if (!error)
+		{
+			auto georef = map->getGeoreferencing();
+			georef.setProjectedCRS(QString::fromLatin1(data));
+			CPLFree(data);
+			map->setGeoreferencing(georef);
+			map_srs = std::move(data_srs);
+		}
+	}
+}
+
+
+
 void OgrFileImport::importStyles(OGRDataSourceH data_source)
 {
 	//auto style_table = OGR_DS_GetStyleTable(data_source);
@@ -434,7 +577,6 @@ void OgrFileImport::importLayer(MapPart* map_part, OGRLayerH layer)
 			continue;
 		}
 		
-		OGR_G_FlattenTo2D(geometry);
 		importFeature(map_part, feature_definition, feature.get(), geometry);
 	}
 }
@@ -468,15 +610,18 @@ void OgrFileImport::importFeature(MapPart* map_part, OGRFeatureDefnH feature_def
 			return;
 		}
 	}
-	else if (!drawing_from_projected)
+	else if (unit_type == UnitOnPaper)
 	{
 		to_map_coord = &OgrFileImport::fromDrawing;
 	}
 	
-	auto object = importGeometry(map_part, feature, geometry);
-	
-	if (object && feature_definition)
+	auto objects = importGeometry(feature, geometry);
+	for (auto object : objects)
 	{
+		map_part->addObject(object);
+		if (!feature_definition)
+			continue;
+		
 		auto num_fields = OGR_FD_GetFieldCount(feature_definition);
 		for (int i = 0; i < num_fields; ++i)
 		{
@@ -490,44 +635,51 @@ void OgrFileImport::importFeature(MapPart* map_part, OGRFeatureDefnH feature_def
 	}
 }
 
-Object* OgrFileImport::importGeometry(MapPart* map_part, OGRFeatureH feature, OGRGeometryH geometry)
+OgrFileImport::ObjectList OgrFileImport::importGeometry(OGRFeatureH feature, OGRGeometryH geometry)
 {
+	ObjectList result;
 	auto geometry_type = wkbFlatten(OGR_G_GetGeometryType(geometry));
 	switch (geometry_type)
 	{
 	case OGRwkbGeometryType::wkbPoint:
-		return importPointGeometry(map_part, feature, geometry);
+		result = { importPointGeometry(feature, geometry) };
+		break;
 		
 	case OGRwkbGeometryType::wkbLineString:
-		return importLineStringGeometry(map_part, feature, geometry);
+		result = { importLineStringGeometry(feature, geometry) };
+		break;
 		
 	case OGRwkbGeometryType::wkbPolygon:
-		return importPolygonGeometry(map_part, feature, geometry);
+		result = { importPolygonGeometry(feature, geometry) };
+		return result;
 		
 	case OGRwkbGeometryType::wkbGeometryCollection:
 	case OGRwkbGeometryType::wkbMultiLineString:
 	case OGRwkbGeometryType::wkbMultiPoint:
 	case OGRwkbGeometryType::wkbMultiPolygon:
-		return importGeometryCollection(map_part, feature, geometry);
+		return importGeometryCollection(feature, geometry);
 		
 	default:
 		qDebug("OgrFileImport: Unknown or unsupported geometry type: %d", geometry_type);
 		++unsupported_geometry_type;
-		return nullptr;
 	}
+	return result;
 }
 
-Object* OgrFileImport::importGeometryCollection(MapPart* map_part, OGRFeatureH feature, OGRGeometryH geometry)
+OgrFileImport::ObjectList OgrFileImport::importGeometryCollection(OGRFeatureH feature, OGRGeometryH geometry)
 {
+	ObjectList result;
 	auto num_geometries = OGR_G_GetGeometryCount(geometry);
+	result.reserve(std::size_t(num_geometries));
 	for (int i = 0; i < num_geometries; ++i)
 	{
-		importGeometry(map_part, feature, OGR_G_GetGeometryRef(geometry, i));
+		auto tmp = importGeometry(feature, OGR_G_GetGeometryRef(geometry, i));
+		result.insert(result.end(), begin(tmp), end(tmp));
 	}
-	return nullptr;
+	return result;
 }
 
-Object* OgrFileImport::importPointGeometry(MapPart* map_part, OGRFeatureH feature, OGRGeometryH geometry)
+Object* OgrFileImport::importPointGeometry(OGRFeatureH feature, OGRGeometryH geometry)
 {
 	auto style = OGR_F_GetStyleString(feature);
 	auto symbol = getSymbol(Symbol::Point, style);
@@ -535,7 +687,6 @@ Object* OgrFileImport::importPointGeometry(MapPart* map_part, OGRFeatureH featur
 	{
 		auto object = new PointObject(symbol);
 		object->setPosition(toMapCoord(OGR_G_GetX(geometry, 0), OGR_G_GetY(geometry, 0)));
-		map_part->addObject(object);
 		return object;
 	}
 	else if (symbol->getType() == Symbol::Text)
@@ -551,7 +702,7 @@ Object* OgrFileImport::importPointGeometry(MapPart* map_part, OGRFeatureH featur
 		{
 			label.remove(0, 1);
 			label.chop(1);
-			int index = OGR_F_GetFieldIndex(feature, label.toLatin1());
+			int index = OGR_F_GetFieldIndex(feature, label.toLatin1().constData());
 			if (index >= 0)
 			{
 				label = QString::fromUtf8(OGR_F_GetFieldAsString(feature, index));
@@ -579,7 +730,6 @@ Object* OgrFileImport::importPointGeometry(MapPart* map_part, OGRFeatureH featur
 				object->setRotation(qDegreesToRadians(angle));
 			}
 			
-			map_part->addObject(object);
 			return object;
 		}
 	}
@@ -587,9 +737,14 @@ Object* OgrFileImport::importPointGeometry(MapPart* map_part, OGRFeatureH featur
 	return nullptr;
 }
 
-PathObject* OgrFileImport::importLineStringGeometry(MapPart* map_part, OGRFeatureH feature, OGRGeometryH geometry)
+PathObject* OgrFileImport::importLineStringGeometry(OGRFeatureH feature, OGRGeometryH geometry)
 {
-	geometry = OGR_G_ForceToLineString(geometry);
+	auto managed_geometry = ogr::unique_geometry(nullptr);
+	if (OGR_G_GetGeometryType(geometry) != wkbLineString)
+	{
+		geometry = OGR_G_ForceToLineString(OGR_G_Clone(geometry));
+		managed_geometry.reset(geometry);
+	}
 	
 	auto num_points = OGR_G_GetPointCount(geometry);
 	if (num_points < 2)
@@ -604,11 +759,10 @@ PathObject* OgrFileImport::importLineStringGeometry(MapPart* map_part, OGRFeatur
 	{
 		object->addCoordinate(toMapCoord(OGR_G_GetX(geometry, i), OGR_G_GetY(geometry, i)));
 	}
-	map_part->addObject(object);
 	return object;
 }
 
-PathObject* OgrFileImport::importPolygonGeometry(MapPart* map_part, OGRFeatureH feature, OGRGeometryH geometry)
+PathObject* OgrFileImport::importPolygonGeometry(OGRFeatureH feature, OGRGeometryH geometry)
 {
 	auto num_geometries = OGR_G_GetGeometryCount(geometry);
 	if (num_geometries < 1)
@@ -617,7 +771,13 @@ PathObject* OgrFileImport::importPolygonGeometry(MapPart* map_part, OGRFeatureH 
 		return nullptr;
 	}
 	
-	auto outline = OGR_G_ForceToLineString(OGR_G_GetGeometryRef(geometry, 0));
+	auto outline = OGR_G_GetGeometryRef(geometry, 0);
+	auto managed_outline = ogr::unique_geometry(nullptr);
+	if (OGR_G_GetGeometryType(outline) != wkbLineString)
+	{
+		outline = OGR_G_ForceToLineString(OGR_G_Clone(outline));
+		managed_outline.reset(outline);
+	}
 	auto num_points = OGR_G_GetPointCount(outline);
 	if (num_points < 3)
 	{
@@ -645,7 +805,6 @@ PathObject* OgrFileImport::importPolygonGeometry(MapPart* map_part, OGRFeatureH 
 	}
 	
 	object->closeAllParts();
-	map_part->addObject(object);
 	return object;
 }
 
@@ -1027,10 +1186,119 @@ AreaSymbol* OgrFileImport::getSymbolForBrush(OGRStyleToolH tool, const QByteArra
 
 MapCoord OgrFileImport::fromDrawing(double x, double y) const
 {
-	return { x, -y };
+	return MapCoord::load(x, -y, 0);
 }
 
 MapCoord OgrFileImport::fromProjected(double x, double y) const
 {
-	return map->getGeoreferencing().toMapCoords(QPointF{ x, y });
+	return MapCoord::load(map->getGeoreferencing().toMapCoordF(QPointF{ x, y }), 0);
+}
+
+
+// static
+bool OgrFileImport::checkGeoreferencing(QFile& file, const Georeferencing& georef)
+{
+	if (georef.isLocal() || !georef.isValid())
+		return false;
+	
+	GdalManager();
+	
+	auto filename = file.fileName();
+	// GDAL 2.0: ... = GDALOpenEx(template_path.toLatin1(), GDAL_OF_VECTOR, nullptr, nullptr, nullptr);
+	auto data_source = ogr::unique_datasource(OGROpen(filename.toUtf8().constData(), 0, nullptr));
+	if (data_source == nullptr)
+	{
+		throw FileFormatException(Importer::tr("Could not read '%1': %2")
+		                          .arg(filename, QString::fromLatin1(CPLGetLastErrorMsg())));
+	}
+	
+	auto spec = georef.getProjectedCRSSpec().toLatin1();
+	auto map_srs = ogr::unique_srs { OSRNewSpatialReference(nullptr) };
+	OSRImportFromProj4(map_srs.get(), spec.constData());
+	
+	bool suitable_srs_found = false;
+	auto num_layers = OGR_DS_GetLayerCount(data_source.get());
+	for (int i = 0; i < num_layers; ++i)
+	{
+		if (auto layer = OGR_DS_GetLayer(data_source.get(), i))
+		{
+			if (auto spatial_reference = OGR_L_GetSpatialRef(layer))
+			{
+				auto transformation = OCTNewCoordinateTransformation(spatial_reference, map_srs.get());
+				if (!transformation)
+					return false;
+				
+				OCTDestroyCoordinateTransformation(transformation);
+				suitable_srs_found = true;
+			}
+		}
+	}
+	
+	return suitable_srs_found;
+}
+
+
+
+// static
+LatLon OgrFileImport::calcAverageLatLon(QFile& file)
+{
+	GdalManager();
+	
+	auto filename = file.fileName();
+	// GDAL 2.0: ... = GDALOpenEx(template_path.toLatin1(), GDAL_OF_VECTOR, nullptr, nullptr, nullptr);
+	auto data_source = ogr::unique_datasource(OGROpen(filename.toUtf8().constData(), 0, nullptr));
+	if (data_source == nullptr)
+	{
+		throw FileFormatException(Importer::tr("Could not read '%1': %2")
+		                          .arg(filename, QString::fromLatin1(CPLGetLastErrorMsg())));
+	}
+	
+	return calcAverageLatLon(data_source.get());
+}
+
+
+// static
+LatLon OgrFileImport::calcAverageLatLon(OGRDataSourceH data_source)
+{
+	auto geo_srs = ogr::unique_srs { OSRNewSpatialReference(nullptr) };
+	OSRImportFromProj4(geo_srs.get(), "+proj=latlong +datum=WGS84");
+	
+	auto num_coords = 0u;
+	double x = 0, y = 0;
+	auto num_layers = OGR_DS_GetLayerCount(data_source);
+	for (int i = 0; i < num_layers; ++i)
+	{
+		if (auto layer = OGR_DS_GetLayer(data_source, i))
+		{
+			auto spatial_reference = OGR_L_GetSpatialRef(layer);
+			if (!spatial_reference)
+				continue;
+			
+			auto transformation = ogr::unique_transformation{ OCTNewCoordinateTransformation(spatial_reference, geo_srs.get()) };
+			if (!transformation)
+				continue;
+			
+			OGR_L_ResetReading(layer);
+			while (auto feature = ogr::unique_feature(OGR_L_GetNextFeature(layer)))
+			{
+				auto geometry = OGR_F_GetGeometryRef(feature.get());
+				if (!geometry || OGR_G_IsEmpty(geometry))
+					continue;
+				
+				auto error = OGR_G_Transform(geometry, transformation.get());
+				if (error)
+					continue;
+				
+				auto num_points = OGR_G_GetPointCount(geometry);
+				for (int i = 0; i < num_points; ++i)
+				{
+					x += OGR_G_GetX(geometry, i);
+					y += OGR_G_GetY(geometry, i);
+					++num_coords;
+				}
+			}
+		}
+	}
+	
+	return num_coords ? LatLon{ y / num_coords, x / num_coords } : LatLon{};
 }
