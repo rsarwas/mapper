@@ -19,18 +19,16 @@
  */
 
 
-#ifndef _OPENORIENTEERING_MAP_GRID_H_
-#define _OPENORIENTEERING_MAP_GRID_H_
+#ifndef OPENORIENTEERING_MAP_GRID_H
+#define OPENORIENTEERING_MAP_GRID_H
 
-#include <QColor>
+#include <QRgb>
 
-QT_BEGIN_NAMESPACE
 class QIODevice;
 class QPainter;
 class QRectF;
 class QXmlStreamReader;
 class QXmlStreamWriter;
-QT_END_NAMESPACE
 
 class Map;
 class MapCoordF;
@@ -90,7 +88,7 @@ public:
 	 * @param on_screen If true, uses a cosmetic pen (one pixel wide),
 	 *                  otherwise uses a 0.1 mm wide pen.
 	 */
-	void draw(QPainter* painter, QRectF bounding_box, Map* map, bool on_screen) const;
+	void draw(QPainter* painter, const QRectF& bounding_box, Map* map, bool on_screen) const;
 	
 	/**
 	 * Calculates the "final" parameters with the following properties:

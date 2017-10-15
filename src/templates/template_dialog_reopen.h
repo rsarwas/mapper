@@ -24,12 +24,18 @@
 
 #include <QDialog>
 #include <QListWidget>
+#include <QObject>
+#include <QString>
 
-QT_BEGIN_NAMESPACE
 class QAbstractButton;
-QT_END_NAMESPACE
+class QDropEvent;
+class QPushButton;
+class QWidget;
 
 class Map;
+
+
+// clazy:excludeall=missing-qobject-macro
 
 
 /**
@@ -52,9 +58,10 @@ private slots:
 private:
 	class OpenTemplateList : public QListWidget
 	{
+	// Q_OBJECT not possible in nested classes.
 	public:
 		OpenTemplateList(ReopenTemplateDialog* dialog);
-        virtual void dropEvent(QDropEvent* event);
+        void dropEvent(QDropEvent* event) override;
 	private:
 		ReopenTemplateDialog* dialog;
 	};

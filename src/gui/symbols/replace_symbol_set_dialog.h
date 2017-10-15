@@ -25,18 +25,14 @@
 #include <memory>
 #include <vector>
 
-#include <QtGlobal>
 #include <QObject>
 #include <QDialog>
 
-
-QT_BEGIN_NAMESPACE
 class QCheckBox;
 class QIODevice;
 class QComboBox;
 class QTableWidget;
 class QWidget;
-QT_END_NAMESPACE
 
 class Map;
 class SymbolDropDownDelegate;
@@ -74,6 +70,12 @@ public:
 	 */
 	static bool showDialogForCRT(QWidget* parent, Map& object_map, const Map& symbol_set, QIODevice& crt_file);
 	
+	/**
+	 * Returns the suggested path (including name) for finding a CRT file
+	 * for the given symbol set IDs.
+	 */
+	static QString discoverCrtFile(const QString& source_id, const QString& target_id);
+	
 private:
 	enum Mode
 	{
@@ -91,6 +93,7 @@ private:
 	void resetReplacements();
 	
 	void openCrtFile();
+	void openCrtFile(const QString& path);
 	bool saveCrtFile();
 	
 	void done(int r) override;

@@ -29,12 +29,10 @@
 
 #include "symbol.h"
 
-QT_BEGIN_NAMESPACE
 class QIODevice;
 class QPainterPath;
 class QXmlStreamReader;
 class QXmlStreamWriter;
-QT_END_NAMESPACE
 
 class Map;
 class MapColor;
@@ -66,7 +64,7 @@ friend class XMLImportExport;
 public:
 	/** Constructs an empty point symbol. */
 	PointSymbol() noexcept;
-	virtual ~PointSymbol();
+	~PointSymbol() override;
 	Symbol* duplicate(const MapColorMap* color_map = nullptr) const override;
 	
 	bool validate() const override;

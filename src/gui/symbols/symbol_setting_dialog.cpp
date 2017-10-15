@@ -35,10 +35,8 @@
 #include "core/map.h"
 #include "core/objects/object.h"
 #include "core/objects/text_object.h"
-#include "core/symbols/area_symbol.h"
 #include "core/symbols/combined_symbol.h"
 #include "core/symbols/line_symbol.h"
-#include "core/symbols/point_symbol.h"
 #include "core/symbols/symbol.h"
 #include "core/symbols/text_symbol.h"
 #include "gui/main_window.h"
@@ -46,7 +44,6 @@
 #include "gui/map/map_widget.h"
 #include "gui/symbols/symbol_properties_widget.h"
 #include "gui/widgets/template_list_widget.h"
-#include "point_symbol_editor_widget.h"
 #include "templates/template.h"
 #include "templates/template_image.h"
 #include "util/util.h"
@@ -150,7 +147,7 @@ SymbolSettingDialog::SymbolSettingDialog(const Symbol* source_symbol, Map* sourc
 	left->layout();
 	
 	QWidget* right = preview_widget;
-	if (preview_layout != nullptr)
+	if (preview_layout)
 	{
 		right = new QWidget();
 		right->setLayout(preview_layout);
@@ -432,9 +429,21 @@ void SymbolSettingDialog::createPreviewMap()
 	{
 		const auto radius = 5.0;
 		
+		auto flags = MapCoord::Flags{};
+		const auto* combined = symbol->asCombined();
+		for (int i = 0; i < combined->getNumParts(); ++i)
+		{
+			auto part = combined->getPart(i);
+			if (part && part->getType() == Symbol::Line && part->asLine()->getDashSymbol())
+			{
+				flags |= MapCoord::DashPoint;
+				break;
+			}
+		}
+		
 		auto path = new PathObject(&*symbol);
 		for (auto i = 0u; i < 5u; ++i)
-			path->addCoordinate(i, MapCoord(sin(2*M_PI * i/5.0) * radius, -cos(2*M_PI * i/5.0) * radius));
+			path->addCoordinate(i, MapCoord(sin(2*M_PI * i/5.0) * radius, -cos(2*M_PI * i/5.0) * radius, flags));
 		path->parts().front().setClosed(true, false);
 		preview_map->addObject(path);
 		

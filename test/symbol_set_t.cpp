@@ -37,6 +37,7 @@
 #include <QFlags>
 #include <QIODevice>
 #include <QLatin1Char>
+#include <QLatin1String>
 #include <QPagedPaintDevice>
 #include <QPrinter>
 #include <QRectF>
@@ -59,13 +60,14 @@
 #include "templates/template.h"
 #include "undo/undo_manager.h"
 
-class QColor;
 
+namespace
+{
 
-static auto Obsolete = QString::fromLatin1("obsolete");
-static auto NeedsReview = QString::fromLatin1("unfinished");
+const auto Obsolete = QString::fromLatin1("obsolete");       // clazy:exclude=non-pod-global-static
+const auto NeedsReview = QString::fromLatin1("unfinished");  // clazy:exclude=non-pod-global-static
 
-static auto translation_suffix = { "template", "cs", "de", "fi", "fr", "ru", "sv", "uk" };
+const auto translation_suffix = { "template", "cs", "de", "fi", "fr", "ru", "sv", "uk" };
 
 using TranslationEntries = std::vector<SymbolSetTool::TranslationEntry>;
 
@@ -185,13 +187,14 @@ TranslationEntries readTsFile(QIODevice& device, const QString& language)
 	return result;
 }
 
+}  // namespace
+
 
 void SymbolSetTool::TranslationEntry::write(QXmlStreamWriter& xml, const QString& language)
 {
 	if (source.isEmpty())
 	{
 		QVERIFY(!comment.isEmpty());
-		qWarning("%s %s, %s: empty", qPrintable(language), qPrintable(context), qPrintable(comment));
 		return;
 	}
 	
@@ -301,33 +304,11 @@ void SymbolSetTool::processSymbolSet_data()
 	QTest::newRow("ISSOM 1:5000") << QString::fromLatin1("ISSOM") <<  5000u <<  5000u;
 	QTest::newRow("ISSOM 1:4000") << QString::fromLatin1("ISSOM") <<  5000u <<  4000u;
 	
-	QTest::newRow("ISOM2000 1:15000 Czech") << QString::fromLatin1("ISOM2000_cs")  << 15000u << 15000u;
-	QTest::newRow("ISOM2000 1:10000 Czech") << QString::fromLatin1("ISOM2000_cs")  << 15000u << 10000u;
-	QTest::newRow("ISSOM 1:5000 Czech") << QString::fromLatin1("ISSOM_cs") <<  5000u <<  5000u;
-	QTest::newRow("ISSOM 1:4000 Czech") << QString::fromLatin1("ISSOM_cs") <<  5000u <<  4000u;
-	
-	QTest::newRow("ISOM2000 1:15000 Finnish") << QString::fromLatin1("ISOM2000_fi")  << 15000u << 15000u;
-	QTest::newRow("ISOM2000 1:10000 Finnish") << QString::fromLatin1("ISOM2000_fi")  << 15000u << 10000u;
-	QTest::newRow("ISSOM 1:5000 Finnish") << QString::fromLatin1("ISSOM_fi") <<  5000u <<  5000u;
-	QTest::newRow("ISSOM 1:4000 Finnish") << QString::fromLatin1("ISSOM_fi") <<  5000u <<  4000u;
-	
-	QTest::newRow("ISSOM 1:5000 French") << QString::fromLatin1("ISSOM_fr") <<  5000u <<  5000u;
-	QTest::newRow("ISSOM 1:4000 French") << QString::fromLatin1("ISSOM_fr") <<  5000u <<  4000u;
-	
-	QTest::newRow("ISOM2000 1:15000 Russian") << QString::fromLatin1("ISOM2000_ru")  << 15000u << 15000u;
-	QTest::newRow("ISOM2000 1:10000 Russian") << QString::fromLatin1("ISOM2000_ru")  << 15000u << 10000u;
-	
 	QTest::newRow("ISMTBOM 1:20000") << QString::fromLatin1("ISMTBOM") << 15000u << 20000u;
 	QTest::newRow("ISMTBOM 1:15000") << QString::fromLatin1("ISMTBOM") << 15000u << 15000u;
 	QTest::newRow("ISMTBOM 1:10000") << QString::fromLatin1("ISMTBOM") << 15000u << 10000u;
 	QTest::newRow("ISMTBOM 1:7500")  << QString::fromLatin1("ISMTBOM") << 15000u <<  7500u;
 	QTest::newRow("ISMTBOM 1:5000")  << QString::fromLatin1("ISMTBOM") << 15000u <<  5000u;
-	
-	QTest::newRow("ISMTBOM 1:20000 Ukrainian") << QString::fromLatin1("ISMTBOM_uk") << 15000u << 20000u;
-	QTest::newRow("ISMTBOM 1:15000 Ukrainian") << QString::fromLatin1("ISMTBOM_uk") << 15000u << 15000u;
-	QTest::newRow("ISMTBOM 1:10000 Ukrainian") << QString::fromLatin1("ISMTBOM_uk") << 15000u << 10000u;
-	QTest::newRow("ISMTBOM 1:7500 Ukrainian")  << QString::fromLatin1("ISMTBOM_uk") << 15000u <<  7500u;
-	QTest::newRow("ISMTBOM 1:5000 Ukrainian")  << QString::fromLatin1("ISMTBOM_uk") << 15000u <<  5000u;
 	
 	QTest::newRow("ISSkiOM 1:15000") << QString::fromLatin1("ISSkiOM") << 15000u << 15000u;
 	QTest::newRow("ISSkiOM 1:10000") << QString::fromLatin1("ISSkiOM") << 15000u << 10000u;
@@ -449,6 +430,25 @@ void SymbolSetTool::processSymbolSet()
 			QCOMPARE(symbols_changed, 139);
 			QCOMPARE(north_lines_changed, 2);
 		}
+		else if (name.startsWith(QLatin1String("ISOM2017")))
+		{
+			const auto factor = double(source_scale) / double(target_scale);
+			map.scaleAllObjects(factor, MapCoord{});
+			
+			int symbols_changed = 0;
+			for (int i = 0; i < num_symbols; ++i)
+			{
+				Symbol* symbol = map.getSymbol(i);
+				const int code = symbol->getNumberComponent(0);
+				if (code != 602
+				    && code != 999)
+				{
+					symbol->scale(factor);
+					++symbols_changed;
+				}
+			}
+			QCOMPARE(symbols_changed, 184);
+		}
 		else if (name.startsWith(QLatin1String("ISSOM")))
 		{
 			int north_lines_changed = 0;
@@ -486,13 +486,14 @@ void SymbolSetTool::processSymbolSet()
 			{
 				Symbol* symbol = map.getSymbol(i);
 				const int code = symbol->getNumberComponent(0);
-				if (code != 602)
+				if (code != 602
+				    && code != 999)
 				{
 					symbol->scale(factor);
 					++symbols_changed;
 				}
 			}
-			QCOMPARE(symbols_changed, 169);
+			QCOMPARE(symbols_changed, 168);
 		}
 		else if (name.startsWith(QLatin1String("ISSkiOM")))
 		{
@@ -536,8 +537,7 @@ void SymbolSetTool::processSymbolSet()
 			QCOMPARE(symbols_changed, 152);
 			QCOMPARE(north_lines_changed, 2);
 		}
-		else if (name.startsWith(QLatin1String("Course_Design"))
-		         || name.startsWith(QLatin1String("ISOM2017")))
+		else if (name.startsWith(QLatin1String("Course_Design")))
 		{
 			const double factor = double(source_scale) / double(target_scale);
 			map.scaleAllObjects(factor, MapCoord());
@@ -547,9 +547,9 @@ void SymbolSetTool::processSymbolSet()
 			QFAIL("Symbol set not recognized");
 		}
 	}
-	else if (tag.endsWith('0'))
+	else
 	{
-		// Not scaled and not translated: Register source strings.
+		// Not scaled: Collect translation source strings.
 		auto num_colors = map.getNumColors();
 		for (int i = 0; i < num_colors; ++i)
 		{
@@ -568,32 +568,10 @@ void SymbolSetTool::processSymbolSet()
 			
 			source = symbol->getDescription();
 			comment = QString{QLatin1String("Description of symbol ") + symbol->getNumberAsString()};
-			addSource(translation_entries, id, source, comment);
-		}
-	}
-	else if (!language.isEmpty())
-	{
-		// Not scaled, but with language: Add translation strings.
-		auto num_colors = map.getNumColors();
-		for (int i = 0; i < num_colors; ++i)
-		{
-			auto color = map.getColor(i);
-			auto comment = QString{QLatin1String("Color ") + QString::number(color->getPriority())};
-			auto translation = color->getName();
-			addTranslation(translation_entries, id, comment, language, translation);
-		}
-		
-		for (int i = 0; i < num_symbols; ++i)
-		{
-			auto symbol = map.getSymbol(i);
-			auto symbol_number = symbol->getNumberAsString();
-			auto comment = QString{QLatin1String("Name of symbol ") + symbol_number};
-			auto translation = symbol->getName();
-			addTranslation(translation_entries, id, comment, language, translation);
-			
-			comment = QString{QLatin1String("Description of symbol ") + symbol_number};
-			translation = symbol->getDescription();
-			addTranslation(translation_entries, id, comment, language, translation);
+			if (source.isEmpty())
+				qWarning("%s: empty", qPrintable(comment));
+			else
+				addSource(translation_entries, id, source, comment);
 		}
 	}
 	
@@ -629,149 +607,146 @@ void SymbolSetTool::processSymbolSet()
 }
 
 
+void SymbolSetTool::processSymbolSetTranslations_data()
+{
+	QTest::addColumn<int>("unused");
+	for (auto suffix : translation_suffix)
+		QTest::newRow(suffix) << 0;
+}
+	
 void SymbolSetTool::processSymbolSetTranslations()
 {
-	QVERIFY(translations_complete);
+	auto suffix = QTest::currentDataTag();
+	auto language = QString::fromLatin1(suffix);
+	if (language.length() > 2)
+		language.clear();
 	
-	for (auto suffix : translation_suffix)
+	auto translation_filename = QString::fromLatin1("map_symbols_%1.ts").arg(QLatin1String(suffix));
+	
+	QByteArray new_data;
+	QByteArray existing_data;
+	QFile file(translations_dir.absoluteFilePath(translation_filename));
+	if (file.exists())
 	{
-		auto language = QString::fromLatin1(suffix);
-		if (language.length() > 2)
-			language.clear();
+		QVERIFY(file.open(QIODevice::ReadOnly));
+		existing_data.reserve(int(file.size()+1));
+		existing_data = file.readAll();
+		QCOMPARE(file.error(), QFileDevice::NoError);
+		file.close();
 		
-		auto translation_filename = QString::fromLatin1("map_symbols_%1.ts").arg(QLatin1String(suffix));
+		// Workaround Weblate quirk
+		existing_data.replace("\n    </message>", "\n        </message>");
 		
-		QByteArray new_data;
-		QByteArray existing_data;
-		QFile file(translations_dir.absoluteFilePath(translation_filename));
-		if (file.exists())
+		new_data.reserve(existing_data.size()*2);
+	}
+	
+	QBuffer buffer(&existing_data);
+	auto translations_from_ts = readTsFile(buffer, language);
+	QVERIFY(!buffer.isOpen());
+	
+	buffer.setBuffer(&new_data);
+	QVERIFY(buffer.open(QIODevice::WriteOnly | QIODevice::Truncate));
+	QXmlStreamWriter xml(&buffer);
+	xml.setAutoFormatting(true);
+	xml.writeStartDocument();
+	xml.writeDTD(QLatin1String("<!DOCTYPE TS>"));
+	xml.writeStartElement(QLatin1String("TS"));
+	xml.writeAttribute(QLatin1String("version"), QLatin1String("2.1"));
+	if (!language.isEmpty())
+		xml.writeAttribute(QLatin1String("language"), language);
+	
+	auto context = QString{};
+	for (auto& entry : translation_entries)
+	{
+		if (context != entry.context)
 		{
-			QVERIFY(file.open(QIODevice::ReadOnly));
-			existing_data.reserve(int(file.size()+1));
-			existing_data = file.readAll();
-			QCOMPARE(file.error(), QFileDevice::NoError);
-			file.close();
-			
-			new_data.reserve(existing_data.size()*2);
+			if (!context.isEmpty())
+				xml.writeEndElement(); // context
+			xml.writeStartElement(QLatin1String("context"));
+			xml.writeTextElement(QLatin1String("name"), entry.context);
+			context = entry.context;
 		}
 		
-		QBuffer buffer(&existing_data);
-		auto translations_from_ts = readTsFile(buffer, language);
-		QVERIFY(!buffer.isOpen());
-		
-		buffer.setBuffer(&new_data);
-		QVERIFY(buffer.open(QIODevice::WriteOnly | QIODevice::Truncate));
-		QXmlStreamWriter xml(&buffer);
-		xml.setAutoFormatting(true);
-		xml.writeStartDocument();
-		xml.writeDTD(QLatin1String("<!DOCTYPE TS>"));
-		xml.writeStartElement(QLatin1String("TS"));
-		xml.writeAttribute(QLatin1String("version"), QLatin1String("2.1"));
-		if (!language.isEmpty())
-			xml.writeAttribute(QLatin1String("language"), language);
-		
-		auto context = QString{};
-		for (auto& entry : translation_entries)
+		auto item = std::find_if(begin(entry.translations), end(entry.translations), [&language](auto& translation) {
+			return translation.language == language;
+		});
+		if (item == end(entry.translations))
 		{
-			if (context != entry.context)
-			{
-				if (!context.isEmpty())
-					xml.writeEndElement(); // context
-				xml.writeStartElement(QLatin1String("context"));
-				xml.writeTextElement(QLatin1String("name"), entry.context);
-				context = entry.context;
-			}
-			
-			auto item = std::find_if(begin(entry.translations), end(entry.translations), [&language](auto& translation) {
-				return translation.language == language;
-			});
-			if (item == end(entry.translations))
-			{
-				entry.translations.push_back({language, {}, NeedsReview});
-				item = --entry.translations.end();
-			}
-			auto& translation = item->translation;
-			auto& type = item->type;
-			
-			auto found = std::find_if(begin(translations_from_ts), end(translations_from_ts), [&entry](auto& current) {
+			entry.translations.push_back({language, {}, NeedsReview});
+			item = --entry.translations.end();
+		}
+		auto& translation = item->translation;
+		auto& type = item->type;
+		
+		
+		// First attempt: exact context + source + comment (symbol number!) match.
+		auto found = std::find_if(begin(translations_from_ts), end(translations_from_ts), [&entry](auto& current) {
+			return entry.context == current.context && entry.source == current.source && entry.comment == current.comment;
+		});
+		if (found == end(translations_from_ts))
+		{
+			// Second attempt: exact context + source match.
+			found = std::find_if(begin(translations_from_ts), end(translations_from_ts), [&entry](auto& current) {
 				return entry.context == current.context && entry.source == current.source;
+			});
+		}
+		if (found == end(translations_from_ts))
+		{
+			// Third attempt: exact source match.
+			found = std::find_if(begin(translations_from_ts), end(translations_from_ts), [&entry](auto& current) {
+				return entry.source == current.source;
+			});
+		}
+		if (found != end(translations_from_ts))
+		{
+			// If any of the previous attempts to find a translation succeeded,
+			// the translation is chosen and marked as not being obsolete.
+			auto match = found->translations.front();
+			translation = match.translation;
+			if (match.type != Obsolete)
+				type = match.type;
+		}
+		else
+		{
+			// Find an existing translation even with changed source,
+			// using the comment (symbol number!) instead of source.
+			auto found = std::find_if(begin(translations_from_ts), end(translations_from_ts), [&entry](auto& current) {
+				return entry.context == current.context && entry.comment == current.comment;
 			});
 			if (found != end(translations_from_ts))
 			{
-				// Exact context + source match.
 				auto match = found->translations.front();
 				translation = match.translation;
-				if (match.type != Obsolete)
-					type = match.type;
 			}
-			else
-			{
-				// Find existing translation even with changed source,
-				// using comment instead of source.
-				auto found = std::find_if(begin(translations_from_ts), end(translations_from_ts), [&entry](auto& current) {
-					return entry.context == current.context && entry.comment == current.comment;
-				});
-				if (found != end(translations_from_ts))
-				{
-					auto match = found->translations.front();
-					translation = match.translation;
-					type = NeedsReview;
-				}
-				else if (translation.isEmpty())
-				{
-					// As a suggestion, find an existing translation in any context.
-					// Note: We only take suggestions from the ts file.
-					// So it might take a second run of this tool to get suggestions.
-					auto found = std::find_if(begin(translations_from_ts), end(translations_from_ts), [&entry](auto& current) {
-						return entry.source == current.source;
-					});
-					if (found != end(translations_from_ts))
-					{
-						auto match = found->translations.front();
-						translation = match.translation;
-					}
-					type = NeedsReview;
-				}
-			}
-			entry.write(xml, language);
+			// Anyway, this translation needs review.
+			type = NeedsReview;
 		}
-		if (!context.isEmpty())
-		{
-			xml.writeEndElement();  // context
-		}
-		
-		xml.writeEndElement(); // TS
-		xml.writeEndDocument();
-		buffer.close();
-		
-		// Weblate uses lower-case "utf-8".
-		static auto lower_case_xml = "<?xml version=\"1.0\" encoding=\"utf-8\"?>";
-		if (!new_data.startsWith(lower_case_xml))
-		{
-			auto pos = new_data.indexOf('>');
-			new_data.replace(0, pos+1, lower_case_xml);
-		}
-		
-		// Use '"', not "&quot;"
-		auto first = -1;
-		for (first = new_data.indexOf('>', first+1); first > 0; first = new_data.indexOf('>', first+1))
-		{
-			auto last = new_data.indexOf('<', first+1);
-			if (last < 0)
-				break;
-			auto text = new_data.mid(first, last - first);
-			text.replace("&quot;", "\"");
-			new_data.replace(first, last - first, text);
-		}
-		
-		if (new_data != existing_data)
-		{
-			QVERIFY(file.open(QIODevice::WriteOnly | QIODevice::Truncate));
-			file.write(new_data);
-			QVERIFY(file.flush());
-			file.close();
-			QCOMPARE(file.error(), QFileDevice::NoError);
-		}
+		entry.write(xml, language);
+	}
+	if (!context.isEmpty())
+	{
+		xml.writeEndElement();  // context
+	}
+	
+	xml.writeEndElement(); // TS
+	xml.writeEndDocument();
+	buffer.close();
+	
+	// Weblate uses lower-case "utf-8".
+	static auto lower_case_xml = "<?xml version=\"1.0\" encoding=\"utf-8\"?>";
+	if (!new_data.startsWith(lower_case_xml))
+	{
+		auto pos = new_data.indexOf('>');
+		new_data.replace(0, pos+1, lower_case_xml);
+	}
+	
+	if (new_data != existing_data)
+	{
+		QVERIFY(file.open(QIODevice::WriteOnly | QIODevice::Truncate));
+		file.write(new_data);
+		QVERIFY(file.flush());
+		file.close();
+		QCOMPARE(file.error(), QFileDevice::NoError);
 	}
 }
 
@@ -855,7 +830,9 @@ void SymbolSetTool::processTestData()
  * while running with "minimal" platform plugin.
  */
 #ifndef Q_OS_MACOS
-static auto qpa_selected = qputenv("QT_QPA_PLATFORM", "minimal");
+namespace {
+	auto qpa_selected = qputenv("QT_QPA_PLATFORM", "minimal");  // clazy:exclude=non-pod-global-static
+}
 #endif
 
 

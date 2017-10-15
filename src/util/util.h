@@ -19,22 +19,32 @@
  */
 
 
-#ifndef UTIL_H
-#define UTIL_H
+#ifndef OPENORIENTEERING_UTIL_H
+#define OPENORIENTEERING_UTIL_H
 
+#include <cmath>
 #include <type_traits>
 
-#include <qmath.h>
+#include <QtGlobal>
+#include <QtMath>
 #include <QDoubleValidator>
+#include <QPointF>
 #include <QRectF>
+#include <QString>
+#include <QValidator>
 
-QT_BEGIN_NAMESPACE
 class QIODevice;
-QT_END_NAMESPACE
+class QObject;
+class QRect;
+class QWidget;
+// IWYU pragma: no_forward_declare QPointF
+// IWYU pragma: no_forward_declare QRectF
 
-class MapCoord;
 class MapCoordF;
-class Settings;
+
+
+// clazy:excludeall=missing-qobject-macro
+
 
 /** Value to calculate the optimum handle distance of 4 cubic bezier curves
  *  used to approximate a circle. */
@@ -79,9 +89,9 @@ namespace std
 class DoubleValidator : public QDoubleValidator
 {
 public:
-	DoubleValidator(double bottom, double top = 10e10, QObject* parent = NULL, int decimals = 20);
+	DoubleValidator(double bottom, double top = 10e10, QObject* parent = nullptr, int decimals = 20);
 	
-	virtual State validate(QString& input, int& pos) const;
+	State validate(QString& input, int& pos) const override;
 };
 
 /** (Un-)blocks recursively all signals from a QObject and its child-objects. */
@@ -193,7 +203,7 @@ namespace Util
 	 * 
 	 * @param file_and_anchor the name of the manual page html file, optionally including an anchor
 	 */
-	void showHelp(QWidget* dialog_parent, QString file_and_anchor);
+	void showHelp(QWidget* dialog_parent, const QString& file_and_anchor);
 	
 	/**
 	 * Creates a What's-this text "See more" linking to the given page and
@@ -203,7 +213,8 @@ namespace Util
 	
 	
 	/** See Util::gridOperation(). This function handles only parallel lines. */
-	template<typename T> void hatchingOperation(QRectF extent, double spacing, double offset, double rotation, T& processor)
+	template<typename T>
+	void hatchingOperation(const QRectF& extent, double spacing, double offset, double rotation, T& processor)
 	{
 		// Make rotation unique
 		rotation = fmod(1.0 * rotation, M_PI);
@@ -329,8 +340,9 @@ namespace Util
 	 * @param processor Callback object on which
 	 *     processor.processLine(QPointF a, QPointF b) will be called for each line.
 	 */
-	template<typename T> void gridOperation(QRectF extent, double horz_spacing, double vert_spacing,
-											double horz_offset, double vert_offset, double rotation, T& processor)
+	template<typename T>
+	void gridOperation(const QRectF& extent, double horz_spacing, double vert_spacing,
+	                   double horz_offset, double vert_offset, double rotation, T& processor)
 	{
 		hatchingOperation(extent, horz_spacing, horz_offset, rotation, processor);
 		hatchingOperation(extent, vert_spacing, vert_offset, rotation + M_PI / 2, processor);

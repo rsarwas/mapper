@@ -19,26 +19,33 @@
  */
 
 
-#ifndef _OPENORIENTEERING_MAP_PRINTER_H_
-#define _OPENORIENTEERING_MAP_PRINTER_H_
+#ifndef OPENORIENTEERING_MAP_PRINTER_H
+#define OPENORIENTEERING_MAP_PRINTER_H
 
 #include <memory>
 #include <vector>
 
-#include <QHash>
+#include <QtGlobal>
 #include <QObject>
+#include <QRect>
 #include <QRectF>
+#include <QSize>
 #include <QSizeF>
+#include <QString>
 
 #ifdef QT_PRINTSUPPORT_LIB
-#include <QPrinterInfo>
+#  include <QPrinterInfo>
+#else
+   class QPrinterInfo;
 #endif
 
-QT_BEGIN_NAMESPACE
+template <class Key, class T>
+class QHash;
 class QImage;
+class QPainter;
+class QPrinter;
 class QXmlStreamReader;
 class QXmlStreamWriter;
-QT_END_NAMESPACE
 
 class Map;
 class MapView;
@@ -221,7 +228,7 @@ public:
 	MapPrinter(Map& map, const MapView* view, QObject* parent = nullptr);
 	
 	/** Destructor. */
-	virtual ~MapPrinter();
+	~MapPrinter() override;
 	
 	/** Returns the configured target printer in terms of QPrinterInfo. */
 	const QPrinterInfo* getTarget() const;
@@ -364,7 +371,7 @@ signals:
 	 *  @param value Reflects the progress in the range from 1 (just started)
 	 *               to 100 (finished).
 	 *  @param status A verbal representation of what printMap() is doing. */
-	void printProgress(int value, QString status) const;
+	void printProgress(int value, const QString& status) const;
 	
 protected:
 	/** Returns true if vector mode is set. */

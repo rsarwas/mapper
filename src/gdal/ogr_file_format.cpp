@@ -24,25 +24,27 @@
 #include <iterator>
 #include <memory>
 #include <vector>
-// IWYU pragma: no_include <type_traits>
+#include <type_traits>
 
 #include <cpl_error.h>
 #include <cpl_conv.h>
 #include <ogr_api.h>
 #include <ogr_srs_api.h>
-// IWYU pragma: no_include "ogr_core.h"
 
 #include <QtGlobal>
 #include <QtMath>
 #include <QByteArray>
 #include <QColor>
+#include <QCoreApplication>
 #include <QFile>
 #include <QHash>
 #include <QIODevice>
 #include <QLatin1Char>
+#include <QLatin1String>
 #include <QObject>
 #include <QPointF>
 #include <QRegularExpression>
+#include <QRegularExpressionMatch>
 #include <QScopedValueRollback>
 #include <QString>
 #include <QStringRef>
@@ -269,6 +271,16 @@ namespace
 			Q_UNREACHABLE();
 		}
 	}
+
+	QString toPrettyWkt(OGRSpatialReferenceH spatial_reference)
+	{
+		char* srs_wkt_raw = nullptr;
+		OSRExportToPrettyWkt(spatial_reference, &srs_wkt_raw, 0);
+		auto srs_wkt = QString::fromLocal8Bit(srs_wkt_raw);
+		CPLFree(srs_wkt_raw);
+		return srs_wkt;
+	}
+	
 }
 
 
@@ -282,7 +294,7 @@ OgrFileFormat::OgrFileFormat()
 		addExtension(QString::fromLatin1(extension));
 }
 
-bool OgrFileFormat::understands(const unsigned char*, size_t) const
+bool OgrFileFormat::understands(const unsigned char*, std::size_t) const
 {
 	return true;
 }
@@ -298,7 +310,6 @@ Importer* OgrFileFormat::createImporter(QIODevice* stream, Map *map, MapView *vi
 
 OgrFileImport::OgrFileImport(QIODevice* stream, Map* map, MapView* view, UnitType unit_type)
  : Importer(stream, map, view)
- , map_srs{ OSRNewSpatialReference(nullptr) }
  , manager{ OGR_SM_Create(nullptr) }
  , unit_type{ unit_type }
  , georeferencing_import_enabled{ true }
@@ -306,22 +317,6 @@ OgrFileImport::OgrFileImport(QIODevice* stream, Map* map, MapView* view, UnitTyp
 	GdalManager().configure();
 	
 	setOption(QLatin1String{ "Separate layers" }, QVariant{ false });
-	
-	auto spec = QByteArray::fromRawData("WGS84", 6);
-	auto error = OSRSetWellKnownGeogCS(map_srs.get(), spec);
-	if (!map->getGeoreferencing().isLocal() && !error)
-	{
-		spec = map->getGeoreferencing().getProjectedCRSSpec().toLatin1();
-		error = OSRImportFromProj4(map_srs.get(), spec.constData());
-	}
-	
-	if (error)
-	{
-		addWarning(tr("Unable to setup \"%1\" SRS for GDAL: %2")
-		           .arg(QString::fromLatin1(spec), QString::number(error)));
-	}
-	
-	// Reasonable default?
 	
 	// OGR feature style defaults
 	default_pen_color = new MapColor(tr("Purple"), 0); 
@@ -377,6 +372,30 @@ void OgrFileImport::setGeoreferencingImportEnabled(bool enabled)
 
 
 
+ogr::unique_srs OgrFileImport::srsFromMap()
+{
+	auto srs = ogr::unique_srs(OSRNewSpatialReference(nullptr));
+	auto& georef = map->getGeoreferencing();
+	if (georef.isValid() && !georef.isLocal())
+	{
+		OSRSetProjCS(srs.get(), "Projected map SRS");
+		OSRSetWellKnownGeogCS(srs.get(), "WGS84");
+		auto spec = QByteArray(georef.getProjectedCRSSpec().toLatin1() + " +wktext");
+		auto error = OSRImportFromProj4(srs.get(), spec);
+		if (!error)
+			return srs;
+		
+		addWarning(tr("Unable to setup \"%1\" SRS for GDAL: %2")
+		           .arg(QString::fromLatin1(spec), QString::number(error)));
+		srs.reset(OSRNewSpatialReference(nullptr));
+	}
+	
+	OSRSetLocalCS(srs.get(), "Local SRS");
+	return srs;
+}
+
+
+
 void OgrFileImport::import(bool load_symbols_only)
 {
 	auto file = qobject_cast<QFile*>(stream);
@@ -388,10 +407,18 @@ void OgrFileImport::import(bool load_symbols_only)
 	auto filename = file->fileName();
 	// GDAL 2.0: ... = GDALOpenEx(template_path.toLatin1(), GDAL_OF_VECTOR, nullptr, nullptr, nullptr);
 	auto data_source = ogr::unique_datasource(OGROpen(filename.toUtf8().constData(), 0, nullptr));
-	if (data_source == nullptr)
+	if (!data_source)
 	{
 		throw FileFormatException(Importer::tr("Could not read '%1': %2")
 		                          .arg(filename, QString::fromLatin1(CPLGetLastErrorMsg())));
+	}
+	
+	if (auto driver = OGR_DS_GetDriver(data_source.get()))
+	{
+		if (auto driver_name = OGR_Dr_GetName(driver))
+		{
+			map->setSymbolSetId(QString::fromLatin1(driver_name));
+		}
 	}
 	
 	empty_geometries = 0;
@@ -401,7 +428,9 @@ void OgrFileImport::import(bool load_symbols_only)
 	too_few_coordinates = 0;
 	
 	if (georeferencing_import_enabled)
-		importGeoreferencing(data_source.get());
+		map_srs = importGeoreferencing(data_source.get());
+	else
+		map_srs = srsFromMap();
 	
 	importStyles(data_source.get());
 
@@ -491,15 +520,20 @@ void OgrFileImport::import(bool load_symbols_only)
 
 
 
-void OgrFileImport::importGeoreferencing(OGRDataSourceH data_source)
+ogr::unique_srs OgrFileImport::importGeoreferencing(OGRDataSourceH data_source)
 {
-	auto wgs84 = ogr::unique_srs { OSRNewSpatialReference(nullptr) };
-	OSRSetWellKnownGeogCS(wgs84.get(), "WGS84");
+	auto no_srs = true;
+	auto local_srs = ogr::unique_srs { nullptr };
+	auto suitable_srs = ogr::unique_srs { nullptr };
+	char* projected_srs_spec =  { nullptr };
 	
-	auto data_srs = ogr::unique_srs { nullptr };
+	auto orthographic = ogr::unique_srs { OSRNewSpatialReference(nullptr) };
+	OSRSetProjCS(orthographic.get(), "Orthographic SRS");
+	OSRSetWellKnownGeogCS(orthographic.get(), "WGS84");
+	OSRSetOrthographic(orthographic.get(), 0.0, 0.0, 0.0, 0.0);
 	
-	// Find any SRS which can be transformed to WGS84,
-	// but prefer projected SRS.
+	// Find any SRS which can be transformed to our orthographic SRS,
+	// but prefer a projected SRS.
 	auto num_layers = OGR_DS_GetLayerCount(data_source);
 	for (int i = 0; i < num_layers; ++i)
 	{
@@ -511,20 +545,50 @@ void OgrFileImport::importGeoreferencing(OGRDataSourceH data_source)
 		if (!spatial_reference)
 			continue;
 		
-		auto transformation = OCTNewCoordinateTransformation(spatial_reference, wgs84.get());
-		if (transformation)
+		no_srs = false;
+		
+		if (OSRIsLocal(spatial_reference))
 		{
-			OCTDestroyCoordinateTransformation(transformation);
-			if (!data_srs)
-			{
-				data_srs.reset(OSRClone(spatial_reference));
-				if (OSRIsProjected(spatial_reference))
-					break;
-			}
+			if (!local_srs)
+				local_srs.reset(OSRClone(spatial_reference));
+			continue;
 		}
+		
+		auto transformation = OCTNewCoordinateTransformation(spatial_reference, orthographic.get());
+		if (!transformation)
+		{
+			addWarning(tr("Cannot use this spatial reference:\n%s").arg(toPrettyWkt(spatial_reference)));
+			continue;
+		}
+		OCTDestroyCoordinateTransformation(transformation);
+		
+		if (OSRIsProjected(spatial_reference))
+		{
+			char *srs_spec = nullptr;
+			auto error = OSRExportToProj4(spatial_reference, &srs_spec);
+			if (!error)
+			{
+				projected_srs_spec = srs_spec;  // transfer ownership
+				suitable_srs.reset(OSRClone(spatial_reference));
+				break;
+			}
+			CPLFree(srs_spec);
+		}
+		
+		if (!suitable_srs)
+			suitable_srs.reset(OSRClone(spatial_reference));
 	}
 	
-	if (data_srs && !OSRIsProjected(data_srs.get()))
+	if (projected_srs_spec)
+	{
+		// Found a suitable projected SRS
+		auto georef = map->getGeoreferencing();  // copy
+		georef.setProjectedCRS(QStringLiteral("PROJ.4"), QString::fromLatin1(projected_srs_spec));
+		map->setGeoreferencing(georef);
+		CPLFree(projected_srs_spec);
+		return suitable_srs;
+	}
+	else if (suitable_srs)
 	{
 		// Found a suitable SRS but it is not projected.
 		// Setting up a local orthographic projection.
@@ -533,23 +597,26 @@ void OgrFileImport::importGeoreferencing(OGRDataSourceH data_source)
 		auto longitude = 0.001 * qRound(1000 * center.longitude());
 		auto ortho_georef = Georeferencing();
 		ortho_georef.setScaleDenominator(int(map->getScaleDenominator()));
-		ortho_georef.setProjectedCRS(QString{}, QString::fromLatin1("+proj=ortho +datum=WGS84 +lat_0=%1 +lon_0=%2")
-		                                        .arg(latitude).arg(longitude));
-		ortho_georef.setGeographicRefPoint(LatLon{ latitude, longitude }, false);
+		ortho_georef.setProjectedCRS(QString{},
+		                             QString::fromLatin1("+proj=ortho +datum=WGS84 +ellps=WGS84 +units=m +lat_0=%1 +lon_0=%2 +no_defs")
+		                             .arg(latitude, 0, 'f')
+		                             .arg(longitude, 0, 'f') );
+		ortho_georef.setProjectedRefPoint({}, false);
+		ortho_georef.setDeclination(map->getGeoreferencing().getDeclination());
 		map->setGeoreferencing(ortho_georef);
-		OSRImportFromProj4(map_srs.get(), ortho_georef.getProjectedCRSSpec().toLatin1());
+		return srsFromMap();
 	}
-	else if (data_srs) {
-		char* data = nullptr;
-		auto error = OSRExportToProj4(data_srs.get(), &data);
-		if (!error)
-		{
-			auto georef = map->getGeoreferencing();
-			georef.setProjectedCRS(QString::fromLatin1(data));
-			CPLFree(data);
-			map->setGeoreferencing(georef);
-			map_srs = std::move(data_srs);
-		}
+	else if (local_srs || no_srs)
+	{
+		auto georef = Georeferencing();
+		georef.setScaleDenominator(int(map->getScaleDenominator()));
+		georef.setDeclination(map->getGeoreferencing().getDeclination());
+		map->setGeoreferencing(georef);
+		return local_srs ? std::move(local_srs) : srsFromMap();
+	}
+	else
+	{
+		throw FileFormatException(tr("The geospatial data has no suitable spatial reference."));
 	}
 }
 
@@ -588,7 +655,6 @@ void OgrFileImport::importFeature(MapPart* map_part, OGRFeatureDefnH feature_def
 	if (new_srs && data_srs != new_srs)
 	{
 		// New SRS, indeed.
-		
 		auto transformation = ogr::unique_transformation{ OCTNewCoordinateTransformation(new_srs, map_srs.get()) };
 		if (!transformation)
 		{
@@ -642,22 +708,26 @@ OgrFileImport::ObjectList OgrFileImport::importGeometry(OGRFeatureH feature, OGR
 	switch (geometry_type)
 	{
 	case OGRwkbGeometryType::wkbPoint:
-		result = { importPointGeometry(feature, geometry) };
+		if (auto object = importPointGeometry(feature, geometry))
+			result = { object };
 		break;
 		
 	case OGRwkbGeometryType::wkbLineString:
-		result = { importLineStringGeometry(feature, geometry) };
+		if (auto object = importLineStringGeometry(feature, geometry))
+			result = { object };
 		break;
 		
 	case OGRwkbGeometryType::wkbPolygon:
-		result = { importPolygonGeometry(feature, geometry) };
-		return result;
+		if (auto object = importPolygonGeometry(feature, geometry))
+			result = { object };
+		break;
 		
 	case OGRwkbGeometryType::wkbGeometryCollection:
 	case OGRwkbGeometryType::wkbMultiLineString:
 	case OGRwkbGeometryType::wkbMultiPoint:
 	case OGRwkbGeometryType::wkbMultiPolygon:
-		return importGeometryCollection(feature, geometry);
+		result = importGeometryCollection(feature, geometry);
+		break;
 		
 	default:
 		qDebug("OgrFileImport: Unknown or unsupported geometry type: %d", geometry_type);
@@ -1186,12 +1256,12 @@ AreaSymbol* OgrFileImport::getSymbolForBrush(OGRStyleToolH tool, const QByteArra
 
 MapCoord OgrFileImport::fromDrawing(double x, double y) const
 {
-	return MapCoord::load(x, -y, 0);
+	return MapCoord::load(x, -y, MapCoord::Flags{});
 }
 
 MapCoord OgrFileImport::fromProjected(double x, double y) const
 {
-	return MapCoord::load(map->getGeoreferencing().toMapCoordF(QPointF{ x, y }), 0);
+	return MapCoord::load(map->getGeoreferencing().toMapCoordF(QPointF{ x, y }), MapCoord::Flags{});
 }
 
 
@@ -1206,27 +1276,39 @@ bool OgrFileImport::checkGeoreferencing(QFile& file, const Georeferencing& geore
 	auto filename = file.fileName();
 	// GDAL 2.0: ... = GDALOpenEx(template_path.toLatin1(), GDAL_OF_VECTOR, nullptr, nullptr, nullptr);
 	auto data_source = ogr::unique_datasource(OGROpen(filename.toUtf8().constData(), 0, nullptr));
-	if (data_source == nullptr)
+	if (!data_source)
 	{
 		throw FileFormatException(Importer::tr("Could not read '%1': %2")
 		                          .arg(filename, QString::fromLatin1(CPLGetLastErrorMsg())));
 	}
 	
-	auto spec = georef.getProjectedCRSSpec().toLatin1();
+	return checkGeoreferencing(data_source.get(), georef);
+}
+
+
+// static
+bool OgrFileImport::checkGeoreferencing(OGRDataSourceH data_source, const Georeferencing& georef)
+{
+	auto spec = QByteArray(georef.getProjectedCRSSpec().toLatin1() + " +wktext");
 	auto map_srs = ogr::unique_srs { OSRNewSpatialReference(nullptr) };
+	OSRSetProjCS(map_srs.get(), "Projected map SRS");
+	OSRSetWellKnownGeogCS(map_srs.get(), "WGS84");
 	OSRImportFromProj4(map_srs.get(), spec.constData());
 	
 	bool suitable_srs_found = false;
-	auto num_layers = OGR_DS_GetLayerCount(data_source.get());
+	auto num_layers = OGR_DS_GetLayerCount(data_source);
 	for (int i = 0; i < num_layers; ++i)
 	{
-		if (auto layer = OGR_DS_GetLayer(data_source.get(), i))
+		if (auto layer = OGR_DS_GetLayer(data_source, i))
 		{
 			if (auto spatial_reference = OGR_L_GetSpatialRef(layer))
 			{
 				auto transformation = OCTNewCoordinateTransformation(spatial_reference, map_srs.get());
 				if (!transformation)
+				{
+					qDebug("Failed to transform this SRS:\n%s", qPrintable(toPrettyWkt(spatial_reference)));
 					return false;
+				}
 				
 				OCTDestroyCoordinateTransformation(transformation);
 				suitable_srs_found = true;
@@ -1247,7 +1329,7 @@ LatLon OgrFileImport::calcAverageLatLon(QFile& file)
 	auto filename = file.fileName();
 	// GDAL 2.0: ... = GDALOpenEx(template_path.toLatin1(), GDAL_OF_VECTOR, nullptr, nullptr, nullptr);
 	auto data_source = ogr::unique_datasource(OGROpen(filename.toUtf8().constData(), 0, nullptr));
-	if (data_source == nullptr)
+	if (!data_source)
 	{
 		throw FileFormatException(Importer::tr("Could not read '%1': %2")
 		                          .arg(filename, QString::fromLatin1(CPLGetLastErrorMsg())));
@@ -1261,7 +1343,7 @@ LatLon OgrFileImport::calcAverageLatLon(QFile& file)
 LatLon OgrFileImport::calcAverageLatLon(OGRDataSourceH data_source)
 {
 	auto geo_srs = ogr::unique_srs { OSRNewSpatialReference(nullptr) };
-	OSRImportFromProj4(geo_srs.get(), "+proj=latlong +datum=WGS84");
+	OSRSetWellKnownGeogCS(geo_srs.get(), "WGS84");
 	
 	auto num_coords = 0u;
 	double x = 0, y = 0;

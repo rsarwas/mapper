@@ -16,7 +16,7 @@
 <context>
     <name>Importer</name>
     <message numerus="yes">
-        <location filename="../src/fileformats/file_import_export.cpp" line="93"/>
+        <location filename="../src/fileformats/file_import_export.cpp" line="100"/>
         <source>Dropped %n irregular object(s).</source>
         <translation>
             <numerusform>Dropped one irregular object.</numerusform>
@@ -27,7 +27,7 @@
 <context>
     <name>MapEditorController</name>
     <message numerus="yes">
-        <location filename="../src/gui/map/map_editor.cpp" line="1595"/>
+        <location filename="../src/gui/map/map_editor.cpp" line="1618"/>
         <source>Cut %n object(s)</source>
         <extracomment>Past tense. Displayed when an Edit &gt; Cut operation is completed.</extracomment>
         <translation>
@@ -36,7 +36,7 @@
         </translation>
     </message>
     <message numerus="yes">
-        <location filename="../src/gui/map/map_editor.cpp" line="1648"/>
+        <location filename="../src/gui/map/map_editor.cpp" line="1671"/>
         <source>Copied %n object(s)</source>
         <translation>
             <numerusform>Copied one object</numerusform>
@@ -44,7 +44,7 @@
         </translation>
     </message>
     <message numerus="yes">
-        <location filename="../src/gui/map/map_editor.cpp" line="1688"/>
+        <location filename="../src/gui/map/map_editor.cpp" line="1711"/>
         <source>Pasted %n object(s)</source>
         <translation>
             <numerusform>Pasted one object</numerusform>
@@ -52,7 +52,7 @@
         </translation>
     </message>
     <message numerus="yes">
-        <location filename="../src/gui/map/map_editor.cpp" line="2488"/>
+        <location filename="../src/gui/map/map_editor.cpp" line="2513"/>
         <source>Duplicated %n object(s)</source>
         <translation>
             <numerusform>Duplicated one object</numerusform>
@@ -63,7 +63,7 @@
 <context>
     <name>OCAD8FileImport</name>
     <message numerus="yes">
-        <location filename="../src/fileformats/ocad8_file_format.cpp" line="146"/>
+        <location filename="../src/fileformats/ocad8_file_format.cpp" line="145"/>
         <source>%n color separation(s) were skipped, reason: Import disabled.</source>
         <translation>
             <numerusform>One color separation was skipped, reason: Import disabled.</numerusform>
@@ -74,11 +74,11 @@
 <context>
     <name>OgrFileImport</name>
     <message numerus="yes">
-        <location filename="../src/gdal/ogr_file_format.cpp" line="467"/>
-        <location filename="../src/gdal/ogr_file_format.cpp" line="472"/>
-        <location filename="../src/gdal/ogr_file_format.cpp" line="477"/>
-        <location filename="../src/gdal/ogr_file_format.cpp" line="482"/>
-        <location filename="../src/gdal/ogr_file_format.cpp" line="487"/>
+        <location filename="../src/gdal/ogr_file_format.cpp" line="486"/>
+        <location filename="../src/gdal/ogr_file_format.cpp" line="491"/>
+        <location filename="../src/gdal/ogr_file_format.cpp" line="496"/>
+        <location filename="../src/gdal/ogr_file_format.cpp" line="501"/>
+        <location filename="../src/gdal/ogr_file_format.cpp" line="506"/>
         <source>Unable to load %n objects, reason: %1</source>
         <translation>
             <numerusform>Unable to load one object, reason: %1</numerusform>
@@ -89,7 +89,7 @@
 <context>
     <name>TagSelectWidget</name>
     <message numerus="yes">
-        <location filename="../src/gui/widgets/tag_select_widget.cpp" line="346"/>
+        <location filename="../src/gui/widgets/tag_select_widget.cpp" line="342"/>
         <source>%n object(s) selected</source>
         <translation>
             <numerusform>One object selected</numerusform>
@@ -100,7 +100,7 @@
 <context>
     <name>TemplateTrack</name>
     <message numerus="yes">
-        <location filename="../src/templates/template_track.cpp" line="475"/>
+        <location filename="../src/templates/template_track.cpp" line="480"/>
         <source>%n path object(s) could not be imported (reason: missing coordinates).</source>
         <translation>
             <numerusform>One path object could not be imported (reason: missing coordinates).</numerusform>

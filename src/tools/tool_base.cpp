@@ -21,22 +21,17 @@
 
 #include "tool_base.h"
 
-#include <QApplication>
-#include <QPainter>
 #include <QMouseEvent>
 #include <QTimer>
 
-#include "gui/main_window.h"
-#include "gui/widgets/key_button_bar.h"
-#include "core/map.h"
-#include "gui/map/map_editor.h"
-#include "undo/object_undo.h"
-#include "gui/map/map_widget.h"
-#include "core/objects/object.h"
-#include "core/objects/text_object.h"
 #include "settings.h"
+#include "core/map.h"
+#include "core/objects/object.h"
+#include "gui/map/map_editor.h"
+#include "gui/map/map_widget.h"
+#include "gui/widgets/key_button_bar.h"
 #include "tool_helpers.h"
-#include "util/util.h"
+#include "undo/object_undo.h"
 
 
 // ### MapEditorToolBase::EditedItem ###
@@ -74,14 +69,20 @@ MapEditorToolBase::EditedItem::EditedItem(EditedItem&& prototype) noexcept
 
 MapEditorToolBase::EditedItem& MapEditorToolBase::EditedItem::operator=(const EditedItem& prototype)
 {
+	if (&prototype == this)
+		return *this;
+	
 	active_object = prototype.active_object;
-	duplicate.reset(active_object ? active_object->duplicate() : nullptr);
+	duplicate.reset(prototype.duplicate ? prototype.duplicate->duplicate() : nullptr);
 	return *this;
 }
 
 
 MapEditorToolBase::EditedItem& MapEditorToolBase::EditedItem::operator=(EditedItem&& prototype) noexcept
 {
+	if (&prototype == this)
+		return *this;
+	
 	active_object = prototype.active_object;
 	duplicate = std::move(prototype.duplicate);
 	return *this;
@@ -475,7 +476,7 @@ void MapEditorToolBase::updatePreviewObjectsAsynchronously()
 	
 	if (!preview_update_triggered)
 	{
-		QTimer::singleShot(10, this, SLOT(updatePreviewObjectsSlot()));
+		QTimer::singleShot(10, this, SLOT(updatePreviewObjectsSlot()));  // clazy:exclude=old-style-connect
 		preview_update_triggered = true;
 	}
 }
@@ -543,7 +544,7 @@ void MapEditorToolBase::abortEditing()
 	for (auto& edited_item : edited_items)
 	{
 		auto object = edited_item.active_object;
-		*object = *edited_item.duplicate;
+		object->copyFrom(*edited_item.duplicate);
 		object->setMap(map());
 		object->update();
 	}
@@ -597,7 +598,7 @@ void MapEditorToolBase::resetEditedObjects()
 	for (auto& edited_item : edited_items)
 	{
 		auto object = edited_item.active_object;
-		*object = *edited_item.duplicate;
+		object->copyFrom(*edited_item.duplicate);
 		object->setMap(nullptr); // This is to keep the renderables out of the normal map.
 	}
 }

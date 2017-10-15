@@ -22,16 +22,30 @@
 #ifndef OPENORIENTEERING_DRAW_PATH_H
 #define OPENORIENTEERING_DRAW_PATH_H
 
+#include <QObject>
+#include <QPoint>
 #include <QPointer>
 #include <QScopedPointer>
 
-#include "draw_line_and_area_tool.h"
+#include "core/map_coord.h"
+#include "tools/draw_line_and_area_tool.h"
+
+class QAction;
+class QCursor;
+class QKeyEvent;
+class QMouseEvent;
+class QPainter;
 
 class ConstrainAngleToolHelper;
-class SnappingToolHelper;
-class SnappingToolHelperSnapInfo;
 class FollowPathToolHelper;
 class KeyButtonBar;
+class MapEditorController;
+class MapWidget;
+class PathObject;
+class SnappingToolHelper;
+class SnappingToolHelperSnapInfo;
+class Symbol;
+
 
 /** 
  * Tool to draw arbitrarily shaped PathObjects.
@@ -41,7 +55,7 @@ class DrawPathTool : public DrawLineAndAreaTool
 Q_OBJECT
 public:
 	DrawPathTool(MapEditorController* editor, QAction* tool_action, bool is_helper_tool, bool allow_closing_paths);
-	virtual ~DrawPathTool();
+	~DrawPathTool() override;
 	
 	void init() override;
 	const QCursor& getCursor() const override;

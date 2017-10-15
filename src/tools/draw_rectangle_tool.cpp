@@ -27,23 +27,22 @@
 #include <QMouseEvent>
 #include <QPainter>
 
-#include "util/util.h"
-#include "core/objects/object.h"
-#include "gui/map/map_widget.h"
 #include "settings.h"
-#include "tool_helpers.h"
+#include "core/map.h"
+#include "core/objects/object.h"
 #include "gui/modifier_key.h"
-#include "gui/widgets/key_button_bar.h"
 #include "gui/map/map_editor.h"
-
-class SymbolWidget;
+#include "gui/map/map_widget.h"
+#include "gui/widgets/key_button_bar.h"
+#include "tools/tool_helpers.h"
+#include "util/util.h"
 
 
 DrawRectangleTool::DrawRectangleTool(MapEditorController* editor, QAction* tool_button, bool is_helper_tool)
 : DrawLineAndAreaTool(editor, DrawRectangle, tool_button, is_helper_tool)
 , angle_helper(new ConstrainAngleToolHelper())
 , snap_helper(new SnappingToolHelper(this))
-, key_button_bar(NULL)
+, key_button_bar(nullptr)
 {
 	cur_map_widget = mapWidget();
 	draw_dash_points = true;
@@ -55,10 +54,10 @@ DrawRectangleTool::DrawRectangleTool(MapEditorController* editor, QAction* tool_
 	
 	angle_helper->addDefaultAnglesDeg(0);
 	angle_helper->setActive(false);
-	connect(angle_helper.data(), SIGNAL(displayChanged()), this, SLOT(updateDirtyRect()));
+	connect(angle_helper.data(), &ConstrainAngleToolHelper::displayChanged, this, &DrawRectangleTool::updateDirtyRect);
 	
 	snap_helper->setFilter(SnappingToolHelper::AllTypes);
-	connect(snap_helper.data(), SIGNAL(displayChanged()), this, SLOT(updateDirtyRect()));
+	connect(snap_helper.data(), &SnappingToolHelper::displayChanged, this, &DrawRectangleTool::updateDirtyRect);
 }
 
 DrawRectangleTool::~DrawRectangleTool()
@@ -383,7 +382,7 @@ bool DrawRectangleTool::keyReleaseEvent(QKeyEvent* event)
 	{
 	case Qt::Key_Control:
 		ctrl_pressed = false;
-		if (!picked_direction && (!editingInProgress() || (editingInProgress() && angles.size() == 1)))
+		if (!picked_direction && (!editingInProgress() || angles.size() == 1))
 		{
 			angle_helper->setActive(false);
 			if (dragging && editingInProgress())
@@ -677,7 +676,7 @@ void DrawRectangleTool::updateDirtyRect()
 	if (shift_pressed)
 		snap_helper->includeDirtyRect(rect);
 	if (is_helper_tool)
-		emit(dirtyRectChanged(rect));
+		emit dirtyRectChanged(rect);
 	else
 	{
 		if (angle_helper->isActive())

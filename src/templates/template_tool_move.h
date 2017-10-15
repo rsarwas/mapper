@@ -18,26 +18,36 @@
  */
 
 
-#ifndef _OPENORIENTEERING_TEMPLATE_TOOL_MOVE_H_
-#define _OPENORIENTEERING_TEMPLATE_TOOL_MOVE_H_
+#ifndef OPENORIENTEERING_TEMPLATE_TOOL_MOVE_H
+#define OPENORIENTEERING_TEMPLATE_TOOL_MOVE_H
 
+#include <QObject>
+
+#include "core/map_coord.h"
 #include "tools/tool.h"
 
+class QAction;
+class QCursor;
+class QMouseEvent;
+
+class MapEditorController;
+class MapWidget;
 class Template;
+
 
 /** Tool to move a template by hand. */
 class TemplateMoveTool : public MapEditorTool
 {
 Q_OBJECT
 public:
-	TemplateMoveTool(Template* templ, MapEditorController* editor, QAction* toolAction = NULL);
+	TemplateMoveTool(Template* templ, MapEditorController* editor, QAction* toolAction = nullptr);
 	
-	virtual void init();
-	virtual const QCursor& getCursor() const;
+	void init() override;
+	const QCursor& getCursor() const override;
 	
-	virtual bool mousePressEvent(QMouseEvent* event, MapCoordF map_coord, MapWidget* widget);
-	virtual bool mouseMoveEvent(QMouseEvent* event, MapCoordF map_coord, MapWidget* widget);
-	virtual bool mouseReleaseEvent(QMouseEvent* event, MapCoordF map_coord, MapWidget* widget);
+	bool mousePressEvent(QMouseEvent* event, MapCoordF map_coord, MapWidget* widget) override;
+	bool mouseMoveEvent(QMouseEvent* event, MapCoordF map_coord, MapWidget* widget) override;
+	bool mouseReleaseEvent(QMouseEvent* event, MapCoordF map_coord, MapWidget* widget) override;
 	
 public slots:
 	void templateDeleted(int index, const Template* temp);

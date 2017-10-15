@@ -22,19 +22,16 @@
 #ifndef OPENORIENTEERING_SYMBOL_DROPDOWN_H
 #define OPENORIENTEERING_SYMBOL_DROPDOWN_H
 
-#include <QtGlobal>
 #include <QComboBox>
 #include <QItemDelegate>
 #include <QObject>
 #include <QString>
 // IWYU pragma: no_include <QStyleOptionViewItem>
 
-QT_BEGIN_NAMESPACE
 class QAbstractItemModel;
 class QModelIndex;
 class QStyleOptionViewItem;
 class QWidget;
-QT_END_NAMESPACE
 
 class Map;
 class Symbol;
@@ -57,7 +54,7 @@ public:
 	 */
 	SymbolDropDown(const Map* map, int filter, const Symbol* initial_symbol = nullptr, const Symbol* excluded_symbol = nullptr, QWidget* parent = nullptr);
 	
-	~SymbolDropDown();
+	~SymbolDropDown() override;
 	
 	
 	/** Returns the selected symbol or nullptr if no symbol selected */
@@ -95,12 +92,12 @@ class SymbolDropDownDelegate : public QItemDelegate
 Q_OBJECT
 public:
 	SymbolDropDownDelegate(int symbol_type_filter, QObject* parent = nullptr);
-	~SymbolDropDownDelegate();
+	~SymbolDropDownDelegate() override;
 	
-	virtual QWidget* createEditor(QWidget* parent, const QStyleOptionViewItem& option, const QModelIndex& index) const;
-	virtual void setEditorData(QWidget* editor, const QModelIndex& index) const;
-	virtual void setModelData(QWidget* editor, QAbstractItemModel* model, const QModelIndex& index) const;
-	virtual void updateEditorGeometry(QWidget* editor, const QStyleOptionViewItem& option, const QModelIndex& index) const;
+	QWidget* createEditor(QWidget* parent, const QStyleOptionViewItem& option, const QModelIndex& index) const override;
+	void setEditorData(QWidget* editor, const QModelIndex& index) const override;
+	void setModelData(QWidget* editor, QAbstractItemModel* model, const QModelIndex& index) const override;
+	void updateEditorGeometry(QWidget* editor, const QStyleOptionViewItem& option, const QModelIndex& index) const override;
 	
 private slots:
 	void emitCommitData();

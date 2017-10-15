@@ -27,17 +27,14 @@
 #include <vector>
 
 #include <Qt>
-#include <QtGlobal>
 #include <QFont>
 #include <QFontMetricsF>
 #include <QString>
 
-QT_BEGIN_NAMESPACE
 class QIODevice;
 class QXmlStreamReader;
 class QXmlStreamWriter;
 // IWYU pragma: no_forward_declare QFontMetricsF
-QT_END_NAMESPACE
 
 class Map;
 class MapColor;
@@ -85,7 +82,7 @@ public:
 	
 	/** Creates an empty text symbol. */
 	TextSymbol();
-	virtual ~TextSymbol();
+	~TextSymbol() override;
 	Symbol* duplicate(const MapColorMap* color_map = nullptr) const override;
 	
 	void createRenderables(
@@ -142,7 +139,7 @@ public:
 	
 	double getNextTab(double pos) const;
 	
-	static const float internal_point_size;
+	constexpr static qreal internal_point_size = 256;
 	
 	SymbolPropertiesWidget* createPropertiesWidget(SymbolSettingDialog* dialog) override;
 	

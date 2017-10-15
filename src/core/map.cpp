@@ -28,14 +28,16 @@
 #include <memory>
 
 #include <Qt>
+#include <QtGlobal>
 #include <QtMath>
 #include <QByteArray>
+#include <QCoreApplication>
 #include <QDebug>
-#include <QDir>
+#include <QEventLoop>
 #include <QFile>
 #include <QFileInfo>
 #include <QIODevice>
-#include <QLatin1Char>
+#include <QLatin1String>
 #include <QLocale>
 #include <QMessageBox>
 #include <QPainter>
@@ -43,6 +45,7 @@
 #include <QPointF>
 #include <QSaveFile>
 #include <QStringList>
+#include <QTextDocument>
 #include <QTranslator>
 
 #include "core/georeferencing.h"
@@ -64,11 +67,15 @@
 #include "fileformats/file_format_registry.h"
 #include "fileformats/file_import_export.h"
 #include "gui/map/map_widget.h"
+#include "gui/text_browser_dialog.h"
 #include "templates/template.h"
 #include "undo/object_undo.h"
+#include "undo/undo.h"
 #include "undo/undo_manager.h"
 #include "util/util.h"
 #include "util/transformation.h"
+
+// IWYU pragma: no_forward_declare QRectF
 
 
 QPointer<QTranslator> map_symbol_translator{};
@@ -108,6 +115,26 @@ struct MapColorSetMergeItem
 /** The mapping of all colors in a source MapColorSet
  *  to colors in a destination MapColorSet. */
 typedef std::vector<MapColorSetMergeItem> MapColorSetMergeList;
+
+
+/**
+ * Shows a message box for a list of unformatted messages.
+ */
+void showMessageBox(QWidget* parent, const QString& title, const QString& headline, const std::vector<QString>& messages)
+{
+	QString document;
+	if (!headline.isEmpty())
+		document += QLatin1String("<p><b>") + headline + QLatin1String("</b></p>");
+	for (const auto& message : messages)
+		document += Qt::convertFromPlainText(message, Qt::WhiteSpaceNormal);
+	
+	TextBrowserDialog dialog(document, parent);
+	dialog.setWindowTitle(title);
+	dialog.setWindowModality(Qt::WindowModal);
+	dialog.exec();
+	// Let Android update the screen.
+	qApp->processEvents(QEventLoop::ExcludeUserInputEvents);
+}
 
 } // namespace
 
@@ -565,7 +592,7 @@ void Map::rotateMap(double rotation, const MapCoord& center, bool adjust_georefe
 	}
 	if (adjust_declination)
 	{
-		double rotation_degrees = 180 * rotation / M_PI;
+		auto rotation_degrees = qRadiansToDegrees(rotation);
 		georeferencing->setDeclination(georeferencing->getDeclination() + rotation_degrees);
 	}
 	if (adjust_templates)
@@ -635,25 +662,6 @@ bool Map::exportTo(const QString& path, MapView* view, const FileFormat* format)
 		return false;
 	}
 	
-	// Update the relative paths of templates
-	QDir map_dir = QFileInfo(path).absoluteDir();
-	for (int i = 0; i < getNumTemplates(); ++i)
-	{
-		Template* temp = getTemplate(i);
-		if (temp->getTemplateState() == Template::Invalid)
-			temp->setTemplateRelativePath(QString());
-		else
-			temp->setTemplateRelativePath(map_dir.relativeFilePath(temp->getTemplatePath()));
-	}
-	for (int i = 0; i < getNumClosedTemplates(); ++i)
-	{
-		Template* temp = getClosedTemplate(i);
-		if (temp->getTemplateState() == Template::Invalid)
-			temp->setTemplateRelativePath(QString());
-		else
-			temp->setTemplateRelativePath(map_dir.relativeFilePath(temp->getTemplatePath()));
-	}
-	
 	QSaveFile file(path);
 	QScopedPointer<Exporter> exporter(format->createExporter(&file, this, view));
 	bool success = false;
@@ -679,22 +687,15 @@ bool Map::exportTo(const QString& path, MapView* view, const FileFormat* format)
 		QMessageBox::warning(
 		  nullptr,
 		  tr("Error"),
-		  /** @todo: Switch to the latter when translated. */ true ?
-		  tr("Cannot open file:\n%1\n\n%2").arg(path).arg(file.errorString()) :
-		  tr("Cannot save file\n%1:\n%2")
+		  tr("Cannot save file\n%1:\n%2").arg(path, file.errorString())
 		);
 	}
 	else if (!exporter->warnings().empty())
 	{
-		QString warnings;
-		for (std::vector<QString>::const_iterator it = exporter->warnings().begin(); it != exporter->warnings().end(); ++it) {
-			if (!warnings.isEmpty())
-				warnings += QLatin1Char('\n');
-			warnings += *it;
-		}
-		QMessageBox msgBox(QMessageBox::Warning, tr("Warning"), tr("The map export generated warnings."), QMessageBox::Ok);
-		msgBox.setDetailedText(warnings);
-		msgBox.exec();
+		showMessageBox(nullptr,
+		               tr("Warning"),
+		               tr("The map export generated warnings."),
+		               exporter->warnings() );
 	}
 	
 	return success;
@@ -753,21 +754,10 @@ bool Map::loadFrom(const QString& path, QWidget* dialog_parent, MapView* view, b
 				// Display any warnings.
 				if (!importer->warnings().empty() && show_error_messages)
 				{
-					QString warnings;
-					for (std::vector<QString>::const_iterator it = importer->warnings().begin(); it != importer->warnings().end(); ++it) {
-						if (!warnings.isEmpty())
-							warnings += QLatin1Char('\n');
-						warnings += *it;
-					}
-					QMessageBox msgBox(
-					  QMessageBox::Warning,
-					  tr("Warning"),
-					  tr("The map import generated warnings."),
-					  QMessageBox::Ok,
-					  dialog_parent
-					);
-					msgBox.setDetailedText(warnings);
-					msgBox.exec();
+					showMessageBox(nullptr,
+					               tr("Warning"),
+					               tr("The map import generated warnings."),
+					               importer->warnings() );
 				}
 
 				import_complete = true;
@@ -798,7 +788,7 @@ bool Map::loadFrom(const QString& path, QWidget* dialog_parent, MapView* view, b
 			QMessageBox::warning(
 			 dialog_parent,
 			 tr("Error"),
-			 tr("Cannot open file:\n%1\n\n%2").arg(path).arg(error_msg)
+			 tr("Cannot open file:\n%1\n\n%2").arg(path, error_msg)
 			);
 		return false;
 	}
@@ -835,9 +825,10 @@ void Map::importMap(
 	    && other->getScaleDenominator() != getScaleDenominator())
 	{
 		int answer = QMessageBox::question(dialog_parent, tr("Question"),
-										   tr("The scale of the imported data is 1:%1 which is different from this map's scale of 1:%2.\n\nRescale the imported data?")
-										   .arg(QLocale().toString(other->getScaleDenominator()))
-										   .arg(QLocale().toString(getScaleDenominator())), QMessageBox::Yes | QMessageBox::No, QMessageBox::Yes);
+		                                   tr("The scale of the imported data is 1:%1 which is different from this map's scale of 1:%2.\n\nRescale the imported data?")
+		                                   .arg(QLocale().toString(other->getScaleDenominator()),
+		                                        QLocale().toString(getScaleDenominator())),
+		                                   QMessageBox::Yes | QMessageBox::No, QMessageBox::Yes);
 		if (answer == QMessageBox::Yes)
 		{
 			/// \todo No need to clone iff the other map is discarded after import.
@@ -969,7 +960,7 @@ QHash<const Symbol*, Symbol*> Map::importMap(
 							break;
 						}
 					}
-					if (dest_part == nullptr)
+					if (!dest_part)
 					{
 						// Import as new part
 						dest_part = new MapPart(part_to_import->getName(), this);
@@ -1065,12 +1056,12 @@ void Map::drawColorSeparation(QPainter* painter, const RenderConfig& config, con
 	renderables->drawColorSeparation(painter, config, spot_color, use_color);
 }
 
-void Map::drawGrid(QPainter* painter, QRectF bounding_box, bool on_screen)
+void Map::drawGrid(QPainter* painter, const QRectF& bounding_box, bool on_screen)
 {
 	grid.draw(painter, bounding_box, this, on_screen);
 }
 
-void Map::drawTemplates(QPainter* painter, QRectF bounding_box, int first_template, int last_template, const MapView* view, bool on_screen) const
+void Map::drawTemplates(QPainter* painter, const QRectF& bounding_box, int first_template, int last_template, const MapView* view, bool on_screen) const
 {
 	for (int i = first_template; i <= last_template; ++i)
 	{
@@ -1097,7 +1088,7 @@ void Map::drawTemplates(QPainter* painter, QRectF bounding_box, int first_templa
 void Map::updateObjects()
 {
 	// TODO: It maybe would be better if the objects entered themselves into a separate list when they get dirty so not all objects have to be traversed here
-	applyOnAllObjects(ObjectOp::Update());
+	applyOnAllObjects(&Object::update);
 }
 
 void Map::removeRenderablesOfObject(const Object* object, bool mark_area_as_dirty)
@@ -1239,7 +1230,7 @@ void Map::addObjectToSelection(Object* object, bool emit_selection_changed)
 	if (!first_selected_object)
 		first_selected_object = object;
 	if (emit_selection_changed)
-		emit(objectSelectionChanged());
+		emit objectSelectionChanged();
 }
 
 void Map::removeObjectFromSelection(Object* object, bool emit_selection_changed)
@@ -1251,7 +1242,7 @@ void Map::removeObjectFromSelection(Object* object, bool emit_selection_changed)
 	if (first_selected_object == object)
 		first_selected_object = object_selection.empty() ? nullptr : *object_selection.begin();
 	if (emit_selection_changed)
-		emit(objectSelectionChanged());
+		emit objectSelectionChanged();
 }
 
 bool Map::removeSymbolFromSelection(const Symbol* symbol, bool emit_selection_changed)
@@ -1274,7 +1265,7 @@ bool Map::removeSymbolFromSelection(const Symbol* symbol, bool emit_selection_ch
 			first_selected_object = object_selection.empty() ? nullptr : *object_selection.begin();
 	}
 	if (emit_selection_changed && removed_at_least_one_object)
-		emit(objectSelectionChanged());
+		emit objectSelectionChanged();
 	return removed_at_least_one_object;
 }
 
@@ -1304,17 +1295,17 @@ void Map::clearObjectSelection(bool emit_selection_changed)
 	first_selected_object = nullptr;
 	
 	if (emit_selection_changed)
-		emit(objectSelectionChanged());
+		emit objectSelectionChanged();
 }
 
 void Map::emitSelectionChanged()
 {
-	emit(objectSelectionChanged());
+	emit objectSelectionChanged();
 }
 
 void Map::emitSelectionEdited()
 {
-	emit(selectedObjectEdited());
+	emit selectedObjectEdited();
 }
 
 void Map::addMapWidget(MapWidget* widget)
@@ -1366,7 +1357,7 @@ void Map::ensureVisibilityOfSelectedObjects(SelectionVisibility visibility)
 }
 
 
-void Map::setDrawingBoundingBox(QRectF map_coords_rect, int pixel_border, bool do_update)
+void Map::setDrawingBoundingBox(const QRectF& map_coords_rect, int pixel_border, bool do_update)
 {
 	for (MapWidget* widget : widgets)
 		widget->setDrawingBoundingBox(map_coords_rect, pixel_border, do_update);
@@ -1379,7 +1370,7 @@ void Map::clearDrawingBoundingBox()
 }
 
 
-void Map::setActivityBoundingBox(QRectF map_coords_rect, int pixel_border, bool do_update)
+void Map::setActivityBoundingBox(const QRectF& map_coords_rect, int pixel_border, bool do_update)
 {
 	for (MapWidget* widget : widgets)
 		widget->setActivityBoundingBox(map_coords_rect, pixel_border, do_update);
@@ -1392,7 +1383,7 @@ void Map::clearActivityBoundingBox()
 }
 
 
-void Map::updateDrawing(QRectF map_coords_rect, int pixel_border)
+void Map::updateDrawing(const QRectF& map_coords_rect, int pixel_border)
 {
 	for (MapWidget* widget : widgets)
 		widget->updateDrawing(map_coords_rect, pixel_border);
@@ -1463,7 +1454,7 @@ void Map::setColor(MapColor* color, int pos)
 	}
 	
 	updateSymbolIcons(color);
-	emit(colorChanged(pos, color));
+	emit colorChanged(pos, color);
 }
 
 void Map::addColor(MapColor* color, int pos)
@@ -1475,7 +1466,7 @@ void Map::addColor(MapColor* color, int pos)
 		updateAllMapWidgets();
 	}
 	setColorsDirty();
-	emit(colorAdded(pos, color));
+	emit colorAdded(pos, color);
 	color->setPriority(pos);
 }
 
@@ -1514,7 +1505,7 @@ void Map::deleteColor(int pos)
 		if (symbol->getType() != Symbol::Combined)
 			symbol->colorDeleted(color);
 	}
-	emit(colorDeleted(pos, color));
+	emit colorDeleted(pos, color);
 	
 	delete color;
 }
@@ -1756,7 +1747,7 @@ void Map::addSymbol(Symbol* symbol, int pos)
 		updateAllMapWidgets();
 	}
 	
-	emit(symbolAdded(pos, symbol));
+	emit symbolAdded(pos, symbol);
 	setSymbolsDirty();
 }
 
@@ -1766,7 +1757,7 @@ void Map::moveSymbol(int from, int to)
 	if (from > to)
 		++from;
 	symbols.erase(symbols.begin() + from);
-	// TODO: emit(symbolChanged(pos, symbol)); ?
+	// TODO: emit symbolChanged(pos, symbol); ?
 	setSymbolsDirty();
 }
 
@@ -1821,7 +1812,7 @@ void Map::setSymbol(Symbol* symbol, int pos)
 	
 	// Change the symbol
 	symbols[pos] = symbol;
-	emit(symbolChanged(pos, symbol, old_symbol));
+	emit symbolChanged(pos, symbol, old_symbol);
 	setSymbolsDirty();
 	delete old_symbol;
 	
@@ -1855,7 +1846,7 @@ void Map::deleteSymbol(int pos)
 		updateAllMapWidgets();
 	}
 	
-	emit(symbolDeleted(pos, temp));
+	emit symbolDeleted(pos, temp);
 	setSymbolsDirty();
 }
 
@@ -1894,7 +1885,7 @@ void Map::updateSymbolIcons(const MapColor* color)
 		if (symbols[i]->containsColor(color))
 		{
 			symbols[i]->resetIcon();
-			emit(symbolIconChanged(i));
+			emit symbolIconChanged(i);
 		}
 	}
 }
@@ -1906,7 +1897,7 @@ void Map::scaleAllSymbols(double factor)
 	{
 		Symbol* symbol = getSymbol(i);
 		symbol->scale(factor);
-		emit(symbolChanged(i, symbol, symbol));
+		emit symbolChanged(i, symbol, symbol);
 	}
 	updateAllObjects();
 	
@@ -1916,11 +1907,11 @@ void Map::scaleAllSymbols(double factor)
 void Map::determineSymbolsInUse(std::vector< bool >& out) const
 {
 	out.assign(symbols.size(), false);
-	for (std::size_t l = 0; l < parts.size(); ++l)
+	for (auto part : parts)
 	{
-		for (int o = 0; o < parts[l]->getNumObjects(); ++o)
+		for (int o = 0; o < part->getNumObjects(); ++o)
 		{
-			const Symbol* symbol = parts[l]->getObject(o)->getSymbol();
+			const Symbol* symbol = part->getObject(o)->getSymbol();
 			int index = findSymbolIndex(symbol);
 			if (index >= 0)
 				out[index] = true;
@@ -1964,7 +1955,7 @@ void Map::determineSymbolUseClosure(std::vector< bool >& symbol_bitfield) const
 void Map::setTemplate(Template* temp, int pos)
 {
 	templates[pos] = temp;
-	emit(templateChanged(pos, templates[pos]));
+	emit templateChanged(pos, templates[pos]);
 }
 
 void Map::addTemplate(Template* temp, int pos)
@@ -1976,7 +1967,7 @@ void Map::addTemplate(Template* temp, int pos)
 		updateAllMapWidgets();
 	}
 	
-	emit(templateAdded(pos, temp));
+	emit templateAdded(pos, temp);
 }
 
 void Map::removeTemplate(int pos)
@@ -2000,7 +1991,7 @@ void Map::deleteTemplate(int pos)
 	delete temp;
 }
 
-void Map::setTemplateAreaDirty(Template* temp, QRectF area, int pixel_border)
+void Map::setTemplateAreaDirty(Template* temp, const QRectF& area, int pixel_border)
 {
 	bool front_cache = findTemplateIndex(temp) >= getFirstFrontTemplate();	// TODO: is there a better way to find out if that is a front or back template?
 	
@@ -2041,7 +2032,7 @@ void Map::setTemplatesDirty()
 
 void Map::emitTemplateChanged(Template* temp)
 {
-	emit(templateChanged(findTemplateIndex(temp), temp));
+	emit templateChanged(findTemplateIndex(temp), temp);
 }
 
 void Map::clearClosedTemplates()
@@ -2101,7 +2092,7 @@ bool Map::reloadClosedTemplate(int i, int target_pos, QWidget* dialog_parent, co
 
 void Map::push(UndoStep *step)
 {
-	undo_manager->push(step);
+	undo_manager->push(std::unique_ptr<UndoStep>(step));
 }
 
 
@@ -2348,7 +2339,7 @@ QRectF Map::calculateExtent(bool include_helper_symbols, bool include_templates,
 	return rect;
 }
 
-void Map::setObjectAreaDirty(QRectF map_coords_rect)
+void Map::setObjectAreaDirty(const QRectF& map_coords_rect)
 {
 	for (MapWidget* widget : widgets)
 		widget->markObjectAreaDirty(map_coords_rect);
@@ -2389,7 +2380,7 @@ void Map::findObjectsAtBox(
 	getCurrentPart()->findObjectsAtBox(corner1, corner2, include_hidden_objects, include_protected_objects, out);
 }
 
-int Map::countObjectsInRect(QRectF map_coord_rect, bool include_hidden_objects)
+int Map::countObjectsInRect(const QRectF& map_coord_rect, bool include_hidden_objects)
 {
 	int count = 0;
 	for (const MapPart* part : parts)
@@ -2397,48 +2388,85 @@ int Map::countObjectsInRect(QRectF map_coord_rect, bool include_hidden_objects)
 	return count;
 }
 
+
+
+bool Map::existsObject(const std::function<bool (const Object*)>& condition) const
+{
+	return std::any_of(begin(parts), end(parts), [&condition](auto part) { return part->existsObject(condition); });
+}
+
+
+void Map::applyOnMatchingObjects(const std::function<void (Object*)>& operation, const std::function<bool (const Object*)>& condition)
+{
+	for (auto part : parts)
+		part->applyOnMatchingObjects(operation, condition);
+}
+
+
+void Map::applyOnMatchingObjects(const std::function<void (Object*, MapPart*, int)>& operation, const std::function<bool (const Object*)>& condition)
+{
+	for (auto part : parts)
+		part->applyOnMatchingObjects(operation, condition);
+}
+
+
+void Map::applyOnAllObjects(const std::function<void (Object*)>& operation)
+{
+	for (auto part : parts)
+		part->applyOnAllObjects(operation);
+}
+
+
+void Map::applyOnAllObjects(const std::function<void (Object*, MapPart*, int)>& operation)
+{
+	for (auto part : parts)
+		part->applyOnAllObjects(operation);
+}
+
+
+
 void Map::scaleAllObjects(double factor, const MapCoord& scaling_center)
 {
-	applyOnAllObjects(ObjectOp::Scale(factor, scaling_center));
+	applyOnAllObjects(ObjectOp::Scale{factor, MapCoordF{scaling_center}});
 }
 
 void Map::rotateAllObjects(double rotation, const MapCoord& center)
 {
-	applyOnAllObjects(ObjectOp::Rotate(rotation, center));
+	applyOnAllObjects(ObjectOp::Rotate{rotation, MapCoordF{center}});
 }
 
 void Map::updateAllObjects()
 {
-	applyOnAllObjects(ObjectOp::ForceUpdate());
+	applyOnAllObjects(&Object::forceUpdate);
 }
 
 void Map::updateAllObjectsWithSymbol(const Symbol* symbol)
 {
-	applyOnMatchingObjects(ObjectOp::ForceUpdate(), ObjectOp::HasSymbol(symbol));
+	applyOnMatchingObjects(&Object::forceUpdate, ObjectOp::HasSymbol{symbol});
 }
 
 void Map::changeSymbolForAllObjects(const Symbol* old_symbol, const Symbol* new_symbol)
 {
-	applyOnMatchingObjects(ObjectOp::ChangeSymbol(new_symbol), ObjectOp::HasSymbol(old_symbol));
+	applyOnMatchingObjects(ObjectOp::ChangeSymbol{new_symbol}, ObjectOp::HasSymbol{old_symbol});
 }
 
 bool Map::deleteAllObjectsWithSymbol(const Symbol* symbol)
 {
-	bool exists = existsObject(ObjectOp::HasSymbol(symbol));
+	bool exists = existsObject(ObjectOp::HasSymbol{symbol});
 	if (exists)
 	{
 		// Remove objects from selection
 		removeSymbolFromSelection(symbol, true);
 	
 		// Delete objects from map
-		applyOnMatchingObjects(ObjectOp::Delete(), ObjectOp::HasSymbol(symbol));
+		applyOnMatchingObjects(ObjectOp::Delete(), ObjectOp::HasSymbol{symbol});
 	}
 	return exists;
 }
 
 bool Map::existsObjectWithSymbol(const Symbol* symbol) const
 {
-	return existsObject(ObjectOp::HasSymbol(symbol));
+	return existsObject(ObjectOp::HasSymbol{symbol});
 }
 
 void Map::setGeoreferencing(const Georeferencing& georeferencing)
@@ -2556,13 +2584,13 @@ void Map::setHasUnsavedChanges(bool has_unsaved_changes)
 		if (unsaved_changes)
 		{
 			unsaved_changes = false;
-			emit hasUnsavedChanges(unsaved_changes);
+			emit hasUnsavedChanged(unsaved_changes);
 		}
 	}
 	else if (!unsaved_changes)
 	{
 		unsaved_changes = true;
-		emit hasUnsavedChanges(unsaved_changes);
+		emit hasUnsavedChanged(unsaved_changes);
 	}
 }
 

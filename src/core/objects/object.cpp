@@ -23,26 +23,25 @@
 
 #include <cmath>
 
-#include <qmath.h>
-#include <QtCore/qnumeric.h>
-#include <QDebug>
+#include <QtMath>
+#include <QtNumeric>
 #include <QIODevice>
-#include <QXmlStreamAttributes>
 #include <QXmlStreamReader>
 #include <QXmlStreamWriter>
 
 #include <private/qbezier_p.h>
 
-#include "util/util.h"
-#include "fileformats/file_import_export.h"
-#include "core/symbols/symbol.h"
-#include "core/symbols/point_symbol.h"
-#include "core/symbols/line_symbol.h"
-#include "core/symbols/text_symbol.h"
-#include "core/map.h"
-#include "text_object.h"
-#include "core/renderables/renderable.h"
 #include "settings.h"
+#include "core/map.h"
+#include "core/objects/text_object.h"
+#include "core/renderables/renderable.h"
+#include "core/symbols/line_symbol.h"
+#include "core/symbols/point_symbol.h"
+#include "core/symbols/symbol.h"
+#include "core/symbols/text_symbol.h"
+#include "fileformats/file_format.h"
+#include "fileformats/file_import_export.h"
+#include "util/util.h"
 #include "util/xml_stream_util.h"
 
 
@@ -108,16 +107,20 @@ Object::~Object()
 	// nothing
 }
 
-Object& Object::operator=(const Object& other)
+void Object::copyFrom(const Object& other)
 {
-	Q_ASSERT(type == other.type);
+	if (&other == this)
+		return;
+	
+	if (type != other.type)
+		throw std::invalid_argument(Q_FUNC_INFO);
+	
 	symbol = other.symbol;
 	coords = other.coords;
 	// map unchanged!
 	object_tags = other.object_tags;
 	output_dirty = true;
 	extent = other.extent;
-	return *this;
 }
 
 bool Object::equals(const Object* other, bool compare_symbol) const
@@ -126,8 +129,7 @@ bool Object::equals(const Object* other, bool compare_symbol) const
 		return false;
 	if (compare_symbol)
 	{
-		if ((!symbol && other->symbol) ||
-			(symbol && !other->symbol))
+		if (bool(symbol) != bool(other->symbol))
 			return false;
 		if (symbol && !symbol->equals(other->symbol))
 			return false;
@@ -412,7 +414,7 @@ Object* Object::load(QXmlStreamReader& xml, Map* map, const SymbolDictionary& sy
 	{
 		QString symbol_id =  object_element.attribute<QString>(literal::symbol);
 		object->symbol = symbol_dict[symbol_id]; // FIXME: cannot work for forward references
-		// NOTE: object->symbol may be NULL.
+		// NOTE: object->symbol may be nullptr.
 	}
 	
 	if (!object->symbol || !object->symbol->isTypeCompatibleTo(object))
@@ -836,8 +838,8 @@ void Object::includeControlPointsRect(QRectF& rect) const
 	{
 		const TextObject* text = asText();
 		std::vector<QPointF> text_handles(text->controlPoints());
-		for (std::size_t i = 0; i < text_handles.size(); ++i)
-			rectInclude(rect, text_handles[i]);
+		for (auto& text_handle : text_handles)
+			rectInclude(rect, text_handle);
 	}
 }
 
@@ -1039,19 +1041,18 @@ PathObject::PathObject(const PathPart &proto_part)
 	path_parts.emplace_back(*this, proto_part);
 }
    
-Object* PathObject::duplicate() const
+PathObject* PathObject::duplicate() const
 {
 	return new PathObject(*this);
 }
 
-PathObject& PathObject::operator=(const PathObject& other)
+void PathObject::copyFrom(const Object& other)
 {
-	return static_cast<PathObject&>(operator=(static_cast<const Object&>(other)));
-}
-
-Object& PathObject::operator=(const Object& other)
-{
-	Object::operator=(other);
+	if (&other == this)
+		return;
+	
+	Object::copyFrom(other);
+	
 	const PathObject& other_path = *other.asPath();
 	pattern_rotation = other_path.getPatternRotation();
 	pattern_origin = other_path.getPatternOrigin();
@@ -1062,7 +1063,6 @@ Object& PathObject::operator=(const Object& other)
 	{
 		path_parts.emplace_back(*this, part);
 	}
-	return *this;
 }
 
 
@@ -1111,7 +1111,7 @@ void PathObject::normalize()
 	}
 }
 
-bool PathObject::intersectsBox(QRectF box) const
+bool PathObject::intersectsBox(const QRectF& box) const
 {
 	// Check path parts for an intersection with box
 	if (std::any_of(begin(path_parts), end(path_parts), [&box](const PathPart& part) { return part.intersectsBox(box); }))
@@ -3190,20 +3190,23 @@ PointObject::PointObject(const PointObject& proto)
 	// nothing
 }
 
-Object* PointObject::duplicate() const
+PointObject* PointObject::duplicate() const
 {
 	return new PointObject(*this);
 }
 
-Object& PointObject::operator=(const Object& other)
+void PointObject::copyFrom(const Object& other)
 {
-	Object::operator=(other);
+	if (&other == this)
+		return;
+	
+	Object::copyFrom(other);
 	const PointObject* point_other = other.asPoint();
 	const PointSymbol* point_symbol = getSymbol()->asPoint();
 	if (point_symbol && point_symbol->isRotatable())
 		setRotation(point_other->getRotation());
-	return *this;
 }
+
 
 void PointObject::setPosition(qint32 x, qint32 y)
 {
@@ -3249,7 +3252,7 @@ void PointObject::setRotation(MapCoordF vector)
 	setRotation(atan2(vector.x(), vector.y()));
 }
 
-bool PointObject::intersectsBox(QRectF box) const
+bool PointObject::intersectsBox(const QRectF& box) const
 {
 	return box.contains(QPointF(coords.front()));
 }

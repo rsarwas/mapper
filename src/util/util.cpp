@@ -22,20 +22,18 @@
 #include "util.h"
 
 #include <QApplication>
-#include <QDebug>
 #include <QDir>
 #include <QIODevice>
 #include <QMessageBox>
 #include <QProcess>
-#include <QSettings>
 #include <QScreen>
 #include <QStandardPaths>
-#include <QUrl>
+#include <QUrl> // IWYU pragma: keep
 
 #include "mapper_config.h"
 #include "settings.h"
 #include "core/map_coord.h"
-#include "gui/text_browser_dialog.h"
+#include "gui/text_browser_dialog.h" // IWYU pragma: keep
 
 DoubleValidator::DoubleValidator(double bottom, double top, QObject* parent, int decimals) : QDoubleValidator(bottom, top, decimals, parent)
 {
@@ -57,8 +55,8 @@ void blockSignalsRecursively(QObject* obj, bool block)
 	obj->blockSignals(block);
 	
 	const QObjectList& list = obj->children();
-	for (QObjectList::const_iterator it = list.begin(), end = list.end(); it != end; ++it)
-		blockSignalsRecursively(*it, block);
+	for (auto child : list)
+		blockSignalsRecursively(child, block);
 }
 
 void rectInclude(QRectF& rect, QPointF point)
@@ -230,7 +228,7 @@ void showHelp(QWidget* dialog_parent, const char* file_and_anchor_latin1)
 	showHelp(dialog_parent, QString::fromLatin1(file_and_anchor_latin1));
 }
 
-void showHelp(QWidget* dialog_parent, QString filename)
+void showHelp(QWidget* dialog_parent, const QString& filename)
 {
 #if defined(Q_OS_ANDROID)
 	const QString manual_path = QLatin1String("doc:/manual/") + filename;
@@ -290,6 +288,7 @@ void showHelp(QWidget* dialog_parent, QString filename)
 #if defined(Q_OS_LINUX)
 		auto env = QProcessEnvironment::systemEnvironment();
 		env.insert(QLatin1String("QT_SELECT"), QLatin1String("5")); // #541
+		env.insert(QLatin1String("LANG"), Settings::getInstance().getSetting(Settings::General_Language).toString());
 		assistant_process.setProcessEnvironment(env);
 #endif
 		

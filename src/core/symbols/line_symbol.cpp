@@ -27,12 +27,12 @@
 #include <iterator>
 #include <memory>
 #include <utility>
-// IWYU pragma: no_include <ext/alloc_traits.h>
 
 #include <QtMath>
 #include <QtNumeric>
 #include <QCoreApplication>
 #include <QIODevice>
+#include <QLatin1String>
 #include <QStringRef>
 #include <QXmlStreamAttributes>
 #include <QXmlStreamReader>
@@ -43,7 +43,6 @@
 #include "core/map.h"
 #include "core/map_color.h"
 #include "core/map_coord.h"
-#include "core/map_part.h"
 #include "core/path_coord.h"
 #include "core/objects/object.h"
 #include "core/renderables/renderable.h"
@@ -147,7 +146,7 @@ void LineSymbolBorder::assign(const LineSymbolBorder& other, const MapColorMap* 
 
 bool LineSymbolBorder::isVisible() const
 {
-	return width > 0 && color != nullptr && !(dash_length == 0 && dashed);
+	return width > 0 && color && !(dash_length == 0 && dashed);
 }
 
 void LineSymbolBorder::createSymbol(LineSymbol& out) const
@@ -205,6 +204,7 @@ LineSymbol::LineSymbol() noexcept
 	mid_symbols_per_spot = 1;
 	mid_symbol_distance = 0;
 	suppress_dash_symbol_at_ends = false;
+	scale_dash_symbol = true;
 	
 	// Border lines
 	have_border_lines = false;
@@ -255,6 +255,7 @@ Symbol* LineSymbol::duplicate(const MapColorMap* color_map) const
 	new_line->mid_symbols_per_spot = mid_symbols_per_spot;
 	new_line->mid_symbol_distance = mid_symbol_distance;
 	new_line->suppress_dash_symbol_at_ends = suppress_dash_symbol_at_ends;
+	new_line->scale_dash_symbol = scale_dash_symbol;
 	new_line->have_border_lines = have_border_lines;
 	new_line->border.assign(border, color_map);
 	new_line->right_border.assign(right_border, color_map);
@@ -1318,10 +1319,11 @@ void LineSymbol::createDashSymbolRenderables(
 	{
 		if (flags[i].isDashPoint())
 		{
-			auto params = path.calculateTangentScaling(i);
+			const auto params = path.calculateTangentScaling(i);
 			//params.first.perpRight();
-			params.second = qMin(params.second, 2.0 * LineSymbol::miterLimit());
-			dash_symbol->createRenderablesScaled(coords[i], params.first.angle(), output, params.second);
+			auto rotation = dash_symbol->isRotatable() ? params.first.angle() : 0.0;
+			auto scale = scale_dash_symbol ? qMin(params.second, 2.0 * LineSymbol::miterLimit()) : 1.0;
+			dash_symbol->createRenderablesScaled(coords[i], rotation, output, scale);
 		}
 	}
 }
@@ -1643,22 +1645,22 @@ void LineSymbol::ensurePointSymbols(const QString& start_name, const QString& mi
 
 void LineSymbol::cleanupPointSymbols()
 {
-	if (start_symbol != nullptr && start_symbol->isEmpty())
+	if (start_symbol && start_symbol->isEmpty())
 	{
 		delete start_symbol;
 		start_symbol = nullptr;
 	}
-	if (mid_symbol != nullptr && mid_symbol->isEmpty())
+	if (mid_symbol && mid_symbol->isEmpty())
 	{
 		delete mid_symbol;
 		mid_symbol = nullptr;
 	}
-	if (end_symbol != nullptr && end_symbol->isEmpty())
+	if (end_symbol && end_symbol->isEmpty())
 	{
 		delete end_symbol;
 		end_symbol = nullptr;
 	}
-	if (dash_symbol != nullptr && dash_symbol->isEmpty())
+	if (dash_symbol && dash_symbol->isEmpty())
 	{
 		delete dash_symbol;
 		dash_symbol = nullptr;
@@ -1822,29 +1824,31 @@ void LineSymbol::saveImpl(QXmlStreamWriter& xml, const Map& map) const
 	xml.writeAttribute(QString::fromLatin1("mid_symbol_distance"), QString::number(mid_symbol_distance));
 	if (suppress_dash_symbol_at_ends)
 		xml.writeAttribute(QString::fromLatin1("suppress_dash_symbol_at_ends"), QString::fromLatin1("true"));
+	if (!scale_dash_symbol)
+		xml.writeAttribute(QString::fromLatin1("scale_dash_symbol"), QString::fromLatin1("false"));
 	
-	if (start_symbol != nullptr)
+	if (start_symbol)
 	{
 		xml.writeStartElement(QString::fromLatin1("start_symbol"));
 		start_symbol->save(xml, map);
 		xml.writeEndElement();
 	}
 	
-	if (mid_symbol != nullptr)
+	if (mid_symbol)
 	{
 		xml.writeStartElement(QString::fromLatin1("mid_symbol"));
 		mid_symbol->save(xml, map);
 		xml.writeEndElement();
 	}
 	
-	if (end_symbol != nullptr)
+	if (end_symbol)
 	{
 		xml.writeStartElement(QString::fromLatin1("end_symbol"));
 		end_symbol->save(xml, map);
 		xml.writeEndElement();
 	}
 	
-	if (dash_symbol != nullptr)
+	if (dash_symbol)
 	{
 		xml.writeStartElement(QString::fromLatin1("dash_symbol"));
 		dash_symbol->save(xml, map);
@@ -1894,6 +1898,7 @@ bool LineSymbol::loadImpl(QXmlStreamReader& xml, const Map& map, SymbolDictionar
 	mid_symbols_per_spot = attributes.value(QLatin1String("mid_symbols_per_spot")).toInt();
 	mid_symbol_distance = attributes.value(QLatin1String("mid_symbol_distance")).toInt();
 	suppress_dash_symbol_at_ends = (attributes.value(QLatin1String("suppress_dash_symbol_at_ends")) == QLatin1String("true"));
+	scale_dash_symbol = (attributes.value(QLatin1String("scale_dash_symbol")) != QLatin1String("false"));
 	
 	have_border_lines = false;
 	while (xml.readNextStartElement())
@@ -2002,30 +2007,28 @@ bool LineSymbol::equalsImpl(const Symbol* other, Qt::CaseSensitivity case_sensit
 		}
 	}
 
-	if ((start_symbol == nullptr && line->start_symbol != nullptr) ||
-		(start_symbol != nullptr && line->start_symbol == nullptr))
+	if (bool(start_symbol) != bool(line->start_symbol))
 		return false;
 	if (start_symbol && !start_symbol->equals(line->start_symbol))
 		return false;
 	
-	if ((mid_symbol == nullptr && line->mid_symbol != nullptr) ||
-		(mid_symbol != nullptr && line->mid_symbol == nullptr))
+	if (bool(mid_symbol) != bool(line->mid_symbol))
 		return false;
 	if (mid_symbol && !mid_symbol->equals(line->mid_symbol))
 		return false;
 	
-	if ((end_symbol == nullptr && line->end_symbol != nullptr) ||
-		(end_symbol != nullptr && line->end_symbol == nullptr))
+	if (bool(end_symbol) != bool(line->end_symbol))
 		return false;
 	if (end_symbol && !end_symbol->equals(line->end_symbol))
 		return false;
 	
-	if ((dash_symbol == nullptr && line->dash_symbol != nullptr) ||
-		(dash_symbol != nullptr && line->dash_symbol == nullptr))
+	if (bool(dash_symbol) != bool(line->dash_symbol))
 		return false;
 	if (dash_symbol && !dash_symbol->equals(line->dash_symbol))
 		return false;
 	if (suppress_dash_symbol_at_ends != line->suppress_dash_symbol_at_ends)
+		return false;
+	if (scale_dash_symbol != line->scale_dash_symbol)
 		return false;
 	
 	if (mid_symbol)

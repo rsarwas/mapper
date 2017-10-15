@@ -25,12 +25,27 @@
 #include <QElapsedTimer>
 #include <QScopedPointer>
 
-#include "edit_tool.h"
+#include <Qt>
+#include <QObject>
+#include <QRectF>
+#include <QString>
+#include <QVariant>
 
+#include "core/map_coord.h"
+#include "tools/edit_tool.h"
+
+class QAction;
+class QFocusEvent;
+class QInputMethodEvent;
+class QKeyEvent;
+class QMouseEvent;
+class QPainter;
+class QRectF;
+
+class MapEditorController;
 class MapWidget;
-class CombinedSymbol;
-class PointObject;
-class Symbol;
+class Object;
+class ObjectMover;
 class TextObjectEditorHelper;
 
 
@@ -44,7 +59,7 @@ class EditPointTool : public EditTool
 Q_OBJECT
 public:
 	EditPointTool(MapEditorController* editor, QAction* tool_action);
-	virtual ~EditPointTool();
+	~EditPointTool() override;
 	
 	/**
 	 * Returns true if new points shall be added as dash points by default.
@@ -79,7 +94,7 @@ protected:
 	bool keyPress(QKeyEvent* event) override;
 	bool keyRelease(QKeyEvent* event) override;
 	bool inputMethodEvent(QInputMethodEvent* event) override;
-	QVariant inputMethodQuery(Qt::InputMethodQuery property, QVariant argument) const override;
+	QVariant inputMethodQuery(Qt::InputMethodQuery property, const QVariant& argument) const override;
 	
 	void initImpl() override;
 	void objectSelectionChangedImpl() override;
@@ -121,6 +136,11 @@ protected:
 	 * Checks if the cursor hovers over the selection frame.
 	 */
 	bool hoveringOverFrame() const;
+	
+	/**
+	 * Checks if a the opposite handle should be moved synchronously.
+	 */
+	bool moveOppositeHandle() const;
 	
 	
 	/** Measures the time a click takes to decide whether to do selection. */

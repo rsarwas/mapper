@@ -18,22 +18,38 @@
  */
 
 
-#ifndef _OPENORIENTEERING_TEMPLATE_TOOL_PAINT_H_
-#define _OPENORIENTEERING_TEMPLATE_TOOL_PAINT_H_
+#ifndef OPENORIENTEERING_TEMPLATE_TOOL_PAINT_H
+#define OPENORIENTEERING_TEMPLATE_TOOL_PAINT_H
 
+#include <vector>
+
+#include <QColor>
 #include <QDialog>
+#include <QObject>
 #include <QPointer>
+#include <QRectF>
+#include <QSize>
+#include <QString>
+#include <QWidget>
 
+#include "core/map_coord.h"
 #include "tools/tool.h"
 
-QT_BEGIN_NAMESPACE
+class QAction;
+class QCursor;
 class QListWidgetItem;
-class QDockWidget;
-QT_END_NAMESPACE
+class QMouseEvent;
+class QPaintEvent;
+class QPainter;
+class QPushButton;
+class QRect;
 
 class Map;
+class MapEditorController;
+class MapWidget;
 class Template;
 class PaintOnTemplatePaletteWidget;
+
 
 /** Tool to paint on image templates. */
 class PaintOnTemplateTool : public MapEditorTool
@@ -41,16 +57,16 @@ class PaintOnTemplateTool : public MapEditorTool
 Q_OBJECT
 public:
 	PaintOnTemplateTool(MapEditorController* editor, QAction* tool_action, Template* temp);
-	virtual ~PaintOnTemplateTool();
+	~PaintOnTemplateTool() override;
 	
-	virtual void init();
-	virtual const QCursor& getCursor() const;
+	void init() override;
+	const QCursor& getCursor() const override;
 	
-	virtual bool mousePressEvent(QMouseEvent* event, MapCoordF map_coord, MapWidget* widget);
-	virtual bool mouseMoveEvent(QMouseEvent* event, MapCoordF map_coord, MapWidget* widget);
-	virtual bool mouseReleaseEvent(QMouseEvent* event, MapCoordF map_coord, MapWidget* widget);
+	bool mousePressEvent(QMouseEvent* event, MapCoordF map_coord, MapWidget* widget) override;
+	bool mouseMoveEvent(QMouseEvent* event, MapCoordF map_coord, MapWidget* widget) override;
+	bool mouseReleaseEvent(QMouseEvent* event, MapCoordF map_coord, MapWidget* widget) override;
 	
-	virtual void draw(QPainter* painter, MapWidget* widget);
+	void draw(QPainter* painter, MapWidget* widget) override;
 	
 public slots:
 	void templateDeleted(int pos, const Template* temp);
@@ -77,11 +93,11 @@ class PaintOnTemplatePaletteWidget : public QWidget
 Q_OBJECT
 public:
 	PaintOnTemplatePaletteWidget(bool close_on_selection);
-	~PaintOnTemplatePaletteWidget();
+	~PaintOnTemplatePaletteWidget() override;
 
 	QColor getSelectedColor();
 	
-	virtual QSize sizeHint() const;
+	QSize sizeHint() const override;
 	
 signals:
 	void colorSelected(QColor color);
@@ -89,9 +105,9 @@ signals:
 	void redoSelected();
 	
 protected:
-	virtual void paintEvent(QPaintEvent* event);
-	virtual void mousePressEvent(QMouseEvent* event);
-	virtual void mouseReleaseEvent(QMouseEvent* event);
+	void paintEvent(QPaintEvent* event) override;
+	void mousePressEvent(QMouseEvent* event) override;
+	void mouseReleaseEvent(QMouseEvent* event) override;
 	
 private:
 	int getNumFieldsX() const;

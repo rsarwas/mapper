@@ -24,7 +24,6 @@
 #include <QApplication>
 #include <QCloseEvent>
 #include <QDesktopServices>
-#include <QDesktopWidget>
 #include <QDir>
 #include <QFileDialog>
 #include <QLabel>
@@ -39,27 +38,28 @@
 #if defined(Q_OS_ANDROID)
 #  include <QtAndroid>
 #  include <QAndroidJniObject>
+#  include <QDesktopWidget>
 #  include <QUrl>
 #endif
 
 #include <mapper_config.h>
 
-#include "about_dialog.h"
-#include "autosave_dialog.h"
-#include "home_screen_controller.h"
-#include "settings_dialog.h"
-#include "../core/map_view.h"
-#include "../fileformats/file_format_registry.h"
-#include "../fileformats/file_import_export.h"
+#include "settings.h"
 #include "core/map.h"
-#include "gui/map/new_map_dialog.h"
-#include "gui/map/map_editor.h"
-#include "../fileformats/file_format.h"
-#include "../settings.h"
+#include "core/map_view.h"
 #include "core/symbols/symbol.h"
+#include "fileformats/file_format.h"
+#include "fileformats/file_format_registry.h"
+#include "gui/about_dialog.h"
+#include "gui/autosave_dialog.h"
+#include "gui/file_dialog.h"
+#include "gui/home_screen_controller.h"
+#include "gui/settings_dialog.h"
+#include "gui/map/map_editor.h"
+#include "gui/map/new_map_dialog.h"
 #include "undo/undo_manager.h"
 #include "util/util.h"
-#include "../util/backports.h"
+#include "util/backports.h"
 
 
 constexpr int MainWindow::max_recent_files;
@@ -280,10 +280,10 @@ void MainWindow::createFileMenu()
 	
 	open_recent_menu = new QMenu(tr("Open &recent"), this);
 	open_recent_menu->setWhatsThis(Util::makeWhatThis("file_menu.html"));
-	for (int i = 0; i < max_recent_files; ++i)
+	for (auto& action : recent_file_act)
 	{
-		recent_file_act[i] = new QAction(this);
-		connect(recent_file_act[i], &QAction::triggered, this, &MainWindow::openRecentFile);
+		action = new QAction(this);
+		connect(action, &QAction::triggered, this, &MainWindow::openRecentFile);
 	}
 	open_recent_menu_inserted = false;
 	
@@ -738,7 +738,10 @@ bool MainWindow::openPath(const QString &path)
 	if (open_in_progress == path)
 	{
 		int result = QMessageBox::warning(this, tr("Crash warning"), 
-		  tr("It seems that %1 crashed the last time this file was opened:<br /><tt>%2</tt><br /><br />Really retry to open it?").arg(appName()).arg(path),
+		  tr("It seems that %1 crashed the last time this file was opened:<br />"
+		     "<tt>%2</tt><br /><br />"
+		     "Really retry to open it?")
+		  .arg(appName(), path),
 		  QMessageBox::Yes | QMessageBox::No);
 		settings.remove(reopen_blocker);
 		if (result == QMessageBox::No)
@@ -758,7 +761,7 @@ bool MainWindow::openPath(const QString &path)
 	
 	QString new_actual_path = path;
 	QString autosave_path = Autosave::autosavePath(path);
-	bool new_autosave_conflict = QFileInfo(autosave_path).exists();
+	bool new_autosave_conflict = QFileInfo::exists(autosave_path);
 	if (new_autosave_conflict)
 	{
 #if defined(Q_OS_ANDROID)
@@ -852,7 +855,7 @@ void MainWindow::switchActualPath(const QString& path)
 void MainWindow::openPathLater(const QString& path)
 {
 	path_backlog.push_back(path);
-	QTimer::singleShot(10, this, SLOT(openPathBacklog()));
+	QTimer::singleShot(10, this, SLOT(openPathBacklog()));  // clazy:exclude=old-style-connect
 }
 
 void MainWindow::openPathBacklog()
@@ -1017,7 +1020,7 @@ QString MainWindow::getOpenFileName(QWidget* parent, const QString& title, FileF
 	
 	filters += tr("All files") + QLatin1String(" (*.*)");
 	
-	QString path = QFileDialog::getOpenFileName(parent, title, open_directory, filters);
+	QString path = FileDialog::getOpenFileName(parent, title, open_directory, filters);
 	QFileInfo info(path);
 	return info.canonicalFilePath();
 }
@@ -1051,7 +1054,7 @@ bool MainWindow::showSaveAsDialog()
 	}
 	
 	QString filter; // will be set to the selected filter by QFileDialog
-	QString path = QFileDialog::getSaveFileName(this, tr("Save file"), save_directory, filters, &filter);
+	QString path = FileDialog::getSaveFileName(this, tr("Save file"), save_directory, filters, &filter);
 	
 	// On Windows, when the user enters "sample", we get "sample.omap *.xmap".
 	// (Fixed in upstream qtbase/src/plugins/platforms/windows/qwindowsdialoghelpers.cpp
@@ -1084,15 +1087,9 @@ bool MainWindow::showSaveAsDialog()
 // 	QString selected_extension = "." + format->primaryExtension();
 	QStringList selected_extensions(format->fileExtensions());
 	selected_extensions.replaceInStrings(QRegExp(QString::fromLatin1("^")), QString::fromLatin1("."));
-	bool has_extension = false;
-	for (auto selected_extension : qAsConst(selected_extensions))
-	{
-		if (path.endsWith(selected_extension, Qt::CaseInsensitive))
-		{
-			has_extension = true;
-			break;
-		}
-	}
+	bool has_extension = std::any_of(selected_extensions.constBegin(), selected_extensions.constEnd(), [&path](const auto& selected_extension) {
+		return path.endsWith(selected_extension, Qt::CaseInsensitive);
+	});
 	if (!has_extension)
 		path += QLatin1Char('.') + format->primaryExtension();
 	// Ensure that the file name matches the format.

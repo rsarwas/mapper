@@ -21,8 +21,10 @@
 
 #include "settings.h"
 
+#include <QtGlobal>
 #include <QApplication>
-#include <QDebug>
+#include <QByteArray>
+#include <QLatin1String>
 #include <QLocale>
 #include <QScreen>
 #include <QSettings>
@@ -78,6 +80,7 @@ Settings::Settings()
 	registerSetting(SymbolWidget_IconSizeMM, "SymbolWidget/icon_size_mm", symbol_widget_icon_size_mm_default);
 	
 	registerSetting(General_RetainCompatiblity, "retainCompatiblity", false);
+	registerSetting(General_SaveUndoRedo, "saveUndoRedo", true);
 	registerSetting(General_AutosaveInterval, "autosave", 15); // unit: minutes
 	registerSetting(General_Language, "language", QLocale::system().name().left(2));
 	registerSetting(General_PixelsPerInch, "pixelsPerInch", ppi);
@@ -131,7 +134,7 @@ void Settings::registerSetting(Settings::SettingsEnum id, const char* path_latin
 	setting_defaults[id] = default_value;
 }
 
-void Settings::migrateSettings(QSettings& settings, QVariant version)
+void Settings::migrateSettings(QSettings& settings, const QVariant& version)
 {
 	migrateValue("General/language", General_Language, settings);
 	if (migrateValue("MapEditor/click_tolerance", MapEditor_ClickToleranceMM, settings))
@@ -187,12 +190,12 @@ QVariant Settings::getSettingCached(Settings::SettingsEnum setting)
 	return value;
 }
 
-void Settings::setSettingInCache(Settings::SettingsEnum setting, QVariant value)
+void Settings::setSettingInCache(Settings::SettingsEnum setting, const QVariant& value)
 {
 	settings_cache.insert(setting, value);
 }
 
-void Settings::setSetting(Settings::SettingsEnum setting, QVariant value)
+void Settings::setSetting(Settings::SettingsEnum setting, const QVariant& value)
 {
 	bool setting_changed = true;
 	if (settings_cache.contains(setting))
@@ -239,9 +242,9 @@ int Settings::getSymbolWidgetIconSizePx()
 	return qRound(Util::mmToPixelLogical(getSettingCached(Settings::SymbolWidget_IconSizeMM).toFloat()));
 }
 
-float Settings::getMapEditorClickTolerancePx()
+qreal Settings::getMapEditorClickTolerancePx()
 {
-	return Util::mmToPixelLogical(getSettingCached(Settings::MapEditor_ClickToleranceMM).toFloat());
+	return Util::mmToPixelLogical(getSettingCached(Settings::MapEditor_ClickToleranceMM).toReal());
 }
 
 float Settings::getMapEditorSnapDistancePx()

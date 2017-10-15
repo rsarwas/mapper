@@ -20,26 +20,27 @@
 #ifndef OPENORIENTEERING_OGR_TEMPLATE_H
 #define OPENORIENTEERING_OGR_TEMPLATE_H
 
+#include <memory>
 #include <vector>
 
-#include <QtGlobal>
 #include <QObject>
 #include <QString>
 
 #include "templates/template_map.h"
 
-QT_BEGIN_NAMESPACE
 class QByteArray;
+class QFile;
 class QWidget;
 class QXmlStreamReader;
 class QXmlStreamWriter;
-QT_END_NAMESPACE
 
+class Georeferencing;
 class Map;
-class Template;
+
 
 /**
- * Template displaying a file supported by OGR.
+ * A Template which displays a file supported by OGR
+ * (geospatial vector data).
  */
 class OgrTemplate : public TemplateMap
 {
@@ -55,24 +56,42 @@ public:
 	
 	const char* getTemplateType() const override;
 	
+	std::unique_ptr<Georeferencing> makeOrthographicGeoreferencing(QFile& file);
+	
 	bool preLoadConfiguration(QWidget* dialog_parent) override;
 	
+	/**
+	 * Loads the geospatial vector data into the template_map.
+	 * 
+	 * If is_georereferenced is true, the template_map will be configured to use
+	 * the georeferencing of the map given in the constructor, and OgrFileFormat
+	 * will let OGR do coordinate transformations as needed.
+	 * 
+	 * If is_georeferenced is false and an explicit_georef is defined, the
+	 * template_map will be configured to use this particular georeferencing
+	 * to produce a projection of the original data.
+	 * 
+	 * Otherwise, the data will be handled as raw map or paper data, depending on
+	 * use_real_coords.
+	 */
 	bool loadTemplateFileImpl(bool configuring) override;
 	
 	bool postLoadConfiguration(QWidget* dialog_parent, bool& out_center_in_view) override;
 	
 protected:
-	Template* duplicateImpl() const override;
+	OgrTemplate* duplicateImpl() const override;
 	
 	bool loadTypeSpecificTemplateConfiguration(QXmlStreamReader& xml) override;
 	
 	void saveTypeSpecificTemplateConfiguration(QXmlStreamWriter& xml) const override;
 	
 private:
-	QString crs_spec;
-	bool migrating_from_pre_v07;  /// Some files saved with unstable snapshots < v0.7
-	bool use_real_coords;
-	bool center_in_view;
+	std::unique_ptr<Georeferencing> explicit_georef;
+	QString track_crs_spec;           // (limited) TemplateTrack compatibility
+	QString projected_crs_spec;       // (limited) TemplateTrack compatibility
+	bool template_track_compatibility { false };  //  transient
+	bool use_real_coords              { true };   //  transient
+	bool center_in_view               { false };  //  transient
 };
 
 #endif // OPENORIENTEERING_OGR_TEMPLATE_H

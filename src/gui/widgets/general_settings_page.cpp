@@ -27,23 +27,22 @@
 #include <QCompleter>
 #include <QDialogButtonBox>
 #include <QDoubleSpinBox>
-#include <QFileDialog>
 #include <QFormLayout>
 #include <QLineEdit>
 #include <QMessageBox>
 #include <QScreen>
-#include <QSettings>
+#include <QSettings> // IWYU pragma: keep
 #include <QSpinBox>
 #include <QTextCodec>
 #include <QToolButton>
 
-#include "home_screen_widget.h"
-#include "../main_window.h"
+#include "settings.h"
+#include "gui/file_dialog.h"
+#include "gui/main_window.h"
 #include "gui/util_gui.h"
+#include "gui/widgets/home_screen_widget.h"
+#include "gui/widgets/settings_page.h"
 #include "util/translation_util.h"
-#include "../../util/backports.h"
-#include "../../util/encoding.h"
-#include "../../util/scoped_signals_blocker.h"
 
 
 GeneralSettingsPage::GeneralSettingsPage(QWidget* parent)
@@ -101,9 +100,15 @@ GeneralSettingsPage::GeneralSettingsPage(QWidget* parent)
 	layout->addRow(Util::Headline::create(tr("Saving files")));
 	
 	compatibility_check = new QCheckBox(tr("Retain compatibility with Mapper %1").arg(QLatin1String("0.5")));
+#ifdef MAPPER_ENABLE_COMPATIBILITY
 	layout->addRow(compatibility_check);
+#else
+	// Let compatibility_check be valid, but not leak
+	connect(this, &QObject::destroyed, compatibility_check, &QObject::deleteLater);
+#endif
 	
-	// Possible point: limit size of undo/redo journal
+	undo_check = new QCheckBox(tr("Save undo/redo history"));
+	layout->addRow(undo_check);
 	
 	autosave_check = new QCheckBox(tr("Save information for automatic recovery"));
 	layout->addRow(autosave_check);
@@ -121,6 +126,7 @@ GeneralSettingsPage::GeneralSettingsPage(QWidget* parent)
 	encoding_box->addItem(available_codecs.first());
 	encoding_box->addItem(QString::fromLatin1("Windows-1252")); // Serves as an example, not translated.
 	const auto available_codecs_raw = QTextCodec::availableCodecs();
+	available_codecs.reserve(available_codecs_raw.size());
 	for (const QByteArray& item : available_codecs_raw)
 	{
 		available_codecs.append(QString::fromUtf8(item));
@@ -202,6 +208,7 @@ void GeneralSettingsPage::apply()
 	setSetting(Settings::HomeScreen_TipsVisible, tips_visible_check->isChecked());
 	setSetting(Settings::General_NewOcd8Implementation, ocd_importer_check->isChecked());
 	setSetting(Settings::General_RetainCompatiblity, compatibility_check->isChecked());
+	setSetting(Settings::General_SaveUndoRedo, undo_check->isChecked());
 	setSetting(Settings::General_PixelsPerInch, ppi_edit->value());
 	
 	auto encoding = encoding_box->currentText().toLatin1();
@@ -261,7 +268,7 @@ void GeneralSettingsPage::updateWidgets()
 	open_mru_check->setChecked(getSetting(Settings::General_OpenMRUFile).toBool());
 	tips_visible_check->setChecked(getSetting(Settings::HomeScreen_TipsVisible).toBool());
 	compatibility_check->setChecked(getSetting(Settings::General_RetainCompatiblity).toBool());
-	
+	undo_check->setChecked(getSetting(Settings::General_SaveUndoRedo).toBool());
 	int autosave_interval = getSetting(Settings::General_AutosaveInterval).toInt();
 	autosave_check->setChecked(autosave_interval > 0);
 	autosave_interval_edit->setEnabled(autosave_interval > 0);
@@ -321,7 +328,7 @@ void GeneralSettingsPage::openTranslationFileDialog()
 	if (filename.isEmpty())
 		filename = getSetting(Settings::General_TranslationFile).toString();
 	
-	filename = QFileDialog::getOpenFileName(this,
+	filename = FileDialog::getOpenFileName(this,
 	  tr("Open translation"), filename, tr("Translation files (*.qm)"));
 	if (!filename.isNull())
 	{

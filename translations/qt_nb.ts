@@ -2,6 +2,37 @@
 <!DOCTYPE TS>
 <TS version="2.1" language="nb_NO">
 <context>
+    <name>MAC_APPLICATION_MENU</name>
+    <message>
+        <source>Services</source>
+        <translation>Valg</translation>
+    </message>
+    <message>
+        <source>Hide %1</source>
+        <translation>Skjul %1</translation>
+    </message>
+    <message>
+        <source>Hide Others</source>
+        <translation>Skjul andre</translation>
+    </message>
+    <message>
+        <source>Show All</source>
+        <translation>Vis alle</translation>
+    </message>
+    <message>
+        <source>Preferences...</source>
+        <translation>Innstillinger...</translation>
+    </message>
+    <message>
+        <source>Quit %1</source>
+        <translation>Avslutt %1</translation>
+    </message>
+    <message>
+        <source>About %1</source>
+        <translation>Om %1</translation>
+    </message>
+</context>
+<context>
     <name>QAbstractSpinBox</name>
     <message>
         <source>Step &amp;down</source>
@@ -34,7 +65,7 @@
 <context>
     <name>QDialog</name>
     <message>
-        <source>What's This?</source>
+        <source>What&apos;s This?</source>
         <translation>Hva er dette?</translation>
     </message>
 </context>
@@ -133,7 +164,7 @@
         <translation>Ja til &amp;alt</translation>
     </message>
     <message>
-        <source>Don't Save</source>
+        <source>Don&apos;t Save</source>
         <translation>Ikke lagre</translation>
     </message>
 </context>
@@ -254,14 +285,14 @@
         <translation>Vis </translation>
     </message>
     <message>
-        <source>'%1' is write protected.
+        <source>&apos;%1&apos; is write protected.
 Do you want to delete it anyway?</source>
-        <translation>'%1' er skrivebeskyttet.
+        <translation>&apos;%1&apos; er skrivebeskyttet.
 Do you want to delete it anyway?</translation>
     </message>
     <message>
-        <source>Are you sure you want to delete '%1'?</source>
-        <translation>Vil du virkelig slette '%1'?</translation>
+        <source>Are you sure you want to delete &apos;%1&apos;?</source>
+        <translation>Vil du virkelig slette &apos;%1&apos;?</translation>
     </message>
     <message>
         <source>List of places and bookmarks</source>
@@ -465,7 +496,7 @@ Vennligst sjekk at riktig filnavn ble angitt.</translation>
         <translation>%1 TB</translation>
     </message>
     <message>
-        <source>&lt;b&gt;The name "%1" can not be used.&lt;/b&gt;&lt;p&gt;Try using another name, with fewer characters or no punctuations marks.</source>
+        <source>&lt;b&gt;The name &quot;%1&quot; can not be used.&lt;/b&gt;&lt;p&gt;Try using another name, with fewer characters or no punctuations marks.</source>
         <translation>&lt;b&gt;Kan ikke bruke navnet «%1».&lt;/b&gt;&lt;p&gt;Prøv et annet navn, med færre tegn, eller uten tegnsetting.</translation>
     </message>
     <message>
@@ -491,6 +522,14 @@ Vennligst sjekk at riktig filnavn ble angitt.</translation>
     <message>
         <source>Date Modified</source>
         <translation>Dato endret</translation>
+    </message>
+</context>
+<context>
+    <name>QGuiApplication</name>
+    <message>
+        <source>QT_LAYOUT_DIRECTION</source>
+        <comment>Translate this string to the string &apos;LTR&apos; in left-to-right languages or to &apos;RTL&apos; in right-to-left languages (such as Hebrew and Arabic) to get proper widget layout.</comment>
+        <translation>LTR</translation>
     </message>
 </context>
 <context>
@@ -534,35 +573,35 @@ Vennligst sjekk at riktig filnavn ble angitt.</translation>
         <translation>Kan ikke laste biblioteket %1: %2</translation>
     </message>
     <message>
-        <source>'%1' is not an ELF object (%2)</source>
+        <source>&apos;%1&apos; is not an ELF object (%2)</source>
         <translation>«%1» er ikke et ELF-objekt (%2)</translation>
     </message>
     <message>
-        <source>The plugin '%1' uses incompatible Qt library. (%2.%3.%4) [%5]</source>
+        <source>The plugin &apos;%1&apos; uses incompatible Qt library. (%2.%3.%4) [%5]</source>
         <translation>Programtillegget «%1» bruker inkompatibelt Qt-bibliotek. (%2.%3.%4) [%5]</translation>
     </message>
     <message>
-        <source>Cannot resolve symbol "%1" in %2: %3</source>
+        <source>Cannot resolve symbol &quot;%1&quot; in %2: %3</source>
         <translation>Klarte ikke slå opp symbolet «%1» i %2: %3</translation>
     </message>
     <message>
-        <source>Plugin verification data mismatch in '%1'</source>
+        <source>Plugin verification data mismatch in &apos;%1&apos;</source>
         <translation>Ikke samsvar i data for programtillegg-verifisering i «%1»</translation>
     </message>
     <message>
-        <source>'%1' is an invalid ELF object (%2)</source>
+        <source>&apos;%1&apos; is an invalid ELF object (%2)</source>
         <translation>«%1» er et ugyldig ELF-objekt (%2)</translation>
     </message>
     <message>
-        <source>The plugin '%1' uses incompatible Qt library. (Cannot mix debug and release libraries.)</source>
+        <source>The plugin &apos;%1&apos; uses incompatible Qt library. (Cannot mix debug and release libraries.)</source>
         <translation>Programtillegget «%1» bruker inkompatibelt Qt-bibliotek. (Kan ikke blande biblioteker for feilsøking og utgave.)</translation>
     </message>
     <message>
-        <source>'%1' is not an ELF object</source>
+        <source>&apos;%1&apos; is not an ELF object</source>
         <translation>«%1» er ikke et ELF-objekt</translation>
     </message>
     <message>
-        <source>The file '%1' is not a valid Qt plugin.</source>
+        <source>The file &apos;%1&apos; is not a valid Qt plugin.</source>
         <translation>Fila «%1» er ikke et gyldig Qt-programtillegg.</translation>
     </message>
     <message>
@@ -630,6 +669,10 @@ Vennligst sjekk at riktig filnavn ble angitt.</translation>
     <message>
         <source>&lt;h3&gt;About Qt&lt;/h3&gt;&lt;p&gt;This program uses Qt version %1.&lt;/p&gt;</source>
         <translation>&lt;h3&gt;Om Qt&lt;/h3&gt;&lt;p&gt;Dette programmet bruker versjon %1 av Qt.&lt;/p&gt;</translation>
+    </message>
+    <message>
+        <source>&lt;p&gt;Qt is a C++ toolkit for cross-platform application development.&lt;/p&gt;&lt;p&gt;Qt provides single-source portability across all major desktop operating systems. It is also available for embedded Linux and other embedded and mobile operating systems.&lt;/p&gt;&lt;p&gt;Qt is available under three different licensing options designed to accommodate the needs of our various users.&lt;/p&gt;&lt;p&gt;Qt licensed under our commercial license agreement is appropriate for development of proprietary/commercial software where you do not want to share any source code with third parties or otherwise cannot comply with the terms of the GNU LGPL version 3 or GNU LGPL version 2.1.&lt;/p&gt;&lt;p&gt;Qt licensed under the GNU LGPL version 3 is appropriate for the development of Qt&amp;nbsp;applications provided you can comply with the terms and conditions of the GNU LGPL version 3.&lt;/p&gt;&lt;p&gt;Qt licensed under the GNU LGPL version 2.1 is appropriate for the development of Qt&amp;nbsp;applications provided you can comply with the terms and conditions of the GNU LGPL version 2.1.&lt;/p&gt;&lt;p&gt;Please see &lt;a href=&quot;http://%2/&quot;&gt;%2&lt;/a&gt; for an overview of Qt licensing.&lt;/p&gt;&lt;p&gt;Copyright (C) %1 The Qt Company Ltd and other contributors.&lt;/p&gt;&lt;p&gt;Qt and the Qt logo are trademarks of The Qt Company Ltd.&lt;/p&gt;&lt;p&gt;Qt is The Qt Company Ltd product developed as an open source project. See &lt;a href=&quot;http://%3/&quot;&gt;%3&lt;/a&gt; for more information.&lt;/p&gt;</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -729,9 +772,41 @@ Vennligst sjekk at riktig filnavn ble angitt.</translation>
 <context>
     <name>QPlatformTheme</name>
     <message>
+        <source>OK</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Save</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Yes</source>
+        <translation>&amp;Ja</translation>
+    </message>
+    <message>
+        <source>&amp;No</source>
+        <translation>&amp;Nei</translation>
+    </message>
+    <message>
         <location filename="../src/gui/text_browser_dialog.cpp" line="63"/>
         <source>Close</source>
         <translation>Lukk</translation>
+    </message>
+    <message>
+        <source>Cancel</source>
+        <translation>Avbryt</translation>
+    </message>
+    <message>
+        <source>Discard</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Help</source>
+        <translation>Hjelp</translation>
+    </message>
+    <message>
+        <source>Reset</source>
+        <translation>Tilbakestill</translation>
     </message>
 </context>
 <context>
@@ -910,7 +985,7 @@ Vil du skrive over den?</translation>
         <translation>Executive</translation>
     </message>
     <message>
-        <source>The 'From' value cannot be greater than the 'To' value.</source>
+        <source>The &apos;From&apos; value cannot be greater than the &apos;To&apos; value.</source>
         <translation>«Fra»-verdien kan ikke være større enn «Til»-verdien.</translation>
     </message>
     <message>
@@ -1695,7 +1770,7 @@ Velg et annet navn.</translation>
 <context>
     <name>QWhatsThisAction</name>
     <message>
-        <source>What's This?</source>
+        <source>What&apos;s This?</source>
         <translation>Hva er dette?</translation>
     </message>
 </context>
@@ -1777,7 +1852,7 @@ Velg et annet navn.</translation>
     </message>
     <message>
         <source>&amp;Next &gt;</source>
-        <translation>&amp;Neste →</translation>
+        <translation>&amp;Neste &gt;</translation>
     </message>
     <message>
         <source>Go Back</source>
@@ -1785,7 +1860,7 @@ Velg et annet navn.</translation>
     </message>
     <message>
         <source>&lt; &amp;Back</source>
-        <translation>← &amp;Tilbake</translation>
+        <translation>&lt; &amp;Tilbake</translation>
     </message>
 </context>
 </TS>

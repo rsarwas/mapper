@@ -17,11 +17,12 @@
  *    along with OpenOrienteering.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-// Intentionally not including mapper_resource.h,
-// in order to avoid a duplicate Q_COREAPP_STARTUP_FUNCTION(setSeachPaths).
 
-#include <QCoreApplication>
+#include "mapper_resource.h"
+
 #include <QDir>
+#include <QLatin1String>
+#include <QString>
 #include <QStringList>
 
 #include "mapper_config.h"
@@ -59,7 +60,7 @@ void setSeachPaths()
 	data_paths.append(app_dir);
 	doc_paths.append(app_dir + QLatin1String("/doc"));
 #elif defined(Q_OS_ANDROID)
-	// Android: load resources from the application directory
+	// Android: load resources from the assets directory
 	auto assets = QString::fromLatin1("assets:");
 	data_paths.append(assets);
 	doc_paths.append(assets + QLatin1String("/doc"));
@@ -69,7 +70,7 @@ void setSeachPaths()
 #endif
 	
 	// General default path: Qt resource system
-	auto resources = QString{ QLatin1Char{':'} };
+	auto resources = QString{ QLatin1String{":"} };
 	data_paths.append(resources);
 	doc_paths.append(resources + QLatin1String("/doc"));
 	

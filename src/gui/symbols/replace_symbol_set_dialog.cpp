@@ -23,9 +23,11 @@
 
 #include <algorithm>
 #include <cstddef>
+#include <functional>
 #include <iterator>
 
 #include <Qt>
+#include <QtGlobal>
 #include <QAbstractItemView>
 #include <QAction>
 #include <QCheckBox>
@@ -33,7 +35,6 @@
 #include <QColor>
 #include <QDialogButtonBox>
 #include <QFile>
-#include <QFileDialog>
 #include <QFlags>
 #include <QFormLayout>
 #include <QGuiApplication>
@@ -43,6 +44,7 @@
 #include <QIODevice>
 #include <QLabel>
 #include <QLatin1Char>
+#include <QLatin1String>
 #include <QList>
 #include <QMenu>
 #include <QMessageBox>
@@ -68,12 +70,13 @@
 #include "core/symbols/symbol.h"
 #include "core/symbols/text_symbol.h"
 #include "fileformats/file_format.h"
+#include "gui/file_dialog.h"
 #include "gui/main_window.h"
 #include "gui/util_gui.h"
 #include "gui/widgets/symbol_dropdown.h"
 #include "util/util.h"
+#include "util/backports.h"
 
-class MapPart;
 // IWYU pragma: no_forward_declare QColor
 // IWYU pragma: no_forward_declare QFormLayout
 // IWYU pragma: no_forward_declare QLabel
@@ -153,7 +156,7 @@ ReplaceSymbolSetDialog::ReplaceSymbolSetDialog(QWidget* parent, Map& object_map,
 	connect(action, &QAction::triggered, this, &ReplaceSymbolSetDialog::resetReplacements);
 	mapping_menu->addSeparator();
 	action = mapping_menu->addAction(QIcon{QLatin1String{":/images/open.png"}}, tr("Open CRT file..."));
-	connect(action, &QAction::triggered, this, &ReplaceSymbolSetDialog::openCrtFile);
+	connect(action, &QAction::triggered, this, QOverload<>::of(&ReplaceSymbolSetDialog::openCrtFile));
 	action = mapping_menu->addAction(QIcon{QLatin1String{":/images/save.png"}}, tr("Save CRT file..."));
 	connect(action, &QAction::triggered, this, &ReplaceSymbolSetDialog::saveCrtFile);
 	
@@ -227,11 +230,14 @@ void ReplaceSymbolSetDialog::resetReplacements()
 void ReplaceSymbolSetDialog::openCrtFile()
 {
 	auto dir = QLatin1String{"data:/symbol sets"};
-	auto filter = QString{tr("CRT file") + QLatin1String{" (*.crt *.CRT)"}};
-	QString path = QFileDialog::getOpenFileName(this, tr("Open CRT file..."), dir, filter);
-	if (path.isEmpty())
-		return;
+	auto filter = QString{tr("CRT file") + QLatin1String{" (*.crt)"}};
+	QString path = FileDialog::getOpenFileName(this, tr("Open CRT file..."), dir, filter);
+	if (!path.isEmpty())
+		openCrtFile(path);
+}
 	
+void ReplaceSymbolSetDialog::openCrtFile(const QString& path)
+{
 	QFile crt_file{path};
 	crt_file.open(QIODevice::ReadOnly);
 	QTextStream stream{ &crt_file };
@@ -277,7 +283,7 @@ void ReplaceSymbolSetDialog::openCrtFile()
 					auto error_msg = tr("There are multiple replacements for symbol %1.")
 					                 .arg(item.query.symbolOperand()->getNumberAsString());
 					QMessageBox::warning(this, Map::tr("Error"),
-					  tr("Cannot open file:\n%1\n\n%2").arg(path).arg(error_msg) );
+					  tr("Cannot open file:\n%1\n\n%2").arg(path, error_msg) );
 					return;
 				}
 			}
@@ -320,8 +326,8 @@ bool ReplaceSymbolSetDialog::saveCrtFile()
 {
 	/// \todo Choose user-writable directory.
 	auto dir = QLatin1String{"data:/symbol sets"};
-	auto filter = QString{tr("CRT file") + QLatin1String{" (*.crt *.CRT)"}};
-	QString path = QFileDialog::getSaveFileName(this, tr("Save CRT file..."), dir, filter);
+	auto filter = QString{tr("CRT file") + QLatin1String{" (*.crt)"}};
+	QString path = FileDialog::getSaveFileName(this, tr("Save CRT file..."), dir, filter);
 	if (!path.isEmpty())
 	{
 		updateMappingFromTable();
@@ -335,7 +341,8 @@ bool ReplaceSymbolSetDialog::saveCrtFile()
 		}
 		/// \todo Reused translation, consider generalized context
 		QMessageBox::warning(this, Map::tr("Error"),
-		                     tr("Cannot save file:\n%1\n\n%2").arg(path).arg(crt_file.errorString()) );
+		                     tr("Cannot save file:\n%1\n\n%2")
+		                     .arg(path, crt_file.errorString()) );
 	}
 	return false;
 }
@@ -444,7 +451,7 @@ void ReplaceSymbolSetDialog::updateMappingTable()
 			
 			const Symbol* unique_symbol = nullptr;
 			auto matching_types = int(Symbol::NoSymbol);
-			auto update_matching = [&unique_symbol, &matching_types](Object* object, MapPart*, int)->bool {
+			auto update_matching = [&unique_symbol, &matching_types](Object* object) {
 				if (auto symbol = object->getSymbol())
 				{
 					if (matching_types == Symbol::NoSymbol)
@@ -459,9 +466,8 @@ void ReplaceSymbolSetDialog::updateMappingTable()
 						matching_types |= Symbol::getCompatibleTypes(symbol->getType());
 					}
 				}
-				return true;
 			};
-			object_map.applyOnMatchingObjects(update_matching, item.query);
+			object_map.applyOnMatchingObjects(update_matching, std::cref(item.query));
 			if (matching_types != Symbol::NoSymbol)
 			{
 				compatible_symbols = matching_types;
@@ -594,6 +600,12 @@ bool ReplaceSymbolSetDialog::showDialog(QWidget* parent, Map& object_map)
 
 	ReplaceSymbolSetDialog dialog(parent, object_map, *symbol_set, replacements, ReplaceSymbolSet);
 	dialog.setWindowModality(Qt::WindowModal);
+	auto crt_file = discoverCrtFile(object_map.symbolSetId(), symbol_set->symbolSetId());
+	if (QFileInfo::exists(crt_file))
+	{
+		dialog.show();
+		dialog.openCrtFile(crt_file);
+	}
 	auto result = dialog.exec();
 	switch (result)
 	{
@@ -675,3 +687,18 @@ bool ReplaceSymbolSetDialog::showDialogForCRT(QWidget* parent, Map& object_map, 
 	Q_UNREACHABLE();
 }
 
+
+// static
+QString ReplaceSymbolSetDialog::discoverCrtFile(const QString& source_id, const QString& target_id)
+{
+	QString name = QLatin1String("data:/symbol sets/")
+	               + source_id + QLatin1Char('-')
+	               + target_id + QLatin1String(".crt");
+#ifdef MAPPER_DEVELOPMENT_BUILD
+	if (!QFileInfo::exists(name))
+		name = QLatin1String("data:/symbol sets/COPY_OF_")
+		       + source_id + QLatin1Char('-')
+		       + target_id + QLatin1String(".crt");
+#endif
+	return name;
+}

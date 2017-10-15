@@ -22,17 +22,30 @@
 #ifndef OPENORIENTEERING_DRAW_TEXT_TOOL_H
 #define OPENORIENTEERING_DRAW_TEXT_TOOL_H
 
-#include "tool_base.h"
-
 #include <memory>
 
+#include <Qt>
+#include <QObject>
+#include <QVariant>
+
 #include "core/renderables/renderable.h"
+#include "tools/tool_base.h"
 
+class QAction;
+class QEvent;
+class QInputMethodEvent;
+class QKeyEvent;
+class QMouseEvent;
+class QPainter;
+class QRectF;
 
+class MapCoordF;
+class MapEditorController;
+class MapWidget;
 class TextObject;
 class TextObjectEditorHelper;
-class MapRenderables;
 class Symbol;
+
 
 /**
  * Tool to draw text objects.
@@ -60,7 +73,7 @@ protected:
 	bool mouseReleaseEvent(QMouseEvent* event, MapCoordF map_coord, MapWidget* widget) override;
 	
 	bool inputMethodEvent(QInputMethodEvent* event) override;
-	QVariant inputMethodQuery(Qt::InputMethodQuery property, QVariant argument) const override;
+	QVariant inputMethodQuery(Qt::InputMethodQuery property, const QVariant& argument) const override;
 	
 	void mouseMove() override;
 	void clickPress() override;

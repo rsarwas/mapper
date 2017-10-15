@@ -20,18 +20,28 @@
 
 #include "path_object_t.h"
 
+#include <QtTest>
+
 #include "global.h"
 #include "core/map.h"
+#include "core/objects/object.h"
 #include "core/symbols/line_symbol.h"
+
 
 class DummyPathObject : public PathObject
 {
 public:
-	DummyPathObject() : PathObject()
+	DummyPathObject()
+	: PathObject()
 	{
 		// Set a dummy symbol to make the object calculate path coordinates
 		setSymbol(Map::getCoveringRedLine(), true);
 	}
+	
+	DummyPathObject(const DummyPathObject&) = delete;
+	DummyPathObject(DummyPathObject&&) = delete;
+	DummyPathObject& operator=(const DummyPathObject&) = delete;
+	DummyPathObject& operator=(DummyPathObject&&) = delete;
 };
 
 PathObjectTest::PathObjectTest(QObject* parent): QObject(parent)

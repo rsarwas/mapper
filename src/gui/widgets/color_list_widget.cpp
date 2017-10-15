@@ -22,6 +22,7 @@
 #include "color_list_widget.h"
 
 #include <Qt>
+#include <QtGlobal>
 #include <QAbstractButton>
 #include <QAbstractItemView>
 #include <QAction>
@@ -196,7 +197,7 @@ void ColorListWidget::showEvent(QShowEvent* event)
 QToolButton* ColorListWidget::newToolButton(const QIcon& icon, const QString& text)
 {
 	auto button = new QToolButton();
-	button->setToolButtonStyle(Qt::ToolButtonFollowStyle);
+	button->setToolButtonStyle(Qt::ToolButtonIconOnly);
 	button->setToolTip(text);
 	button->setIcon(icon);
 	button->setText(text);

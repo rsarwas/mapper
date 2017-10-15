@@ -21,7 +21,14 @@
 #ifndef OPENORIENTEERING_ABOUT_DIALOG_H
 #define OPENORIENTEERING_ABOUT_DIALOG_H
 
-#include "text_browser_dialog.h"
+#include <QObject>
+#include <QString>
+
+class QUrl;
+class QWidget;
+
+#include "gui/text_browser_dialog.h"
+
 
 /**
  * @brief A dialog which shows information about Mapper and its components.
@@ -45,7 +52,7 @@ protected:
 	/**
 	 * @brief Sets custom HTML content when the URL identifies the first page.
 	 */
-	virtual void sourceChanged(const QUrl& url) override;
+	void sourceChanged(const QUrl& url) override;
 	
 	/**
 	 * @brief Updates the window title from the current document title.

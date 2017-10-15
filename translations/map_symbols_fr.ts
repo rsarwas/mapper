@@ -6,13 +6,13 @@
         <message>
             <source>Purple</source>
             <comment>Color 0</comment>
-            <translation type="unfinished">Purple</translation>
-        </message>
+            <translation>Violine</translation>
+    </message>
         <message>
             <source>Black</source>
             <comment>Color 1</comment>
-            <translation type="unfinished">Black</translation>
-        </message>
+            <translation>Noir</translation>
+    </message>
         <message>
             <source>Opaque White below Black</source>
             <comment>Color 2</comment>
@@ -21,18 +21,18 @@
         <message>
             <source>Black 65%</source>
             <comment>Color 3</comment>
-            <translation type="unfinished"></translation>
-        </message>
+            <translation>Noir 65%</translation>
+    </message>
         <message>
             <source>Black 20%</source>
             <comment>Color 4</comment>
-            <translation type="unfinished">Black 20%</translation>
-        </message>
+            <translation>Noir 20%</translation>
+    </message>
         <message>
             <source>Brown 50%</source>
             <comment>Color 5</comment>
-            <translation type="unfinished"></translation>
-        </message>
+            <translation>Brun 50%</translation>
+    </message>
         <message>
             <source>Black below light browns</source>
             <comment>Color 6</comment>
@@ -41,128 +41,128 @@
         <message>
             <source>Opaque Blue</source>
             <comment>Color 7</comment>
-            <translation type="unfinished">Opaque Blue</translation>
-        </message>
+            <translation type="unfinished">Bleu masquant</translation>
+    </message>
         <message>
             <source>Blue</source>
             <comment>Color 8</comment>
-            <translation type="unfinished">Blue</translation>
-        </message>
+            <translation>Bleu</translation>
+    </message>
         <message>
             <source>Blue 50%</source>
             <comment>Color 9</comment>
-            <translation type="unfinished"></translation>
-        </message>
+            <translation>Bleu 50%</translation>
+    </message>
         <message>
             <source>Brown</source>
             <comment>Color 10</comment>
-            <translation type="unfinished">Brown</translation>
-        </message>
+            <translation>Brun</translation>
+    </message>
         <message>
             <source>OpenOrienteering Orange</source>
             <comment>Color 11</comment>
-            <translation type="unfinished">OpenOrienteering Orange</translation>
-        </message>
+            <translation>Orange OpenOrienteering</translation>
+    </message>
         <message>
             <source>Black 25% (Grey)</source>
             <comment>Color 12</comment>
-            <translation type="unfinished"></translation>
-        </message>
+            <translation>Noir 25% (Gris)</translation>
+    </message>
         <message>
             <source>Green 50%, Yellow</source>
             <comment>Color 13</comment>
-            <translation type="unfinished">Green 50%, Yellow</translation>
-        </message>
+            <translation>Vert 50%, Jaune</translation>
+    </message>
         <message>
             <source>Green</source>
             <comment>Color 14</comment>
-            <translation type="unfinished">Green</translation>
-        </message>
+            <translation>Vert</translation>
+    </message>
         <message>
             <source>Opaque Yellow</source>
             <comment>Color 15</comment>
-            <translation type="unfinished"></translation>
-        </message>
+            <translation type="unfinished">Jaune masquant</translation>
+    </message>
         <message>
             <source>Opaque White over Green</source>
             <comment>Color 16</comment>
-            <translation type="unfinished"></translation>
-        </message>
+            <translation type="unfinished">Blanc masquant sur vert</translation>
+    </message>
         <message>
             <source>Opaque Green 20%</source>
             <comment>Color 17</comment>
-            <translation type="unfinished"></translation>
-        </message>
+            <translation type="unfinished">Vert masquant 20%</translation>
+    </message>
         <message>
             <source>Opaque Green 50%</source>
             <comment>Color 18</comment>
-            <translation type="unfinished"></translation>
-        </message>
+            <translation type="unfinished">Vert masquant 50%</translation>
+    </message>
         <message>
             <source>Green, Black 50%</source>
             <comment>Color 19</comment>
-            <translation type="unfinished">Green, Black 50%</translation>
-        </message>
+            <translation>Vert, Noir 50%</translation>
+    </message>
         <message>
             <source>Opaque Green</source>
             <comment>Color 20</comment>
-            <translation type="unfinished">Opaque Green</translation>
-        </message>
+            <translation type="unfinished">Vert masquant</translation>
+    </message>
         <message>
             <source>Green 50%</source>
             <comment>Color 21</comment>
-            <translation type="unfinished"></translation>
-        </message>
+            <translation>Vert 50%</translation>
+    </message>
         <message>
             <source>Green 20%</source>
             <comment>Color 22</comment>
-            <translation type="unfinished"></translation>
-        </message>
+            <translation>Vert 20%</translation>
+    </message>
         <message>
             <source>Green below light greens</source>
             <comment>Color 23</comment>
-            <translation type="unfinished">Green below light greens</translation>
-        </message>
+            <translation>Vert sous vert clair</translation>
+    </message>
         <message>
             <source>Green 50% over Yellow</source>
             <comment>Color 24</comment>
-            <translation type="unfinished"></translation>
-        </message>
+            <translation>Vert 50% sur Jaune</translation>
+    </message>
         <message>
             <source>White over Yellow</source>
             <comment>Color 25</comment>
-            <translation type="unfinished"></translation>
-        </message>
+            <translation>Blanc sur Jaune</translation>
+    </message>
         <message>
             <source>Yellow</source>
             <comment>Color 26</comment>
-            <translation type="unfinished">Yellow</translation>
-        </message>
+            <translation>Jaune</translation>
+    </message>
         <message>
             <source>Yellow 50%</source>
             <comment>Color 27</comment>
-            <translation type="unfinished">Yellow 50%</translation>
-        </message>
+            <translation>Jaune 50%</translation>
+    </message>
         <message>
             <source>Contour</source>
             <comment>Name of symbol 101</comment>
-            <translation type="unfinished">Courbe de niveau</translation>
+            <translation>Courbe de niveau</translation>
         </message>
         <message>
             <source>A line joining points of equal height. The standard vertical interval between contours is 5 metres. A contour interval of 2.5 metres may be used for flat terrains. The smallest bend in a contour is 0.25 mm from centre to centre of the lines.</source>
             <comment>Description of symbol 101</comment>
-            <translation type="unfinished"></translation>
-        </message>
+            <translation type="unfinished">Ligne joignant les points d&apos;iso altitude. L&apos;intervalle standard entre deux courbes de niveau est de 5m. Une courbe de niveau intermédiaire (2.5m) peut être utilisée lors de terrains plats. La plus petite inflexion d&apos;une courbe doit être au moins de 0.25 mm de centre à centre.</translation>
+    </message>
         <message>
             <source>Slope line, contour</source>
             <comment>Name of symbol 101.1</comment>
-            <translation type="unfinished"></translation>
-        </message>
+            <translation type="unfinished">Tirets de pente</translation>
+    </message>
         <message>
             <source>Slope lines may be drawn on the lower side of a contour line to clarify the direction of slope. When used, they should be placed in re-entrants.</source>
             <comment>Description of symbol 101.1</comment>
-            <translation type="unfinished"></translation>
-        </message>
+            <translation type="unfinished">Les tirets de pentes peuvent être ajoutés du côté aval d&apos;une courbe de niveau, afin de clarifier le sens de la pente. Ils doivent être positionnés au niveau des rentrants.</translation>
+    </message>
         <message>
             <source>Index contour</source>
             <comment>Name of symbol 102</comment>
@@ -181,16 +181,15 @@
         <message>
             <source>Contour values may be included to aid assessment of large height differences. They are inserted in the index contours in positions where other detail is not obscured. The figures should be orientated so that the top of the figure is on the higher side of the contour.</source>
             <comment>Description of symbol 102.1</comment>
-            <translation type="unfinished">Les courbes de niveau peuvent être cotées pour faciliter l'évaluation de grandes différences de dénivelé. Elles sont insérées dans les courbes de niveau maîtresse, où elles ne dissimulent aucun détail. Les chiffres sont orientés avec leur sommet en amont de la pente.</translation>
+            <translation type="unfinished">Les courbes de niveau peuvent être cotées pour faciliter l&apos;évaluation de grandes différences de dénivelé. Elles sont insérées dans les courbes de niveau maîtresse, où elles ne dissimulent aucun détail. Les chiffres sont orientés avec leur sommet en amont de la pente.</translation>
         </message>
         <message>
             <source>Form line</source>
             <comment>Name of symbol 103</comment>
-            <translation type="unfinished">Courbe de forme</translation>
-        </message>
+            <translation>Courbe de niveau intermédiaire</translation>
+    </message>
         <message>
-            <source>Form lines are used where more information must be given about the shape of the ground. Form lines are added only where representation would be incomplete with ordinary contours. They shall not be used as intermediate contours. Only one form line should be used between neighbouring contours. It is very important that a form line fits logically into the contour system, so the start and end of a form line should be parallel to the neighbouring contours. The gaps between the form line dashes must be placed on reasonably straight sections of the form line. Form lines can be used to differentiate flat knolls and depressions from more distinct ones.
-</source>
+            <source>Form lines are used where more information must be given about the shape of the ground. Form lines are added only where representation would be incomplete with ordinary contours. They shall not be used as intermediate contours. Only one form line should be used between neighbouring contours. It is very important that a form line fits logically into the contour system, so the start and end of a form line should be parallel to the neighbouring contours. The gaps between the form line dashes must be placed on reasonably straight sections of the form line. Form lines can be used to differentiate flat knolls and depressions from more distinct ones.</source>
             <comment>Description of symbol 103</comment>
             <translation type="unfinished"></translation>
         </message>
@@ -242,7 +241,7 @@
         <message>
             <source>Use this symbol to display the full extent of wide earth banks.</source>
             <comment>Description of symbol 104.3</comment>
-            <translation type="unfinished">Utiliser ce symbole pour représenter l'étendue de l'abrupt de terre.</translation>
+            <translation type="unfinished">Utiliser ce symbole pour représenter l&apos;étendue de l&apos;abrupt de terre.</translation>
         </message>
         <message>
             <source>Earth bank, minimum size (from ISOM2000)</source>
@@ -325,8 +324,7 @@ The symbol shall not touch or overlap contours.</source>
         </message>
         <message>
             <source>A small depression or hollow without steep sides that is too small to be shown by contours. Minimum depth: 1 m. Minimum width: 2 m.
-Small depressions with steep sides are represented with symbol 112 (pit). The symbol may not touch or overlap other brown symbols. Location is the centre of gravity of the symbol, and the symbol is orientated to north.
-</source>
+Small depressions with steep sides are represented with symbol 112 (pit). The symbol may not touch or overlap other brown symbols. Location is the centre of gravity of the symbol, and the symbol is orientated to north.</source>
             <comment>Description of symbol 111</comment>
             <translation type="unfinished"></translation>
         </message>
@@ -351,7 +349,7 @@ gravity of the symbol, and the symbol is orientated to north.</source>
 This is an area symbol.
 The minimum number of dots is three (footprint 10 m x 10 m).
 Contours shall not be cut in broken ground areas.
-Density: 3 to 5 dots / mm2 (9-16%).</source>
+Density: 3 to 5 dots / mm² (9-16%).</source>
             <comment>Description of symbol 113</comment>
             <translation type="unfinished"></translation>
         </message>
@@ -375,8 +373,7 @@ Density: 3 to 5 dots / mm2 (9-16%).</source>
 This is an area symbol.
 The minimum number of dots is three (footprint 7m x 7m).
 Contours shall not be cut in broken ground areas.
-Density: 8 to 10 dots / mm2 (25-32%).
-</source>
+Density: 8 to 10 dots / mm² (25-32%).</source>
             <comment>Description of symbol 114</comment>
             <translation type="unfinished"></translation>
         </message>
@@ -399,8 +396,7 @@ Density: 8 to 10 dots / mm2 (25-32%).
             <source>A cliff, quarry or earth bank that is so high and steep that it is impossible to pass/climb or is dangerous.
 For vertical rock faces the tags may be omitted if space is short. Ends of the top line may be rounded or square. Shorter tags may be used at the ends.
 The gap between two impassable cliffs or between impassable cliffs and other impassable feature symbols must exceed 0.3 mm on the map.
-When an impassable cliff drops straight into water, making it impossible to pass under the cliff along the water’s edge, the bank line is omitted or the tags shall clearly extend over the bank line. An impassable cliff should interplay with the contour lines.
-</source>
+When an impassable cliff drops straight into water, making it impossible to pass under the cliff along the water’s edge, the bank line is omitted or the tags shall clearly extend over the bank line. An impassable cliff should interplay with the contour lines.</source>
             <comment>Description of symbol 201</comment>
             <translation type="unfinished"></translation>
         </message>
@@ -426,8 +422,7 @@ When an impassable cliff drops straight into water, making it impossible to pass
             <source>A cliff, quarry or earth bank that is so high and steep that it is impossible to pass/climb or is dangerous.
 For vertical rock faces the tags may be omitted if space is short. &lt;b&gt;For plan shape representation, the minimum width is 0.35 mm.&lt;/b&gt; Shorter tags may be used at the ends.
 The gap between two impassable cliffs or between impassable cliffs and other impassable feature symbols must exceed 0.3 mm on the map.
-When an impassable cliff drops straight into water, making it impossible to pass under the cliff along the water’s edge, the bank line is omitted or the tags shall clearly extend over the bank line. An impassable cliff should interplay with the contour lines.
-</source>
+When an impassable cliff drops straight into water, making it impossible to pass under the cliff along the water’s edge, the bank line is omitted or the tags shall clearly extend over the bank line. An impassable cliff should interplay with the contour lines.</source>
             <comment>Description of symbol 201.2</comment>
             <translation type="unfinished"></translation>
         </message>
@@ -439,7 +434,7 @@ When an impassable cliff drops straight into water, making it impossible to pass
         <message>
             <source>For vertical rock faces the tags may be omitted if space is short, e.g. narrow passages between cliffs (the passage should be drawn with a width of at least 0.3 mm).</source>
             <comment>Description of symbol 201.3</comment>
-            <translation type="unfinished">Pour des faces verticales, les tirets peuvent être omis s'il n'y a pas assez de place, par ex. un passage étroit entre des falaises. (Les passages doivent être représentés par une largeur d'au moins 0.3 mm).</translation>
+            <translation type="unfinished">Pour des faces verticales, les tirets peuvent être omis s&apos;il n&apos;y a pas assez de place, par ex. un passage étroit entre des falaises. (Les passages doivent être représentés par une largeur d&apos;au moins 0.3 mm).</translation>
         </message>
         <message>
             <source>Impassable cliff, tag line</source>
@@ -449,7 +444,7 @@ When an impassable cliff drops straight into water, making it impossible to pass
         <message>
             <source>Use this symbol to display the full extent of a wide cliff.</source>
             <comment>Description of symbol 201.4</comment>
-            <translation type="unfinished">Utiliser ce symbole pour dessiner l'étendue d'une grande falaise.</translation>
+            <translation type="unfinished">Utiliser ce symbole pour dessiner l&apos;étendue d&apos;une grande falaise.</translation>
         </message>
         <message>
             <source>Impassable cliff, minimum size (from ISOM2000)</source>
@@ -535,8 +530,7 @@ Crossing a cliff will normally slow progress.</source>
         <message>
             <source>Rocky pits, holes, caves or mineshafts which may constitute a danger to the competitor. Minimum depth: 1 m.
 Location is the centre of gravity of the symbol.
-Rocky pits larger than 5 m in diameter should be exaggerated and represented using cliff symbols (201, 202).
-</source>
+Rocky pits larger than 5 m in diameter should be exaggerated and represented using cliff symbols (201, 202).</source>
             <comment>Description of symbol 203.1</comment>
             <translation type="unfinished"></translation>
         </message>
@@ -548,7 +542,7 @@ Rocky pits larger than 5 m in diameter should be exaggerated and represented usi
         <message>
             <source>Rocky pits, holes, caves or mineshafts with a distinct entrance which may constitute a danger to the competitor. Minimum depth: 1 m.
 Location is the centre of gravity of the symbol, and the symbol should point into the cave.
-Rocky pits larger than 5 m in diameter should be exaggerated and represented using cliff symbols (201, 202). </source>
+Rocky pits larger than 5 m in diameter should be exaggerated and represented using cliff symbols (201, 202).</source>
             <comment>Description of symbol 203.2</comment>
             <translation type="unfinished"></translation>
         </message>
@@ -560,7 +554,7 @@ Rocky pits larger than 5 m in diameter should be exaggerated and represented usi
         <message>
             <source>Rocky pits, holes, caves or mineshafts with a distinct entrance which may constitute a danger to the competitor. Minimum depth: 1 m.
 Location is the centre of gravity of the symbol, and the symbol should point into the cave.
-Rocky pits larger than 5 m in diameter should be exaggerated and represented using cliff symbols (201, 202). </source>
+Rocky pits larger than 5 m in diameter should be exaggerated and represented using cliff symbols (201, 202).</source>
             <comment>Description of symbol 203.9</comment>
             <translation type="unfinished"></translation>
         </message>
@@ -670,8 +664,7 @@ To be able to show obvious height differences within a boulder field, it is perm
         </message>
         <message>
             <source>An area which is covered with so many blocks of stone that they cannot be marked individually and the runnability is affected, is shown with randomly placed and orientated solid triangles. A minimum of two triangles must be used.
-Density: 2–3 symbols / mm2 (31%-47%). To be able to show obvious height differences within a boulder field, it is permitted to enlarge some of the triangles to 120%.
-</source>
+Density: 2–3 symbols / mm² (31%-47%). To be able to show obvious height differences within a boulder field, it is permitted to enlarge some of the triangles to 120%.</source>
             <comment>Description of symbol 209</comment>
             <translation type="unfinished"></translation>
         </message>
@@ -710,8 +703,7 @@ To avoid confusion with symbol 416 (distinct vegetation boundary), the dots shou
             <source>Stony or rocky ground which reduces the runnability significantly (to about 20-60% of normal speed).
 The dots should be randomly distributed but not interfere with the representation of important terrain features and objects.
 The minimum number of dots is three (footprint 8 m x 8 m).
-To avoid confusion with symbol 416 (distinct vegetation boundary), the dots should not be arranged to form a line.
-</source>
+To avoid confusion with symbol 416 (distinct vegetation boundary), the dots should not be arranged to form a line.</source>
             <comment>Description of symbol 211</comment>
             <translation type="unfinished"></translation>
         </message>
@@ -724,8 +716,7 @@ To avoid confusion with symbol 416 (distinct vegetation boundary), the dots shou
             <source>Stony or rocky ground which is hardly passable (less than 20% of normal speed).
 The dots should be randomly distributed but not interfere with the representation of important terrain features and objects.
 The minimum number of dots is three (footprint 7 m x 7 m).
-To avoid confusion with symbol 416 (distinct vegetation boundary), the dots should not be arranged to form a line.
-</source>
+To avoid confusion with symbol 416 (distinct vegetation boundary), the dots should not be arranged to form a line.</source>
             <comment>Description of symbol 212</comment>
             <translation type="unfinished"></translation>
         </message>
@@ -801,8 +792,7 @@ Collapsed and easily crossable trenches should be mapped as erosion gullies.</so
             <translation type="unfinished"></translation>
         </message>
         <message>
-            <source>A shallow seasonal or periodic body of water may be represented using a dashed outline. Small shallow water bodies may be represented as 100% blue (without an outline).
-</source>
+            <source>A shallow seasonal or periodic body of water may be represented using a dashed outline. Small shallow water bodies may be represented as 100% blue (without an outline).</source>
             <comment>Description of symbol 302</comment>
             <translation type="unfinished"></translation>
         </message>
@@ -832,15 +822,14 @@ Collapsed and easily crossable trenches should be mapped as erosion gullies.</so
             <translation type="unfinished"></translation>
         </message>
         <message>
-            <source>A shallow seasonal or periodic body of water may be represented using a dashed
-0.10 outline.</source>
+            <source>A shallow seasonal or periodic body of water may be represented using a dashed 0.10 outline.</source>
             <comment>Description of symbol 302.3</comment>
             <translation type="unfinished"></translation>
         </message>
         <message>
             <source>Waterhole</source>
             <comment>Name of symbol 303</comment>
-            <translation type="unfinished">Trou d'eau</translation>
+            <translation type="unfinished">Trou d&apos;eau</translation>
         </message>
         <message>
             <source>A water-filled pit or an area of water which is too small to be shown to scale. Location is the centre of gravity of the symbol, and the symbol is orientated to north.</source>
@@ -875,7 +864,7 @@ Collapsed and easily crossable trenches should be mapped as erosion gullies.</so
         <message>
             <source>A natural or man-made minor water channel which may contain water only intermittently.</source>
             <comment>Description of symbol 306</comment>
-            <translation type="unfinished">Cours d'eau naturel ou creusé qui peut ne contenir de l'eau que par intermittence.</translation>
+            <translation type="unfinished">Cours d&apos;eau naturel ou creusé qui peut ne contenir de l&apos;eau que par intermittence.</translation>
         </message>
         <message>
             <source>Uncrossable marsh, with border line</source>
@@ -893,8 +882,7 @@ Collapsed and easily crossable trenches should be mapped as erosion gullies.</so
             <translation type="unfinished"></translation>
         </message>
         <message>
-            <source>A marsh which is uncrossable or dangerous for the competitor. The black outline emphasises that the feature is uncrossable. The black outline is omitted for boundaries between uncrossable marsh and symbol 301 (uncrossable body of water). The symbol may be combined with a rough open land symbol (403, 404) to show openness. The symbol is orientated to north.
-</source>
+            <source>A marsh which is uncrossable or dangerous for the competitor. The black outline emphasises that the feature is uncrossable. The black outline is omitted for boundaries between uncrossable marsh and symbol 301 (uncrossable body of water). The symbol may be combined with a rough open land symbol (403, 404) to show openness. The symbol is orientated to north.</source>
             <comment>Description of symbol 307.1</comment>
             <translation type="unfinished"></translation>
         </message>
@@ -990,7 +978,7 @@ Location is the centre of gravity of the symbol, and the symbol is orientated to
         <message>
             <source>Prominent water feature</source>
             <comment>Name of symbol 313</comment>
-            <translation type="unfinished">Élément d'eau particulier</translation>
+            <translation type="unfinished">Élément d&apos;eau particulier</translation>
         </message>
         <message>
             <source>Prominent water feature
@@ -1005,8 +993,7 @@ The symbol is orientated to north.</source>
         </message>
         <message>
             <source>Open land that has a ground cover (grass, moss or similar) which offers better runnability than typical open forest. If yellow coloured areas become dominant, a screen (75% instead of full yellow) may be used.
-May not be combined with other area symbols than symbol 113 (broken ground), symbol 208 (boulder field) and marsh symbols (308, 310).
-</source>
+May not be combined with other area symbols than symbol 113 (broken ground), symbol 208 (boulder field) and marsh symbols (308, 310).</source>
             <comment>Description of symbol 401</comment>
             <translation type="unfinished"></translation>
         </message>
@@ -1018,8 +1005,7 @@ arbres dispersés</translation>
         </message>
         <message>
             <source>Areas with scattered trees or bushes in open land may be generalised by using a regular pattern of large dots in the yellow screen. The dots may be white (scattered trees) or green (scattered bushes/thickets). Prominent individual trees may be added using symbol 417 (prominent large tree). If yellow coloured areas become dominant, a screen (75% instead of full yellow) may be used.
-May not be combined with other area symbols than symbol 113 (broken ground), symbol 208 (boulder field) or marsh symbols (308, 310).
-</source>
+May not be combined with other area symbols than symbol 113 (broken ground), symbol 208 (boulder field) or marsh symbols (308, 310).</source>
             <comment>Description of symbol 402</comment>
             <translation type="unfinished"></translation>
         </message>
@@ -1059,8 +1045,7 @@ The dots may be white (scattered trees) or green (scattered bushes/thickets). On
 running, good visibility) or 409 (vegetation, walk, good visibility) to show reduced runnability.
 The symbol is orientated to north.
 Minimum width: 1.5 mm (footprint 22.5 m). Minimum area: 2.5 x 2.5 mm. Smaller areas must either be left out, exaggerated or shown using symbol 403 (rough
-open land).
-</source>
+open land).</source>
             <comment>Description of symbol 404</comment>
             <translation type="unfinished"></translation>
         </message>
@@ -1075,8 +1060,7 @@ The dots may be white (scattered trees) or green (scattered bushes/thickets). On
 running, good visibility) or 409 (vegetation, walk, good visibility) to show reduced runnability.
 The symbol is orientated to north.
 Minimum width: 1.5 mm (footprint 22.5 m). Minimum area: 2.5 x 2.5 mm. Smaller areas must either be left out, exaggerated or shown using symbol 403 (rough
-open land).
-</source>
+open land).</source>
             <comment>Description of symbol 404.1</comment>
             <translation type="unfinished"></translation>
         </message>
@@ -1086,8 +1070,7 @@ open land).
             <translation type="unfinished"></translation>
         </message>
         <message>
-            <source>Typical open forest for the particular type of terrain. If no part of the forest is easily runnable then no white should appear on the map.
-</source>
+            <source>Typical open forest for the particular type of terrain. If no part of the forest is easily runnable then no white should appear on the map.</source>
             <comment>Description of symbol 405</comment>
             <translation type="unfinished"></translation>
         </message>
@@ -1112,8 +1095,7 @@ open land).
             <translation type="unfinished"></translation>
         </message>
         <message>
-            <source>Vegetation, slow running, good visibility
-</source>
+            <source>Vegetation, slow running, good visibility</source>
             <comment>Name of symbol 407</comment>
             <translation type="unfinished"></translation>
         </message>
@@ -1123,14 +1105,12 @@ open land).
             <translation type="unfinished"></translation>
         </message>
         <message>
-            <source>Vegetation, walk
-</source>
+            <source>Vegetation, walk</source>
             <comment>Name of symbol 408</comment>
             <translation type="unfinished"></translation>
         </message>
         <message>
-            <source>An area with dense trees or thickets (low visibility) which reduce running to about 20-60% of normal speed.
-</source>
+            <source>An area with dense trees or thickets (low visibility) which reduce running to about 20-60% of normal speed.</source>
             <comment>Description of symbol 408</comment>
             <translation type="unfinished"></translation>
         </message>
@@ -1217,17 +1197,6 @@ For fairness reasons, areas that are really difficult to get through (10% and sl
             <translation type="unfinished"></translation>
         </message>
         <message>
-            <source>Vegetation, impassable, minimum width</source>
-            <comment>Name of symbol 411.0.1</comment>
-            <translation type="unfinished"></translation>
-        </message>
-        <message>
-            <source>An area of dense vegetation (trees or undergrowth) which is effectively impassable.
-Minimum width: 0.35 mm</source>
-            <comment>Description of symbol 411.0.1</comment>
-            <translation type="unfinished"></translation>
-        </message>
-        <message>
             <source>Vegetation, impassable</source>
             <comment>Name of symbol 411.1</comment>
             <translation type="unfinished"></translation>
@@ -1238,6 +1207,17 @@ Minimum width: 0.35 mm</source>
             <translation type="unfinished"></translation>
         </message>
         <message>
+            <source>Vegetation, impassable, minimum width</source>
+            <comment>Name of symbol 411.2</comment>
+            <translation type="unfinished"></translation>
+        </message>
+        <message>
+            <source>An area of dense vegetation (trees or undergrowth) which is effectively impassable.
+Minimum width: 0.35 mm</source>
+            <comment>Description of symbol 411.2</comment>
+            <translation type="unfinished"></translation>
+        </message>
+        <message>
             <source>Cultivated land</source>
             <comment>Name of symbol 412</comment>
             <translation type="unfinished"></translation>
@@ -1245,8 +1225,7 @@ Minimum width: 0.35 mm</source>
         <message>
             <source>Cultivated land, normally used for growing crops. Runnability may vary according to the type of crops grown and the time of year. For agroforestry, symbol 405 (forest) or 402 (open land with scattered trees) may be used instead of yellow.
 Since the runnability may vary, such areas should be avoided when setting courses.
-The symbol is combined with symbol 709 (out of bounds area) to show cultivated land that shall not be entered.
-</source>
+The symbol is combined with symbol 709 (out of bounds area) to show cultivated land that shall not be entered.</source>
             <comment>Description of symbol 412</comment>
             <translation type="unfinished"></translation>
         </message>
@@ -1314,8 +1293,7 @@ May be combined with symbol 407 (vegetation, slow running, good visibility) or 4
         <message>
             <source>A distinct forest edge or vegetation boundary within the forest.
 Very distinct forest edges and vegetation boundaries may be represented using the cultivation boundary symbol. Only one of the vegetation boundary symbols (black dotted line or dashed green line) can be used on a map.
-Minimum length, black dot implementation: 5 dots (2.5 mm – footprint 37 m).
-</source>
+Minimum length, black dot implementation: 5 dots (2.5 mm – footprint 37 m).</source>
             <comment>Description of symbol 416</comment>
             <translation type="unfinished"></translation>
         </message>
@@ -1414,7 +1392,7 @@ symbol.</source>
             <translation type="unfinished"></translation>
         </message>
         <message>
-            <source>Formerly "502 Major road", provided for migration from ISOM 2000. Use of this symbol is discouraged for new maps.</source>
+            <source>Formerly &quot;502 Major road&quot;, provided for migration from ISOM 2000. Use of this symbol is discouraged for new maps.</source>
             <comment>Description of symbol 502.1</comment>
             <translation type="unfinished"></translation>
         </message>
@@ -1485,8 +1463,7 @@ symbol.</source>
         </message>
         <message>
             <source>A forest ride or a prominent trace (forestry extraction track, sandy track, ski track) through the terrain which does not have a distinct runnable path along it. The definition of the symbol must be given on the map.
-Runnability: the same runnability as the surroundings.
-</source>
+Runnability: the same runnability as the surroundings.</source>
             <comment>Description of symbol 508</comment>
             <translation type="unfinished"></translation>
         </message>
@@ -1555,8 +1532,7 @@ If it is forbidden to run along the railway, it shall be combined with the overp
             <translation type="unfinished"></translation>
         </message>
         <message>
-            <source>Power line, cableway or skilift. The bars show the exact location of the pylons. The line may be broken to improve legibility.
-</source>
+            <source>Power line, cableway or skilift. The bars show the exact location of the pylons. The line may be broken to improve legibility.</source>
             <comment>Description of symbol 510</comment>
             <translation type="unfinished"></translation>
         </message>
@@ -1583,6 +1559,17 @@ The lines may be broken to improve legibility. Very large carrying masts shall b
             <translation type="unfinished"></translation>
         </message>
         <message>
+            <source>Major power line, large carrying masts</source>
+            <comment>Name of symbol 511.2</comment>
+            <translation type="unfinished"></translation>
+        </message>
+        <message>
+            <source>Major power lines should be drawn with a double line. The gap between the lines may indicate the extent of the powerline.
+The lines may be broken to improve legibility. Very large carrying masts shall be represented in plan shape using symbol 521 (building) or with symbol 524 (high tower).</source>
+            <comment>Description of symbol 511.2</comment>
+            <translation type="unfinished"></translation>
+        </message>
+        <message>
             <source>Bridge / tunnel</source>
             <comment>Name of symbol 512</comment>
             <translation type="unfinished"></translation>
@@ -1590,8 +1577,7 @@ The lines may be broken to improve legibility. Very large carrying masts shall b
         <message>
             <source>Bridges and tunnels are represented using the same basic symbols.
 If it is not possible to get through a tunnel (or under a bridge), it shall be omitted.
-Small bridges connected to a track/path are shown by centring a track dash on the crossing. Tracks/paths are broken for water course crossings without bridges.
-</source>
+Small bridges connected to a track/path are shown by centring a track dash on the crossing. Tracks/paths are broken for water course crossings without bridges.</source>
             <comment>Description of symbol 512</comment>
             <translation type="unfinished"></translation>
         </message>
@@ -1686,8 +1672,7 @@ If the fence forms an enclosed area, tags should be placed inside.</source>
         </message>
         <message>
             <source>A way through or over a wall, fence or other linear feature, including a gate or stile.
-For impassable features, the line shall be broken at the crossing point. For passable features, the line shall not be broken if passing involves a degree of climb.
-</source>
+For impassable features, the line shall be broken at the crossing point. For passable features, the line shall not be broken if passing involves a degree of climb.</source>
             <comment>Description of symbol 519</comment>
             <translation type="unfinished"></translation>
         </message>
@@ -1698,8 +1683,7 @@ For impassable features, the line shall be broken at the crossing point. For pas
         </message>
         <message>
             <source>An out-of-bounds area is a feature such as a private house, a garden, a factory or another industrial area. Only contours and prominent features such as railways and large buildings shall be shown inside an out-of-bounds area.
-The area shall be discontinued where a path or track goes through. Out-of-bounds areas should be bounded by the black boundary line or another black line symbol (e.g. fence).
-</source>
+The area shall be discontinued where a path or track goes through. Out-of-bounds areas should be bounded by the black boundary line or another black line symbol (e.g. fence).</source>
             <comment>Description of symbol 520</comment>
             <translation type="unfinished"></translation>
         </message>
@@ -1768,11 +1752,9 @@ Minimum area: 0.5 mm x 0.5 mm (footprint 7.5 m x 7.5 m).</source>
             <translation type="unfinished"></translation>
         </message>
         <message>
-            <source>In urban areas, buildings larger than 75 m x 75 m may be represented with a dark grey infill .
+            <source>In urban areas, buildings larger than 75 m x 75 m may be represented with a dark grey infill.
 
-Passages through buildings must have a minimum width of 0.3 mm (footprint 4.5 m). Buildings within forbidden areas are generalised. Areas totally contained within a building shall not be mapped (they shall be represented as being part of the building). Minimum gap indicating a passage between buildings and between buildings and other impassable features should be 0.25 mm.
-
-</source>
+Passages through buildings must have a minimum width of 0.3 mm (footprint 4.5 m). Buildings within forbidden areas are generalised. Areas totally contained within a building shall not be mapped (they shall be represented as being part of the building). Minimum gap indicating a passage between buildings and between buildings and other impassable features should be 0.25 mm.</source>
             <comment>Description of symbol 521.2</comment>
             <translation type="unfinished"></translation>
         </message>
@@ -1914,9 +1896,7 @@ Location is at the centre of gravity of the symbol.</source>
             <translation type="unfinished"></translation>
         </message>
         <message>
-            <source>Special man-made features are shown with these symbols. The definition of the
-symbols must be given in each case in the map legend.
-</source>
+            <source>Special man-made features are shown with these symbols. The definition of the symbols must be given in each case in the map legend.</source>
             <comment>Description of symbol 530</comment>
             <translation type="unfinished"></translation>
         </message>
@@ -1926,9 +1906,7 @@ symbols must be given in each case in the map legend.
             <translation type="unfinished"></translation>
         </message>
         <message>
-            <source>Special man-made features are shown with these symbols. The definition of the
-symbols must be given in each case in the map legend.
-</source>
+            <source>Special man-made features are shown with these symbols. The definition of the symbols must be given in each case in the map legend.</source>
             <comment>Description of symbol 531</comment>
             <translation type="unfinished"></translation>
         </message>
@@ -1938,26 +1916,14 @@ symbols must be given in each case in the map legend.
             <translation type="unfinished"></translation>
         </message>
         <message>
-            <source>Magnetic north lines are lines placed on the map pointing to magnetic north, parallel to the sides of the paper. Their spacing on the map shall be 20 mm on the map which represents 300 m on the ground at the scale of 1:15 000. If the map is enlarged to 1:10 000, the spacing of the lines will be 30 mm on the map. North lines shall be broken to improve the legibility of the map, for instance where they would obscure small features. In areas with very few water features, blue lines may be used.
-</source>
+            <source>Magnetic north lines are lines placed on the map pointing to magnetic north, parallel to the sides of the paper. Their spacing on the map shall be 20 mm on the map which represents 300 m on the ground at the scale of 1:15 000. If the map is enlarged to 1:10 000, the spacing of the lines will be 30 mm on the map. North lines shall be broken to improve the legibility of the map, for instance where they would obscure small features. In areas with very few water features, blue lines may be used.</source>
             <comment>Description of symbol 601.1</comment>
             <translation type="unfinished"></translation>
         </message>
         <message>
             <source>North lines pattern</source>
-            <comment>Name of symbol 601.1.1</comment>
-            <translation type="unfinished"></translation>
-        </message>
-        <message>
-            <source>Magnetic north lines are lines placed on the map pointing to magnetic north, parallel to the sides of the paper. Their spacing on the map shall be 20 mm on the map which represents 300 m on the ground at the scale of 1:15 000. If the map is enlarged to 1:10 000, the spacing of the lines will be 30 mm on the map. North lines shall be broken to improve the legibility of the map, for instance where they would obscure small features. In areas with very few water features, blue lines may be used.
-</source>
-            <comment>Description of symbol 601.1.1</comment>
-            <translation type="unfinished"></translation>
-        </message>
-        <message>
-            <source>Magnetic north line, blue</source>
             <comment>Name of symbol 601.2</comment>
-            <translation type="unfinished">Lignes du nord magnétique, bleu</translation>
+            <translation>Lignes du nord magnétique</translation>
         </message>
         <message>
             <source>Magnetic north lines are lines placed on the map pointing to magnetic north, parallel to the sides of the paper. Their spacing on the map shall be 20 mm on the map which represents 300 m on the ground at the scale of 1:15 000. If the map is enlarged to 1:10 000, the spacing of the lines will be 30 mm on the map. North lines shall be broken to improve the legibility of the map, for instance where they would obscure small features. In areas with very few water features, blue lines may be used.</source>
@@ -1965,14 +1931,23 @@ symbols must be given in each case in the map legend.
             <translation type="unfinished"></translation>
         </message>
         <message>
+            <source>Magnetic north line, blue</source>
+            <comment>Name of symbol 601.3</comment>
+            <translation>Lignes du nord magnétique, bleu</translation>
+        </message>
+        <message>
+            <source>Magnetic north lines are lines placed on the map pointing to magnetic north, parallel to the sides of the paper. Their spacing on the map shall be 20 mm on the map which represents 300 m on the ground at the scale of 1:15 000. If the map is enlarged to 1:10 000, the spacing of the lines will be 30 mm on the map. North lines shall be broken to improve the legibility of the map, for instance where they would obscure small features. In areas with very few water features, blue lines may be used.</source>
+            <comment>Description of symbol 601.3</comment>
+            <translation type="unfinished"></translation>
+        </message>
+        <message>
             <source>North lines pattern, blue</source>
-            <comment>Name of symbol 601.2.1</comment>
+            <comment>Name of symbol 601.4</comment>
             <translation type="unfinished">Ligne du nord magnétique, bleu, aide</translation>
         </message>
         <message>
-            <source>Magnetic north lines are lines placed on the map pointing to magnetic north, parallel to the sides of the paper. Their spacing on the map shall be 20 mm on the map which represents 300 m on the ground at the scale of 1:15 000. If the map is enlarged to 1:10 000, the spacing of the lines will be 30 mm on the map. North lines shall be broken to improve the legibility of the map, for instance where they would obscure small features. In areas with very few water features, blue lines may be used.
-</source>
-            <comment>Description of symbol 601.2.1</comment>
+            <source>Magnetic north lines are lines placed on the map pointing to magnetic north, parallel to the sides of the paper. Their spacing on the map shall be 20 mm on the map which represents 300 m on the ground at the scale of 1:15 000. If the map is enlarged to 1:10 000, the spacing of the lines will be 30 mm on the map. North lines shall be broken to improve the legibility of the map, for instance where they would obscure small features. In areas with very few water features, blue lines may be used.</source>
+            <comment>Description of symbol 601.4</comment>
             <translation type="unfinished"></translation>
         </message>
         <message>
@@ -1988,7 +1963,7 @@ symbols must be given in each case in the map legend.
         <message>
             <source>Spot height, dot</source>
             <comment>Name of symbol 603.0</comment>
-            <translation type="unfinished">Point d'altitude, point</translation>
+            <translation type="unfinished">Point d&apos;altitude, point</translation>
         </message>
         <message>
             <source>Spot heights are used for the rough assessment of height differences. The height is given to the nearest metre. Water levels are given without the dot. Spot heights must only be used where they do not conflict with other symbols.</source>
@@ -2044,7 +2019,7 @@ Sections of the circle should be omitted to leave important detail showing.</sou
         <message>
             <source>The number of the control is placed close to the control point circle in such a way that it does not obscure important detail. The numbers are orientated to north.</source>
             <comment>Description of symbol 704</comment>
-            <translation type="unfinished">Le numéro du poste est placé à proximité du cercle, de telle manière qu'il ne masque aucun détail important. Ces numéros sont orientés vers le nord.</translation>
+            <translation type="unfinished">Le numéro du poste est placé à proximité du cercle, de telle manière qu&apos;il ne masque aucun détail important. Ces numéros sont orientés vers le nord.</translation>
         </message>
         <message>
             <source>Course line</source>
@@ -2162,7 +2137,7 @@ An out-of-bounds route shall not be used.</source>
         <message>
             <source>The location of a first aid post.</source>
             <comment>Description of symbol 712</comment>
-            <translation type="unfinished">La position d'un poste de premiers soins.</translation>
+            <translation type="unfinished">La position d&apos;un poste de premiers soins.</translation>
         </message>
         <message>
             <source>Refreshment point</source>
@@ -2177,16 +2152,16 @@ An out-of-bounds route shall not be used.</source>
         <message>
             <source>Simple Orienteering Course</source>
             <comment>Name of symbol 799</comment>
-            <translation type="unfinished">Simple course d'orientation</translation>
+            <translation type="unfinished">Simple course d&apos;orientation</translation>
         </message>
         <message>
             <source>This symbol provides a simple and quick way to make training courses.
 
 The purple line will extend a bit into the finish symbol. This is a shortcoming of this simple approach.</source>
             <comment>Description of symbol 799</comment>
-            <translation type="unfinished">Ce symbole fournit un moyen simple et rapide de créer des course d'entraînement.
+            <translation type="unfinished">Ce symbole fournit un moyen simple et rapide de créer des course d&apos;entraînement.
 
-Les lignes violettes sont légèrement prolongées dans le symbole d'arrivée. Ceci est un inconvénient de ce symbole.</translation>
+Les lignes violettes sont légèrement prolongées dans le symbole d&apos;arrivée. Ceci est un inconvénient de ce symbole.</translation>
         </message>
         <message>
             <source>OpenOrienteering Logo</source>
@@ -2339,7 +2314,7 @@ Les lignes violettes sont légèrement prolongées dans le symbole d'arrivée. C
         <message>
             <source>An intermediate contour line. Form lines are used where more information can be given about the shape of the ground. They are used only where representation is not possible with ordinary contours. Only one form line may be used between neighbouring contours.</source>
             <comment>Description of symbol 103</comment>
-            <translation type="unfinished">Courbe de niveau intermédiaire. Les courbes intermédiaires sont utilisées pour donner plus d'information sur la forme du terrain. Elles ne seront utilisées que si les courbes de niveau ne peuvent donner une bonne représentation du terrain. Une seule courbe intermédiaire peut être dessinée entre deux courbes de niveau.</translation>
+            <translation type="unfinished">Courbe de niveau intermédiaire. Les courbes intermédiaires sont utilisées pour donner plus d&apos;information sur la forme du terrain. Elles ne seront utilisées que si les courbes de niveau ne peuvent donner une bonne représentation du terrain. Une seule courbe intermédiaire peut être dessinée entre deux courbes de niveau.</translation>
         </message>
         <message>
             <source>Slope line</source>
@@ -2359,7 +2334,7 @@ Les lignes violettes sont légèrement prolongées dans le symbole d'arrivée. C
         <message>
             <source>Contour values may be included to aid assessment of large height differences. They are inserted in the index contours in positions where other detail is not obscured. The figures should be orientated so that the top of the figure is on the higher side of the contour.</source>
             <comment>Description of symbol 105</comment>
-            <translation type="unfinished">Les courbes de niveau peuvent être cotées pour faciliter l'évaluation de grandes différences de dénivelé. Elles sont insérées dans les courbes de niveau maîtresse, où elles ne dissimulent aucun détail. Les chiffres sont orientés avec leur sommet en amont de la pente.</translation>
+            <translation type="unfinished">Les courbes de niveau peuvent être cotées pour faciliter l&apos;évaluation de grandes différences de dénivelé. Elles sont insérées dans les courbes de niveau maîtresse, où elles ne dissimulent aucun détail. Les chiffres sont orientés avec leur sommet en amont de la pente.</translation>
         </message>
         <message>
             <source>Earth bank</source>
@@ -2409,7 +2384,7 @@ Les lignes violettes sont légèrement prolongées dans le symbole d'arrivée. C
         <message>
             <source>Use this symbol to display the full extent of wide earth banks.</source>
             <comment>Description of symbol 106.2</comment>
-            <translation type="unfinished">Utiliser ce symbole pour représenter l'étendue de l'abrupt de terre.</translation>
+            <translation type="unfinished">Utiliser ce symbole pour représenter l&apos;étendue de l&apos;abrupt de terre.</translation>
         </message>
         <message>
             <source>Earth wall</source>
@@ -2527,7 +2502,7 @@ Les lignes violettes sont légèrement prolongées dans le symbole d'arrivée. C
             <translation type="unfinished"></translation>
         </message>
         <message>
-            <source>An impassable cliff, quarry or earth bank (see 106) is shown with a 0.35 mm line and downward tags showing its full extent from the top line to the foot. For vertical rock faces the tags may be omitted if space is short, e.g. narrow passages between cliffs (the passage should be drawn with a width of at least 0.3 mm). The tags may extend over an area symbol representing detail immediately below the rock face. When a rock face drops straight into water making it impossible to pass under the cliff along the water's edge, the bank line is omitted or the tags should clearly extend over the bank line.</source>
+            <source>An impassable cliff, quarry or earth bank (see 106) is shown with a 0.35 mm line and downward tags showing its full extent from the top line to the foot. For vertical rock faces the tags may be omitted if space is short, e.g. narrow passages between cliffs (the passage should be drawn with a width of at least 0.3 mm). The tags may extend over an area symbol representing detail immediately below the rock face. When a rock face drops straight into water making it impossible to pass under the cliff along the water&apos;s edge, the bank line is omitted or the tags should clearly extend over the bank line.</source>
             <comment>Description of symbol 201</comment>
             <translation type="unfinished"></translation>
         </message>
@@ -2537,7 +2512,7 @@ Les lignes violettes sont légèrement prolongées dans le symbole d'arrivée. C
             <translation type="unfinished"></translation>
         </message>
         <message>
-            <source>An impassable cliff, quarry or earth bank (see 106) is shown with a 0.35 mm line and downward tags showing its full extent from the top line to the foot. For vertical rock faces the tags may be omitted if space is short, e.g. narrow passages between cliffs (the passage should be drawn with a width of at least 0.3 mm). The tags may extend over an area symbol representing detail immediately below the rock face. When a rock face drops straight into water making it impossible to pass under the cliff along the water's edge, the bank line is omitted or the tags should clearly extend over the bank line.</source>
+            <source>An impassable cliff, quarry or earth bank (see 106) is shown with a 0.35 mm line and downward tags showing its full extent from the top line to the foot. For vertical rock faces the tags may be omitted if space is short, e.g. narrow passages between cliffs (the passage should be drawn with a width of at least 0.3 mm). The tags may extend over an area symbol representing detail immediately below the rock face. When a rock face drops straight into water making it impossible to pass under the cliff along the water&apos;s edge, the bank line is omitted or the tags should clearly extend over the bank line.</source>
             <comment>Description of symbol 201.0.1</comment>
             <translation type="unfinished"></translation>
         </message>
@@ -2549,7 +2524,7 @@ Les lignes violettes sont légèrement prolongées dans le symbole d'arrivée. C
         <message>
             <source>For vertical rock faces the tags may be omitted if space is short, e.g. narrow passages between cliffs (the passage should be drawn with a width of at least 0.3 mm).</source>
             <comment>Description of symbol 201.1</comment>
-            <translation type="unfinished">Pour des faces verticales, les tirets peuvent être omis s'il n'y a pas assez de place, par ex. un passage étroit entre des falaises. (Les passages doivent être représentés par une largeur d'au moins 0.3 mm).</translation>
+            <translation type="unfinished">Pour des faces verticales, les tirets peuvent être omis s&apos;il n&apos;y a pas assez de place, par ex. un passage étroit entre des falaises. (Les passages doivent être représentés par une largeur d&apos;au moins 0.3 mm).</translation>
         </message>
         <message>
             <source>Impassable cliff, tag line</source>
@@ -2559,7 +2534,7 @@ Les lignes violettes sont légèrement prolongées dans le symbole d'arrivée. C
         <message>
             <source>Use this symbol to display the full extent of a wide cliff.</source>
             <comment>Description of symbol 201.2</comment>
-            <translation type="unfinished">Utiliser ce symbole pour dessiner l'étendue d'une grande falaise.</translation>
+            <translation type="unfinished">Utiliser ce symbole pour dessiner l&apos;étendue d&apos;une grande falaise.</translation>
         </message>
         <message>
             <source>Rock pillars/cliffs</source>
@@ -2599,7 +2574,7 @@ Les lignes violettes sont légèrement prolongées dans le symbole d'arrivée. C
         <message>
             <source>Should be used if the direction of fall of the rock face is apparent from the contours and the legibility is good.</source>
             <comment>Description of symbol 203.1</comment>
-            <translation type="unfinished">Doit être utilisé si le sens de la pente est évident d'après les courbes de niveau.</translation>
+            <translation type="unfinished">Doit être utilisé si le sens de la pente est évident d&apos;après les courbes de niveau.</translation>
         </message>
         <message>
             <source>Passable rock face, no tags, minimum size</source>
@@ -2609,7 +2584,7 @@ Les lignes violettes sont légèrement prolongées dans le symbole d'arrivée. C
         <message>
             <source>Should be used if the direction of fall of the rock face is apparent from the contours and the legibility is good.</source>
             <comment>Description of symbol 203.1.1</comment>
-            <translation type="unfinished">Doit être utilisé si le sens de la pente est évident d'après les courbes de niveau.</translation>
+            <translation type="unfinished">Doit être utilisé si le sens de la pente est évident d&apos;après les courbes de niveau.</translation>
         </message>
         <message>
             <source>Passable rock face, no tags, rounded</source>
@@ -2792,14 +2767,14 @@ Les lignes violettes sont légèrement prolongées dans le symbole d'arrivée. C
             <translation type="unfinished"></translation>
         </message>
         <message>
-            <source>Where the lake or pond is smaller than 1mm² on the printed map, the bank line is omitted.</source>
+            <source>Where the lake or pond is smaller than 1 mm² on the printed map, the bank line is omitted.</source>
             <comment>Description of symbol 302</comment>
             <translation type="unfinished"></translation>
         </message>
         <message>
             <source>Waterhole</source>
             <comment>Name of symbol 303</comment>
-            <translation type="unfinished">Trou d'eau</translation>
+            <translation type="unfinished">Trou d&apos;eau</translation>
         </message>
         <message>
             <source>A water-filled pit or an area of water which is too small to be shown to scale. Location is the centre of gravity of the symbol, which is orientated to north.</source>
@@ -2834,7 +2809,7 @@ Les lignes violettes sont légèrement prolongées dans le symbole d'arrivée. C
         <message>
             <source>A natural or man-made minor water channel which may contain water only intermittently.</source>
             <comment>Description of symbol 307</comment>
-            <translation type="unfinished">Cours d'eau naturel ou creusé qui peut ne contenir de l'eau que par intermittence.</translation>
+            <translation type="unfinished">Cours d&apos;eau naturel ou creusé qui peut ne contenir de l&apos;eau que par intermittence.</translation>
         </message>
         <message>
             <source>Narrow marsh</source>
@@ -2877,7 +2852,7 @@ Les lignes violettes sont légèrement prolongées dans le symbole d'arrivée. C
             <translation type="unfinished">Marais</translation>
         </message>
         <message>
-            <source>A crossable marsh, usually with a distinct edge. The symbol should be combined with vegetation symbols to show runnability and openness. Where a small marsh area should be combined with either 403/404 it is permitted to use 401/402 to improve legibility</source>
+            <source>A crossable marsh, usually with a distinct edge. The symbol should be combined with vegetation symbols to show runnability and openness. Where a small marsh area should be combined with either 403/404 it is permitted to use 401/402 to improve legibility.</source>
             <comment>Description of symbol 310</comment>
             <translation type="unfinished"></translation>
         </message>
@@ -3597,8 +3572,7 @@ Note: if the stream is wider than 0.25mm, adjust this symbol so it extends 0.5mm
             <translation type="unfinished"></translation>
         </message>
         <message>
-            <source>Special man-made features are shown with these symbols. The definition of the
-symbols must be given in each case in the map legend.</source>
+            <source>Special man-made features are shown with these symbols. The definition of the symbols must be given in each case in the map legend.</source>
             <comment>Description of symbol 539</comment>
             <translation type="unfinished"></translation>
         </message>
@@ -3608,8 +3582,7 @@ symbols must be given in each case in the map legend.</source>
             <translation type="unfinished"></translation>
         </message>
         <message>
-            <source>Special man-made features are shown with these symbols. The definition of the
-symbols must be given in each case in the map legend.</source>
+            <source>Special man-made features are shown with these symbols. The definition of the symbols must be given in each case in the map legend.</source>
             <comment>Description of symbol 540</comment>
             <translation type="unfinished"></translation>
         </message>
@@ -3626,12 +3599,12 @@ symbols must be given in each case in the map legend.</source>
         <message>
             <source>North lines pattern</source>
             <comment>Name of symbol 601.1</comment>
-            <translation type="unfinished"></translation>
+            <translation>Lignes du nord magnétique</translation>
         </message>
         <message>
             <source>Magnetic north line, blue</source>
             <comment>Name of symbol 601.2</comment>
-            <translation type="unfinished">Lignes du nord magnétique, bleu</translation>
+            <translation>Lignes du nord magnétique, bleu</translation>
         </message>
         <message>
             <source>Magnetic north lines are lines placed on the map pointing to magnetic north. Their spacing on the map should be 33.33 mm which represents 500 m on the ground at the scale of 1:15 000. For maps with other scales lines placing should be at intervals which represents a round number of meters (e.g. 50 m, 100 m, 250 m, 500 m) and the spacing should be between 20 mm and 40 mm on the map. North lines may be broken where they obscure small features such as boulders, knolls, cliffs, stream junctions, path ends, etc. In areas with very few water features, blue lines may be used.</source>
@@ -3656,13 +3629,12 @@ symbols must be given in each case in the map legend.</source>
         <message>
             <source>Spot height, dot</source>
             <comment>Name of symbol 603.0</comment>
-            <translation type="unfinished">Point d'altitude, point</translation>
+            <translation type="unfinished">Point d&apos;altitude, point</translation>
         </message>
         <message>
-            <source>Spot heights are used for the rough assessment of height differences. The height is given to the nearest metre. The figures are orientated to the north. Water levels are
-given without the dot.</source>
+            <source>Spot heights are used for the rough assessment of height differences. The height is given to the nearest metre. The figures are orientated to the north. Water levels are given without the dot.</source>
             <comment>Description of symbol 603.0</comment>
-            <translation type="unfinished"></translation>
+            <translation type="unfinished">Les points d&apos;altitude sont utilisés pour l&apos;estimation des différences d&apos;altitude. Celle-ci est arrondie au mètre. Les chiffres sont orientés vers le nord. Les niveaux d&apos;eau sont représentés sans le point.</translation>
         </message>
         <message>
             <source>Spot height, text</source>
@@ -3672,7 +3644,7 @@ given without the dot.</source>
         <message>
             <source>Spot heights are used for the rough assessment of height differences. The height is given to the nearest metre. The figures are orientated to the north. Water levels are given without the dot.</source>
             <comment>Description of symbol 603.1</comment>
-            <translation type="unfinished">Les points d'altitude sont utilisés pour l'estimation des différences d'altitude. Celle-ci est arrondie au mètre. Les chiffres sont orientés vers le nord. Les niveaux d'eau sont représentés sans le point.</translation>
+            <translation type="unfinished">Les points d&apos;altitude sont utilisés pour l&apos;estimation des différences d&apos;altitude. Celle-ci est arrondie au mètre. Les chiffres sont orientés vers le nord. Les niveaux d&apos;eau sont représentés sans le point.</translation>
         </message>
         <message>
             <source>Start</source>
@@ -3682,7 +3654,7 @@ given without the dot.</source>
         <message>
             <source>The start or map issue point (if not at the start) is shown by an equilateral triangle which points in the direction of the first control. The centre of the triangle shows the precise position of the start point.</source>
             <comment>Description of symbol 701</comment>
-            <translation type="unfinished">Le départ, (ou le point de la prise de carte s'il ne s'agit pas du départ) est représenté par un triangle équilatéral qui pointe dans la direction du premier poste. Le centre de ce triangle montre la position exacte du point de départ.</translation>
+            <translation type="unfinished">Le départ, (ou le point de la prise de carte s&apos;il ne s&apos;agit pas du départ) est représenté par un triangle équilatéral qui pointe dans la direction du premier poste. Le centre de ce triangle montre la position exacte du point de départ.</translation>
         </message>
         <message>
             <source>Control point</source>
@@ -3692,7 +3664,7 @@ given without the dot.</source>
         <message>
             <source>The control points are shown with circles. The centre of the circle shows the precise position of the feature. Sections of circles should be omitted to leave important detail showing.</source>
             <comment>Description of symbol 702</comment>
-            <translation type="unfinished">Les postes de contrôle sont représentés par des cercles. Le centre du cercle doit indiquer la position exacte de l'élément. Des sections du cercle peuvent être éliminées à condition de ne masquer aucun détail important.</translation>
+            <translation type="unfinished">Les postes de contrôle sont représentés par des cercles. Le centre du cercle doit indiquer la position exacte de l&apos;élément. Des sections du cercle peuvent être éliminées à condition de ne masquer aucun détail important.</translation>
         </message>
         <message>
             <source>Control number</source>
@@ -3702,7 +3674,7 @@ given without the dot.</source>
         <message>
             <source>The number of the control is placed close to the control point circle in such a way that it does not obscure important detail. The numbers are orientated to north.</source>
             <comment>Description of symbol 703</comment>
-            <translation type="unfinished">Le numéro du poste est placé à proximité du cercle, de telle manière qu'il ne masque aucun détail important. Ces numéros sont orientés vers le nord.</translation>
+            <translation type="unfinished">Le numéro du poste est placé à proximité du cercle, de telle manière qu&apos;il ne masque aucun détail important. Ces numéros sont orientés vers le nord.</translation>
         </message>
         <message>
             <source>Line</source>
@@ -3712,7 +3684,7 @@ given without the dot.</source>
         <message>
             <source>Where controls are to be visited in order, the start, control points and finish are joined together by straight lines. Sections of lines should be omitted to leave important detail showing.</source>
             <comment>Description of symbol 704</comment>
-            <translation type="unfinished">Lorsque les contrôles doivent être parcourus dans un ordre défini, le départ, les postes et l'arrivée sont réunis par des traits. Des sections de ligne peuvent être éliminées pour ne pas masquer des détails importants.</translation>
+            <translation type="unfinished">Lorsque les contrôles doivent être parcourus dans un ordre défini, le départ, les postes et l&apos;arrivée sont réunis par des traits. Des sections de ligne peuvent être éliminées pour ne pas masquer des détails importants.</translation>
         </message>
         <message>
             <source>Marked route</source>
@@ -3732,7 +3704,7 @@ given without the dot.</source>
         <message>
             <source>The finish is shown by two concentric circles.</source>
             <comment>Description of symbol 706</comment>
-            <translation type="unfinished">L'arrivée est représentée par deux cercles concentriques.</translation>
+            <translation type="unfinished">L&apos;arrivée est représentée par deux cercles concentriques.</translation>
         </message>
         <message>
             <source>Uncrossable boundary</source>
@@ -3740,7 +3712,7 @@ given without the dot.</source>
             <translation type="unfinished"></translation>
         </message>
         <message>
-            <source>Aboundary which it is not permitted to cross.</source>
+            <source>A boundary which it is not permitted to cross.</source>
             <comment>Description of symbol 707</comment>
             <translation type="unfinished"></translation>
         </message>
@@ -3817,7 +3789,7 @@ A bounding line may be drawn if there is no natural boundary, as follows:
         <message>
             <source>The location of a first aid post.</source>
             <comment>Description of symbol 712</comment>
-            <translation type="unfinished">La position d'un poste de premiers soins.</translation>
+            <translation type="unfinished">La position d&apos;un poste de premiers soins.</translation>
         </message>
         <message>
             <source>Refreshment point</source>
@@ -3832,16 +3804,16 @@ A bounding line may be drawn if there is no natural boundary, as follows:
         <message>
             <source>Simple Orienteering Course</source>
             <comment>Name of symbol 799</comment>
-            <translation type="unfinished">Simple course d'orientation</translation>
+            <translation type="unfinished">Simple course d&apos;orientation</translation>
         </message>
         <message>
             <source>This symbol provides a simple and quick way to make training courses.
 
 The purple line will extend a bit into the finish symbol. This is a shortcoming of this simple approach.</source>
             <comment>Description of symbol 799</comment>
-            <translation type="unfinished">Ce symbole fournit un moyen simple et rapide de créer des course d'entraînement.
+            <translation type="unfinished">Ce symbole fournit un moyen simple et rapide de créer des course d&apos;entraînement.
 
-Les lignes violettes sont légèrement prolongées dans le symbole d'arrivée. Ceci est un inconvénient de ce symbole.</translation>
+Les lignes violettes sont légèrement prolongées dans le symbole d&apos;arrivée. Ceci est un inconvénient de ce symbole.</translation>
         </message>
         <message>
             <source>OpenOrienteering Logo</source>
@@ -4044,11 +4016,11 @@ Les lignes violettes sont légèrement prolongées dans le symbole d'arrivée. C
         <message>
             <source>A line joining points of equal height. The standard vertical interval between contours is 2 or 2.5 m. To emphasize the 3-dimensional effect of the contour line image, contour lines shall be represented as continuous lines through all symbols, also building (526.1) and canopy (526.2). However, contour lines shall be cut out for better legibility, if they touch the following symbols: small earth wall (108.1), small knoll (112), small elongated knoll (113), small depression (115), pit or hole (116), prominent landform feature (118), step or edge of paved area (529.1). 
 
-The relative height difference between neighbouring features must be represented on the map as accurately as possible.  Absolute height accuracy is of less importance. It is permissible to alter the height of a contour slightly if this will improve the representation of a feature. This deviation should not exceed 25% of the contour interval and attention must be paid to neighbouring features. The smallest bend in a contour is 0.4 mm from centre to centre of the lines.</source>
+The relative height difference between neighbouring features must be represented on the map as accurately as possible. Absolute height accuracy is of less importance. It is permissible to alter the height of a contour slightly if this will improve the representation of a feature. This deviation should not exceed 25% of the contour interval and attention must be paid to neighbouring features. The smallest bend in a contour is 0.4 mm from centre to centre of the lines.</source>
             <comment>Description of symbol 101</comment>
-            <translation>Ligne qui rejoint les points d'altitude équivalente. L'intervalle vertical standard (équidistance) est 2 ou 2,5 mètres. Pour mettre en évidence l'effet 3D de l'image des courbes de niveau, celles-ci seront représentées en ligne continue au dessus des autres symboles, y compris les bâtiments (526.1) et les auvents (526.2). Cependant, elles seront interrompues si elles touchent les symboles ci-après : petite levée de terre (108.1), petite butte (112), petite butte allongée (113), petite dépréssion (115), trou (116), élément de relief bien visible (118), marche ou zone pavée (529.1). 
+            <translation>Ligne qui rejoint les points d&apos;altitude équivalente. L&apos;intervalle vertical standard (équidistance) est 2 ou 2,5 mètres. Pour mettre en évidence l&apos;effet 3D de l&apos;image des courbes de niveau, celles-ci seront représentées en ligne continue au dessus des autres symboles, y compris les bâtiments (526.1) et les auvents (526.2). Cependant, elles seront interrompues si elles touchent les symboles ci-après : petite levée de terre (108.1), petite butte (112), petite butte allongée (113), petite dépréssion (115), trou (116), élément de relief bien visible (118), marche ou zone pavée (529.1). 
 
-La différence d'altitude relative entre des éléments voisins doit être représentée aussi précisément que possible. La précision de l'altitude absolue est de moindre importance. Il est permis de modifier légèrement une courbe de niveau si cela peut améliorer la représentation d'un élément. La déviation ne peut cependant dépasser 25 % de l'équidistance et il convient de porter attention aux éléments voisins. La courbure minimale d'une courbe de niveau est de 0,4 mm, de centre à centre des lignes.</translation>
+La différence d&apos;altitude relative entre des éléments voisins doit être représentée aussi précisément que possible. La précision de l&apos;altitude absolue est de moindre importance. Il est permis de modifier légèrement une courbe de niveau si cela peut améliorer la représentation d&apos;un élément. La déviation ne peut cependant dépasser 25 % de l&apos;équidistance et il convient de porter attention aux éléments voisins. La courbure minimale d&apos;une courbe de niveau est de 0,4 mm, de centre à centre des lignes.</translation>
         </message>
         <message>
             <source>Index contour</source>
@@ -4056,9 +4028,9 @@ La différence d'altitude relative entre des éléments voisins doit être repr�
             <translation>Courbe de niveau maîtresse</translation>
         </message>
         <message>
-            <source>Every fifth contour shall be drawn with a thicker line. This is an aid to the quick assessment of height difference and the overall shape of the terrain surface.  Where an index contour coincides with an area of much detail, it may be shown with symbol contour (101).</source>
+            <source>Every fifth contour shall be drawn with a thicker line. This is an aid to the quick assessment of height difference and the overall shape of the terrain surface. Where an index contour coincides with an area of much detail, it may be shown with symbol contour (101).</source>
             <comment>Description of symbol 102</comment>
-            <translation>Chaque cinquième courbe sera dessinée avec une épaisseur plus importante. Ce sera une aide à l'estimation rapide d'une différence d'altitude et de la forme générale du terrain. Lorsqu'une courbe de niveau maîtresse coïncide avec une zone fortement détaillée, elle peut être dessinée en courbe simple (101).</translation>
+            <translation>Chaque cinquième courbe sera dessinée avec une épaisseur plus importante. Ce sera une aide à l&apos;estimation rapide d&apos;une différence d&apos;altitude et de la forme générale du terrain. Lorsqu&apos;une courbe de niveau maîtresse coïncide avec une zone fortement détaillée, elle peut être dessinée en courbe simple (101).</translation>
         </message>
         <message>
             <source>Form line</source>
@@ -4068,7 +4040,7 @@ La différence d'altitude relative entre des éléments voisins doit être repr�
         <message>
             <source>An intermediate contour line. Form lines are used where more information can be given about the shape of the ground. They are used only where representation is not possible with ordinary contours. Only one form line may be used between neighbouring contours.</source>
             <comment>Description of symbol 103</comment>
-            <translation>Courbe de niveau intermédiaire. Les courbes intermédiaires sont utilisées pour donner plus d'information sur la forme du terrain. Elles ne seront utilisées que si les courbes de niveau ne peuvent donner une bonne représentation du terrain. Une seule courbe intermédiaire peut être dessinée entre deux courbes de niveau.</translation>
+            <translation>Courbe de niveau intermédiaire. Les courbes intermédiaires sont utilisées pour donner plus d&apos;information sur la forme du terrain. Elles ne seront utilisées que si les courbes de niveau ne peuvent donner une bonne représentation du terrain. Une seule courbe intermédiaire peut être dessinée entre deux courbes de niveau.</translation>
         </message>
         <message>
             <source>Slope line</source>
@@ -4078,7 +4050,7 @@ La différence d'altitude relative entre des éléments voisins doit être repr�
         <message>
             <source>Slope lines should be drawn on the lower side of a contour line where it is necessary to clarify the direction of slope, e.g. along the line of a re-entrant or in a depression.</source>
             <comment>Description of symbol 104</comment>
-            <translation>Des tirets de pente peuvent être dessinés du côté aval d'une courbe de niveau lorsqu'il est nécessaire de clarifier la direction de la pente, par ex. le long de la courbe d'un rentrant ou dans une dépression.</translation>
+            <translation>Des tirets de pente peuvent être dessinés du côté aval d&apos;une courbe de niveau lorsqu&apos;il est nécessaire de clarifier la direction de la pente, par ex. le long de la courbe d&apos;un rentrant ou dans une dépression.</translation>
         </message>
         <message>
             <source>Contour value</source>
@@ -4088,7 +4060,7 @@ La différence d'altitude relative entre des éléments voisins doit être repr�
         <message>
             <source>Contour values may be included to aid assessment of large height differences. They are inserted in the index contours in positions where other detail is not obscured. The figures should be orientated so that the top of the figure is on the higher side of the contour.</source>
             <comment>Description of symbol 105</comment>
-            <translation>Les courbes de niveau peuvent être cotées pour faciliter l'évaluation de grandes différences de dénivelé. Elles sont insérées dans les courbes de niveau maîtresse, où elles ne dissimulent aucun détail. Les chiffres sont orientés avec leur sommet en amont de la pente.</translation>
+            <translation>Les courbes de niveau peuvent être cotées pour faciliter l&apos;évaluation de grandes différences de dénivelé. Elles sont insérées dans les courbes de niveau maîtresse, où elles ne dissimulent aucun détail. Les chiffres sont orientés avec leur sommet en amont de la pente.</translation>
         </message>
         <message>
             <source>Earth bank</source>
@@ -4098,7 +4070,7 @@ La différence d'altitude relative entre des éléments voisins doit être repr�
         <message>
             <source>A steep earth bank is an abrupt change in ground level which can be clearly distinguished from its surroundings, e.g. gravel or sand pits, roads and railway cuttings or embankments. The tags should show the full extent of the slope, but may be omitted if two banks are close together. Impassable banks shall be drawn with the symbol impassable cliff (201). The line width of very high earth banks may be 0.37 mm.</source>
             <comment>Description of symbol 106.0</comment>
-            <translation>Un abrupt de terre est un changement brutal dans le niveau du terrain qui peut être clairement distingué dans l'environnement, comme par exemple une carrière ou des tranchées, des remblais de route ou de chemins de terre. La longueur des tirets doit montrer l'importance de la pente, mais ils peuvent être omis si deux abrupts sont très proches l'un de l'autre. Des abrupts de terre infranchissables doivent être dessinés avec le symbole de falaise infranchissable (201). L'épaisseur de ligne d'abrupts très importants peut être de 0,37 mm.</translation>
+            <translation>Un abrupt de terre est un changement brutal dans le niveau du terrain qui peut être clairement distingué dans l&apos;environnement, comme par exemple une carrière ou des tranchées, des remblais de route ou de chemins de terre. La longueur des tirets doit montrer l&apos;importance de la pente, mais ils peuvent être omis si deux abrupts sont très proches l&apos;un de l&apos;autre. Des abrupts de terre infranchissables doivent être dessinés avec le symbole de falaise infranchissable (201). L&apos;épaisseur de ligne d&apos;abrupts très importants peut être de 0,37 mm.</translation>
         </message>
         <message>
             <source>Earth bank, very high</source>
@@ -4108,7 +4080,7 @@ La différence d'altitude relative entre des éléments voisins doit être repr�
         <message>
             <source>A steep earth bank is an abrupt change in ground level which can be clearly distinguished from its surroundings, e.g. gravel or sand pits, roads and railway cuttings or embankments. The tags should show the full extent of the slope, but may be omitted if two banks are close together. Impassable banks shall be drawn with the symbol impassable cliff (201). The line width of very high earth banks may be 0.37 mm.</source>
             <comment>Description of symbol 106.1</comment>
-            <translation>Un abrupt de terre est un changement brutal dans le niveau du terrain qui peut être clairement distingué dans l'environnement, comme par exemple une carrière ou des tranchées, des remblais de route ou de chemins de terre. La longueur des tirets doit montrer l'importance de la pente, mais ils peuvent être omis si deux abrupts sont très proches l'un de l'autre. Des abrupts de terre infranchissables doivent être dessinés avec le symbole de falaise infranchissable (201). L'épaisseur de ligne d'abrupts très importants peut être de 0,37 mm.</translation>
+            <translation>Un abrupt de terre est un changement brutal dans le niveau du terrain qui peut être clairement distingué dans l&apos;environnement, comme par exemple une carrière ou des tranchées, des remblais de route ou de chemins de terre. La longueur des tirets doit montrer l&apos;importance de la pente, mais ils peuvent être omis si deux abrupts sont très proches l&apos;un de l&apos;autre. Des abrupts de terre infranchissables doivent être dessinés avec le symbole de falaise infranchissable (201). L&apos;épaisseur de ligne d&apos;abrupts très importants peut être de 0,37 mm.</translation>
         </message>
         <message>
             <source>Earth bank, tag line</source>
@@ -4118,7 +4090,7 @@ La différence d'altitude relative entre des éléments voisins doit être repr�
         <message>
             <source>Use this symbol to display the full extent of wide earth banks.</source>
             <comment>Description of symbol 106.2</comment>
-            <translation>Utiliser ce symbole pour représenter l'étendue de l'abrupt de terre.</translation>
+            <translation>Utiliser ce symbole pour représenter l&apos;étendue de l&apos;abrupt de terre.</translation>
         </message>
         <message>
             <source>Small earth wall</source>
@@ -4126,9 +4098,9 @@ La différence d'altitude relative entre des éléments voisins doit être repr�
             <translation>Petite levée de terre</translation>
         </message>
         <message>
-            <source>A small distinct earth wall, usually man made. The minimum height is 0.5 m.  Larger earth walls should be represented with the symbols contour (101), form line (103) or earth bank (106).</source>
+            <source>A small distinct earth wall, usually man made. The minimum height is 0.5 m. Larger earth walls should be represented with the symbols contour (101), form line (103) or earth bank (106).</source>
             <comment>Description of symbol 108.1</comment>
-            <translation>Petit mur de terre distinct, généralement créé par l'homme. La hauteur minimum est de 0,5 m. Des murs plus importants doivent être représentés par les symboles de courbe de niveau (101), de courbe de forme (103) ou d'abrupt de terre (106).</translation>
+            <translation>Petit mur de terre distinct, généralement créé par l&apos;homme. La hauteur minimum est de 0,5 m. Des murs plus importants doivent être représentés par les symboles de courbe de niveau (101), de courbe de forme (103) ou d&apos;abrupt de terre (106).</translation>
         </message>
         <message>
             <source>Erosion gully or trench</source>
@@ -4138,7 +4110,7 @@ La différence d'altitude relative entre des éléments voisins doit être repr�
         <message>
             <source>An erosion gully or trench which is too small to be represented with the symbol earth bank (106), contour (101), index contour (102) or form line (103) is represented by a single line. The line width reflects the size of the gully. The end of the line is pointed. Minimum depth is 1 m. Minimum length is 3 mm on the map.</source>
             <comment>Description of symbol 109</comment>
-            <translation>Ravin provoqué par l'érosion ou une tranchée trop petite pour être dessinée avec les symboles d'abrupt de terre (106), de courbe de niveau - maîtresse - de forme (101-102-103) est représenté par un seul trait. L'épaisseur du trait représente les dimensions du ravin. Le trait se termine en pointe. Profondeur minimale : 1 m. Longueur minimale sur la carte : 3 mm.</translation>
+            <translation>Ravin provoqué par l&apos;érosion ou une tranchée trop petite pour être dessinée avec les symboles d&apos;abrupt de terre (106), de courbe de niveau - maîtresse - de forme (101-102-103) est représenté par un seul trait. L&apos;épaisseur du trait représente les dimensions du ravin. Le trait se termine en pointe. Profondeur minimale : 1 m. Longueur minimale sur la carte : 3 mm.</translation>
         </message>
         <message>
             <source>Small erosion gully</source>
@@ -4146,7 +4118,7 @@ La différence d'altitude relative entre des éléments voisins doit être repr�
             <translation>Petit ravin</translation>
         </message>
         <message>
-            <source>Asmall erosion gully or trench. Minimum depth is 0.5 m.</source>
+            <source>A small erosion gully or trench. Minimum depth is 0.5 m.</source>
             <comment>Description of symbol 110</comment>
             <translation>Ravine, fossé sec ou petite tranchée. Profondeur minimale : 0,5 m.</translation>
         </message>
@@ -4158,7 +4130,7 @@ La différence d'altitude relative entre des éléments voisins doit être repr�
         <message>
             <source>A small obvious mound or rocky knoll which cannot be drawn to scale with a contour (101), index contour (102) or form line (103). The height of the knoll should be a minimum of 1 m from the surrounding ground.</source>
             <comment>Description of symbol 112</comment>
-            <translation>Petit monticule visible ou une butte rocheuse qui ne peut être déssinée avec des courbes de niveau (101), des courbes de niveau maîtresse (102) ou des courbes de forme (103). La hauteur d'une butte doit être d'au mois 1 m par rapport au terrain qui l'entoure.</translation>
+            <translation>Petit monticule visible ou une butte rocheuse qui ne peut être déssinée avec des courbes de niveau (101), des courbes de niveau maîtresse (102) ou des courbes de forme (103). La hauteur d&apos;une butte doit être d&apos;au mois 1 m par rapport au terrain qui l&apos;entoure.</translation>
         </message>
         <message>
             <source>Elongated knoll</source>
@@ -4170,9 +4142,9 @@ La différence d'altitude relative entre des éléments voisins doit être repr�
 
 The symbol may not be drawn in free form or such that two elongated knoll symbols touch or overlap.</source>
             <comment>Description of symbol 113</comment>
-            <translation>Petit monticule visible, allongé et qui ne peut être dessiné à l'échelle avec une courbe de niveau (101), maîtresse (102) ou de forme (103). La longueur maximum sera de 6 m et sa largeur maximale 2 m. La hauteur d'une butte doit être d'au moins 1 m par rapport au terrain qui l'entoure. Les buttes plus importantes doivent être dessinées avec des courbes de niveau. 
+            <translation>Petit monticule visible, allongé et qui ne peut être dessiné à l&apos;échelle avec une courbe de niveau (101), maîtresse (102) ou de forme (103). La longueur maximum sera de 6 m et sa largeur maximale 2 m. La hauteur d&apos;une butte doit être d&apos;au moins 1 m par rapport au terrain qui l&apos;entoure. Les buttes plus importantes doivent être dessinées avec des courbes de niveau. 
 
-Ce symbole ne peut être dessiné sous forme libre ou de telle manière que deux d'entre eux se recouvrent.</translation>
+Ce symbole ne peut être dessiné sous forme libre ou de telle manière que deux d&apos;entre eux se recouvrent.</translation>
         </message>
         <message>
             <source>Small depression</source>
@@ -4182,7 +4154,7 @@ Ce symbole ne peut être dessiné sous forme libre ou de telle manière que deux
         <message>
             <source>A small shallow natural depression or hollow which cannot be represented by the symbol contour (101) or form line (103) is represented by a semicircle. The minimum diameter should be 2 m. The minimum depth from the surrounding ground should be 1 m. The symbol is orientated to north.</source>
             <comment>Description of symbol 115</comment>
-            <translation>Petite dépression naturelle évasée ou une cuvette qui ne peut être représentée par des courbes de niveau (101) ou de forme (103) est représentée par un demi-cercle. Le diamètre minimum est de 2 m. La profondeur minimale par rapport au terrain qui l'entoure doit être de 1 m. Le symbole est orienté au nord.</translation>
+            <translation>Petite dépression naturelle évasée ou une cuvette qui ne peut être représentée par des courbes de niveau (101) ou de forme (103) est représentée par un demi-cercle. Le diamètre minimum est de 2 m. La profondeur minimale par rapport au terrain qui l&apos;entoure doit être de 1 m. Le symbole est orienté au nord.</translation>
         </message>
         <message>
             <source>Pit</source>
@@ -4192,7 +4164,7 @@ Ce symbole ne peut être dessiné sous forme libre ou de telle manière que deux
         <message>
             <source>A pit or hole with distinct steep sides which cannot be represented to scale with the symbol earth bank (106). The minimum diameter shall be 2 m. The minimum depth from the surrounding ground shall be 1 m. The symbol is orientated to north.</source>
             <comment>Description of symbol 116</comment>
-            <translation>Trou avec des flancs nets et raides qui ne peut être représenté à l'échelle par le symbole 106 (diamètre minimum 2 m). La profondeur minimale par rapport au terrain qui l'entoure doit être de 1 m. Le symbole est orienté au nord.</translation>
+            <translation>Trou avec des flancs nets et raides qui ne peut être représenté à l&apos;échelle par le symbole 106 (diamètre minimum 2 m). La profondeur minimale par rapport au terrain qui l&apos;entoure doit être de 1 m. Le symbole est orienté au nord.</translation>
         </message>
         <message>
             <source>Broken ground, small</source>
@@ -4225,64 +4197,64 @@ Ce symbole ne peut être dessiné sous forme libre ou de telle manière que deux
             <translation>Ce symbole peut être utilisé pour des détails particuliers de relief. Sa définition doit toujours figurer sur la légende de la carte. Le symbole est orienté au nord.</translation>
         </message>
         <message>
-            <source>Impassable cliff &lt;span style="color:magenta"&gt;(forbidden to cross)&lt;/span&gt;</source>
+            <source>Impassable cliff &lt;span style=&quot;color:magenta&quot;&gt;(forbidden to cross)&lt;/span&gt;</source>
             <comment>Name of symbol 201</comment>
-            <translation>Falaise infranchissable &lt;span style="color:magenta"&gt;(interdit)&lt;/span&gt;</translation>
+            <translation>Falaise infranchissable &lt;span style=&quot;color:magenta&quot;&gt;(interdit)&lt;/span&gt;</translation>
         </message>
         <message>
             <source>An impassable cliff, quarry or earth bank [see symbol earth bank (106)]. Tags are drawn downwards, showing its full extent from the top line to the foot. For vertical rock faces the tags may be omitted if space is short, e.g. narrow passages between cliffs (the passage should be drawn with a width of at least 0.3 mm). 
 
-The tags may extend over an area symbol representing detail immediately below the rock face. When a rock face drops straight into water making it impossible to pass under the cliff along the water's edge, the bank line is omitted or the tags shall clearly extend over the bank line. Minimum height is 2 meters.
+The tags may extend over an area symbol representing detail immediately below the rock face. When a rock face drops straight into water making it impossible to pass under the cliff along the water&apos;s edge, the bank line is omitted or the tags shall clearly extend over the bank line. Minimum height is 2 meters.
 
-&lt;span style="color:magenta"&gt;It is forbidden to cross an impassable cliff!
+&lt;span style=&quot;color:magenta&quot;&gt;It is forbidden to cross an impassable cliff!
 Competitors violating this rule will be disqualified.&lt;/span&gt;</source>
             <comment>Description of symbol 201</comment>
-            <translation>Falaise infranchissable, carrière ou abrupt de terre (voir 106). Des tirets vers l'aval montrent l'importance de l'élément de la ligne de sommet à son pied. Pour des faces verticales, les tirets peuvent être omis s'il n'y a pas assez de place, par ex. un passage étroit entre des falaises. (les passages doivent être représentés par une largeur d'au moins 0,3 mm). 
+            <translation>Falaise infranchissable, carrière ou abrupt de terre (voir 106). Des tirets vers l&apos;aval montrent l&apos;importance de l&apos;élément de la ligne de sommet à son pied. Pour des faces verticales, les tirets peuvent être omis s&apos;il n&apos;y a pas assez de place, par ex. un passage étroit entre des falaises. (les passages doivent être représentés par une largeur d&apos;au moins 0,3 mm). 
 
-Les tirets peuvent s'étendre sur un symbole de surface qui représente le détail directement sous la face rocheuse. Quand une falaise tombe directement dans l'eau, rendant impossible le passage au pied de la falaise, soit le trait marquant la rive est omis, soit les tirets doivent nettement le dépasser. La hauteur minimale est 2 m. 
+Les tirets peuvent s&apos;étendre sur un symbole de surface qui représente le détail directement sous la face rocheuse. Quand une falaise tombe directement dans l&apos;eau, rendant impossible le passage au pied de la falaise, soit le trait marquant la rive est omis, soit les tirets doivent nettement le dépasser. La hauteur minimale est 2 m. 
 
-&lt;span style="color:magenta"&gt;Il est interdit de franchir ce type de falaise !
+&lt;span style=&quot;color:magenta&quot;&gt;Il est interdit de franchir ce type de falaise !
 Le concurrent qui ne respecte pas cette règle sera disqualifié.&lt;/span&gt;</translation>
         </message>
         <message>
-            <source>Impassable cliff, minimum size &lt;span style="color:magenta"&gt;(forbidden to cross)&lt;/span&gt;</source>
+            <source>Impassable cliff, minimum size &lt;span style=&quot;color:magenta&quot;&gt;(forbidden to cross)&lt;/span&gt;</source>
             <comment>Name of symbol 201.0.1</comment>
-            <translation>Falaise infranchissable, taille minimum &lt;span style="color:magenta"&gt;(interdit)&lt;/span&gt;</translation>
+            <translation>Falaise infranchissable, taille minimum &lt;span style=&quot;color:magenta&quot;&gt;(interdit)&lt;/span&gt;</translation>
         </message>
         <message>
             <source>An impassable cliff, quarry or earth bank [see symbol earth bank (106)]. Tags are drawn downwards, showing its full extent from the top line to the foot. For vertical rock faces the tags may be omitted if space is short, e.g. narrow passages between cliffs (the passage should be drawn with a width of at least 0.3 mm). 
 
-The tags may extend over an area symbol representing detail immediately below the rock face. When a rock face drops straight into water making it impossible to pass under the cliff along the water's edge, the bank line is omitted or the tags shall clearly extend over the bank line. Minimum height is 2 meters.
+The tags may extend over an area symbol representing detail immediately below the rock face. When a rock face drops straight into water making it impossible to pass under the cliff along the water&apos;s edge, the bank line is omitted or the tags shall clearly extend over the bank line. Minimum height is 2 meters.
 
-&lt;span style="color:magenta"&gt;It is forbidden to cross an impassable cliff!
+&lt;span style=&quot;color:magenta&quot;&gt;It is forbidden to cross an impassable cliff!
 Competitors violating this rule will be disqualified.&lt;/span&gt;</source>
             <comment>Description of symbol 201.0.1</comment>
-            <translation>Falaise infranchissable, carrière ou abrupt de terre (voir 106). Des tirets vers l'aval montrent l'importance de l'élément de la ligne de sommet à son pied. Pour des faces verticales, les tirets peuvent être omis s'il n'y a pas assez de place, par ex. un passage étroit entre des falaises. (les passages doivent être représentés par une largeur d'au moins 0,3 mm). 
+            <translation>Falaise infranchissable, carrière ou abrupt de terre (voir 106). Des tirets vers l&apos;aval montrent l&apos;importance de l&apos;élément de la ligne de sommet à son pied. Pour des faces verticales, les tirets peuvent être omis s&apos;il n&apos;y a pas assez de place, par ex. un passage étroit entre des falaises. (les passages doivent être représentés par une largeur d&apos;au moins 0,3 mm). 
 
-Les tirets peuvent s'étendre sur un symbole de surface qui représente le détail directement sous la face rocheuse. Quand une falaise tombe directement dans l'eau, rendant impossible le passage au pied de la falaise, soit le trait marquant la rive est omis, soit les tirets doivent nettement le dépasser. La hauteur minimale est 2 m. 
+Les tirets peuvent s&apos;étendre sur un symbole de surface qui représente le détail directement sous la face rocheuse. Quand une falaise tombe directement dans l&apos;eau, rendant impossible le passage au pied de la falaise, soit le trait marquant la rive est omis, soit les tirets doivent nettement le dépasser. La hauteur minimale est 2 m. 
 
-&lt;span style="color:magenta"&gt;Il est interdit de franchir ce type de falaise !
+&lt;span style=&quot;color:magenta&quot;&gt;Il est interdit de franchir ce type de falaise !
 Le concurrent qui ne respecte pas cette règle sera disqualifié.&lt;/span&gt;</translation>
         </message>
         <message>
-            <source>Impassable cliff, no tags &lt;span style="color:magenta"&gt;(forbidden to cross)&lt;/span&gt;</source>
+            <source>Impassable cliff, no tags &lt;span style=&quot;color:magenta&quot;&gt;(forbidden to cross)&lt;/span&gt;</source>
             <comment>Name of symbol 201.1</comment>
-            <translation>Falaise infranchissable, sans tirets &lt;span style="color:magenta"&gt;(interdit)&lt;/span&gt;</translation>
+            <translation>Falaise infranchissable, sans tirets &lt;span style=&quot;color:magenta&quot;&gt;(interdit)&lt;/span&gt;</translation>
         </message>
         <message>
             <source>For vertical rock faces the tags may be omitted if space is short, e.g. narrow passages between cliffs (the passage should be drawn with a width of at least 0.3 mm).</source>
             <comment>Description of symbol 201.1</comment>
-            <translation>Pour des faces verticales, les tirets peuvent être omis s'il n'y a pas assez de place, par ex. un passage étroit entre des falaises. (Les passages doivent être représentés par une largeur d'au moins 0.3 mm).</translation>
+            <translation>Pour des faces verticales, les tirets peuvent être omis s&apos;il n&apos;y a pas assez de place, par ex. un passage étroit entre des falaises. (Les passages doivent être représentés par une largeur d&apos;au moins 0.3 mm).</translation>
         </message>
         <message>
-            <source>Impassable cliff, no tags, minimum size &lt;span style="color:magenta"&gt;(forbidden to cross)&lt;/span&gt;</source>
+            <source>Impassable cliff, no tags, minimum size &lt;span style=&quot;color:magenta&quot;&gt;(forbidden to cross)&lt;/span&gt;</source>
             <comment>Name of symbol 201.1.1</comment>
-            <translation>Falaise infranchissable, sans tirets, taille minimum &lt;span style="color:magenta"&gt;(interdit)&lt;/span&gt;</translation>
+            <translation>Falaise infranchissable, sans tirets, taille minimum &lt;span style=&quot;color:magenta&quot;&gt;(interdit)&lt;/span&gt;</translation>
         </message>
         <message>
             <source>For vertical rock faces the tags may be omitted if space is short, e.g. narrow passages between cliffs (the passage should be drawn with a width of at least 0.3 mm).</source>
             <comment>Description of symbol 201.1.1</comment>
-            <translation>Pour des faces verticales, les tirets peuvent être omis s'il n'y a pas assez de place, par ex. un passage étroit entre des falaises. (Les passages doivent être représentés par une largeur d'au moins 0.3 mm).</translation>
+            <translation>Pour des faces verticales, les tirets peuvent être omis s&apos;il n&apos;y a pas assez de place, par ex. un passage étroit entre des falaises. (Les passages doivent être représentés par une largeur d&apos;au moins 0.3 mm).</translation>
         </message>
         <message>
             <source>Impassable cliff, tag line</source>
@@ -4292,7 +4264,7 @@ Le concurrent qui ne respecte pas cette règle sera disqualifié.&lt;/span&gt;</
         <message>
             <source>Use this symbol to display the full extent of a wide cliff.</source>
             <comment>Description of symbol 201.2</comment>
-            <translation>Utiliser ce symbole pour dessiner l'étendue d'une grande falaise.</translation>
+            <translation>Utiliser ce symbole pour dessiner l&apos;étendue d&apos;une grande falaise.</translation>
         </message>
         <message>
             <source>Gigantic boulder or rock pillar</source>
@@ -4302,7 +4274,7 @@ Le concurrent qui ne respecte pas cette règle sera disqualifié.&lt;/span&gt;</
         <message>
             <source>A gigantic boulder, rock pillar or massive cliff shall be represented in plan shape without tags.</source>
             <comment>Description of symbol 202</comment>
-            <translation>Des colonnes rocheuses, de grandes falaises ou d'énormes rochers sont représentés par leur forme en plan sans tiret.</translation>
+            <translation>Des colonnes rocheuses, de grandes falaises ou d&apos;énormes rochers sont représentés par leur forme en plan sans tiret.</translation>
         </message>
         <message>
             <source>Passable rock face</source>
@@ -4312,7 +4284,7 @@ Le concurrent qui ne respecte pas cette règle sera disqualifié.&lt;/span&gt;</
         <message>
             <source>A small vertical rock face may be shown without tags. If the direction of fall of the rock face is not apparent from the contours or to improve legibility, short tags should be drawn in the direction of the fall. Minimum height is 1 m. For passable rock faces shown without tags the end of the line may be rounded to improve legibility.</source>
             <comment>Description of symbol 203</comment>
-            <translation>Une petite face rocheuse est représentée sans tirets. Si le sens de la pente n'est pas évident d'après les courbes de niveau, ou pour améliorer la lisibilité, des tirets courts peuvent être dessinés vers l'aval. Hauteur minimum : 1 m. En l'absence de ces tirets, les extrémités des traits représentatifs peuvent être arrondies pour améliorer la lisibilité.</translation>
+            <translation>Une petite face rocheuse est représentée sans tirets. Si le sens de la pente n&apos;est pas évident d&apos;après les courbes de niveau, ou pour améliorer la lisibilité, des tirets courts peuvent être dessinés vers l&apos;aval. Hauteur minimum : 1 m. En l&apos;absence de ces tirets, les extrémités des traits représentatifs peuvent être arrondies pour améliorer la lisibilité.</translation>
         </message>
         <message>
             <source>Passable rock face, minimum size</source>
@@ -4322,7 +4294,7 @@ Le concurrent qui ne respecte pas cette règle sera disqualifié.&lt;/span&gt;</
         <message>
             <source>A small vertical rock face may be shown without tags. If the direction of fall of the rock face is not apparent from the contours or to improve legibility, short tags should be drawn in the direction of the fall. Minimum height is 1 m. For passable rock faces shown without tags the end of the line may be rounded to improve legibility.</source>
             <comment>Description of symbol 203.0.1</comment>
-            <translation>Une petite face rocheuse est représentée sans tirets. Si le sens de la pente n'est pas évident d'après les courbes de niveau, ou pour améliorer la lisibilité, des tirets courts peuvent être dessinés vers l'aval. Hauteur minimum : 1 m. En l'absence de ces tirets, les extrémités des traits représentatifs peuvent être arrondies pour améliorer la lisibilité.</translation>
+            <translation>Une petite face rocheuse est représentée sans tirets. Si le sens de la pente n&apos;est pas évident d&apos;après les courbes de niveau, ou pour améliorer la lisibilité, des tirets courts peuvent être dessinés vers l&apos;aval. Hauteur minimum : 1 m. En l&apos;absence de ces tirets, les extrémités des traits représentatifs peuvent être arrondies pour améliorer la lisibilité.</translation>
         </message>
         <message>
             <source>Passable rock face, no tags</source>
@@ -4332,7 +4304,7 @@ Le concurrent qui ne respecte pas cette règle sera disqualifié.&lt;/span&gt;</
         <message>
             <source>Should be used if the direction of fall of the rock face is apparent from the contours and the legibility is good.</source>
             <comment>Description of symbol 203.1</comment>
-            <translation>Doit être utilisé si le sens de la pente est évident d'après les courbes de niveau.</translation>
+            <translation>Doit être utilisé si le sens de la pente est évident d&apos;après les courbes de niveau.</translation>
         </message>
         <message>
             <source>Passable rock face, no tags, minimum size</source>
@@ -4342,7 +4314,7 @@ Le concurrent qui ne respecte pas cette règle sera disqualifié.&lt;/span&gt;</
         <message>
             <source>Should be used if the direction of fall of the rock face is apparent from the contours and the legibility is good.</source>
             <comment>Description of symbol 203.1.1</comment>
-            <translation>Doit être utilisé si le sens de la pente est évident d'après les courbes de niveau.</translation>
+            <translation>Doit être utilisé si le sens de la pente est évident d&apos;après les courbes de niveau.</translation>
         </message>
         <message>
             <source>Passable rock face, no tags, rounded</source>
@@ -4352,7 +4324,7 @@ Le concurrent qui ne respecte pas cette règle sera disqualifié.&lt;/span&gt;</
         <message>
             <source>Should be used if the direction of fall of the rock face is apparent from the contours and the legibility is good. For passable rock faces shown without tags the end of the line may be rounded to improve legibility.</source>
             <comment>Description of symbol 203.2</comment>
-            <translation>Doit être utilisé si le sens de la pente est évident d'après les courbes de niveau. Pour les falaises franchissables dessinées sans tirets, la fin de ligne doit être arrondie pour améliorer la lisiblité.</translation>
+            <translation>Doit être utilisé si le sens de la pente est évident d&apos;après les courbes de niveau. Pour les falaises franchissables dessinées sans tirets, la fin de ligne doit être arrondie pour améliorer la lisiblité.</translation>
         </message>
         <message>
             <source>Passable rock face, no tags, rounded, minimum size</source>
@@ -4362,7 +4334,7 @@ Le concurrent qui ne respecte pas cette règle sera disqualifié.&lt;/span&gt;</
         <message>
             <source>Should be used if the direction of fall of the rock face is apparent from the contours and the legibility is good. For passable rock faces shown without tags the end of the line may be rounded to improve legibility.</source>
             <comment>Description of symbol 203.2.1</comment>
-            <translation>Doit être utilisé si le sens de la pente est évident d'après les courbes de niveau. Pour les falaises franchissables dessinées sans tirets, la fin de ligne doit être arrondie pour améliorer la lisiblité.</translation>
+            <translation>Doit être utilisé si le sens de la pente est évident d&apos;après les courbes de niveau. Pour les falaises franchissables dessinées sans tirets, la fin de ligne doit être arrondie pour améliorer la lisiblité.</translation>
         </message>
         <message>
             <source>Rocky pit</source>
@@ -4382,11 +4354,11 @@ Le concurrent qui ne respecte pas cette règle sera disqualifié.&lt;/span&gt;</
         <message>
             <source>A cave is represented by the same symbol as a rocky pit. In this case the symbol shall be orientated to point up the slope as indicated opposite. This symbol should generally not be used in urban areas. The centre of gravity of the symbol marks the opening.
 
-&lt;span style="color:magenta"&gt;Controls may not be placed inside caves!&lt;/span&gt;</source>
+&lt;span style=&quot;color:magenta&quot;&gt;Controls may not be placed inside caves!&lt;/span&gt;</source>
             <comment>Description of symbol 205</comment>
-            <translation>Une caverner est reésentée par le même symbole qu'un trou rocheux. Dans ce cas le symbole doit être orienté dans le sens de la pente. Ce symbole ne doit as être utilisé en zone urbaine. Le centre du symbole indique la position de l'entrée de la caverne.
+            <translation>Une caverner est reésentée par le même symbole qu&apos;un trou rocheux. Dans ce cas le symbole doit être orienté dans le sens de la pente. Ce symbole ne doit as être utilisé en zone urbaine. Le centre du symbole indique la position de l&apos;entrée de la caverne.
 
-&lt;span style="color:magenta"&gt;Aucun poste de contrôle ne doit être placé à l'intérieur des grottes !&lt;/span&gt;</translation>
+&lt;span style=&quot;color:magenta&quot;&gt;Aucun poste de contrôle ne doit être placé à l&apos;intérieur des grottes !&lt;/span&gt;</translation>
         </message>
         <message>
             <source>Boulder</source>
@@ -4394,7 +4366,7 @@ Le concurrent qui ne respecte pas cette règle sera disqualifié.&lt;/span&gt;</
             <translation>Rocher</translation>
         </message>
         <message>
-            <source>A small distinct boulder. The minimum height is 1 m.  Every boulder marked on the map shall be immediately identifiable on the ground.</source>
+            <source>A small distinct boulder. The minimum height is 1 m. Every boulder marked on the map shall be immediately identifiable on the ground.</source>
             <comment>Description of symbol 206</comment>
             <translation>Petit bloc rocheux, bien distinct. Hauteur minimum : 1 m. Chaque rocher représenté sur la carte doit être aisément identifiable sur le terrain.</translation>
         </message>
@@ -4416,7 +4388,7 @@ Le concurrent qui ne respecte pas cette règle sera disqualifié.&lt;/span&gt;</
         <message>
             <source>An area which is covered with so many blocks of stone that they cannot be marked individually is represented with randomly orientated solid triangles. The runnability is reduced and is indicated by the density of the triangles. A minimum of two triangles shall be used. The triangles can be enlarged by up to 20 %.</source>
             <comment>Description of symbol 208</comment>
-            <translation>Zone où la densité de de blocs rocheux est telle qu'ils ne peuvent être marqués séparémment est représentée par des triangles pleins orientés aléatoirement. La pénétrabilité est réduite et est indiquée par la densité des triangles. Minimum 2 triangles. Les triangles peuvent être agrandis jusqu'à 20%.</translation>
+            <translation>Zone où la densité de de blocs rocheux est telle qu&apos;ils ne peuvent être marqués séparémment est représentée par des triangles pleins orientés aléatoirement. La pénétrabilité est réduite et est indiquée par la densité des triangles. Minimum 2 triangles. Les triangles peuvent être agrandis jusqu&apos;à 20%.</translation>
         </message>
         <message>
             <source>Boulder field, large</source>
@@ -4426,7 +4398,7 @@ Le concurrent qui ne respecte pas cette règle sera disqualifié.&lt;/span&gt;</
         <message>
             <source>An area which is covered with so many blocks of stone that they cannot be marked individually is represented with randomly orientated solid triangles. The runnability is reduced and is indicated by the density of the triangles. A minimum of two triangles shall be used. The triangles can be enlarged by up to 20 %.</source>
             <comment>Description of symbol 208.1</comment>
-            <translation>Zone où la densité de de blocs rocheux est telle qu'ils ne peuvent être marqués séparémment est représentée par des triangles pleins orientés aléatoirement. La pénétrabilité est réduite et est indiquée par la densité des triangles. Minimum 2 triangles. Les triangles peuvent être agrandis jusqu'à 20%.</translation>
+            <translation>Zone où la densité de de blocs rocheux est telle qu&apos;ils ne peuvent être marqués séparémment est représentée par des triangles pleins orientés aléatoirement. La pénétrabilité est réduite et est indiquée par la densité des triangles. Minimum 2 triangles. Les triangles peuvent être agrandis jusqu&apos;à 20%.</translation>
         </message>
         <message>
             <source>Stony ground</source>
@@ -4456,7 +4428,7 @@ Le concurrent qui ne respecte pas cette règle sera disqualifié.&lt;/span&gt;</
         <message>
             <source>An area of soft sandy ground or gravel with no vegetation which reduces runnability. Where an area of sandy ground is open and has good runnability, it is represented with symbol open land (401), open land with scattered trees (402) or paved area (529).</source>
             <comment>Description of symbol 211</comment>
-            <translation>Zone de sable mou ou de graviers sans végétation où la course est ralentie. Un découvert sablonneux où la course n'est pas ralentie est représentée par les symboles 401 (terrain découvert), 402 (terrain découvert encombré) ou 529 (zone pavée).</translation>
+            <translation>Zone de sable mou ou de graviers sans végétation où la course est ralentie. Un découvert sablonneux où la course n&apos;est pas ralentie est représentée par les symboles 401 (terrain découvert), 402 (terrain découvert encombré) ou 529 (zone pavée).</translation>
         </message>
         <message>
             <source>Bare rock</source>
@@ -4464,58 +4436,56 @@ Le concurrent qui ne respecte pas cette règle sera disqualifié.&lt;/span&gt;</
             <translation>Affleurement rocheux</translation>
         </message>
         <message>
-            <source>An area of runnable rock without earth or vegetation. An area of rock covered
-with grass, moss or other low vegetation shall be represented according to its
-openness and runnability (401/402/403/404).</source>
+            <source>An area of runnable rock without earth or vegetation. An area of rock covered with grass, moss or other low vegetation shall be represented according to its openness and runnability (401/402/403/404).</source>
             <comment>Description of symbol 212</comment>
-            <translation>Zone rocheuse courable, sans terre ou végétation. Une zone de rochers recouverts d'herbe, de mousse ou de végétation basse est représentée comme une zone découverte selon sa pénétrabilité et sa courabilité (401/402/403/404).</translation>
+            <translation>Zone rocheuse courable, sans terre ou végétation. Une zone de rochers recouverts d&apos;herbe, de mousse ou de végétation basse est représentée comme une zone découverte selon sa pénétrabilité et sa courabilité (401/402/403/404).</translation>
         </message>
         <message>
             <source>Waterhole</source>
             <comment>Name of symbol 303</comment>
-            <translation>Trou d'eau</translation>
+            <translation>Trou d&apos;eau</translation>
         </message>
         <message>
             <source>A water-filled pit or an area of water which is too small to be shown to scale. The symbol is orientated to north.</source>
             <comment>Description of symbol 303</comment>
-            <translation>Trou rempli d'eau ou zone d'eau trop petite pour être représentée à l'échelle. Le symbole est orienté au nord.</translation>
+            <translation>Trou rempli d&apos;eau ou zone d&apos;eau trop petite pour être représentée à l&apos;échelle. Le symbole est orienté au nord.</translation>
         </message>
         <message>
-            <source>Impassable body of water, with bank line, 100% blue &lt;span style="color:magenta"&gt;(forbidden to cross)&lt;/span&gt;</source>
+            <source>Impassable body of water, with bank line, 100% blue &lt;span style=&quot;color:magenta&quot;&gt;(forbidden to cross)&lt;/span&gt;</source>
             <comment>Name of symbol 304.1</comment>
-            <translation>Zone d'eau infranchissable, avec bordure, 100% bleu &lt;span style="color:magenta"&gt;(franchissement interdit)&lt;/span&gt;</translation>
+            <translation>Zone d&apos;eau infranchissable, avec bordure, 100% bleu &lt;span style=&quot;color:magenta&quot;&gt;(franchissement interdit)&lt;/span&gt;</translation>
         </message>
         <message>
             <source>An area of deep water such as a lake, pond, river or fountain which may constitute a danger to the competitor or has forbidden access. The dark blue colour and the bordering black line indicates that the feature cannot or shall not be crossed. The minimum dimension is 1 mm².
 
-&lt;span style="color:magenta"&gt;It is forbidden to cross an impassable body of water!
+&lt;span style=&quot;color:magenta&quot;&gt;It is forbidden to cross an impassable body of water!
 Competitors violating this rule will be disqualified.&lt;/span&gt;</source>
             <comment>Description of symbol 304.1</comment>
-            <translation>Zone d'eau profonde, tel un lac, un étang, une rivière qui peut constituer un danger pour le compétiteur ou est interdite d'accès. La couleur bleue foncé et la limite noire indiquent que l'élément ne peut être franchi. La dimension minimale est 1 mm².
+            <translation>Zone d&apos;eau profonde, tel un lac, un étang, une rivière qui peut constituer un danger pour le compétiteur ou est interdite d&apos;accès. La couleur bleue foncé et la limite noire indiquent que l&apos;élément ne peut être franchi. La dimension minimale est 1 mm².
 
-&lt;span style="color:magenta"&gt;Il est interdit de franchir une zone d'eau infranchissable.
+&lt;span style=&quot;color:magenta&quot;&gt;Il est interdit de franchir une zone d&apos;eau infranchissable.
 Le concurrent qui ne respecte pas cette règle sera disqualifié.&lt;/span&gt;</translation>
         </message>
         <message>
-            <source>Impassable body of water, with bank line, 75% blue &lt;span style="color:magenta"&gt;(forbidden to cross)&lt;/span&gt;</source>
+            <source>Impassable body of water, with bank line, 75% blue &lt;span style=&quot;color:magenta&quot;&gt;(forbidden to cross)&lt;/span&gt;</source>
             <comment>Name of symbol 304.1.1</comment>
-            <translation>Zone d'eau infranchissable, avec bordure, 75% bleu &lt;span style="color:magenta"&gt;(franchissement interdit)&lt;/span&gt;</translation>
+            <translation>Zone d&apos;eau infranchissable, avec bordure, 75% bleu &lt;span style=&quot;color:magenta&quot;&gt;(franchissement interdit)&lt;/span&gt;</translation>
         </message>
         <message>
             <source>An area of deep water such as a lake, pond, river or fountain which may constitute a danger to the competitor or has forbidden access. The dark blue colour and the bordering black line indicates that the feature cannot or shall not be crossed. The minimum dimension is 1 mm².
 
-&lt;span style="color:magenta"&gt;It is forbidden to cross an impassable body of water!
+&lt;span style=&quot;color:magenta&quot;&gt;It is forbidden to cross an impassable body of water!
 Competitors violating this rule will be disqualified.&lt;/span&gt;</source>
             <comment>Description of symbol 304.1.1</comment>
-            <translation>Zone d'eau profonde, tel un lac, un étang, une rivière qui peut constituer un danger pour le compétiteur ou est interdite d'accès. La couleur bleue foncé et la limite noire indiquent que l'élément ne peut être franchi. La dimension minimale est 1 mm².
+            <translation>Zone d&apos;eau profonde, tel un lac, un étang, une rivière qui peut constituer un danger pour le compétiteur ou est interdite d&apos;accès. La couleur bleue foncé et la limite noire indiquent que l&apos;élément ne peut être franchi. La dimension minimale est 1 mm².
 
-&lt;span style="color:magenta"&gt;Il est interdit de franchir une zone d'eau infranchissable.
+&lt;span style=&quot;color:magenta&quot;&gt;Il est interdit de franchir une zone d&apos;eau infranchissable.
 Le concurrent qui ne respecte pas cette règle sera disqualifié.&lt;/span&gt;</translation>
         </message>
         <message>
-            <source>Impassable body of water, bank line &lt;span style="color:magenta"&gt;(forbidden to cross)&lt;/span&gt;</source>
+            <source>Impassable body of water, bank line &lt;span style=&quot;color:magenta&quot;&gt;(forbidden to cross)&lt;/span&gt;</source>
             <comment>Name of symbol 304.2</comment>
-            <translation>Zone d'eau infranchissable, bordure &lt;span style="color:magenta"&gt;(interdit)&lt;/span&gt;</translation>
+            <translation>Zone d&apos;eau infranchissable, bordure &lt;span style=&quot;color:magenta&quot;&gt;(interdit)&lt;/span&gt;</translation>
         </message>
         <message>
             <source>The bordering black line indicates that the feature cannot or shall not be crossed.</source>
@@ -4523,86 +4493,86 @@ Le concurrent qui ne respecte pas cette règle sera disqualifié.&lt;/span&gt;</
             <translation>Bordure noire indiquant que la zone ne peut ou ne doit pas être franchie.</translation>
         </message>
         <message>
-            <source>Impassable body of water, fill, 100% blue &lt;span style="color:magenta"&gt;(forbidden to cross)&lt;/span&gt;</source>
+            <source>Impassable body of water, fill, 100% blue &lt;span style=&quot;color:magenta&quot;&gt;(forbidden to cross)&lt;/span&gt;</source>
             <comment>Name of symbol 304.3</comment>
-            <translation>Zone d'eau infranchissable, remplissage, 100% bleu &lt;span style="color:magenta"&gt;(franchissement interdit)&lt;/span&gt;</translation>
+            <translation>Zone d&apos;eau infranchissable, remplissage, 100% bleu &lt;span style=&quot;color:magenta&quot;&gt;(franchissement interdit)&lt;/span&gt;</translation>
         </message>
         <message>
             <source>An area of deep water such as a lake, pond, river or fountain which may constitute a danger to the competitor or has forbidden access. The dark blue colour and the bordering black line indicates that the feature cannot or shall not be crossed. The minimum dimension is 1 mm².
 
-&lt;span style="color:magenta"&gt;It is forbidden to cross an impassable body of water!
+&lt;span style=&quot;color:magenta&quot;&gt;It is forbidden to cross an impassable body of water!
 Competitors violating this rule will be disqualified.&lt;/span&gt;</source>
             <comment>Description of symbol 304.3</comment>
-            <translation>Zone d'eau profonde, tel un lac, un étang, une rivière qui peut constituer un danger pour le compétiteur ou est interdite d'accès. La couleur bleue foncé et la limite noire indiquent que l'élément ne peut être franchi. La dimension minimale est 1 mm².
+            <translation>Zone d&apos;eau profonde, tel un lac, un étang, une rivière qui peut constituer un danger pour le compétiteur ou est interdite d&apos;accès. La couleur bleue foncé et la limite noire indiquent que l&apos;élément ne peut être franchi. La dimension minimale est 1 mm².
 
-&lt;span style="color:magenta"&gt;Il est interdit de franchir une zone d'eau infranchissable.
+&lt;span style=&quot;color:magenta&quot;&gt;Il est interdit de franchir une zone d&apos;eau infranchissable.
 Le concurrent qui ne respecte pas cette règle sera disqualifié.&lt;/span&gt;</translation>
         </message>
         <message>
-            <source>Impassable body of water, fill, 75% blue &lt;span style="color:magenta"&gt;(forbidden to cross)&lt;/span&gt;</source>
+            <source>Impassable body of water, fill, 75% blue &lt;span style=&quot;color:magenta&quot;&gt;(forbidden to cross)&lt;/span&gt;</source>
             <comment>Name of symbol 304.4</comment>
-            <translation>Zone d'eau infranchissable, remplissage, 75% bleu &lt;span style="color:magenta"&gt;(franchissement interdit)&lt;/span&gt;</translation>
+            <translation>Zone d&apos;eau infranchissable, remplissage, 75% bleu &lt;span style=&quot;color:magenta&quot;&gt;(franchissement interdit)&lt;/span&gt;</translation>
         </message>
         <message>
             <source>An area of deep water such as a lake, pond, river or fountain which may constitute a danger to the competitor or has forbidden access. The dark blue colour and the bordering black line indicates that the feature cannot or shall not be crossed. The minimum dimension is 1 mm².
 
-&lt;span style="color:magenta"&gt;It is forbidden to cross an impassable body of water!
+&lt;span style=&quot;color:magenta&quot;&gt;It is forbidden to cross an impassable body of water!
 Competitors violating this rule will be disqualified.&lt;/span&gt;</source>
             <comment>Description of symbol 304.4</comment>
-            <translation>Zone d'eau profonde, tel un lac, un étang, une rivière qui peut constituer un danger pour le compétiteur ou est interdite d'accès. La couleur bleue foncé et la limite noire indiquent que l'élément ne peut être franchi. La dimension minimale est 1 mm².
+            <translation>Zone d&apos;eau profonde, tel un lac, un étang, une rivière qui peut constituer un danger pour le compétiteur ou est interdite d&apos;accès. La couleur bleue foncé et la limite noire indiquent que l&apos;élément ne peut être franchi. La dimension minimale est 1 mm².
 
-&lt;span style="color:magenta"&gt;Il est interdit de franchir une zone d'eau infranchissable.
+&lt;span style=&quot;color:magenta&quot;&gt;Il est interdit de franchir une zone d&apos;eau infranchissable.
 Le concurrent qui ne respecte pas cette règle sera disqualifié.&lt;/span&gt;</translation>
         </message>
         <message>
             <source>Passable body of water, fill</source>
             <comment>Name of symbol 305.0.1</comment>
-            <translation>Zone d'eau franchissable, remplissage</translation>
+            <translation>Zone d&apos;eau franchissable, remplissage</translation>
         </message>
         <message>
-            <source>An area of shallow water such as a pond, river or fountain that can be crossed. The body of water shall be less than 0.5 m deep and runnable. If the body of water is not runnable it shall be represented with the symbol impassable body of water (304.1). If no other line symbol touches the border of the passable body of water, the border shall be represented with a blue line. </source>
+            <source>An area of shallow water such as a pond, river or fountain that can be crossed. The body of water shall be less than 0.5 m deep and runnable. If the body of water is not runnable it shall be represented with the symbol impassable body of water (304.1). If no other line symbol touches the border of the passable body of water, the border shall be represented with a blue line.</source>
             <comment>Description of symbol 305.0.1</comment>
-            <translation>Zone d'eau peu profonde, telle un étang, une mare, une rivière ou une fontaine qui peut être franchie. La profondeur sera inférieure à 0,5 m et courable. Si l'étendue d'eau n'est pas courable, elle doit être représentée par le symbole 304.1 (infranchissable). Si aucun autre symbole de ligne ne touche le bord de cette étendue d'eau, la rive sera représentée par une ligne bleue.</translation>
+            <translation>Zone d&apos;eau peu profonde, telle un étang, une mare, une rivière ou une fontaine qui peut être franchie. La profondeur sera inférieure à 0,5 m et courable. Si l&apos;étendue d&apos;eau n&apos;est pas courable, elle doit être représentée par le symbole 304.1 (infranchissable). Si aucun autre symbole de ligne ne touche le bord de cette étendue d&apos;eau, la rive sera représentée par une ligne bleue.</translation>
         </message>
         <message>
             <source>Passable body of water, bank line</source>
             <comment>Name of symbol 305.0.2</comment>
-            <translation>Zone d'eau franchissable, contour</translation>
+            <translation>Zone d&apos;eau franchissable, contour</translation>
         </message>
         <message>
             <source>An area of shallow water such as a pond, river or fountain that can be crossed. The body of water shall be less than 0.5 m deep and runnable. If the body of water is not runnable it shall be represented with the symbol (304.1). If no other line symbol touches the border of the passable body of water, the border shall be represented with a blue line.</source>
             <comment>Description of symbol 305.0.2</comment>
-            <translation>Zone d'eau peu profonde, telle un étang, une mare, une rivière ou une fontaine qui peut être franchie. La profondeur sera inférieure à 0,5 m et courable. Si l'étendue d'eau n'est pas courable, elle doit être représentée par le symbole 304.1 (infranchissable). Si aucun autre symbole de ligne ne touche le bord de cette étendue d'eau, la rive sera représentée par une ligne bleue.</translation>
+            <translation>Zone d&apos;eau peu profonde, telle un étang, une mare, une rivière ou une fontaine qui peut être franchie. La profondeur sera inférieure à 0,5 m et courable. Si l&apos;étendue d&apos;eau n&apos;est pas courable, elle doit être représentée par le symbole 304.1 (infranchissable). Si aucun autre symbole de ligne ne touche le bord de cette étendue d&apos;eau, la rive sera représentée par une ligne bleue.</translation>
         </message>
         <message>
             <source>Passable body of water</source>
             <comment>Name of symbol 305.1</comment>
-            <translation>Zone d'eau franchissable</translation>
+            <translation>Zone d&apos;eau franchissable</translation>
         </message>
         <message>
-            <source>An area of shallow water such as a pond, river or fountain that can be crossed.  The body of water shall be less than 0.5 m deep and runnable. If the body of water is not runnable it shall be represented with the symbol impassable body of water (304.1). If no other line symbol touches the border of the passable body of water, the border shall be represented with a blue line.</source>
+            <source>An area of shallow water such as a pond, river or fountain that can be crossed. The body of water shall be less than 0.5 m deep and runnable. If the body of water is not runnable it shall be represented with the symbol impassable body of water (304.1). If no other line symbol touches the border of the passable body of water, the border shall be represented with a blue line.</source>
             <comment>Description of symbol 305.1</comment>
-            <translation>Zone d'eau peu profonde, telle un étang, une mare, une rivière ou une fontaine qui peut être franchie. La profondeur sera inférieure à 0,5 m et courable. Si l'étendue d'eau n'est pas courable, elle doit être représentée par le symbole 304.1 (infranchissable). Si aucun autre symbole de ligne ne touche le bord de cette étendue d'eau, la rive sera représentée par une ligne bleue.</translation>
+            <translation>Zone d&apos;eau peu profonde, telle un étang, une mare, une rivière ou une fontaine qui peut être franchie. La profondeur sera inférieure à 0,5 m et courable. Si l&apos;étendue d&apos;eau n&apos;est pas courable, elle doit être représentée par le symbole 304.1 (infranchissable). Si aucun autre symbole de ligne ne touche le bord de cette étendue d&apos;eau, la rive sera représentée par une ligne bleue.</translation>
         </message>
         <message>
             <source>Passable small watercourse</source>
             <comment>Name of symbol 306</comment>
-            <translation>Petit cours d'eau franchissable</translation>
+            <translation>Petit cours d&apos;eau franchissable</translation>
         </message>
         <message>
             <source>A crossable watercourse less than 2 m wide.</source>
             <comment>Description of symbol 306</comment>
-            <translation>Petit cours d'eau d'une largeur inférieure à 2 m.</translation>
+            <translation>Petit cours d&apos;eau d&apos;une largeur inférieure à 2 m.</translation>
         </message>
         <message>
             <source>Minor watercourse</source>
             <comment>Name of symbol 307</comment>
-            <translation>Cours d'eau temporaire</translation>
+            <translation>Cours d&apos;eau temporaire</translation>
         </message>
         <message>
             <source>A natural or man-made minor water channel which may contain water only intermittently.</source>
             <comment>Description of symbol 307</comment>
-            <translation>Cours d'eau naturel ou creusé qui peut ne contenir de l'eau que par intermittence.</translation>
+            <translation>Cours d&apos;eau naturel ou creusé qui peut ne contenir de l&apos;eau que par intermittence.</translation>
         </message>
         <message>
             <source>Narrow marsh</source>
@@ -4612,22 +4582,22 @@ Le concurrent qui ne respecte pas cette règle sera disqualifié.&lt;/span&gt;</
         <message>
             <source>A marsh or trickle of water which is too narrow to be shown with symbol marsh (310).</source>
             <comment>Description of symbol 308</comment>
-            <translation>Un marais ou un filet d'eau trop étroit pour être représenté par le symbole 310 (marais).</translation>
+            <translation>Un marais ou un filet d&apos;eau trop étroit pour être représenté par le symbole 310 (marais).</translation>
         </message>
         <message>
-            <source>Impassable marsh &lt;span style="color:magenta"&gt;(forbidden to cross)&lt;/span&gt;</source>
+            <source>Impassable marsh &lt;span style=&quot;color:magenta&quot;&gt;(forbidden to cross)&lt;/span&gt;</source>
             <comment>Name of symbol 309</comment>
-            <translation>Marais infranchissable &lt;span style="color:magenta"&gt;(franchissement interdit)&lt;/span&gt;</translation>
+            <translation>Marais infranchissable &lt;span style=&quot;color:magenta&quot;&gt;(franchissement interdit)&lt;/span&gt;</translation>
         </message>
         <message>
-            <source>A marsh which is impassable or which may constitute a danger to the competitor.  The feature cannot or shall not be crossed.
+            <source>A marsh which is impassable or which may constitute a danger to the competitor. The feature cannot or shall not be crossed.
 
-&lt;span style="color:magenta"&gt;It is forbidden to cross an impassable marsh!
+&lt;span style=&quot;color:magenta&quot;&gt;It is forbidden to cross an impassable marsh!
 Competitors violating this rule will be disqualified.&lt;/span&gt;</source>
             <comment>Description of symbol 309</comment>
             <translation>Marais infranchissable ou qui peut constituer un danger pour le concurrent. Cet élément ne peut être franchi.
 
-&lt;span style="color:magenta"&gt;Il est interdit de franchir un marais infranchissable !
+&lt;span style=&quot;color:magenta&quot;&gt;Il est interdit de franchir un marais infranchissable !
 Le concurrent qui ne respecte pas cette règle sera disqualifié.&lt;/span&gt;</translation>
         </message>
         <message>
@@ -4706,12 +4676,12 @@ Taille minimum : 4 tirets.</translation>
         <message>
             <source>The source of a stream with a distinct outflow. This symbol should generally not be used in urban areas. The symbol is orientated to open downstream.</source>
             <comment>Description of symbol 313</comment>
-            <translation>Source d'un cours d'eau avec un débit perceptible. Le symbole ne sera généralement pas utilisé en zone urbaine. Le symbole est orienté avec l'ouverture vers l'aval.</translation>
+            <translation>Source d&apos;un cours d&apos;eau avec un débit perceptible. Le symbole ne sera généralement pas utilisé en zone urbaine. Le symbole est orienté avec l&apos;ouverture vers l&apos;aval.</translation>
         </message>
         <message>
             <source>Prominent water feature</source>
             <comment>Name of symbol 314</comment>
-            <translation>Élément d'eau particulier</translation>
+            <translation>Élément d&apos;eau particulier</translation>
         </message>
         <message>
             <source>A small water feature which is significant or prominent. The definition of the symbol shall always be given in the map legend. The symbol is orientated to north.</source>
@@ -4735,9 +4705,9 @@ Taille minimum : 4 tirets.</translation>
 arbres dispersés</translation>
         </message>
         <message>
-            <source>An area of meadows with scattered trees or bushes, with grass or similar ground cover offering very good runnability. Areas smaller than 10 mm2 at the maps scale are shown as open land (401). Symbols prominent large tree (418) and prominent bush or small tree (419) may be added.</source>
+            <source>An area of meadows with scattered trees or bushes, with grass or similar ground cover offering very good runnability. Areas smaller than 10 mm² at the maps scale are shown as open land (401). Symbols prominent large tree (418) and prominent bush or small tree (419) may be added.</source>
             <comment>Description of symbol 402</comment>
-            <translation>Prairie avec arbres ou buissons dispersés, avec herbe ou végétation similaire au sol et permettant une course facile. De petites surfaces (inférieures à 10 mm² à l'échelle de la carte) sont représentées comme terrain découvert (401). Des symboles 418 (grand arbre bien visible) et 419 (buisson bien visible ou petit arbre) peuvent être ajoutés.</translation>
+            <translation>Prairie avec arbres ou buissons dispersés, avec herbe ou végétation similaire au sol et permettant une course facile. De petites surfaces (inférieures à 10 mm² à l&apos;échelle de la carte) sont représentées comme terrain découvert (401). Des symboles 418 (grand arbre bien visible) et 419 (buisson bien visible ou petit arbre) peuvent être ajoutés.</translation>
         </message>
         <message>
             <source>Rough open land</source>
@@ -4747,7 +4717,7 @@ arbres dispersés</translation>
         <message>
             <source>An area of heath or moorland, a felled area, a newly planted area (trees lower than ca. 1 m) or other generally open land with rough ground vegetation, i.e. heather or tall grass. This symbol may be combined with symbols undergrowth: slow running (407) and undergrowth: difficult to run (409) to show reduced runnability.</source>
             <comment>Description of symbol 403</comment>
-            <translation>Landes, abattis, jeunes plantations (arbres de moins de 1 m de haut), ou tout autre terrain découvert avec une végétation basse "rugueuse" (bruyère, brande, ou de l'herbe haute). Ce symbole peut être combiné avec les symboles 407 et 409 des végétations au sol pour indiquer une vitesse de course réduite.</translation>
+            <translation>Landes, abattis, jeunes plantations (arbres de moins de 1 m de haut), ou tout autre terrain découvert avec une végétation basse &quot;rugueuse&quot; (bruyère, brande, ou de l&apos;herbe haute). Ce symbole peut être combiné avec les symboles 407 et 409 des végétations au sol pour indiquer une vitesse de course réduite.</translation>
         </message>
         <message>
             <source>Rough open land with scattered trees</source>
@@ -4757,9 +4727,9 @@ encombré avec arbres
 dispersés</translation>
         </message>
         <message>
-            <source>An area of rough open land with scattered trees or bushes. Areas smaller than 16 mm2 in the map scale are either mapped as rough open land (403) or forest: easy running (405). Symbols prominent large tree (418) and prominent bush or small tree (419) may be added.</source>
+            <source>An area of rough open land with scattered trees or bushes. Areas smaller than 16 mm² in the map scale are either mapped as rough open land (403) or forest: easy running (405). Symbols prominent large tree (418) and prominent bush or small tree (419) may be added.</source>
             <comment>Description of symbol 404</comment>
-            <translation>Zone découverte encombrée avec des arbres dispersés ou des buissons. Des zones inférieures à 16 mm² à l'échelle de la carte doivent être représentées comme terrain découvert encombré (403) ou forêt course facile (405). Des symboles 418 (grand arbre bien visible) et 419 (buisson bien visible ou petit arbre) peuvent être ajoutés.</translation>
+            <translation>Zone découverte encombrée avec des arbres dispersés ou des buissons. Des zones inférieures à 16 mm² à l&apos;échelle de la carte doivent être représentées comme terrain découvert encombré (403) ou forêt course facile (405). Des symboles 418 (grand arbre bien visible) et 419 (buisson bien visible ou petit arbre) peuvent être ajoutés.</translation>
         </message>
         <message>
             <source>Forest: easy running</source>
@@ -4769,7 +4739,7 @@ dispersés</translation>
         <message>
             <source>An area of typical open runnable forest for the particular type of terrain. If no part of the forest is runnable then no white should appear on the map.</source>
             <comment>Description of symbol 405</comment>
-            <translation>Forêt ouverte, courable, tenant compte du type de terrain. Si aucune partie de la forêt n'est courable, il ne doit pas y avoir de blanc sur la carte.</translation>
+            <translation>Forêt ouverte, courable, tenant compte du type de terrain. Si aucune partie de la forêt n&apos;est courable, il ne doit pas y avoir de blanc sur la carte.</translation>
         </message>
         <message>
             <source>Forest: slow running</source>
@@ -4781,7 +4751,7 @@ dispersés</translation>
 
 Minimum width 0.25 mm.</source>
             <comment>Description of symbol 406</comment>
-            <translation>Zone avec une densité importante d'arbres denses qui réduit la course à environ 60-80 % de la vitesse normale.
+            <translation>Zone avec une densité importante d&apos;arbres denses qui réduit la course à environ 60-80 % de la vitesse normale.
 
 Taille minimum : 0,25 mm.</translation>
         </message>
@@ -4808,7 +4778,7 @@ Taille minimum : 0,25 mm.</translation>
         <message>
             <source>An area with dense trees or thicket (low visibility) which reduces running to ca. 20-60% of normal speed.</source>
             <comment>Description of symbol 408</comment>
-            <translation>Zone d'arbres denses ou de fourrés (visibilité faible) qui réduisent la vitesse de course à environ 20-60 % de la vitesse normale.</translation>
+            <translation>Zone d&apos;arbres denses ou de fourrés (visibilité faible) qui réduisent la vitesse de course à environ 20-60 % de la vitesse normale.</translation>
         </message>
         <message>
             <source>Forest: difficult to run, minimum width</source>
@@ -4882,7 +4852,7 @@ Taille minimum : 0,25 mm.</translation>
         <message>
             <source>Land planted with fruit trees or bushes. The dot lines may be orientated to represent the direction of planting.</source>
             <comment>Description of symbol 412</comment>
-            <translation>Terrain planté d'arbres fruitiers ou d'arbustes. Les lignes de points peuvent être orientées pour montrer la direction des plantations.</translation>
+            <translation>Terrain planté d&apos;arbres fruitiers ou d&apos;arbustes. Les lignes de points peuvent être orientées pour montrer la direction des plantations.</translation>
         </message>
         <message>
             <source>Orchard, one direction (e.g. Vineyard)</source>
@@ -4892,7 +4862,7 @@ Taille minimum : 0,25 mm.</translation>
         <message>
             <source>Land planted with fruit trees or bushes, with a distinct direction of planting which reduces the runnability. The green lines shall be orientated to show the direction of planting.</source>
             <comment>Description of symbol 413</comment>
-            <translation>Terrain planté d'arbres fruitiers ou d'arbustes dans une direction définie qui réduira la pénétrabilité. Les lignes vertes seront orientées pour montrer la direction de la plantation.</translation>
+            <translation>Terrain planté d&apos;arbres fruitiers ou d&apos;arbustes dans une direction définie qui réduira la pénétrabilité. Les lignes vertes seront orientées pour montrer la direction de la plantation.</translation>
         </message>
         <message>
             <source>Distinct cultivation boundary</source>
@@ -4902,7 +4872,7 @@ Taille minimum : 0,25 mm.</translation>
         <message>
             <source>The boundary of symbol cultivated land (seasonally out of bounds) (415) when not shown with other symbols (fence, wall, path, etc.) is represented with a black line. A permanent boundary between different types of cultivated land is also represented with this symbol.</source>
             <comment>Description of symbol 414</comment>
-            <translation>La limite des terrains cultivés (415) est représentée par un trait noir, lorsqu'elle n'est pas déjà indiquée par un autre symbole (clôture, mur, sentier, etc.). Une limite permanente entre différents types de terrains cultivés est également représentée par ce symbole.</translation>
+            <translation>La limite des terrains cultivés (415) est représentée par un trait noir, lorsqu&apos;elle n&apos;est pas déjà indiquée par un autre symbole (clôture, mur, sentier, etc.). Une limite permanente entre différents types de terrains cultivés est également représentée par ce symbole.</translation>
         </message>
         <message>
             <source>Cultivated land (seasonally out of bounds)</source>
@@ -4922,7 +4892,7 @@ Taille minimum : 0,25 mm.</translation>
         <message>
             <source>A distinct forest edge or very distinct vegetation boundary within the forest. For indistinct boundaries, the area edges are shown only by the change in colour and/or dot screen.</source>
             <comment>Description of symbol 416</comment>
-            <translation>Une lisière de forêt ou une limite de végétation distincte très nette, à l'intérieur de la forêt. Dans le cas de limites imprécises, elles sont montrées par le seul changement de couleur ou de trame.</translation>
+            <translation>Une lisière de forêt ou une limite de végétation distincte très nette, à l&apos;intérieur de la forêt. Dans le cas de limites imprécises, elles sont montrées par le seul changement de couleur ou de trame.</translation>
         </message>
         <message>
             <source>Prominent large tree</source>
@@ -4955,23 +4925,23 @@ Taille minimum : 0,25 mm.</translation>
             <translation>Élément particulier de la végétation significatif ou bien visible. La définition du symbole devra figurer dans la légende de la carte. Le symbole est orienté au nord.</translation>
         </message>
         <message>
-            <source>Impassable vegetation &lt;span style="color:magenta"&gt;(forbidden to cross)&lt;/span&gt;</source>
+            <source>Impassable vegetation &lt;span style=&quot;color:magenta&quot;&gt;(forbidden to cross)&lt;/span&gt;</source>
             <comment>Name of symbol 421</comment>
-            <translation>Végétation infranchissable &lt;span style="color:magenta"&gt;(franchissement interdit)&lt;/span&gt;</translation>
+            <translation>Végétation infranchissable &lt;span style=&quot;color:magenta&quot;&gt;(franchissement interdit)&lt;/span&gt;</translation>
         </message>
         <message>
             <source>An area of dense vegetation (trees or undergrowth) which is impassable or which shall not be crossed, due to forbidden access or because it may constitute a danger to the competitor.
  
 Minimum width: 0.4 mm.
 
-&lt;span style="color:magenta"&gt;It is forbidden to cross impassable vegetation!
+&lt;span style=&quot;color:magenta&quot;&gt;It is forbidden to cross impassable vegetation!
 Competitors violating this rule will be disqualified.&lt;/span&gt;</source>
             <comment>Description of symbol 421</comment>
-            <translation>Zone de végétation dense (arbres ou végétation au sol) qui est infranchissable ou ne DOIT être franchie, à cause de l'interdiction de son accès ou parce qu'elle peut constituer un danger pour le coureur.
+            <translation>Zone de végétation dense (arbres ou végétation au sol) qui est infranchissable ou ne DOIT être franchie, à cause de l&apos;interdiction de son accès ou parce qu&apos;elle peut constituer un danger pour le coureur.
  
 Taille minimum : 0,4 mm.
 
-&lt;span style="color:magenta"&gt;Il est interdit de pénétrer dans une telle zone ! 
+&lt;span style=&quot;color:magenta&quot;&gt;Il est interdit de pénétrer dans une telle zone ! 
 Les concurrents ne respectant pas cette règle seront disqualifiés.&lt;/span&gt;</translation>
         </message>
         <message>
@@ -4993,9 +4963,9 @@ Colour: black, brown 0%(white), 10%, 20% or 30% (urban) / 20%, 30%, 40%, 50% (mi
             <comment>Description of symbol 506.1.1</comment>
             <translation>Sentier non pavé ou trace de véhicule constituant un passage possible à pied, par opposition à une surface plane et dure. La densité du remplissage en brun devra être la même que celle choisie pour le symbole 529 (zone pavée). 
 
-Pour améliorer la lisibilité de ce symbole dans les parties non-urbaines de la carte, l'épaisseur de la ligne peut dans ces zones non-urbaines être augmentée de 0.07 à 0.14 mm et le remplissage en brun rendu plus foncé. Si un remplissage (x %) est utilisé dans les parties urbaines, un brun (x + 20 %) pourra être utilisé en zone non-urbaine de la carte.
+Pour améliorer la lisibilité de ce symbole dans les parties non-urbaines de la carte, l&apos;épaisseur de la ligne peut dans ces zones non-urbaines être augmentée de 0.07 à 0.14 mm et le remplissage en brun rendu plus foncé. Si un remplissage (x %) est utilisé dans les parties urbaines, un brun (x + 20 %) pourra être utilisé en zone non-urbaine de la carte.
 
-Couleur : noir, brun 0 (blanc),10 %, 20 % ou 30 % (zone urbaine) / 20 %, 30 %, 40 %, 50 % (zone non-urbaine) - (min 60 lignes / cm); la couleur et l'épaisseur de la ligne devront être les mêmes quepour les symboles 529 (zone 
+Couleur : noir, brun 0 (blanc),10 %, 20 % ou 30 % (zone urbaine) / 20 %, 30 %, 40 %, 50 % (zone non-urbaine) - (min 60 lignes / cm); la couleur et l&apos;épaisseur de la ligne devront être les mêmes quepour les symboles 529 (zone 
 pavée) ou 529.1 (escalier en zone pavée).</translation>
         </message>
         <message>
@@ -5012,9 +4982,9 @@ Colour: black, brown 0%(white), 10%, 20% or 30% (urban) / 20%, 30%, 40%, 50% (mi
             <comment>Description of symbol 506.1.2</comment>
             <translation>Sentier non pavé ou trace de véhicule constituant un passage possible à pied, par opposition à une surface plane et dure. La densité du remplissage en brun devra être la même que celle choisie pour le symbole 529 (zone pavée). 
 
-Pour améliorer la lisibilité de ce symbole dans les parties non-urbaines de la carte, l'épaisseur de la ligne peut dans ces zones non-urbaines être augmentée de 0.07 à 0.14 mm et le remplissage en brun rendu plus foncé. Si un remplissage (x %) est utilisé dans les parties urbaines, un brun (x + 20 %) pourra être utilisé en zone non-urbaine de la carte.
+Pour améliorer la lisibilité de ce symbole dans les parties non-urbaines de la carte, l&apos;épaisseur de la ligne peut dans ces zones non-urbaines être augmentée de 0.07 à 0.14 mm et le remplissage en brun rendu plus foncé. Si un remplissage (x %) est utilisé dans les parties urbaines, un brun (x + 20 %) pourra être utilisé en zone non-urbaine de la carte.
 
-Couleur : noir, brun 0 (blanc),10 %, 20 % ou 30 % (zone urbaine) / 20 %, 30 %, 40 %, 50 % (zone non-urbaine) - (min 60 lignes / cm); la couleur et l'épaisseur de la ligne devront être les mêmes quepour les symboles 529 (zone 
+Couleur : noir, brun 0 (blanc),10 %, 20 % ou 30 % (zone urbaine) / 20 %, 30 %, 40 %, 50 % (zone non-urbaine) - (min 60 lignes / cm); la couleur et l&apos;épaisseur de la ligne devront être les mêmes quepour les symboles 529 (zone 
 pavée) ou 529.1 (escalier en zone pavée).</translation>
         </message>
         <message>
@@ -5031,9 +5001,9 @@ Colour: black, brown 0%(white), 10%, 20% or 30% (urban) / 20%, 30%, 40%, 50% (mi
             <comment>Description of symbol 506.1.3</comment>
             <translation>Sentier non pavé ou trace de véhicule constituant un passage possible à pied, par opposition à une surface plane et dure. La densité du remplissage en brun devra être la même que celle choisie pour le symbole 529 (zone pavée). 
 
-Pour améliorer la lisibilité de ce symbole dans les parties non-urbaines de la carte, l'épaisseur de la ligne peut dans ces zones non-urbaines être augmentée de 0.07 à 0.14 mm et le remplissage en brun rendu plus foncé. Si un remplissage (x %) est utilisé dans les parties urbaines, un brun (x + 20 %) pourra être utilisé en zone non-urbaine de la carte.
+Pour améliorer la lisibilité de ce symbole dans les parties non-urbaines de la carte, l&apos;épaisseur de la ligne peut dans ces zones non-urbaines être augmentée de 0.07 à 0.14 mm et le remplissage en brun rendu plus foncé. Si un remplissage (x %) est utilisé dans les parties urbaines, un brun (x + 20 %) pourra être utilisé en zone non-urbaine de la carte.
 
-Couleur : noir, brun 0 (blanc),10 %, 20 % ou 30 % (zone urbaine) / 20 %, 30 %, 40 %, 50 % (zone non-urbaine) - (min 60 lignes / cm); la couleur et l'épaisseur de la ligne devront être les mêmes quepour les symboles 529 (zone 
+Couleur : noir, brun 0 (blanc),10 %, 20 % ou 30 % (zone urbaine) / 20 %, 30 %, 40 %, 50 % (zone non-urbaine) - (min 60 lignes / cm); la couleur et l&apos;épaisseur de la ligne devront être les mêmes quepour les symboles 529 (zone 
 pavée) ou 529.1 (escalier en zone pavée).</translation>
         </message>
         <message>
@@ -5050,9 +5020,9 @@ Colour: black, brown 0%(white), 10%, 20% or 30% (urban) / 20%, 30%, 40%, 50% (mi
             <comment>Description of symbol 506.1.4</comment>
             <translation>Sentier non pavé ou trace de véhicule constituant un passage possible à pied, par opposition à une surface plane et dure. La densité du remplissage en brun devra être la même que celle choisie pour le symbole 529 (zone pavée). 
 
-Pour améliorer la lisibilité de ce symbole dans les parties non-urbaines de la carte, l'épaisseur de la ligne peut dans ces zones non-urbaines être augmentée de 0.07 à 0.14 mm et le remplissage en brun rendu plus foncé. Si un remplissage (x %) est utilisé dans les parties urbaines, un brun (x + 20 %) pourra être utilisé en zone non-urbaine de la carte.
+Pour améliorer la lisibilité de ce symbole dans les parties non-urbaines de la carte, l&apos;épaisseur de la ligne peut dans ces zones non-urbaines être augmentée de 0.07 à 0.14 mm et le remplissage en brun rendu plus foncé. Si un remplissage (x %) est utilisé dans les parties urbaines, un brun (x + 20 %) pourra être utilisé en zone non-urbaine de la carte.
 
-Couleur : noir, brun 0 (blanc),10 %, 20 % ou 30 % (zone urbaine) / 20 %, 30 %, 40 %, 50 % (zone non-urbaine) - (min 60 lignes / cm); la couleur et l'épaisseur de la ligne devront être les mêmes quepour les symboles 529 (zone 
+Couleur : noir, brun 0 (blanc),10 %, 20 % ou 30 % (zone urbaine) / 20 %, 30 %, 40 %, 50 % (zone non-urbaine) - (min 60 lignes / cm); la couleur et l&apos;épaisseur de la ligne devront être les mêmes quepour les symboles 529 (zone 
 pavée) ou 529.1 (escalier en zone pavée).</translation>
         </message>
         <message>
@@ -5063,7 +5033,7 @@ pavée) ou 529.1 (escalier en zone pavée).</translation>
         <message>
             <source>A small unpaved footpath or track. Not to be used in urban areas.</source>
             <comment>Description of symbol 507</comment>
-            <translation>Petit sentier non pavé ou une trace. Ne pas utiliser en zone urbaine</translation>
+            <translation>Petit sentier non pavé ou une trace. Ne pas utiliser en zone urbaine.</translation>
         </message>
         <message>
             <source>Less distinct small path</source>
@@ -5071,9 +5041,9 @@ pavée) ou 529.1 (escalier en zone pavée).</translation>
             <translation>Sentier peu visible</translation>
         </message>
         <message>
-            <source>Aless distinct path or forestry extraction track. Not to be used in urban areas.</source>
+            <source>A less distinct path or forestry extraction track. Not to be used in urban areas.</source>
             <comment>Description of symbol 508</comment>
-            <translation>Sentier peu distinct ou trace d'exploitation forestière. Ne pas utiliser en zone urbaine.</translation>
+            <translation>Sentier peu distinct ou trace d&apos;exploitation forestière. Ne pas utiliser en zone urbaine.</translation>
         </message>
         <message>
             <source>Narrow ride</source>
@@ -5083,7 +5053,7 @@ pavée) ou 529.1 (escalier en zone pavée).</translation>
         <message>
             <source>A distinct ride is a linear break in the forest (usually in a plantation), which does not have a distinct path along it. Where there is a path along a ride, the symbol small unpaved footpath or track (506.1) shall be used. Not to be used in urban areas.</source>
             <comment>Description of symbol 509</comment>
-            <translation>Un layon est une ouverture rectiligne dans une forêt (habituellement une plantation) qui ne comporte pas de sentier distinct. Lorsqu'il y a un sentier le long d'un layon, le symbole 507 (petit sentier non pavé ou trace) doit être utilisé. Ne doit pas être utilisé en zone urbaine.</translation>
+            <translation>Un layon est une ouverture rectiligne dans une forêt (habituellement une plantation) qui ne comporte pas de sentier distinct. Lorsqu&apos;il y a un sentier le long d&apos;un layon, le symbole 507 (petit sentier non pavé ou trace) doit être utilisé. Ne doit pas être utilisé en zone urbaine.</translation>
         </message>
         <message>
             <source>Bridge, minimum width</source>
@@ -5113,7 +5083,7 @@ pavée) ou 529.1 (escalier en zone pavée).</translation>
         <message>
             <source>A railway is a permanent track laid with rails on which locomotives, carriages or wagons can travel. If it is forbidden to cross or run along the railroad, the forbidden area around the railway shall be represented with symbol area with forbidden access (528.1).</source>
             <comment>Description of symbol 515.1</comment>
-            <translation>Une voie ferrée est une piste permanente avec des rails où circulent des locomotives et wagons. S'il est interdit de la franchir ou de la longer, la zone interdite doit être représentée avec le symbole 528.1 (zone d'accès interdit).</translation>
+            <translation>Une voie ferrée est une piste permanente avec des rails où circulent des locomotives et wagons. S&apos;il est interdit de la franchir ou de la longer, la zone interdite doit être représentée avec le symbole 528.1 (zone d&apos;accès interdit).</translation>
         </message>
         <message>
             <source>Tramway</source>
@@ -5123,7 +5093,7 @@ pavée) ou 529.1 (escalier en zone pavée).</translation>
         <message>
             <source>A tramway is a public vehicle running regularly along certain streets, usually on rails. The track can be easily crossed by the competitor. Tramways are generally not represented. However, if they serve navigation or orientation, they can be represented.</source>
             <comment>Description of symbol 515.2</comment>
-            <translation>Un tramway est un véhicule public circulant régulièrement le long de certaines routes, habituellement sur des rails. La voie peut facilement être traversée par le coureur. Les rails de tramways ne seront en général pas représentés, sauf s'ils peuvent servir à la navigation et à l'orientation.</translation>
+            <translation>Un tramway est un véhicule public circulant régulièrement le long de certaines routes, habituellement sur des rails. La voie peut facilement être traversée par le coureur. Les rails de tramways ne seront en général pas représentés, sauf s&apos;ils peuvent servir à la navigation et à l&apos;orientation.</translation>
         </message>
         <message>
             <source>Power line, cableway or skilift</source>
@@ -5151,7 +5121,7 @@ Very large carrying masts shall be represented in plan shape or with the symbol 
 
 &lt;b&gt;Note: When drawing this symbol, press space to toggle placing the pylon symbols at new nodes.&lt;/b&gt;</source>
             <comment>Description of symbol 517</comment>
-            <translation>Les lignes à haute tension sont représentées par une ligne double. L'intervalle entre ces lignes peut représenter la puissance de la ligne à haute tension.
+            <translation>Les lignes à haute tension sont représentées par une ligne double. L&apos;intervalle entre ces lignes peut représenter la puissance de la ligne à haute tension.
 
 Les pylônes très importants seront représentés en plan ou avec le symbole 535 (haute tour), auquel cas les lignes des cables peuvent être omises (la carte montre uniquement les pylônes).
 
@@ -5165,11 +5135,11 @@ Les pylônes très importants seront représentés en plan ou avec le symbole 53
         <message>
             <source>An underpass or a tunnel is a passage running underneath the ground, especially a passage for pedestrians or vehicles, crossing under for instance a railroad or a road.
 
-&lt;span style="color: magenta"&gt;If underpasses or tunnels etc. are to be used in a competition, they shall be emphasized with the symbol crossing point (708) or crossing section (708.1)!&lt;/span&gt;</source>
+&lt;span style=&quot;color: magenta&quot;&gt;If underpasses or tunnels etc. are to be used in a competition, they shall be emphasized with the symbol crossing point (708) or crossing section (708.1)!&lt;/span&gt;</source>
             <comment>Description of symbol 518.1</comment>
             <translation>Un passage souterrain ou un tunnel est situé sous le niveau du sol, spécialement prévu pour les piétons ou véhicule traversant par exemple une voie ferrée ou une route.
 
-&lt;span style="color: magenta"&gt;Si des passages souterrains ou des tunnels doivent être utilisés pendant une compétition, ils seront complétés du symbole 708 (point de passage) ou 708.1 (section de passage) !&lt;/span&gt;</translation>
+&lt;span style=&quot;color: magenta&quot;&gt;Si des passages souterrains ou des tunnels doivent être utilisés pendant une compétition, ils seront complétés du symbole 708 (point de passage) ou 708.1 (section de passage) !&lt;/span&gt;</translation>
         </message>
         <message>
             <source>Passable stone wall</source>
@@ -5202,35 +5172,35 @@ Les pylônes très importants seront représentés en plan ou avec le symbole 53
             <translation>Un mur franchissable ou mur de soutènement est une contruction en pierre, briques, béton, etc. qui peut être franchie. Ce symbole convient en zone urbaine. Si sa hauteur est supérieure à 2 m, il devra être représenté par le symbole 521.1 (mur infranchissable). De larges murs devront être dessinés en plan, selon leur forme.</translation>
         </message>
         <message>
-            <source>Impassable wall &lt;span style="color:magenta"&gt;(forbidden to cross)&lt;/span&gt;</source>
+            <source>Impassable wall &lt;span style=&quot;color:magenta&quot;&gt;(forbidden to cross)&lt;/span&gt;</source>
             <comment>Name of symbol 521.1.1</comment>
-            <translation>Mur infranchissable &lt;span style="color:magenta"&gt;(franchissement interdit)&lt;/span&gt;</translation>
+            <translation>Mur infranchissable &lt;span style=&quot;color:magenta&quot;&gt;(franchissement interdit)&lt;/span&gt;</translation>
         </message>
         <message>
             <source>An impassable wall or retaining wall is a wall, which fulfil the function of an enclosure or solid barrier. It shall not be crossed, due to forbidden access or because it may constitute a danger to the competitor due to its height. Very wide impassable walls shall be drawn in plan shape and represented with the symbol building (526.1).
 
-&lt;span style="color:magenta"&gt;It is forbidden to cross an impassable wall!
+&lt;span style=&quot;color:magenta&quot;&gt;It is forbidden to cross an impassable wall!
 Competitors violating this rule will be disqualified.&lt;/span&gt;</source>
             <comment>Description of symbol 521.1.1</comment>
-            <translation>Un mur infranchissable ou mur de soutènement qui présente les fonction d'encercler une zone ou de constituer une barrière. Il ne peut être franchi soit parce que la zone est interdite d'accès, soit parce que sa hauteur peut constituer un danger pour le coureur. Des murs infranchissables très larges seront dessinés en plan selon leur forme et représentés par le symbole 526.1 (bâtiment).
+            <translation>Un mur infranchissable ou mur de soutènement qui présente les fonction d&apos;encercler une zone ou de constituer une barrière. Il ne peut être franchi soit parce que la zone est interdite d&apos;accès, soit parce que sa hauteur peut constituer un danger pour le coureur. Des murs infranchissables très larges seront dessinés en plan selon leur forme et représentés par le symbole 526.1 (bâtiment).
 
-&lt;span style="color:magenta"&gt;Il est interdit de franchir un tel mur !
+&lt;span style=&quot;color:magenta&quot;&gt;Il est interdit de franchir un tel mur !
 Le concurrent qui ne respecte pas cette règle sera disqualifié.&lt;/span&gt;</translation>
         </message>
         <message>
-            <source>Impassable wall, plan shape &lt;span style="color:magenta"&gt;(forbidden to cross)&lt;/span&gt;</source>
+            <source>Impassable wall, plan shape &lt;span style=&quot;color:magenta&quot;&gt;(forbidden to cross)&lt;/span&gt;</source>
             <comment>Name of symbol 521.1.2</comment>
-            <translation>Mur infranchissable, plan &lt;span style="color:magenta"&gt;(interdit)&lt;/span&gt;</translation>
+            <translation>Mur infranchissable, plan &lt;span style=&quot;color:magenta&quot;&gt;(interdit)&lt;/span&gt;</translation>
         </message>
         <message>
             <source>An impassable wall or retaining wall is a wall, which fulfil the function of an enclosure or solid barrier. It shall not be crossed, due to forbidden access or because it may constitute a danger to the competitor due to its height. Very wide impassable walls shall be drawn in plan shape and represented with the symbol building (526.1).
 
-&lt;span style="color:magenta"&gt;It is forbidden to cross an impassable wall!
+&lt;span style=&quot;color:magenta&quot;&gt;It is forbidden to cross an impassable wall!
 Competitors violating this rule will be disqualified.&lt;/span&gt;</source>
             <comment>Description of symbol 521.1.2</comment>
-            <translation>Un mur infranchissable ou mur de soutènement qui présente les fonction d'encercler une zone ou de constituer une barrière. Il ne peut être franchi soit parce que la zone est interdite d'accès, soit parce que sa hauteur peut constituer un danger pour le coureur. Des murs infranchissables très larges seront dessinés en plan selon leur forme et représentés par le symbole 526.1 (bâtiment).
+            <translation>Un mur infranchissable ou mur de soutènement qui présente les fonction d&apos;encercler une zone ou de constituer une barrière. Il ne peut être franchi soit parce que la zone est interdite d&apos;accès, soit parce que sa hauteur peut constituer un danger pour le coureur. Des murs infranchissables très larges seront dessinés en plan selon leur forme et représentés par le symbole 526.1 (bâtiment).
 
-&lt;span style="color:magenta"&gt;Il est interdit de franchir un tel mur !
+&lt;span style=&quot;color:magenta&quot;&gt;Il est interdit de franchir un tel mur !
 Le concurrent qui ne respecte pas cette règle sera disqualifié.&lt;/span&gt;</translation>
         </message>
         <message>
@@ -5243,24 +5213,24 @@ Le concurrent qui ne respecte pas cette règle sera disqualifié.&lt;/span&gt;</
 
 If a fence or railing is higher than 2 m or very difficult to cross, it shall be represented with the symbol impassable fence or railing (524).</source>
             <comment>Description of symbol 522</comment>
-            <translation>Une clôture franchissable est une barrière qui entoure ou borde un champ, terrain, etc ... habituellement réalisée avec des piquets et du fil de fer ou du bois. Elle est utilisée pour empêcher l'entrée ou délimiter une zone. Une palissade est une barrière composée d'un ou de plusieurs rails (planches) soutenus par des piquets largement espacés, entre lesquels il est possible de se glisser.
+            <translation>Une clôture franchissable est une barrière qui entoure ou borde un champ, terrain, etc ... habituellement réalisée avec des piquets et du fil de fer ou du bois. Elle est utilisée pour empêcher l&apos;entrée ou délimiter une zone. Une palissade est une barrière composée d&apos;un ou de plusieurs rails (planches) soutenus par des piquets largement espacés, entre lesquels il est possible de se glisser.
 
-Si la hauteur est supérieure à 2 m, ou la clôture très difficile à franchir, l'élément devra être représenté par le symbole 524 (clôture ou palissade infranchissable).</translation>
+Si la hauteur est supérieure à 2 m, ou la clôture très difficile à franchir, l&apos;élément devra être représenté par le symbole 524 (clôture ou palissade infranchissable).</translation>
         </message>
         <message>
-            <source>Impassable fence or railing &lt;span style="color:magenta"&gt;(forbidden to cross)&lt;/span&gt;</source>
+            <source>Impassable fence or railing &lt;span style=&quot;color:magenta&quot;&gt;(forbidden to cross)&lt;/span&gt;</source>
             <comment>Name of symbol 524</comment>
-            <translation>Clôture ou balustrade infranchissable &lt;span style="color:magenta"&gt;(franchissement interdit)&lt;/span&gt;</translation>
+            <translation>Clôture ou balustrade infranchissable &lt;span style=&quot;color:magenta&quot;&gt;(franchissement interdit)&lt;/span&gt;</translation>
         </message>
         <message>
             <source>An impassable fence or railing, which shall not be crossed, due to forbidden access or because it may constitute a danger to the competitor because of its height.
 
-&lt;span style="color:magenta"&gt;It is forbidden to cross an impassable fence or railing!
+&lt;span style=&quot;color:magenta&quot;&gt;It is forbidden to cross an impassable fence or railing!
 Competitors violating this rule will be disqualified.&lt;/span&gt;</source>
             <comment>Description of symbol 524</comment>
-            <translation>Une clôture ou palissade infranchissable qui ne peut être franchie suite à une interdiction d'accès ou parce que sa hauteur constitue un danger pour le coureur.
+            <translation>Une clôture ou palissade infranchissable qui ne peut être franchie suite à une interdiction d&apos;accès ou parce que sa hauteur constitue un danger pour le coureur.
 
-&lt;span style="color:magenta"&gt;Il est interdit de franchir une clôture ou une palissade infranchissable !
+&lt;span style=&quot;color:magenta&quot;&gt;Il est interdit de franchir une clôture ou une palissade infranchissable !
 Le concurrent qui ne respecte pas cette règle sera disqualifié.&lt;/span&gt;</translation>
         </message>
         <message>
@@ -5269,28 +5239,28 @@ Le concurrent qui ne respecte pas cette règle sera disqualifié.&lt;/span&gt;</
             <translation>Point de passage</translation>
         </message>
         <message>
-            <source>A crossing point is a gap or an opening in a fence, railing or wall, which can easily be crossed by a competitor.  Small gaps or openings which can not easily be crossed by competitors, shall not be represented on the map and shall be closed during the competition.</source>
+            <source>A crossing point is a gap or an opening in a fence, railing or wall, which can easily be crossed by a competitor. Small gaps or openings which can not easily be crossed by competitors, shall not be represented on the map and shall be closed during the competition.</source>
             <comment>Description of symbol 525</comment>
             <translation>Un point de passage est un intervalle ou une ouverture dans une clôture, une palissade, un mur qui peut être facilement franchi par le coureur. De petits passages qui ne peuvent être facilement franchis ne doivent pas être représentés sur la carte et doivent être fermés durant la compétition.</translation>
         </message>
         <message>
-            <source>Building &lt;span style="color:magenta"&gt;(forbidden to pass through or over)&lt;/span&gt;</source>
+            <source>Building &lt;span style=&quot;color:magenta&quot;&gt;(forbidden to pass through or over)&lt;/span&gt;</source>
             <comment>Name of symbol 526.1</comment>
-            <translation>Construction infranchissable &lt;span style="color:magenta"&gt;(accès interdit)&lt;/span&gt;</translation>
+            <translation>Construction infranchissable &lt;span style=&quot;color:magenta&quot;&gt;(accès interdit)&lt;/span&gt;</translation>
         </message>
         <message>
             <source>A building is a relatively permanent construction having a roof. Buildings within symbol area with forbidden access (527.1) may just be represented in a simplified manner.Areas totally contained within a building shall be mapped as being a part of the building. 
 
 The minimum gap between buildings and between buildings and other impassable features shall be 0.40 mm. The black screen percentage should be chosen according to the terrain. A dark screen gives a better contrast to passable areas, such as streets, stairways and canopies, while a light screen makes contours and course overprint more clearly visible (which can be important in very densely built up urban terrain and in steep urban terrain). The black screen shall be the same for the whole map. 
 
-&lt;span style="color:magenta"&gt;It is forbidden to pass through or over a building! 
+&lt;span style=&quot;color:magenta&quot;&gt;It is forbidden to pass through or over a building! 
 Competitors violating this rule will be disqualified.&lt;/span&gt;</source>
             <comment>Description of symbol 526.1</comment>
-            <translation>Un bâtiment est une construction permanente avec un toit. Les bâtiment à l'intérieur d'une zone d'accès interdit (528.1) peuvent être représentés d'une manière simplifiée. Les zones entièrement contenues à l'intérieur d'un bâtiment seront dessinées comme en faisant partie.
+            <translation>Un bâtiment est une construction permanente avec un toit. Les bâtiment à l&apos;intérieur d&apos;une zone d&apos;accès interdit (528.1) peuvent être représentés d&apos;une manière simplifiée. Les zones entièrement contenues à l&apos;intérieur d&apos;un bâtiment seront dessinées comme en faisant partie.
 
-L'intervalle minimal entre des bâtiment ou entre un bâtiment et d'autres éléments infranchissables est de 0.40 mm. Le pourcentage de la trame noire sera choisie en fonction du terrain. Une trame foncée apporte un contraste meilleur aux zones franchissables (routes, escaliers, auvents) alors qu'une trame plus claire rendra plus visible les courbes de niveau et les surimpressions de parcours (ce qui peut être important dans des zones urbaines avec une grande densité de constructions ou en terrain urbain escarpé). La trame noire doit être identique sur la totalité de la carte.
+L&apos;intervalle minimal entre des bâtiment ou entre un bâtiment et d&apos;autres éléments infranchissables est de 0.40 mm. Le pourcentage de la trame noire sera choisie en fonction du terrain. Une trame foncée apporte un contraste meilleur aux zones franchissables (routes, escaliers, auvents) alors qu&apos;une trame plus claire rendra plus visible les courbes de niveau et les surimpressions de parcours (ce qui peut être important dans des zones urbaines avec une grande densité de constructions ou en terrain urbain escarpé). La trame noire doit être identique sur la totalité de la carte.
 
-&lt;span style="color:magenta"&gt;Il est interdit de traverser ou de passer au-dessus d'un batîment !
+&lt;span style=&quot;color:magenta&quot;&gt;Il est interdit de traverser ou de passer au-dessus d&apos;un batîment !
 Le concurrent qui ne respete pas cette règle sera disqualifié.&lt;/span&gt;</translation>
         </message>
         <message>
@@ -5314,23 +5284,23 @@ Le concurrent qui ne respete pas cette règle sera disqualifié.&lt;/span&gt;</t
             <translation>Ne pas utiliser ce symbole en tant que tel.</translation>
         </message>
         <message>
-            <source>Building, minimum size &lt;span style="color:magenta"&gt;(forbidden to pass through or over)&lt;/span&gt;</source>
+            <source>Building, minimum size &lt;span style=&quot;color:magenta&quot;&gt;(forbidden to pass through or over)&lt;/span&gt;</source>
             <comment>Name of symbol 526.1.3</comment>
-            <translation>Construction, taille minimum &lt;span style="color:magenta"&gt;(accès interdit)&lt;/span&gt;</translation>
+            <translation>Construction, taille minimum &lt;span style=&quot;color:magenta&quot;&gt;(accès interdit)&lt;/span&gt;</translation>
         </message>
         <message>
             <source>A building is a relatively permanent construction having a roof. Buildings within symbol area with forbidden access (527.1) may just be represented in a simplified manner.Areas totally contained within a building shall be mapped as being a part of the building. 
 
 The minimum gap between buildings and between buildings and other impassable features shall be 0.40 mm. The black screen percentage should be chosen according to the terrain. A dark screen gives a better contrast to passable areas, such as streets, stairways and canopies, while a light screen makes contours and course overprint more clearly visible (which can be important in very densely built up urban terrain and in steep urban terrain). The black screen shall be the same for the whole map. 
 
-&lt;span style="color:magenta"&gt;It is forbidden to pass through or over a building! 
+&lt;span style=&quot;color:magenta&quot;&gt;It is forbidden to pass through or over a building! 
 Competitors violating this rule will be disqualified.&lt;/span&gt;</source>
             <comment>Description of symbol 526.1.3</comment>
-            <translation>Un bâtiment est une construction permanente avec un toit. Les bâtiment à l'intérieur d'une zone d'accès interdit (528.1) peuvent être représentés d'une manière simplifiée. Les zones entièrement contenues à l'intérieur d'un bâtiment seront dessinées comme en faisant partie.
+            <translation>Un bâtiment est une construction permanente avec un toit. Les bâtiment à l&apos;intérieur d&apos;une zone d&apos;accès interdit (528.1) peuvent être représentés d&apos;une manière simplifiée. Les zones entièrement contenues à l&apos;intérieur d&apos;un bâtiment seront dessinées comme en faisant partie.
 
-L'intervalle minimal entre des bâtiment ou entre un bâtiment et d'autres éléments infranchissables est de 0.40 mm. Le pourcentage de la trame noire sera choisie en fonction du terrain. Une trame foncée apporte un contraste meilleur aux zones franchissables (routes, escaliers, auvents) alors qu'une trame plus claire rendra plus visible les courbes de niveau et les surimpressions de parcours (ce qui peut être important dans des zones urbaines avec une grande densité de constructions ou en terrain urbain escarpé). La trame noire doit être identique sur la totalité de la carte.
+L&apos;intervalle minimal entre des bâtiment ou entre un bâtiment et d&apos;autres éléments infranchissables est de 0.40 mm. Le pourcentage de la trame noire sera choisie en fonction du terrain. Une trame foncée apporte un contraste meilleur aux zones franchissables (routes, escaliers, auvents) alors qu&apos;une trame plus claire rendra plus visible les courbes de niveau et les surimpressions de parcours (ce qui peut être important dans des zones urbaines avec une grande densité de constructions ou en terrain urbain escarpé). La trame noire doit être identique sur la totalité de la carte.
 
-&lt;span style="color:magenta"&gt;Il est interdit de traverser ou de passer au-dessus d'un batîment !
+&lt;span style=&quot;color:magenta&quot;&gt;Il est interdit de traverser ou de passer au-dessus d&apos;un batîment !
 Le concurrent qui ne respete pas cette règle sera disqualifié.&lt;/span&gt;</translation>
         </message>
         <message>
@@ -5343,7 +5313,7 @@ Le concurrent qui ne respete pas cette règle sera disqualifié.&lt;/span&gt;</t
 
 Small passable parts of buildings which can not easily be crossed by competitors, shall not be represented on the map and shall be closed during the competition.</source>
             <comment>Description of symbol 526.2</comment>
-            <translation>Un passage couvert est une construction (avec un toit) généralement soutenue par des piliers, piquets ou murs, telle que des passages, couloir, cour, arrêts de bus, stations d'essence, garage. 
+            <translation>Un passage couvert est une construction (avec un toit) généralement soutenue par des piliers, piquets ou murs, telle que des passages, couloir, cour, arrêts de bus, stations d&apos;essence, garage. 
 
 De petites parties de bâtiments qui ne peuvent être franchies facilement par les coureurs ne seront pas représentées et seront fermées durant la compétition.</translation>
         </message>
@@ -5377,28 +5347,28 @@ De petites parties de bâtiments qui ne peuvent être franchies facilement par l
 
 Columns of pillars and pillars along buildings are not represented. However, if they are important for navigation and orientation, they can be represented.</source>
             <comment>Description of symbol 526.3</comment>
-            <translation>Un pilier est un axe vertical ou une structure de pierre, brique ou autre matériau, relativement mince par rapport à sa hauteur, et de n'importe quelle forme, utilisé pour soutenir un bâtiment. Les piliers de moins de 2 x 2 m ne seront généralement pas représentés.
+            <translation>Un pilier est un axe vertical ou une structure de pierre, brique ou autre matériau, relativement mince par rapport à sa hauteur, et de n&apos;importe quelle forme, utilisé pour soutenir un bâtiment. Les piliers de moins de 2 x 2 m ne seront généralement pas représentés.
 
-Les colonnes et piliers le long des bâtiments ne sont pas représentés. Ils peuvent cependant l'être s'ils sont important pour la navigation et l'orientation.</translation>
+Les colonnes et piliers le long des bâtiments ne sont pas représentés. Ils peuvent cependant l&apos;être s&apos;ils sont important pour la navigation et l&apos;orientation.</translation>
         </message>
         <message>
-            <source>Area with forbidden access &lt;span style="color:magenta"&gt;(forbidden to cross)&lt;/span&gt;</source>
+            <source>Area with forbidden access &lt;span style=&quot;color:magenta&quot;&gt;(forbidden to cross)&lt;/span&gt;</source>
             <comment>Name of symbol 528.1</comment>
-            <translation>Zone interdite &lt;span style="color:magenta"&gt;(franchissement interdit)&lt;/span&gt;</translation>
+            <translation>Zone interdite &lt;span style=&quot;color:magenta&quot;&gt;(franchissement interdit)&lt;/span&gt;</translation>
         </message>
         <message>
             <source>An area with forbidden access such as a private area, a flower bed, a railway area etc. No feature shall be represented in this area, except very prominent features such as railways, large buildings, or very large trees. Road entrances shall be represented clearly.
 
 Areas with forbidden access totally contained within buildings shall be mapped as being a part of the building.
 
-&lt;span style="color:magenta"&gt;It is forbidden to cross an area with forbidden access!
+&lt;span style=&quot;color:magenta&quot;&gt;It is forbidden to cross an area with forbidden access!
 Competitors violating this rule will be disqualified.&lt;/span&gt;</source>
             <comment>Description of symbol 528.1</comment>
-            <translation>Une zone interdite est, par exemple, une propriété privée, un parterre de fleurs, une zone de rails, etc. Aucun élément à l'intérieur d'une telle zone ne sera représenté, excepté les éléments très visibles tels les rails, les grands bâtiments, les très grands arbres. 
+            <translation>Une zone interdite est, par exemple, une propriété privée, un parterre de fleurs, une zone de rails, etc. Aucun élément à l&apos;intérieur d&apos;une telle zone ne sera représenté, excepté les éléments très visibles tels les rails, les grands bâtiments, les très grands arbres. 
 
-Les accès routiers seront clairement représentés. Si ces zones ont entièrement contenues à l'intérieur d'un bâtiment, elles seront dessinées comme en faisant partie.
+Les accès routiers seront clairement représentés. Si ces zones ont entièrement contenues à l&apos;intérieur d&apos;un bâtiment, elles seront dessinées comme en faisant partie.
 
-&lt;span style="color:magenta"&gt;Il est interdit de franchir une zone interdite !
+&lt;span style=&quot;color:magenta&quot;&gt;Il est interdit de franchir une zone interdite !
 Le concurrent qui ne respecte pas cette règle sera disqualifié.&lt;/span&gt;</translation>
         </message>
         <message>
@@ -5620,42 +5590,42 @@ Couleur : brun 0 (blanc), 10%, 20%, 30% (urbain), 20%, 30%,40%,50% (non-urbain) 
         <message>
             <source>Step or edge of paved area, urban</source>
             <comment>Name of symbol 529.1.1</comment>
-            <translation>Bord de zone pavée et marches d'escalier, zone urbaine</translation>
+            <translation>Bord de zone pavée et marches d&apos;escalier, zone urbaine</translation>
         </message>
         <message>
             <source>A step or an edge of a paved area. Steps of a stairway shall be represented in a generalized manner. Edges within paved areas are generally not represented, unless they serve navigation. The thickness of edge of paved areas shall be enlarged to 0.14 mm in non-urban areas to improve legibility. The thickness of step lines shall always be 0.07 mm.</source>
             <comment>Description of symbol 529.1.1</comment>
-            <translation>Une marche d'escalier ou un bord de zone pavée. Les marches d’escalier doivent être représentés d’une manière générale. Les bords à l’intérieur des zones pavées ne sont généralement pas représentées sauf si elles sont utiles à l’orientation. L’épaisseur des bords des zones pavées sera portée à 0,14 mm pour les zones non-urbaines afin d’améliorer la lisibilité. L’épaisseur de ligne des marches sera toujours de 0,07 mm.</translation>
+            <translation>Une marche d&apos;escalier ou un bord de zone pavée. Les marches d’escalier doivent être représentés d’une manière générale. Les bords à l’intérieur des zones pavées ne sont généralement pas représentées sauf si elles sont utiles à l’orientation. L’épaisseur des bords des zones pavées sera portée à 0,14 mm pour les zones non-urbaines afin d’améliorer la lisibilité. L’épaisseur de ligne des marches sera toujours de 0,07 mm.</translation>
         </message>
         <message>
             <source>Step or edge of paved area, non-urban</source>
             <comment>Name of symbol 529.1.2</comment>
-            <translation>Bord de zone pavée et marches d'escalier, zone non-urbaine</translation>
+            <translation>Bord de zone pavée et marches d&apos;escalier, zone non-urbaine</translation>
         </message>
         <message>
             <source>A step or an edge of a paved area. Steps of a stairway shall be represented in a generalized manner. Edges within paved areas are generally not represented, unless they serve navigation. The thickness of edge of paved areas shall be enlarged to 0.14 mm in non-urban areas to improve legibility. The thickness of step lines shall always be 0.07 mm.</source>
             <comment>Description of symbol 529.1.2</comment>
-            <translation>Une marche d'escalier ou un bord de zone pavée. Les marches d’escalier doivent être représentés d’une manière générale. Les bords à l’intérieur des zones pavées ne sont généralement pas représentées sauf si elles sont utiles à l’orientation. L’épaisseur des bords des zones pavées sera portée à 0,14 mm pour les zones non-urbaines afin d’améliorer la lisibilité. L’épaisseur de ligne des marches sera toujours de 0,07 mm.</translation>
+            <translation>Une marche d&apos;escalier ou un bord de zone pavée. Les marches d’escalier doivent être représentés d’une manière générale. Les bords à l’intérieur des zones pavées ne sont généralement pas représentées sauf si elles sont utiles à l’orientation. L’épaisseur des bords des zones pavées sera portée à 0,14 mm pour les zones non-urbaines afin d’améliorer la lisibilité. L’épaisseur de ligne des marches sera toujours de 0,07 mm.</translation>
         </message>
         <message>
             <source>Step or edge of paved area, narrow stairway</source>
             <comment>Name of symbol 529.1.3</comment>
-            <translation>Bord de zone pavée et marches d'escalier, escalier étroit</translation>
+            <translation>Bord de zone pavée et marches d&apos;escalier, escalier étroit</translation>
         </message>
         <message>
             <source>A step or an edge of a paved area. Steps of a stairway shall be represented in a generalized manner. Edges within paved areas are generally not represented, unless they serve navigation. The thickness of edge of paved areas shall be enlarged to 0.14 mm in non-urban areas to improve legibility. The thickness of step lines shall always be 0.07 mm.</source>
             <comment>Description of symbol 529.1.3</comment>
-            <translation>Une marche d'escalier ou un bord de zone pavée. Les marches d’escalier doivent être représentés d’une manière générale. Les bords à l’intérieur des zones pavées ne sont généralement pas représentées sauf si elles sont utiles à l’orientation. L’épaisseur des bords des zones pavées sera portée à 0,14 mm pour les zones non-urbaines afin d’améliorer la lisibilité. L’épaisseur de ligne des marches sera toujours de 0,07 mm.</translation>
+            <translation>Une marche d&apos;escalier ou un bord de zone pavée. Les marches d’escalier doivent être représentés d’une manière générale. Les bords à l’intérieur des zones pavées ne sont généralement pas représentées sauf si elles sont utiles à l’orientation. L’épaisseur des bords des zones pavées sera portée à 0,14 mm pour les zones non-urbaines afin d’améliorer la lisibilité. L’épaisseur de ligne des marches sera toujours de 0,07 mm.</translation>
         </message>
         <message>
             <source>Step or edge of paved area, wide stairway</source>
             <comment>Name of symbol 529.1.4</comment>
-            <translation>Bord de zone pavée et marches d'escalier, escalier large</translation>
+            <translation>Bord de zone pavée et marches d&apos;escalier, escalier large</translation>
         </message>
         <message>
             <source>A step or an edge of a paved area. Steps of a stairway shall be represented in a generalized manner. Edges within paved areas are generally not represented, unless they serve navigation. The thickness of edge of paved areas shall be enlarged to 0.14 mm in non-urban areas to improve legibility. The thickness of step lines shall always be 0.07 mm.</source>
             <comment>Description of symbol 529.1.4</comment>
-            <translation>Une marche d'escalier ou un bord de zone pavée. Les marches d’escalier doivent être représentés d’une manière générale. Les bords à l’intérieur des zones pavées ne sont généralement pas représentées sauf si elles sont utiles à l’orientation. L’épaisseur des bords des zones pavées sera portée à 0,14 mm pour les zones non-urbaines afin d’améliorer la lisibilité. L’épaisseur de ligne des marches sera toujours de 0,07 mm.</translation>
+            <translation>Une marche d&apos;escalier ou un bord de zone pavée. Les marches d’escalier doivent être représentés d’une manière générale. Les bords à l’intérieur des zones pavées ne sont généralement pas représentées sauf si elles sont utiles à l’orientation. L’épaisseur des bords des zones pavées sera portée à 0,14 mm pour les zones non-urbaines afin d’améliorer la lisibilité. L’épaisseur de ligne des marches sera toujours de 0,07 mm.</translation>
         </message>
         <message>
             <source>Passable pipeline</source>
@@ -5668,19 +5638,19 @@ Couleur : brun 0 (blanc), 10%, 20%, 30% (urbain), 20%, 30%,40%,50% (non-urbain) 
             <translation>Une conduite (gaz, eau, pétrole, etc.) au-dessus du niveau du sol et qui peut être franchie par-dessus ou par-dessous.</translation>
         </message>
         <message>
-            <source>Impassable pipeline &lt;span style="color:magenta"&gt;(forbidden to cross)&lt;/span&gt;</source>
+            <source>Impassable pipeline &lt;span style=&quot;color:magenta&quot;&gt;(forbidden to cross)&lt;/span&gt;</source>
             <comment>Name of symbol 534</comment>
-            <translation>Conduite infranchissable &lt;span style="color:magenta"&gt;(franchissement interdit)&lt;/span&gt;</translation>
+            <translation>Conduite infranchissable &lt;span style=&quot;color:magenta&quot;&gt;(franchissement interdit)&lt;/span&gt;</translation>
         </message>
         <message>
             <source>An impassable pipeline (gas, water, oil, etc.) above ground level which shall not be crossed, due to forbidden access or because it may constitute a danger to the competitor because of its height.
 
-&lt;span style="color:magenta"&gt;It is forbidden to cross an impassable pipeline!
+&lt;span style=&quot;color:magenta&quot;&gt;It is forbidden to cross an impassable pipeline!
 Competitors violating this rule will be disqualified.&lt;/span&gt;</source>
             <comment>Description of symbol 534</comment>
-            <translation>Une conduite (gaz, eau, pétrole, etc.) au-dessus du niveau du sol et qui ne peut être franchie à cause d'un accès interdit ou parce qu'elle peut constituer un danger pour le coureur de par sa hauteur.
+            <translation>Une conduite (gaz, eau, pétrole, etc.) au-dessus du niveau du sol et qui ne peut être franchie à cause d&apos;un accès interdit ou parce qu&apos;elle peut constituer un danger pour le coureur de par sa hauteur.
 
-&lt;span style="color:magenta"&gt;Il est interdit de franchir une telle conduite !
+&lt;span style=&quot;color:magenta&quot;&gt;Il est interdit de franchir une telle conduite !
 Le concurrent qui ne respecte pas cette règle sera disqualifié.&lt;/span&gt;</translation>
         </message>
         <message>
@@ -5699,7 +5669,7 @@ Le concurrent qui ne respecte pas cette règle sera disqualifié.&lt;/span&gt;</
             <translation>Petite tour</translation>
         </message>
         <message>
-            <source>An obvious small tower, platform or seat . The symbol is orientated to north.</source>
+            <source>An obvious small tower, platform or seat. The symbol is orientated to north.</source>
             <comment>Description of symbol 536</comment>
             <translation>Une petite tour, affût de chasse, petite plateforme ou un siège. Le symbole est orienté au nord.</translation>
         </message>
@@ -5709,7 +5679,7 @@ Le concurrent qui ne respecte pas cette règle sera disqualifié.&lt;/span&gt;</
             <translation>Borne</translation>
         </message>
         <message>
-            <source>Cairn, memorial, small monument or boundary stone more than 0.5 m high.  Large massive monuments shall be represented in plan shape with the symbol building (526.1).</source>
+            <source>Cairn, memorial, small monument or boundary stone more than 0.5 m high. Large massive monuments shall be represented in plan shape with the symbol building (526.1).</source>
             <comment>Description of symbol 537</comment>
             <translation>Borne, monument, ou limite de frontière de plus de 0.5 m de haut. Des monuments importants seront représentés en plan selon leur forme en utilisant le symbole 526.1 (bâtiment).</translation>
         </message>
@@ -5726,22 +5696,22 @@ Le concurrent qui ne respecte pas cette règle sera disqualifié.&lt;/span&gt;</
         <message>
             <source>Prominent man-made feature</source>
             <comment>Name of symbol 539</comment>
-            <translation>Éléments particuliers dus à l'homme</translation>
+            <translation>Éléments particuliers dus à l&apos;homme</translation>
         </message>
         <message>
             <source>A man-made feature which is significant or prominent. The definition of the symbol shall always be given in the map legend.</source>
             <comment>Description of symbol 539</comment>
-            <translation>Un élément particulier dû à l'homme, bien visible et significatif. La définition doit figurer dans la légende de la carte.</translation>
+            <translation>Un élément particulier dû à l&apos;homme, bien visible et significatif. La définition doit figurer dans la légende de la carte.</translation>
         </message>
         <message>
             <source>Prominent man-made feature</source>
             <comment>Name of symbol 540</comment>
-            <translation>Éléments particuliers dus à l'homme</translation>
+            <translation>Éléments particuliers dus à l&apos;homme</translation>
         </message>
         <message>
             <source>A man-made feature which is significant or prominent. The definition of the symbol shall always be given in the map legend. The symbol is orientated to north.</source>
             <comment>Description of symbol 540</comment>
-            <translation>Un élément particulier dû à l'homme, bien visible et significatif. La définition doit figurer dans la légende de la carte.</translation>
+            <translation>Un élément particulier dû à l&apos;homme, bien visible et significatif. La définition doit figurer dans la légende de la carte.</translation>
         </message>
         <message>
             <source>Magnetic north line - black</source>
@@ -5753,7 +5723,7 @@ Le concurrent qui ne respecte pas cette règle sera disqualifié.&lt;/span&gt;</
 
 North lines may be broken where they obscure small features such as boulders, knolls, cliffs, stream junctions, path ends, etc.</source>
             <comment>Description of symbol 601.0.1</comment>
-            <translation>Les lignes du nord magnétique sont placées sur la carte, dirigées vers le nord magnétique. Leur intervalle doit être de 30 mm à l'échelle 1:5000 et 37,5 mm pour l’échelle 1:4000 ce qui représente 150 m sur le terrain pour les deux échelles.
+            <translation>Les lignes du nord magnétique sont placées sur la carte, dirigées vers le nord magnétique. Leur intervalle doit être de 30 mm à l&apos;échelle 1:5000 et 37,5 mm pour l’échelle 1:4000 ce qui représente 150 m sur le terrain pour les deux échelles.
 
 Les lignes du nord peuvent être interrompues lorsqu‘elles cachent un petit élément comme rochers, buttes, falaises, jonction de ruisseaux, extrémités de sentiers, etc.</translation>
         </message>
@@ -5769,7 +5739,7 @@ North lines may be broken where they obscure small features such as boulders, kn
 
 &lt;b&gt;Note: this is a non-standard addition to the symbol set.&lt;/b&gt;</source>
             <comment>Description of symbol 601.0.2</comment>
-            <translation>Les lignes du nord magnétique sont placées sur la carte, dirigées vers le nord magnétique. Leur intervalle doit être de 30 mm à l'échelle 1:5000 et 37,5 mm pour l’échelle 1:4000 ce qui représente 150 m sur le terrain pour les deux échelles.
+            <translation>Les lignes du nord magnétique sont placées sur la carte, dirigées vers le nord magnétique. Leur intervalle doit être de 30 mm à l&apos;échelle 1:5000 et 37,5 mm pour l’échelle 1:4000 ce qui représente 150 m sur le terrain pour les deux échelles.
 
 Les lignes du nord peuvent être interrompues lorsqu‘elles cachent un petit élément comme rochers, buttes, falaises, jonction de ruisseaux, extrémités de sentiers, etc.
 
@@ -5781,13 +5751,13 @@ Les lignes du nord peuvent être interrompues lorsqu‘elles cachent un petit é
             <translation>Ligne du nord magnétique, noir, aide</translation>
         </message>
         <message>
-            <source>Magnetic north lines are lines placed on the map pointing to magnetic north.  Their spacing shall be 30mm on the 1:5000 map so they represent 150m on the ground.
+            <source>Magnetic north lines are lines placed on the map pointing to magnetic north. Their spacing shall be 30 mm on the 1:5000 map so they represent 150 m on the ground.
 
-North lines may be broken where they obscure small features such as boulders, knolls, cliffs, stream junctions, path ends, etc.  Cut holes in the pattern to create these breaks.</source>
+North lines may be broken where they obscure small features such as boulders, knolls, cliffs, stream junctions, path ends, etc. Cut holes in the pattern to create these breaks.</source>
             <comment>Description of symbol 601.0.3</comment>
-            <translation>Les lignes du nord magnétique sont placées sur la carte, dirigées vers le nord magnétique. Leur intervalle doit être de 30 mm à l'échelle 1:5000 et 37,5 mm pour l’échelle 1:4000 ce qui représente 150 m sur le terrain pour les deux échelles.
+            <translation>Les lignes du nord magnétique sont placées sur la carte, dirigées vers le nord magnétique. Leur intervalle doit être de 30 mm à l&apos;échelle 1:5000 et 37,5 mm pour l’échelle 1:4000 ce qui représente 150 m sur le terrain pour les deux échelles.
 
-Les lignes du nord peuvent être interrompues lorsqu‘elles cachent un petit élément comme rochers, buttes, falaises, jonction de ruisseaux, extrémités de sentiers, etc. Pour cela, créer un vide dans l'objet.</translation>
+Les lignes du nord peuvent être interrompues lorsqu‘elles cachent un petit élément comme rochers, buttes, falaises, jonction de ruisseaux, extrémités de sentiers, etc. Pour cela, créer un vide dans l&apos;objet.</translation>
         </message>
         <message>
             <source>Magnetic north line, blue</source>
@@ -5795,11 +5765,11 @@ Les lignes du nord peuvent être interrompues lorsqu‘elles cachent un petit é
             <translation>Lignes du nord magnétique, bleu</translation>
         </message>
         <message>
-            <source>Magnetic north lines are lines placed on the map pointing to magnetic north. Their spacing shall be 30 mm on the 1:5 000 map so they represent 150 m on the ground.  
+            <source>Magnetic north lines are lines placed on the map pointing to magnetic north. Their spacing shall be 30 mm on the 1:5 000 map so they represent 150 m on the ground.
 
 North lines may be broken where they obscure small features such as boulders, knolls, cliffs, stream junctions, path ends, etc.</source>
             <comment>Description of symbol 601.0.4</comment>
-            <translation>Les lignes du nord magnétique sont placées sur la carte, dirigées vers le nord magnétique. Leur intervalle doit être de 30 mm à l'échelle 1:5000 et 37,5 mm pour l’échelle 1:4000 ce qui représente 150 m sur le terrain pour les deux échelles.
+            <translation>Les lignes du nord magnétique sont placées sur la carte, dirigées vers le nord magnétique. Leur intervalle doit être de 30 mm à l&apos;échelle 1:5000 et 37,5 mm pour l’échelle 1:4000 ce qui représente 150 m sur le terrain pour les deux échelles.
 
 Les lignes du nord peuvent être interrompues lorsqu‘elles cachent un petit élément comme rochers, buttes, falaises, jonction de ruisseaux, extrémités de sentiers, etc.</translation>
         </message>
@@ -5815,7 +5785,7 @@ North lines may be broken where they obscure small features such as boulders, kn
 
 &lt;b&gt;Note: this is a non-standard addition to the symbol set.&lt;/b&gt;</source>
             <comment>Description of symbol 601.0.5</comment>
-            <translation>Les lignes du nord magnétique sont placées sur la carte, dirigées vers le nord magnétique. Leur intervalle doit être de 30 mm à l'échelle 1:5000 et 37,5 mm pour l’échelle 1:4000 ce qui représente 150 m sur le terrain pour les deux échelles.
+            <translation>Les lignes du nord magnétique sont placées sur la carte, dirigées vers le nord magnétique. Leur intervalle doit être de 30 mm à l&apos;échelle 1:5000 et 37,5 mm pour l’échelle 1:4000 ce qui représente 150 m sur le terrain pour les deux échelles.
 
 Les lignes du nord peuvent être interrompues lorsqu‘elles cachent un petit élément comme rochers, buttes, falaises, jonction de ruisseaux, extrémités de sentiers, etc.
 
@@ -5829,11 +5799,11 @@ Les lignes du nord peuvent être interrompues lorsqu‘elles cachent un petit é
         <message>
             <source>Magnetic north lines are lines placed on the map pointing to magnetic north. Their spacing shall be 30 mm on the 1:5 000 map so they represent 150 m on the ground. 
 
-North lines may be broken where they obscure small features such as boulders, knolls, cliffs, stream junctions, path ends, etc.  Cut holes in the pattern to create these breaks.</source>
+North lines may be broken where they obscure small features such as boulders, knolls, cliffs, stream junctions, path ends, etc. Cut holes in the pattern to create these breaks.</source>
             <comment>Description of symbol 601.0.6</comment>
-            <translation>Les lignes du nord magnétique sont placées sur la carte, dirigées vers le nord magnétique. Leur intervalle doit être de 30 mm à l'échelle 1:5000 et 37,5 mm pour l’échelle 1:4000 ce qui représente 150 m sur le terrain pour les deux échelles.
+            <translation>Les lignes du nord magnétique sont placées sur la carte, dirigées vers le nord magnétique. Leur intervalle doit être de 30 mm à l&apos;échelle 1:5000 et 37,5 mm pour l’échelle 1:4000 ce qui représente 150 m sur le terrain pour les deux échelles.
 
-Les lignes du nord peuvent être interrompues lorsqu‘elles cachent un petit élément comme rochers, buttes, falaises, jonction de ruisseaux, extrémités de sentiers, etc. Pour cela, créer un vide dans l'objet.</translation>
+Les lignes du nord peuvent être interrompues lorsqu‘elles cachent un petit élément comme rochers, buttes, falaises, jonction de ruisseaux, extrémités de sentiers, etc. Pour cela, créer un vide dans l&apos;objet.</translation>
         </message>
         <message>
             <source>Registration mark</source>
@@ -5843,27 +5813,27 @@ Les lignes du nord peuvent être interrompues lorsqu‘elles cachent un petit é
         <message>
             <source>At least three registration marks shall be placed within the frame of a map in a non-symmetrical arrangement. In addition, a colour check should be possible.</source>
             <comment>Description of symbol 602</comment>
-            <translation>Au minimum trois croix de centrage doivent être placées à l'intérieur du cadre de la carte, en position non-symétrique. Des contrôles de couleur additionnels sont également possibles.</translation>
+            <translation>Au minimum trois croix de centrage doivent être placées à l&apos;intérieur du cadre de la carte, en position non-symétrique. Des contrôles de couleur additionnels sont également possibles.</translation>
         </message>
         <message>
             <source>Spot height, dot</source>
             <comment>Name of symbol 603.0.1</comment>
-            <translation>Point d'altitude, point</translation>
+            <translation>Point d&apos;altitude, point</translation>
         </message>
         <message>
             <source>Spot heights are used for the rough assessment of height differences. The height is given to the nearest metre. The figures are orientated to the north. Water levels are given without the dot.</source>
             <comment>Description of symbol 603.0.1</comment>
-            <translation>Les points d'altitude sont utilisés pour l'estimation des différences d'altitude. Celle-ci est arrondie au mètre. Les chiffres sont orientés vers le nord. Les niveaux d'eau sont représentés sans le point.</translation>
+            <translation>Les points d&apos;altitude sont utilisés pour l&apos;estimation des différences d&apos;altitude. Celle-ci est arrondie au mètre. Les chiffres sont orientés vers le nord. Les niveaux d&apos;eau sont représentés sans le point.</translation>
         </message>
         <message>
             <source>Spot height</source>
             <comment>Name of symbol 603.0.2</comment>
-            <translation>Point d'altitude, altitude</translation>
+            <translation>Point d&apos;altitude, altitude</translation>
         </message>
         <message>
             <source>Spot heights are used for the rough assessment of height differences. The height is given to the nearest metre. The figures are orientated to the north. Water levels are given without the dot.</source>
             <comment>Description of symbol 603.0.2</comment>
-            <translation>Les points d'altitude sont utilisés pour l'estimation des différences d'altitude. Celle-ci est arrondie au mètre. Les chiffres sont orientés vers le nord. Les niveaux d'eau sont représentés sans le point.</translation>
+            <translation>Les points d&apos;altitude sont utilisés pour l&apos;estimation des différences d&apos;altitude. Celle-ci est arrondie au mètre. Les chiffres sont orientés vers le nord. Les niveaux d&apos;eau sont représentés sans le point.</translation>
         </message>
         <message>
             <source>Start</source>
@@ -5873,7 +5843,7 @@ Les lignes du nord peuvent être interrompues lorsqu‘elles cachent un petit é
         <message>
             <source>The start or map issue point (if not at the start) is shown by an equilateral triangle which points in the direction of the first control. The centre of the triangle shows the precise position of the start point.</source>
             <comment>Description of symbol 701</comment>
-            <translation>Le départ, (ou le point de la prise de carte s'il ne s'agit pas du départ) est représenté par un triangle équilatéral qui pointe dans la direction du premier poste. Le centre de ce triangle montre la position exacte du point de départ.</translation>
+            <translation>Le départ, (ou le point de la prise de carte s&apos;il ne s&apos;agit pas du départ) est représenté par un triangle équilatéral qui pointe dans la direction du premier poste. Le centre de ce triangle montre la position exacte du point de départ.</translation>
         </message>
         <message>
             <source>Control point</source>
@@ -5883,7 +5853,7 @@ Les lignes du nord peuvent être interrompues lorsqu‘elles cachent un petit é
         <message>
             <source>The control points are shown with circles. The centre of the circle shows the precise position of the feature. Sections of circles should be omitted to leave important detail showing.</source>
             <comment>Description of symbol 702</comment>
-            <translation>Les postes de contrôle sont représentés par des cercles. Le centre du cercle doit indiquer la position exacte de l'élément. Des sections du cercle peuvent être éliminées à condition de ne masquer aucun détail important.</translation>
+            <translation>Les postes de contrôle sont représentés par des cercles. Le centre du cercle doit indiquer la position exacte de l&apos;élément. Des sections du cercle peuvent être éliminées à condition de ne masquer aucun détail important.</translation>
         </message>
         <message>
             <source>Control number</source>
@@ -5893,7 +5863,7 @@ Les lignes du nord peuvent être interrompues lorsqu‘elles cachent un petit é
         <message>
             <source>The number of the control is placed close to the control point circle in such a way that it does not obscure important detail. The numbers are orientated to north.</source>
             <comment>Description of symbol 703</comment>
-            <translation>Le numéro du poste est placé à proximité du cercle, de telle manière qu'il ne masque aucun détail important. Ces numéros sont orientés vers le nord.</translation>
+            <translation>Le numéro du poste est placé à proximité du cercle, de telle manière qu&apos;il ne masque aucun détail important. Ces numéros sont orientés vers le nord.</translation>
         </message>
         <message>
             <source>Line</source>
@@ -5903,7 +5873,7 @@ Les lignes du nord peuvent être interrompues lorsqu‘elles cachent un petit é
         <message>
             <source>Where controls are to be visited in order, the start, control points and finish are joined together by straight lines. Sections of lines should be omitted to leave important detail showing.</source>
             <comment>Description of symbol 704</comment>
-            <translation>Lorsque les contrôles doivent être parcourus dans un ordre défini, le départ, les postes et l'arrivée sont réunis par des traits. Des sections de ligne peuvent être éliminées pour ne pas masquer des détails importants.</translation>
+            <translation>Lorsque les contrôles doivent être parcourus dans un ordre défini, le départ, les postes et l&apos;arrivée sont réunis par des traits. Des sections de ligne peuvent être éliminées pour ne pas masquer des détails importants.</translation>
         </message>
         <message>
             <source>Marked route</source>
@@ -5923,24 +5893,24 @@ Les lignes du nord peuvent être interrompues lorsqu‘elles cachent un petit é
         <message>
             <source>The finish is shown by two concentric circles.</source>
             <comment>Description of symbol 706</comment>
-            <translation>L'arrivée est représentée par deux cercles concentriques.</translation>
+            <translation>L&apos;arrivée est représentée par deux cercles concentriques.</translation>
         </message>
         <message>
-            <source>Uncrossable boundary &lt;span style="color:magenta"&gt;(forbidden to cross)&lt;/span&gt;</source>
+            <source>Uncrossable boundary &lt;span style=&quot;color:magenta&quot;&gt;(forbidden to cross)&lt;/span&gt;</source>
             <comment>Name of symbol 707</comment>
-            <translation>Limite interdite &lt;span style="color:magenta"&gt;(franchissement interdit)&lt;/span&gt;</translation>
+            <translation>Limite interdite &lt;span style=&quot;color:magenta&quot;&gt;(franchissement interdit)&lt;/span&gt;</translation>
         </message>
         <message>
             <source>A boundary which it is not permitted to cross. Uncrossable boundaries shall be mapped by using the symbols: impassable cliff (201), impassable body of water (304.1), impassable marsh (309), impassable wall (521.1), impassable fence or railing (524) or impassable pipeline (534) and shall not be overprinted with symbol uncrossable boundary (707). This symbol is to be used only for last minute updates to the competition area, as excessive use of purple for indicating barriers is unfortunate.
 
-&lt;span style="color:magenta"&gt;It is forbidden to cross an uncrossable boundary!
+&lt;span style=&quot;color:magenta&quot;&gt;It is forbidden to cross an uncrossable boundary!
 Competitors violating this rule will be disqualified.&lt;/span&gt;</source>
             <comment>Description of symbol 707</comment>
-            <translation>Une limite dont le franchissement est interdit. Les limites infranchissables seront cartographiées en utilisant les symboles 201 (falaise infanchissable), 304.1 (étendue d'eau infranchissable), 309 (marais infranchissable), 521.1 (mur infranchissable), 524 (clôture ou palissade infranchissable) ou 534 (conduite infranchissable) et ne seront pas sur-imprimées avec ce symbole 707. Celui-ci sera uniquement utilisé en dernière minute pour mettre à jour la zone de compétition. Un emploi excessif de violet pour indiquer les obstacles est en effet inadéquat.
+            <translation>Une limite dont le franchissement est interdit. Les limites infranchissables seront cartographiées en utilisant les symboles 201 (falaise infanchissable), 304.1 (étendue d&apos;eau infranchissable), 309 (marais infranchissable), 521.1 (mur infranchissable), 524 (clôture ou palissade infranchissable) ou 534 (conduite infranchissable) et ne seront pas sur-imprimées avec ce symbole 707. Celui-ci sera uniquement utilisé en dernière minute pour mettre à jour la zone de compétition. Un emploi excessif de violet pour indiquer les obstacles est en effet inadéquat.
 
 A boundary which it is not permitted to cross. Uncrossable boundaries shall be mapped by using the symbols: impassable cliff (201), impassable body of water (304.1), impassable marsh (309), impassable wall (521.1), impassable fence or railing (524) or impassable pipeline (534) and shall not be overprinted with symbol uncrossable boundary (707). This symbol is to be used only for last minute updates to the competition area, as excessive use of purple for indicating barriers is unfortunate.
 
-&lt;span style="color:magenta"&gt;Il est interdit de franchir une limite interdite !
+&lt;span style=&quot;color:magenta&quot;&gt;Il est interdit de franchir une limite interdite !
 Le concurrent qui ne respecte pas cettre règle sera disqualifié.&lt;/span&gt;</translation>
         </message>
         <message>
@@ -5953,7 +5923,7 @@ Le concurrent qui ne respecte pas cettre règle sera disqualifié.&lt;/span&gt;<
 
 If underpasses or tunnels etc. are to be used in a competition, they shall be emphasized with symbol crossing point (708) or crossing section (708.1).</source>
             <comment>Description of symbol 708</comment>
-            <translation>Un point de passage à travers ou au-dessus d'un mur, d'une clôture, le franchissement d'une route, d'un chemin de fer ou d'un tunnel est représenté sur la carte par deux parenthèses inversées. 
+            <translation>Un point de passage à travers ou au-dessus d&apos;un mur, d&apos;une clôture, le franchissement d&apos;une route, d&apos;un chemin de fer ou d&apos;un tunnel est représenté sur la carte par deux parenthèses inversées. 
 
 Si de tels passages souterrains ou tunnels doivent être utilisés pendant une compétition, ils doivent être renforcés par le symbole 708 (point de passage) ou 708.1 (passage).</translation>
         </message>
@@ -5967,32 +5937,32 @@ Si de tels passages souterrains ou tunnels doivent être utilisés pendant une c
 
 If underpasses or tunnels etc. are to be used in a competition, they shall be emphasized with symbol (708) or (708.1).</source>
             <comment>Description of symbol 708.1</comment>
-            <translation>Une section de passage à travers des bâtiments, murs ou clôture, ou la traversée d'une route ou d'une voie ferrée, ou tunnel ou la traversée d'une zone interdite est cartographiée comme un objet linéaire selon sa forme en plan.
+            <translation>Une section de passage à travers des bâtiments, murs ou clôture, ou la traversée d&apos;une route ou d&apos;une voie ferrée, ou tunnel ou la traversée d&apos;une zone interdite est cartographiée comme un objet linéaire selon sa forme en plan.
 
 Si des passages souterrains ou tunnels, etc, doivent être utilisés en compétition, ils doivent être renforcés par le symbole 708 (point de passage) ou 708.1 (passage).</translation>
         </message>
         <message>
-            <source>Out-of-bounds area &lt;span style="color:magenta"&gt;(forbidden to cross)&lt;/span&gt;</source>
+            <source>Out-of-bounds area &lt;span style=&quot;color:magenta&quot;&gt;(forbidden to cross)&lt;/span&gt;</source>
             <comment>Name of symbol 709</comment>
-            <translation>Zone interdite &lt;span style="color:magenta"&gt;(franchissement interdit)&lt;/span&gt;</translation>
+            <translation>Zone interdite &lt;span style=&quot;color:magenta&quot;&gt;(franchissement interdit)&lt;/span&gt;</translation>
         </message>
         <message>
-            <source>Out of bounds areas are mapped with the symbol area with forbidden access (528.1).  This symbol shall only be used for last minute updates to the competition map (e.g. for areas that may be dangerous for the competitors during the competition, or very late changes to the competition terrain).
+            <source>Out of bounds areas are mapped with the symbol area with forbidden access (528.1). This symbol shall only be used for last minute updates to the competition map (e.g. for areas that may be dangerous for the competitors during the competition, or very late changes to the competition terrain).
 An out-of-bounds area is shown with vertical stripes. A bounding line may be drawn if there is no natural boundary, as follows:
 - a solid line indicates that the boundary is marked continuously (tapes, etc.) on the ground,
 - a dashed line indicates intermittent marking on the ground,
 - no line indicates no marking on the ground.
 
-&lt;span style="color:magenta"&gt;It is forbidden to cross an out-of-bounds area!
+&lt;span style=&quot;color:magenta&quot;&gt;It is forbidden to cross an out-of-bounds area!
 Competitors violating this rule will be disqualified.&lt;/span&gt;</source>
             <comment>Description of symbol 709</comment>
-            <translation>Une zone interdite est représentée avec le symbole 528.1 (zone d'accès interdit). Ce symbole doit uniquement être utilisé pour une mise à jour de dernière minute (par ex. pour des zones qui peuvent être dangereuses pour le coureur, ou des modifications très tardives sur le terrain de compétition).
-Une zone interdite est représentée par des hachures verticales. En l'absence de limite naturelle, une ligne peut être ajoutée avec les conventions ci-après :
+            <translation>Une zone interdite est représentée avec le symbole 528.1 (zone d&apos;accès interdit). Ce symbole doit uniquement être utilisé pour une mise à jour de dernière minute (par ex. pour des zones qui peuvent être dangereuses pour le coureur, ou des modifications très tardives sur le terrain de compétition).
+Une zone interdite est représentée par des hachures verticales. En l&apos;absence de limite naturelle, une ligne peut être ajoutée avec les conventions ci-après :
 - une ligne continue indique que la zone est repérée de manière continue (banderole, etc) sur le terrain
 - une ligne en tirets indique un repérage intermittent sur le terrain
-- l'absence de ligne indique qu'il n'y a aucun repérage sur le terrain.
+- l&apos;absence de ligne indique qu&apos;il n&apos;y a aucun repérage sur le terrain.
 
-&lt;span style="color:magenta"&gt;Il est interdit de franchir une telle limite !
+&lt;span style=&quot;color:magenta&quot;&gt;Il est interdit de franchir une telle limite !
 Le concurrent qui ne respecte pas cette règle sera disqualifié.&lt;/span&gt;</translation>
         </message>
         <message>
@@ -6024,7 +5994,7 @@ Le concurrent qui ne respecte pas cette règle sera disqualifié.&lt;/span&gt;</
         <message>
             <source>The location of a first aid post.</source>
             <comment>Description of symbol 712</comment>
-            <translation>La position d'un poste de premiers soins.</translation>
+            <translation>La position d&apos;un poste de premiers soins.</translation>
         </message>
         <message>
             <source>Refreshment point</source>
@@ -6034,37 +6004,37 @@ Le concurrent qui ne respecte pas cette règle sera disqualifié.&lt;/span&gt;</
         <message>
             <source>The location of a refreshment point which is not at a control or along the marked route.</source>
             <comment>Description of symbol 713</comment>
-            <translation>La position d'un poste de ravitaillement quand il n'est pas à un poste de contrôle ou le long d'un itinéraire balisé.</translation>
+            <translation>La position d&apos;un poste de ravitaillement quand il n&apos;est pas à un poste de contrôle ou le long d&apos;un itinéraire balisé.</translation>
         </message>
         <message>
-            <source>Temporary construction or closed area &lt;span style="color:magenta"&gt;(forbidden to cross)&lt;/span&gt;</source>
+            <source>Temporary construction or closed area &lt;span style=&quot;color:magenta&quot;&gt;(forbidden to cross)&lt;/span&gt;</source>
             <comment>Name of symbol 714</comment>
-            <translation>Construction temporaire ou zone fermée &lt;span style="color:magenta"&gt;(franchissement interdit)&lt;/span&gt;</translation>
+            <translation>Construction temporaire ou zone fermée &lt;span style=&quot;color:magenta&quot;&gt;(franchissement interdit)&lt;/span&gt;</translation>
         </message>
         <message>
             <source>Obvious temporary constructions like platforms for spectators and speaker, closed area for spectators, outside restaurant areas, etc. shall be represented in plan shape.
 
-&lt;span style="color:magenta"&gt;It is forbidden to enter a temporary construction or closed area!
+&lt;span style=&quot;color:magenta&quot;&gt;It is forbidden to enter a temporary construction or closed area!
 Competitors violating this rule will be disqualified.&lt;/span&gt;</source>
             <comment>Description of symbol 714</comment>
             <translation>Des constructions temporaires bien visibles tels que les tribunes des spectateurs et du speaker, les zones fermées des spectateurs, les zones de restaurant extérieurs, etc. seront représentées selon leur forme en plan.
 
-&lt;span style="color:magenta"&gt;Il est interdit de pénétrer dans une construction temporaire ou une zone fermé !
+&lt;span style=&quot;color:magenta&quot;&gt;Il est interdit de pénétrer dans une construction temporaire ou une zone fermé !
 Le concurrent qui ne respecte pas cette règle sera disqualifé.&lt;/span&gt;</translation>
         </message>
         <message>
             <source>Simple Orienteering Course</source>
             <comment>Name of symbol 799</comment>
-            <translation>Simple course d'orientation</translation>
+            <translation>Simple course d&apos;orientation</translation>
         </message>
         <message>
             <source>This symbol provides a simple and quick way to make training courses.
 
 The purple line will extend a bit into the finish symbol. This is a shortcoming of this simple approach.</source>
             <comment>Description of symbol 799</comment>
-            <translation>Ce symbole fournit un moyen simple et rapide de créer des course d'entraînement.
+            <translation>Ce symbole fournit un moyen simple et rapide de créer des course d&apos;entraînement.
 
-Les lignes violettes sont légèrement prolongées dans le symbole d'arrivée. Ceci est un inconvénient de ce symbole.</translation>
+Les lignes violettes sont légèrement prolongées dans le symbole d&apos;arrivée. Ceci est un inconvénient de ce symbole.</translation>
         </message>
         <message>
             <source>OpenOrienteering Logo</source>
@@ -6242,7 +6212,7 @@ Les lignes violettes sont légèrement prolongées dans le symbole d'arrivée. C
         <message>
             <source>Contour values may be included to aid assessment of large height differences. They are inserted in the index contours in positions where other detail is not obscured. The figures should be orientated so that the top of the figure is on the higher side of the contour.</source>
             <comment>Description of symbol 105</comment>
-            <translation type="unfinished">Les courbes de niveau peuvent être cotées pour faciliter l'évaluation de grandes différences de dénivelé. Elles sont insérées dans les courbes de niveau maîtresse, où elles ne dissimulent aucun détail. Les chiffres sont orientés avec leur sommet en amont de la pente.</translation>
+            <translation type="unfinished">Les courbes de niveau peuvent être cotées pour faciliter l&apos;évaluation de grandes différences de dénivelé. Elles sont insérées dans les courbes de niveau maîtresse, où elles ne dissimulent aucun détail. Les chiffres sont orientés avec leur sommet en amont de la pente.</translation>
         </message>
         <message>
             <source>Earth bank</source>
@@ -6292,7 +6262,7 @@ Les lignes violettes sont légèrement prolongées dans le symbole d'arrivée. C
         <message>
             <source>Use this symbol to display the full extent of wide earth banks.</source>
             <comment>Description of symbol 106.2</comment>
-            <translation type="unfinished">Utiliser ce symbole pour représenter l'étendue de l'abrupt de terre.</translation>
+            <translation type="unfinished">Utiliser ce symbole pour représenter l&apos;étendue de l&apos;abrupt de terre.</translation>
         </message>
         <message>
             <source>Earth wall</source>
@@ -6320,7 +6290,7 @@ Les lignes violettes sont légèrement prolongées dans le symbole d'arrivée. C
             <translation type="unfinished"></translation>
         </message>
         <message>
-            <source>An impassable cliff, quarry or earth bank (see 106) is shown with a 0.35 mm line and downward tags showing its full extent from the top line to the foot. For vertical rock faces the tags may be omitted if space is short, e.g. narrow passages between cliffs (the passage should be drawn with a width of at least 0.3 mm). The tags may extend over an area symbol representing detail immediately below the rock face. When a rock face drops straight into water making it impossible to pass under the cliff along the water's edge, the bank line is omitted or the tags should clearly extend over the bank line.</source>
+            <source>An impassable cliff, quarry or earth bank (see 106) is shown with a 0.35 mm line and downward tags showing its full extent from the top line to the foot. For vertical rock faces the tags may be omitted if space is short, e.g. narrow passages between cliffs (the passage should be drawn with a width of at least 0.3 mm). The tags may extend over an area symbol representing detail immediately below the rock face. When a rock face drops straight into water making it impossible to pass under the cliff along the water&apos;s edge, the bank line is omitted or the tags should clearly extend over the bank line.</source>
             <comment>Description of symbol 201</comment>
             <translation type="unfinished"></translation>
         </message>
@@ -6330,7 +6300,7 @@ Les lignes violettes sont légèrement prolongées dans le symbole d'arrivée. C
             <translation type="unfinished"></translation>
         </message>
         <message>
-            <source>An impassable cliff, quarry or earth bank (see 106) is shown with a 0.35 mm line and downward tags showing its full extent from the top line to the foot. For vertical rock faces the tags may be omitted if space is short, e.g. narrow passages between cliffs (the passage should be drawn with a width of at least 0.3 mm). The tags may extend over an area symbol representing detail immediately below the rock face. When a rock face drops straight into water making it impossible to pass under the cliff along the water's edge, the bank line is omitted or the tags should clearly extend over the bank line.</source>
+            <source>An impassable cliff, quarry or earth bank (see 106) is shown with a 0.35 mm line and downward tags showing its full extent from the top line to the foot. For vertical rock faces the tags may be omitted if space is short, e.g. narrow passages between cliffs (the passage should be drawn with a width of at least 0.3 mm). The tags may extend over an area symbol representing detail immediately below the rock face. When a rock face drops straight into water making it impossible to pass under the cliff along the water&apos;s edge, the bank line is omitted or the tags should clearly extend over the bank line.</source>
             <comment>Description of symbol 201.0.1</comment>
             <translation type="unfinished"></translation>
         </message>
@@ -6342,7 +6312,7 @@ Les lignes violettes sont légèrement prolongées dans le symbole d'arrivée. C
         <message>
             <source>For vertical rock faces the tags may be omitted if space is short, e.g. narrow passages between cliffs (the passage should be drawn with a width of at least 0.3 mm).</source>
             <comment>Description of symbol 201.1</comment>
-            <translation type="unfinished">Pour des faces verticales, les tirets peuvent être omis s'il n'y a pas assez de place, par ex. un passage étroit entre des falaises. (Les passages doivent être représentés par une largeur d'au moins 0.3 mm).</translation>
+            <translation type="unfinished">Pour des faces verticales, les tirets peuvent être omis s&apos;il n&apos;y a pas assez de place, par ex. un passage étroit entre des falaises. (Les passages doivent être représentés par une largeur d&apos;au moins 0.3 mm).</translation>
         </message>
         <message>
             <source>Impassable cliff, tag line</source>
@@ -6352,7 +6322,7 @@ Les lignes violettes sont légèrement prolongées dans le symbole d'arrivée. C
         <message>
             <source>Use this symbol to display the full extent of a wide cliff.</source>
             <comment>Description of symbol 201.2</comment>
-            <translation type="unfinished">Utiliser ce symbole pour dessiner l'étendue d'une grande falaise.</translation>
+            <translation type="unfinished">Utiliser ce symbole pour dessiner l&apos;étendue d&apos;une grande falaise.</translation>
         </message>
         <message>
             <source>Rock pillars/cliffs</source>
@@ -6432,7 +6402,7 @@ Les lignes violettes sont légèrement prolongées dans le symbole d'arrivée. C
         <message>
             <source>Large areas of water are shown with this symbol (blue 50%). The colour of the bank line is blue 100 %.
 
-Small areas of water should be shown with full colour. Use symbol 302 ("Pond" in ISOM).</source>
+Small areas of water should be shown with full colour. Use symbol 302 (&quot;Pond&quot; in ISOM).</source>
             <comment>Description of symbol 301</comment>
             <translation type="unfinished"></translation>
         </message>
@@ -6459,7 +6429,7 @@ Small areas of water should be shown with full colour. Use symbol 302 ("Pond" in
         <message>
             <source>Small areas of water should be shown with full colour.
 
-This is symbol "302 Pond" in ISOM, but is a variation of "301 Lake" in ISMTBOM.</source>
+This is symbol &quot;302 Pond&quot; in ISOM, but is a variation of &quot;301 Lake&quot; in ISMTBOM.</source>
             <comment>Description of symbol 302</comment>
             <translation type="unfinished"></translation>
         </message>
@@ -6491,7 +6461,7 @@ This is symbol "302 Pond" in ISOM, but is a variation of "301 Lake" in ISMTBOM.<
         <message>
             <source>A natural or man-made minor water channel which may contain water only intermittently.</source>
             <comment>Description of symbol 307</comment>
-            <translation type="unfinished">Cours d'eau naturel ou creusé qui peut ne contenir de l'eau que par intermittence.</translation>
+            <translation type="unfinished">Cours d&apos;eau naturel ou creusé qui peut ne contenir de l&apos;eau que par intermittence.</translation>
         </message>
         <message>
             <source>Uncrossable marsh</source>
@@ -6519,7 +6489,7 @@ This is symbol "302 Pond" in ISOM, but is a variation of "301 Lake" in ISMTBOM.<
             <translation type="unfinished">Marais</translation>
         </message>
         <message>
-            <source>A crossable marsh, usually with a distinct edge. The symbol should be combined with vegetation symbols to show runnability and openness. Where a small marsh area should be combined with either 403/404 it is permitted to use 401/402 to improve legibility</source>
+            <source>A crossable marsh, usually with a distinct edge. The symbol should be combined with vegetation symbols to show runnability and openness. Where a small marsh area should be combined with either 403/404 it is permitted to use 401/402 to improve legibility.</source>
             <comment>Description of symbol 310</comment>
             <translation type="unfinished"></translation>
         </message>
@@ -6966,8 +6936,7 @@ cross, it shall be marked with the symbol 707 (uncrossable boundary).</source>
             <translation type="unfinished"></translation>
         </message>
         <message>
-            <source>Special man-made features are shown with these symbols. The definition of the
-symbols must be given in each case in the map legend.</source>
+            <source>Special man-made features are shown with these symbols. The definition of the symbols must be given in each case in the map legend.</source>
             <comment>Description of symbol 539</comment>
             <translation type="unfinished"></translation>
         </message>
@@ -6977,8 +6946,7 @@ symbols must be given in each case in the map legend.</source>
             <translation type="unfinished"></translation>
         </message>
         <message>
-            <source>Special man-made features are shown with these symbols. The definition of the
-symbols must be given in each case in the map legend.</source>
+            <source>Special man-made features are shown with these symbols. The definition of the symbols must be given in each case in the map legend.</source>
             <comment>Description of symbol 540</comment>
             <translation type="unfinished"></translation>
         </message>
@@ -7010,13 +6978,12 @@ symbols must be given in each case in the map legend.</source>
         <message>
             <source>Spot height, dot</source>
             <comment>Name of symbol 603.0</comment>
-            <translation type="unfinished">Point d'altitude, point</translation>
+            <translation type="unfinished">Point d&apos;altitude, point</translation>
         </message>
         <message>
-            <source>Spot heights are used for the rough assessment of height differences. The height is given to the nearest metre. The figures are orientated to the north. Water levels are
-given without the dot.</source>
+            <source>Spot heights are used for the rough assessment of height differences. The height is given to the nearest metre. The figures are orientated to the north. Water levels are given without the dot.</source>
             <comment>Description of symbol 603.0</comment>
-            <translation type="unfinished"></translation>
+            <translation type="unfinished">Les points d&apos;altitude sont utilisés pour l&apos;estimation des différences d&apos;altitude. Celle-ci est arrondie au mètre. Les chiffres sont orientés vers le nord. Les niveaux d&apos;eau sont représentés sans le point.</translation>
         </message>
         <message>
             <source>Spot height, text</source>
@@ -7026,7 +6993,7 @@ given without the dot.</source>
         <message>
             <source>Spot heights are used for the rough assessment of height differences. The height is given to the nearest metre. The figures are orientated to the north. Water levels are given without the dot.</source>
             <comment>Description of symbol 603.1</comment>
-            <translation type="unfinished">Les points d'altitude sont utilisés pour l'estimation des différences d'altitude. Celle-ci est arrondie au mètre. Les chiffres sont orientés vers le nord. Les niveaux d'eau sont représentés sans le point.</translation>
+            <translation type="unfinished">Les points d&apos;altitude sont utilisés pour l&apos;estimation des différences d&apos;altitude. Celle-ci est arrondie au mètre. Les chiffres sont orientés vers le nord. Les niveaux d&apos;eau sont représentés sans le point.</translation>
         </message>
         <message>
             <source>Start</source>
@@ -7036,7 +7003,7 @@ given without the dot.</source>
         <message>
             <source>The start or map issue point (if not at the start) is shown by an equilateral triangle which points in the direction of the first control. The centre of the triangle shows the precise position of the start point.</source>
             <comment>Description of symbol 701</comment>
-            <translation type="unfinished">Le départ, (ou le point de la prise de carte s'il ne s'agit pas du départ) est représenté par un triangle équilatéral qui pointe dans la direction du premier poste. Le centre de ce triangle montre la position exacte du point de départ.</translation>
+            <translation type="unfinished">Le départ, (ou le point de la prise de carte s&apos;il ne s&apos;agit pas du départ) est représenté par un triangle équilatéral qui pointe dans la direction du premier poste. Le centre de ce triangle montre la position exacte du point de départ.</translation>
         </message>
         <message>
             <source>Control point</source>
@@ -7046,7 +7013,7 @@ given without the dot.</source>
         <message>
             <source>The control points are shown with circles. The centre of the circle shows the precise position of the feature. Sections of circles should be omitted to leave important detail showing.</source>
             <comment>Description of symbol 702</comment>
-            <translation type="unfinished">Les postes de contrôle sont représentés par des cercles. Le centre du cercle doit indiquer la position exacte de l'élément. Des sections du cercle peuvent être éliminées à condition de ne masquer aucun détail important.</translation>
+            <translation type="unfinished">Les postes de contrôle sont représentés par des cercles. Le centre du cercle doit indiquer la position exacte de l&apos;élément. Des sections du cercle peuvent être éliminées à condition de ne masquer aucun détail important.</translation>
         </message>
         <message>
             <source>Control point with focus point (in MTBO maps)</source>
@@ -7066,7 +7033,7 @@ given without the dot.</source>
         <message>
             <source>The number of the control is placed close to the control point circle in such a way that it does not obscure important detail. The numbers are orientated to north.</source>
             <comment>Description of symbol 703</comment>
-            <translation type="unfinished">Le numéro du poste est placé à proximité du cercle, de telle manière qu'il ne masque aucun détail important. Ces numéros sont orientés vers le nord.</translation>
+            <translation type="unfinished">Le numéro du poste est placé à proximité du cercle, de telle manière qu&apos;il ne masque aucun détail important. Ces numéros sont orientés vers le nord.</translation>
         </message>
         <message>
             <source>Line</source>
@@ -7076,7 +7043,7 @@ given without the dot.</source>
         <message>
             <source>Where controls are to be visited in order, the start, control points and finish are joined together by straight lines. Sections of lines should be omitted to leave important detail showing.</source>
             <comment>Description of symbol 704</comment>
-            <translation type="unfinished">Lorsque les contrôles doivent être parcourus dans un ordre défini, le départ, les postes et l'arrivée sont réunis par des traits. Des sections de ligne peuvent être éliminées pour ne pas masquer des détails importants.</translation>
+            <translation type="unfinished">Lorsque les contrôles doivent être parcourus dans un ordre défini, le départ, les postes et l&apos;arrivée sont réunis par des traits. Des sections de ligne peuvent être éliminées pour ne pas masquer des détails importants.</translation>
         </message>
         <message>
             <source>Marked route</source>
@@ -7099,7 +7066,7 @@ to represent allowed routes that are marked in the terrain.</source>
         <message>
             <source>The finish is shown by two concentric circles.</source>
             <comment>Description of symbol 706</comment>
-            <translation type="unfinished">L'arrivée est représentée par deux cercles concentriques.</translation>
+            <translation type="unfinished">L&apos;arrivée est représentée par deux cercles concentriques.</translation>
         </message>
         <message>
             <source>Uncrossable boundary</source>
@@ -7107,7 +7074,7 @@ to represent allowed routes that are marked in the terrain.</source>
             <translation type="unfinished"></translation>
         </message>
         <message>
-            <source>Aboundary which it is not permitted to cross.</source>
+            <source>A boundary which it is not permitted to cross.</source>
             <comment>Description of symbol 707</comment>
             <translation type="unfinished"></translation>
         </message>
@@ -7158,7 +7125,7 @@ by using the perpendicular lines at the end of the zigzag lines.</source>
         <message>
             <source>The location of a first aid post.</source>
             <comment>Description of symbol 712</comment>
-            <translation type="unfinished">La position d'un poste de premiers soins.</translation>
+            <translation type="unfinished">La position d&apos;un poste de premiers soins.</translation>
         </message>
         <message>
             <source>Refreshment point</source>
@@ -7193,16 +7160,16 @@ by using the perpendicular lines at the end of the zigzag lines.</source>
         <message>
             <source>Simple Orienteering Course</source>
             <comment>Name of symbol 799</comment>
-            <translation type="unfinished">Simple course d'orientation</translation>
+            <translation type="unfinished">Simple course d&apos;orientation</translation>
         </message>
         <message>
             <source>This symbol provides a simple and quick way to make training courses.
 
 The purple line will extend a bit into the finish symbol. This is a shortcoming of this simple approach.</source>
             <comment>Description of symbol 799</comment>
-            <translation type="unfinished">Ce symbole fournit un moyen simple et rapide de créer des course d'entraînement.
+            <translation type="unfinished">Ce symbole fournit un moyen simple et rapide de créer des course d&apos;entraînement.
 
-Les lignes violettes sont légèrement prolongées dans le symbole d'arrivée. Ceci est un inconvénient de ce symbole.</translation>
+Les lignes violettes sont légèrement prolongées dans le symbole d&apos;arrivée. Ceci est un inconvénient de ce symbole.</translation>
         </message>
         <message>
             <source>OpenOrienteering Logo</source>
@@ -7222,7 +7189,7 @@ Les lignes violettes sont légèrement prolongées dans le symbole d'arrivée. C
         <message>
             <source>An intermediate contour line. Form lines are used where more information can be given about the shape of the ground. They are used only where representation is not possible with ordinary contours. Only one form line may be used between neighbouring contours.</source>
             <comment>Description of symbol 103</comment>
-            <translation type="unfinished">Courbe de niveau intermédiaire. Les courbes intermédiaires sont utilisées pour donner plus d'information sur la forme du terrain. Elles ne seront utilisées que si les courbes de niveau ne peuvent donner une bonne représentation du terrain. Une seule courbe intermédiaire peut être dessinée entre deux courbes de niveau.</translation>
+            <translation type="unfinished">Courbe de niveau intermédiaire. Les courbes intermédiaires sont utilisées pour donner plus d&apos;information sur la forme du terrain. Elles ne seront utilisées que si les courbes de niveau ne peuvent donner une bonne représentation du terrain. Une seule courbe intermédiaire peut être dessinée entre deux courbes de niveau.</translation>
         </message>
         <message>
             <source>Small earth wall</source>
@@ -7342,7 +7309,7 @@ Les lignes violettes sont légèrement prolongées dans le symbole d'arrivée. C
         <message>
             <source>Should be used if the direction of fall of the rock face is apparent from the contours and the legibility is good.</source>
             <comment>Description of symbol 203.1</comment>
-            <translation type="unfinished">Doit être utilisé si le sens de la pente est évident d'après les courbes de niveau.</translation>
+            <translation type="unfinished">Doit être utilisé si le sens de la pente est évident d&apos;après les courbes de niveau.</translation>
         </message>
         <message>
             <source>Passable rock face, no tags, minimum size</source>
@@ -7352,7 +7319,7 @@ Les lignes violettes sont légèrement prolongées dans le symbole d'arrivée. C
         <message>
             <source>Should be used if the direction of fall of the rock face is apparent from the contours and the legibility is good.</source>
             <comment>Description of symbol 203.1.1</comment>
-            <translation type="unfinished">Doit être utilisé si le sens de la pente est évident d'après les courbes de niveau.</translation>
+            <translation type="unfinished">Doit être utilisé si le sens de la pente est évident d&apos;après les courbes de niveau.</translation>
         </message>
         <message>
             <source>Passable rock face, no tags, rounded</source>
@@ -7447,7 +7414,7 @@ Les lignes violettes sont légèrement prolongées dans le symbole d'arrivée. C
         <message>
             <source>Waterhole</source>
             <comment>Name of symbol 303</comment>
-            <translation type="unfinished">Trou d'eau</translation>
+            <translation type="unfinished">Trou d&apos;eau</translation>
         </message>
         <message>
             <source>A water-filled pit or an area of water which is too small to be shown to scale. Location is the centre of gravity of the symbol, which is orientated to north.</source>
@@ -7843,7 +7810,7 @@ Note: if the stream is wider than 0.25mm, adjust this symbol so it extends 0.5mm
         <message>
             <source>North lines pattern</source>
             <comment>Name of symbol 601.1</comment>
-            <translation type="unfinished"></translation>
+            <translation>Lignes du nord magnétique</translation>
         </message>
         <message>
             <source>Out-of-bounds area, dashed boundary</source>
@@ -8037,7 +8004,7 @@ Note: if the stream is wider than 0.25mm, adjust this symbol so it extends 0.5mm
         <message>
             <source>An intermediate contour line. Form lines are used where more information can be given about the shape of the ground. They are used only where representation is not possible with ordinary contours. Only one form line may be used between neighbouring contours.</source>
             <comment>Description of symbol 103</comment>
-            <translation type="unfinished">Courbe de niveau intermédiaire. Les courbes intermédiaires sont utilisées pour donner plus d'information sur la forme du terrain. Elles ne seront utilisées que si les courbes de niveau ne peuvent donner une bonne représentation du terrain. Une seule courbe intermédiaire peut être dessinée entre deux courbes de niveau.</translation>
+            <translation type="unfinished">Courbe de niveau intermédiaire. Les courbes intermédiaires sont utilisées pour donner plus d&apos;information sur la forme du terrain. Elles ne seront utilisées que si les courbes de niveau ne peuvent donner une bonne représentation du terrain. Une seule courbe intermédiaire peut être dessinée entre deux courbes de niveau.</translation>
         </message>
         <message>
             <source>Slope line</source>
@@ -8057,7 +8024,7 @@ Note: if the stream is wider than 0.25mm, adjust this symbol so it extends 0.5mm
         <message>
             <source>Contour values may be included to aid assessment of large height differences. They are inserted in the index contours in positions where other detail is not obscured. The figures should be orientated so that the top of the figure is on the higher side of the contour.</source>
             <comment>Description of symbol 105</comment>
-            <translation type="unfinished">Les courbes de niveau peuvent être cotées pour faciliter l'évaluation de grandes différences de dénivelé. Elles sont insérées dans les courbes de niveau maîtresse, où elles ne dissimulent aucun détail. Les chiffres sont orientés avec leur sommet en amont de la pente.</translation>
+            <translation type="unfinished">Les courbes de niveau peuvent être cotées pour faciliter l&apos;évaluation de grandes différences de dénivelé. Elles sont insérées dans les courbes de niveau maîtresse, où elles ne dissimulent aucun détail. Les chiffres sont orientés avec leur sommet en amont de la pente.</translation>
         </message>
         <message>
             <source>Earth bank</source>
@@ -8107,7 +8074,7 @@ Note: if the stream is wider than 0.25mm, adjust this symbol so it extends 0.5mm
         <message>
             <source>Use this symbol to display the full extent of wide earth banks.</source>
             <comment>Description of symbol 106.2</comment>
-            <translation type="unfinished">Utiliser ce symbole pour représenter l'étendue de l'abrupt de terre.</translation>
+            <translation type="unfinished">Utiliser ce symbole pour représenter l&apos;étendue de l&apos;abrupt de terre.</translation>
         </message>
         <message>
             <source>Earth wall</source>
@@ -8135,7 +8102,7 @@ Note: if the stream is wider than 0.25mm, adjust this symbol so it extends 0.5mm
             <translation type="unfinished"></translation>
         </message>
         <message>
-            <source>An impassable cliff, quarry or earth bank (see 106) is shown with a 0.35 mm line and downward tags showing its full extent from the top line to the foot. For vertical rock faces the tags may be omitted if space is short, e.g. narrow passages between cliffs (the passage should be drawn with a width of at least 0.3 mm). The tags may extend over an area symbol representing detail immediately below the rock face. When a rock face drops straight into water making it impossible to pass under the cliff along the water's edge, the bank line is omitted or the tags should clearly extend over the bank line.</source>
+            <source>An impassable cliff, quarry or earth bank (see 106) is shown with a 0.35 mm line and downward tags showing its full extent from the top line to the foot. For vertical rock faces the tags may be omitted if space is short, e.g. narrow passages between cliffs (the passage should be drawn with a width of at least 0.3 mm). The tags may extend over an area symbol representing detail immediately below the rock face. When a rock face drops straight into water making it impossible to pass under the cliff along the water&apos;s edge, the bank line is omitted or the tags should clearly extend over the bank line.</source>
             <comment>Description of symbol 201</comment>
             <translation type="unfinished"></translation>
         </message>
@@ -8145,7 +8112,7 @@ Note: if the stream is wider than 0.25mm, adjust this symbol so it extends 0.5mm
             <translation type="unfinished"></translation>
         </message>
         <message>
-            <source>An impassable cliff, quarry or earth bank (see 106) is shown with a 0.35 mm line and downward tags showing its full extent from the top line to the foot. For vertical rock faces the tags may be omitted if space is short, e.g. narrow passages between cliffs (the passage should be drawn with a width of at least 0.3 mm). The tags may extend over an area symbol representing detail immediately below the rock face. When a rock face drops straight into water making it impossible to pass under the cliff along the water's edge, the bank line is omitted or the tags should clearly extend over the bank line.</source>
+            <source>An impassable cliff, quarry or earth bank (see 106) is shown with a 0.35 mm line and downward tags showing its full extent from the top line to the foot. For vertical rock faces the tags may be omitted if space is short, e.g. narrow passages between cliffs (the passage should be drawn with a width of at least 0.3 mm). The tags may extend over an area symbol representing detail immediately below the rock face. When a rock face drops straight into water making it impossible to pass under the cliff along the water&apos;s edge, the bank line is omitted or the tags should clearly extend over the bank line.</source>
             <comment>Description of symbol 201.0.1</comment>
             <translation type="unfinished"></translation>
         </message>
@@ -8157,7 +8124,7 @@ Note: if the stream is wider than 0.25mm, adjust this symbol so it extends 0.5mm
         <message>
             <source>For vertical rock faces the tags may be omitted if space is short, e.g. narrow passages between cliffs (the passage should be drawn with a width of at least 0.3 mm).</source>
             <comment>Description of symbol 201.1</comment>
-            <translation type="unfinished">Pour des faces verticales, les tirets peuvent être omis s'il n'y a pas assez de place, par ex. un passage étroit entre des falaises. (Les passages doivent être représentés par une largeur d'au moins 0.3 mm).</translation>
+            <translation type="unfinished">Pour des faces verticales, les tirets peuvent être omis s&apos;il n&apos;y a pas assez de place, par ex. un passage étroit entre des falaises. (Les passages doivent être représentés par une largeur d&apos;au moins 0.3 mm).</translation>
         </message>
         <message>
             <source>Impassable cliff, tag line</source>
@@ -8167,7 +8134,7 @@ Note: if the stream is wider than 0.25mm, adjust this symbol so it extends 0.5mm
         <message>
             <source>Use this symbol to display the full extent of a wide cliff.</source>
             <comment>Description of symbol 201.2</comment>
-            <translation type="unfinished">Utiliser ce symbole pour dessiner l'étendue d'une grande falaise.</translation>
+            <translation type="unfinished">Utiliser ce symbole pour dessiner l&apos;étendue d&apos;une grande falaise.</translation>
         </message>
         <message>
             <source>Rock pillars/cliffs</source>
@@ -8207,7 +8174,7 @@ Note: if the stream is wider than 0.25mm, adjust this symbol so it extends 0.5mm
         <message>
             <source>Should be used if the direction of fall of the rock face is apparent from the contours and the legibility is good.</source>
             <comment>Description of symbol 203.1</comment>
-            <translation type="unfinished">Doit être utilisé si le sens de la pente est évident d'après les courbes de niveau.</translation>
+            <translation type="unfinished">Doit être utilisé si le sens de la pente est évident d&apos;après les courbes de niveau.</translation>
         </message>
         <message>
             <source>Passable rock face, no tags, minimum size</source>
@@ -8217,7 +8184,7 @@ Note: if the stream is wider than 0.25mm, adjust this symbol so it extends 0.5mm
         <message>
             <source>Should be used if the direction of fall of the rock face is apparent from the contours and the legibility is good.</source>
             <comment>Description of symbol 203.1.1</comment>
-            <translation type="unfinished">Doit être utilisé si le sens de la pente est évident d'après les courbes de niveau.</translation>
+            <translation type="unfinished">Doit être utilisé si le sens de la pente est évident d&apos;après les courbes de niveau.</translation>
         </message>
         <message>
             <source>Passable rock face, no tags, rounded</source>
@@ -8764,8 +8731,7 @@ direction of planting. If yellow coloured areas becomes dominant, a screen (75%)
             <translation type="unfinished"></translation>
         </message>
         <message>
-            <source>Special man-made features are shown with these symbols. The definition of the
-symbols must be given in each case in the map legend.</source>
+            <source>Special man-made features are shown with these symbols. The definition of the symbols must be given in each case in the map legend.</source>
             <comment>Description of symbol 539</comment>
             <translation type="unfinished"></translation>
         </message>
@@ -8775,8 +8741,7 @@ symbols must be given in each case in the map legend.</source>
             <translation type="unfinished"></translation>
         </message>
         <message>
-            <source>Special man-made features are shown with these symbols. The definition of the
-symbols must be given in each case in the map legend.</source>
+            <source>Special man-made features are shown with these symbols. The definition of the symbols must be given in each case in the map legend.</source>
             <comment>Description of symbol 540</comment>
             <translation type="unfinished"></translation>
         </message>
@@ -8793,7 +8758,7 @@ symbols must be given in each case in the map legend.</source>
         <message>
             <source>North lines pattern</source>
             <comment>Name of symbol 601.1</comment>
-            <translation type="unfinished"></translation>
+            <translation>Lignes du nord magnétique</translation>
         </message>
         <message>
             <source>Magnetic north line, blue</source>
@@ -8823,13 +8788,12 @@ symbols must be given in each case in the map legend.</source>
         <message>
             <source>Spot height, dot</source>
             <comment>Name of symbol 603.0</comment>
-            <translation type="unfinished">Point d'altitude, point</translation>
+            <translation type="unfinished">Point d&apos;altitude, point</translation>
         </message>
         <message>
-            <source>Spot heights are used for the rough assessment of height differences. The height is given to the nearest metre. The figures are orientated to the north. Water levels are
-given without the dot.</source>
+            <source>Spot heights are used for the rough assessment of height differences. The height is given to the nearest metre. The figures are orientated to the north. Water levels are given without the dot.</source>
             <comment>Description of symbol 603.0</comment>
-            <translation type="unfinished"></translation>
+            <translation type="unfinished">Les points d&apos;altitude sont utilisés pour l&apos;estimation des différences d&apos;altitude. Celle-ci est arrondie au mètre. Les chiffres sont orientés vers le nord. Les niveaux d&apos;eau sont représentés sans le point.</translation>
         </message>
         <message>
             <source>Spot height, text</source>
@@ -8839,7 +8803,7 @@ given without the dot.</source>
         <message>
             <source>Spot heights are used for the rough assessment of height differences. The height is given to the nearest metre. The figures are orientated to the north. Water levels are given without the dot.</source>
             <comment>Description of symbol 603.1</comment>
-            <translation type="unfinished">Les points d'altitude sont utilisés pour l'estimation des différences d'altitude. Celle-ci est arrondie au mètre. Les chiffres sont orientés vers le nord. Les niveaux d'eau sont représentés sans le point.</translation>
+            <translation type="unfinished">Les points d&apos;altitude sont utilisés pour l&apos;estimation des différences d&apos;altitude. Celle-ci est arrondie au mètre. Les chiffres sont orientés vers le nord. Les niveaux d&apos;eau sont représentés sans le point.</translation>
         </message>
         <message>
             <source>Very wide track &gt; 3m</source>
@@ -9027,7 +8991,7 @@ that it is more clearly visible in the track network.</source>
         <message>
             <source>The start or map issue point (if not at the start) is shown by an equilateral triangle which points in the direction of the first control. The centre of the triangle shows the precise position of the start point.</source>
             <comment>Description of symbol 701</comment>
-            <translation type="unfinished">Le départ, (ou le point de la prise de carte s'il ne s'agit pas du départ) est représenté par un triangle équilatéral qui pointe dans la direction du premier poste. Le centre de ce triangle montre la position exacte du point de départ.</translation>
+            <translation type="unfinished">Le départ, (ou le point de la prise de carte s&apos;il ne s&apos;agit pas du départ) est représenté par un triangle équilatéral qui pointe dans la direction du premier poste. Le centre de ce triangle montre la position exacte du point de départ.</translation>
         </message>
         <message>
             <source>Control point</source>
@@ -9037,7 +9001,7 @@ that it is more clearly visible in the track network.</source>
         <message>
             <source>The control points are shown with circles. The centre of the circle shows the precise position of the feature. Sections of circles should be omitted to leave important detail showing.</source>
             <comment>Description of symbol 702</comment>
-            <translation type="unfinished">Les postes de contrôle sont représentés par des cercles. Le centre du cercle doit indiquer la position exacte de l'élément. Des sections du cercle peuvent être éliminées à condition de ne masquer aucun détail important.</translation>
+            <translation type="unfinished">Les postes de contrôle sont représentés par des cercles. Le centre du cercle doit indiquer la position exacte de l&apos;élément. Des sections du cercle peuvent être éliminées à condition de ne masquer aucun détail important.</translation>
         </message>
         <message>
             <source>Control point and focus point</source>
@@ -9057,7 +9021,7 @@ that it is more clearly visible in the track network.</source>
         <message>
             <source>The number of the control is placed close to the control point circle in such a way that it does not obscure important detail. The numbers are orientated to north.</source>
             <comment>Description of symbol 703</comment>
-            <translation type="unfinished">Le numéro du poste est placé à proximité du cercle, de telle manière qu'il ne masque aucun détail important. Ces numéros sont orientés vers le nord.</translation>
+            <translation type="unfinished">Le numéro du poste est placé à proximité du cercle, de telle manière qu&apos;il ne masque aucun détail important. Ces numéros sont orientés vers le nord.</translation>
         </message>
         <message>
             <source>Line</source>
@@ -9067,7 +9031,7 @@ that it is more clearly visible in the track network.</source>
         <message>
             <source>Where controls are to be visited in order, the start, control points and finish are joined together by straight lines. Sections of lines should be omitted to leave important detail showing.</source>
             <comment>Description of symbol 704</comment>
-            <translation type="unfinished">Lorsque les contrôles doivent être parcourus dans un ordre défini, le départ, les postes et l'arrivée sont réunis par des traits. Des sections de ligne peuvent être éliminées pour ne pas masquer des détails importants.</translation>
+            <translation type="unfinished">Lorsque les contrôles doivent être parcourus dans un ordre défini, le départ, les postes et l&apos;arrivée sont réunis par des traits. Des sections de ligne peuvent être éliminées pour ne pas masquer des détails importants.</translation>
         </message>
         <message>
             <source>Marked route</source>
@@ -9087,7 +9051,7 @@ that it is more clearly visible in the track network.</source>
         <message>
             <source>The finish is shown by two concentric circles.</source>
             <comment>Description of symbol 706</comment>
-            <translation type="unfinished">L'arrivée est représentée par deux cercles concentriques.</translation>
+            <translation type="unfinished">L&apos;arrivée est représentée par deux cercles concentriques.</translation>
         </message>
         <message>
             <source>Uncrossable boundary</source>
@@ -9095,7 +9059,7 @@ that it is more clearly visible in the track network.</source>
             <translation type="unfinished"></translation>
         </message>
         <message>
-            <source>Aboundary which it is not permitted to cross.</source>
+            <source>A boundary which it is not permitted to cross.</source>
             <comment>Description of symbol 707</comment>
             <translation type="unfinished"></translation>
         </message>
@@ -9172,7 +9136,7 @@ A bounding line may be drawn if there is no natural boundary, as follows:
         <message>
             <source>The location of a first aid post.</source>
             <comment>Description of symbol 712</comment>
-            <translation type="unfinished">La position d'un poste de premiers soins.</translation>
+            <translation type="unfinished">La position d&apos;un poste de premiers soins.</translation>
         </message>
         <message>
             <source>Refreshment point</source>
@@ -9187,16 +9151,16 @@ A bounding line may be drawn if there is no natural boundary, as follows:
         <message>
             <source>Simple Orienteering Course</source>
             <comment>Name of symbol 799</comment>
-            <translation type="unfinished">Simple course d'orientation</translation>
+            <translation type="unfinished">Simple course d&apos;orientation</translation>
         </message>
         <message>
             <source>This symbol provides a simple and quick way to make training courses.
 
 The purple line will extend a bit into the finish symbol. This is a shortcoming of this simple approach.</source>
             <comment>Description of symbol 799</comment>
-            <translation type="unfinished">Ce symbole fournit un moyen simple et rapide de créer des course d'entraînement.
+            <translation type="unfinished">Ce symbole fournit un moyen simple et rapide de créer des course d&apos;entraînement.
 
-Les lignes violettes sont légèrement prolongées dans le symbole d'arrivée. Ceci est un inconvénient de ce symbole.</translation>
+Les lignes violettes sont légèrement prolongées dans le symbole d&apos;arrivée. Ceci est un inconvénient de ce symbole.</translation>
         </message>
         <message>
             <source>OpenOrienteering Logo</source>
@@ -9364,14 +9328,14 @@ Les lignes violettes sont légèrement prolongées dans le symbole d'arrivée. C
             <translation type="unfinished"></translation>
         </message>
         <message>
-            <source>Where the lake or pond is smaller than 1mm² on the printed map, the bank line is omitted.</source>
+            <source>Where the lake or pond is smaller than 1 mm² on the printed map, the bank line is omitted.</source>
             <comment>Description of symbol 302</comment>
             <translation type="unfinished"></translation>
         </message>
         <message>
             <source>Waterhole</source>
             <comment>Name of symbol 303</comment>
-            <translation type="unfinished">Trou d'eau</translation>
+            <translation type="unfinished">Trou d&apos;eau</translation>
         </message>
         <message>
             <source>A water-filled pit or an area of water which is too small to be shown to scale. Location is the centre of gravity of the symbol, which is orientated to north.</source>
@@ -9386,7 +9350,7 @@ Les lignes violettes sont légèrement prolongées dans le symbole d'arrivée. C
         <message>
             <source>A natural or man-made minor water channel which may contain water only intermittently.</source>
             <comment>Description of symbol 307</comment>
-            <translation type="unfinished">Cours d'eau naturel ou creusé qui peut ne contenir de l'eau que par intermittence.</translation>
+            <translation type="unfinished">Cours d&apos;eau naturel ou creusé qui peut ne contenir de l&apos;eau que par intermittence.</translation>
         </message>
         <message>
             <source>Forest: difficult to run</source>
@@ -9439,7 +9403,7 @@ Les lignes violettes sont légèrement prolongées dans le symbole d'arrivée. C
             <translation type="unfinished">Marais</translation>
         </message>
         <message>
-            <source>A crossable marsh, usually with a distinct edge. The symbol should be combined with vegetation symbols to show runnability and openness. Where a small marsh area should be combined with either 403/404 it is permitted to use 401/402 to improve legibility</source>
+            <source>A crossable marsh, usually with a distinct edge. The symbol should be combined with vegetation symbols to show runnability and openness. Where a small marsh area should be combined with either 403/404 it is permitted to use 401/402 to improve legibility.</source>
             <comment>Description of symbol 310</comment>
             <translation type="unfinished"></translation>
         </message>
@@ -9800,16 +9764,16 @@ Note: if the stream is wider than 0.25mm, adjust this symbol so it extends 0.5mm
         <message>
             <source>Simple Orienteering Course</source>
             <comment>Name of symbol 799</comment>
-            <translation type="unfinished">Simple course d'orientation</translation>
+            <translation type="unfinished">Simple course d&apos;orientation</translation>
         </message>
         <message>
             <source>This symbol provides a simple and quick way to make training courses.
 
 The purple line will extend a bit into the finish symbol. This is a shortcoming of this simple approach.</source>
             <comment>Description of symbol 799</comment>
-            <translation type="unfinished">Ce symbole fournit un moyen simple et rapide de créer des course d'entraînement.
+            <translation type="unfinished">Ce symbole fournit un moyen simple et rapide de créer des course d&apos;entraînement.
 
-Les lignes violettes sont légèrement prolongées dans le symbole d'arrivée. Ceci est un inconvénient de ce symbole.</translation>
+Les lignes violettes sont légèrement prolongées dans le symbole d&apos;arrivée. Ceci est un inconvénient de ce symbole.</translation>
         </message>
         <message>
             <source>Start</source>
@@ -9819,7 +9783,7 @@ Les lignes violettes sont légèrement prolongées dans le symbole d'arrivée. C
         <message>
             <source>The start or map issue point (if not at the start) is shown by an equilateral triangle which points in the direction of the first control. The centre of the triangle shows the precise position of the start point.</source>
             <comment>Description of symbol 701</comment>
-            <translation type="unfinished">Le départ, (ou le point de la prise de carte s'il ne s'agit pas du départ) est représenté par un triangle équilatéral qui pointe dans la direction du premier poste. Le centre de ce triangle montre la position exacte du point de départ.</translation>
+            <translation type="unfinished">Le départ, (ou le point de la prise de carte s&apos;il ne s&apos;agit pas du départ) est représenté par un triangle équilatéral qui pointe dans la direction du premier poste. Le centre de ce triangle montre la position exacte du point de départ.</translation>
         </message>
         <message>
             <source>Control point</source>
@@ -9829,7 +9793,7 @@ Les lignes violettes sont légèrement prolongées dans le symbole d'arrivée. C
         <message>
             <source>The control points are shown with circles. The centre of the circle shows the precise position of the feature. Sections of circles should be omitted to leave important detail showing.</source>
             <comment>Description of symbol 702</comment>
-            <translation type="unfinished">Les postes de contrôle sont représentés par des cercles. Le centre du cercle doit indiquer la position exacte de l'élément. Des sections du cercle peuvent être éliminées à condition de ne masquer aucun détail important.</translation>
+            <translation type="unfinished">Les postes de contrôle sont représentés par des cercles. Le centre du cercle doit indiquer la position exacte de l&apos;élément. Des sections du cercle peuvent être éliminées à condition de ne masquer aucun détail important.</translation>
         </message>
         <message>
             <source>Control number</source>
@@ -9839,7 +9803,7 @@ Les lignes violettes sont légèrement prolongées dans le symbole d'arrivée. C
         <message>
             <source>The number of the control is placed close to the control point circle in such a way that it does not obscure important detail. The numbers are orientated to north.</source>
             <comment>Description of symbol 703</comment>
-            <translation type="unfinished">Le numéro du poste est placé à proximité du cercle, de telle manière qu'il ne masque aucun détail important. Ces numéros sont orientés vers le nord.</translation>
+            <translation type="unfinished">Le numéro du poste est placé à proximité du cercle, de telle manière qu&apos;il ne masque aucun détail important. Ces numéros sont orientés vers le nord.</translation>
         </message>
         <message>
             <source>Line</source>
@@ -9849,7 +9813,7 @@ Les lignes violettes sont légèrement prolongées dans le symbole d'arrivée. C
         <message>
             <source>Where controls are to be visited in order, the start, control points and finish are joined together by straight lines. Sections of lines should be omitted to leave important detail showing.</source>
             <comment>Description of symbol 704</comment>
-            <translation type="unfinished">Lorsque les contrôles doivent être parcourus dans un ordre défini, le départ, les postes et l'arrivée sont réunis par des traits. Des sections de ligne peuvent être éliminées pour ne pas masquer des détails importants.</translation>
+            <translation type="unfinished">Lorsque les contrôles doivent être parcourus dans un ordre défini, le départ, les postes et l&apos;arrivée sont réunis par des traits. Des sections de ligne peuvent être éliminées pour ne pas masquer des détails importants.</translation>
         </message>
         <message>
             <source>Marked route</source>
@@ -9869,7 +9833,7 @@ Les lignes violettes sont légèrement prolongées dans le symbole d'arrivée. C
         <message>
             <source>The finish is shown by two concentric circles.</source>
             <comment>Description of symbol 706</comment>
-            <translation type="unfinished">L'arrivée est représentée par deux cercles concentriques.</translation>
+            <translation type="unfinished">L&apos;arrivée est représentée par deux cercles concentriques.</translation>
         </message>
         <message>
             <source>Uncrossable boundary</source>
@@ -9877,7 +9841,7 @@ Les lignes violettes sont légèrement prolongées dans le symbole d'arrivée. C
             <translation type="unfinished"></translation>
         </message>
         <message>
-            <source>Aboundary which it is not permitted to cross.</source>
+            <source>A boundary which it is not permitted to cross.</source>
             <comment>Description of symbol 707</comment>
             <translation type="unfinished"></translation>
         </message>
@@ -9954,7 +9918,7 @@ A bounding line may be drawn if there is no natural boundary, as follows:
         <message>
             <source>The location of a first aid post.</source>
             <comment>Description of symbol 712</comment>
-            <translation type="unfinished">La position d'un poste de premiers soins.</translation>
+            <translation type="unfinished">La position d&apos;un poste de premiers soins.</translation>
         </message>
         <message>
             <source>Refreshment point</source>
@@ -10014,8 +9978,7 @@ D: Control feature
 E: Appearance
 F: Dimensions, combinations
 G: Location of the control flag
-H: Other information
-</source>
+H: Other information</source>
             <comment>Description of symbol 99.3</comment>
             <translation type="unfinished"></translation>
         </message>
@@ -11084,8 +11047,7 @@ The default line shows a box of 5 mm by 5mm and can be removed from the final sy
             <translation type="unfinished"></translation>
         </message>
         <message>
-            <source>Where the feature is in an area of sandy ground not indicated on the map; e.g. Spur, sandy.
-</source>
+            <source>Where the feature is in an area of sandy ground not indicated on the map; e.g. Spur, sandy.</source>
             <comment>Description of symbol 8.8</comment>
             <translation type="unfinished"></translation>
         </message>
@@ -11455,8 +11417,7 @@ b) The feature extends over a significant area and the control is situated on th
             <source>Used where:
 a) The edge of a feature turns through an angle of 45-135 degrees; e.g. Open land, east corner (inside).
 b) A linear feature turns a corner; e.g. Fence, south corner (inside).
-The orientation of the symbol indicates the direction in which the corner points.
-</source>
+The orientation of the symbol indicates the direction in which the corner points.</source>
             <comment>Description of symbol 11.4.1</comment>
             <translation type="unfinished"></translation>
         </message>
@@ -12046,8 +12007,7 @@ The orientation of the symbol indicates the direction in which the corner points
             <translation type="unfinished"></translation>
         </message>
         <message>
-            <source>Taped Route from Control to
-Map Exchange</source>
+            <source>Taped Route from Control to Map Exchange</source>
             <comment>Name of symbol 13.5</comment>
             <translation type="unfinished"></translation>
         </message>

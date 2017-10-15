@@ -19,14 +19,28 @@
  */
 
 
-#ifndef _OPENORIENTEERING_TOOL_FILL_H_
-#define _OPENORIENTEERING_TOOL_FILL_H_
+#ifndef OPENORIENTEERING_FILL_TOOL_H
+#define OPENORIENTEERING_FILL_TOOL_H
+
+#include <vector>
+
+#include <QImage>
+#include <QObject>
+// IWYU pragma: no_include <QRectF>
+#include <QTransform>
 
 #include "tool_base.h"
 
-class MapView;
+class QAction;
+class QPainter;
+class QPoint;
+class QRectF;
+
+class Map;
+class MapEditorController;
 class PathObject;
 class RenderConfig;
+class Symbol;
 
 /** 
  * Tool to fill bounded areas with PathObjects.
@@ -36,7 +50,7 @@ class FillTool : public MapEditorToolBase
 Q_OBJECT
 public:
 	FillTool(MapEditorController* editor, QAction* tool_action);
-	virtual ~FillTool();
+	~FillTool() override;
 	
 protected slots:
 	void setDrawingSymbol(const Symbol* symbol);
@@ -54,10 +68,10 @@ protected:
 		float end_clen;
 	};
 	
-	virtual void updateStatusText();
-	virtual void objectSelectionChangedImpl();
+	void updateStatusText() override;
+	void objectSelectionChangedImpl() override;
 	
-	virtual void clickPress();
+	void clickPress() override;
 	
 	/**
 	 * Tries to apply the fill tool at the current click position,
@@ -88,13 +102,13 @@ protected:
 	 *  0 if the tracing fails because the start is not included in the shape,
 	 *  1 if the tracing succeeds.
 	 */
-	int traceBoundary(QImage image, QPoint start_pixel, QPoint test_pixel, std::vector< QPoint >& out_boundary);
+	int traceBoundary(const QImage& image, QPoint start_pixel, QPoint test_pixel, std::vector<QPoint>& out_boundary);
 	
 	/**
 	 * Creates a fill object for the given image, boundary vector (of pixel positions) and transform.
 	 * Returns false if the creation fails.
 	 */
-	bool fillBoundary(const QImage& image, const std::vector< QPoint >& boundary, QTransform image_to_map);
+	bool fillBoundary(const QImage& image, const std::vector<QPoint>& boundary, const QTransform& image_to_map);
 	
 	const Symbol* drawing_symbol;
 };

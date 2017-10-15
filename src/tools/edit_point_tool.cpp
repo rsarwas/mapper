@@ -26,28 +26,23 @@
 #include <QKeyEvent>
 #include <QMouseEvent>
 #include <QPainter>
-#include <QScopedValueRollback>
 
 #include "settings.h"
 #include "core/map.h"
 #include "core/objects/object.h"
+#include "core/objects/object_mover.h"
 #include "core/objects/text_object.h"
 #include "core/symbols/line_symbol.h"
-#include "core/symbols/text_symbol.h"
-#include "core/renderables/renderable.h"
 #include "core/symbols/symbol.h"
-#include "gui/main_window.h"
 #include "gui/modifier_key.h"
 #include "gui/map/map_editor.h"
 #include "gui/map/map_widget.h"
 #include "gui/widgets/key_button_bar.h"
+#include "tools/object_selector.h"
 #include "tools/tool_helpers.h"
-#include "tools/draw_text_tool.h"
 #include "tools/text_object_editor_helper.h"
 #include "undo/object_undo.h"
 #include "util/util.h"
-
-class SymbolWidget;
 
 
 namespace
@@ -168,7 +163,7 @@ void EditPointTool::clickPress()
 		PathCoord path_coord;
 		path->calcClosestPointOnPath(cur_pos_map, distance_sq, path_coord);
 		
-		float click_tolerance_map_sq = cur_map_widget->getMapView()->pixelToLength(clickTolerance());
+		auto click_tolerance_map_sq = cur_map_widget->getMapView()->pixelToLength(clickTolerance());
 		click_tolerance_map_sq = click_tolerance_map_sq * click_tolerance_map_sq;
 		
 		if (distance_sq <= click_tolerance_map_sq)
@@ -350,7 +345,7 @@ void EditPointTool::dragMove()
 			handle_offset = MapCoordF(0, 0);
 		}
 		
-		object_mover->move(constrained_pos_map, !(active_modifiers & Qt::ShiftModifier));
+		object_mover->move(constrained_pos_map, moveOppositeHandle());
 		updatePreviewObjectsAsynchronously();
 	}
 	else if (box_selection)
@@ -490,7 +485,7 @@ bool EditPointTool::inputMethodEvent(QInputMethodEvent* event)
 	return MapEditorTool::inputMethodEvent(event);
 }
 
-QVariant EditPointTool::inputMethodQuery(Qt::InputMethodQuery property, QVariant argument) const
+QVariant EditPointTool::inputMethodQuery(Qt::InputMethodQuery property, const QVariant& argument) const
 {
 	auto result = QVariant { };
 	if (text_editor)
@@ -551,8 +546,8 @@ int EditPointTool::updateDirtyRectImpl(QRectF& rect)
 	// Control points
 	if (show_object_points)
 	{
-		for (Map::ObjectSelection::const_iterator it = map()->selectedObjectsBegin(), end = map()->selectedObjectsEnd(); it != end; ++it)
-			(*it)->includeControlPointsRect(rect);
+		for (auto object : map()->selectedObjects())
+			object->includeControlPointsRect(rect);
 	}
 	
 	// Text selection
@@ -574,7 +569,7 @@ void EditPointTool::drawImpl(QPainter* painter, MapWidget* widget)
 	auto num_selected_objects = map()->selectedObjects().size();
 	if (num_selected_objects > 0)
 	{
-		drawSelectionOrPreviewObjects(painter, widget, text_editor != nullptr);
+		drawSelectionOrPreviewObjects(painter, widget, bool(text_editor));
 		
 		if (!text_editor)
 		{
@@ -688,9 +683,9 @@ void EditPointTool::updateStatusText()
 	{
 		MapCoordF drag_vector = constrained_pos_map - click_pos_map;
 		text = EditTool::tr("<b>Coordinate offset:</b> %1, %2 mm  <b>Distance:</b> %3 m ").
-		       arg(QLocale().toString(drag_vector.x(), 'f', 1)).
-		       arg(QLocale().toString(-drag_vector.y(), 'f', 1)).
-		       arg(QLocale().toString(0.001 * map()->getScaleDenominator() * drag_vector.length(), 'f', 1)) +
+		       arg(QLocale().toString(drag_vector.x(), 'f', 1),
+		           QLocale().toString(-drag_vector.y(), 'f', 1),
+		           QLocale().toString(0.001 * map()->getScaleDenominator() * drag_vector.length(), 'f', 1)) +
 		       QLatin1String("| ");
 		
 		if (!angle_helper->isActive())
@@ -828,7 +823,7 @@ void EditPointTool::updateHoverState(MapCoordF cursor_pos)
 		updateDirtyRect();
 	}
 	
-	Q_ASSERT((hover_state.testFlag(OverObjectNode) || hover_state.testFlag(OverPathEdge)) == (hover_object != nullptr));
+	Q_ASSERT((hover_state.testFlag(OverObjectNode) || hover_state.testFlag(OverPathEdge)) == bool(hover_object));
 }
 
 void EditPointTool::setupAngleHelperFromHoverObject()
@@ -915,4 +910,11 @@ bool EditPointTool::hoveringOverCurveHandle() const
 	return hover_state == OverObjectNode
 	       && hover_object->getType() == Object::Path
 	       && hover_object->asPath()->isCurveHandle(hover_point);
+}
+
+
+bool EditPointTool::moveOppositeHandle() const
+{
+	return !(active_modifiers & Qt::ShiftModifier)
+	       && hoveringOverCurveHandle();
 }

@@ -26,10 +26,11 @@
 #include <memory>
 // IWYU pragma: no_include <ext/alloc_traits.h>
 
+#include <QtGlobal>
 #include <QCoreApplication>
 #include <QFont>
 #include <QIODevice>
-#include <QLatin1Char>
+#include <QLatin1String>
 #include <QPointF>
 #include <QRectF>
 #include <QStringRef>
@@ -41,7 +42,6 @@
 #include "core/map.h"
 #include "core/map_color.h"
 #include "core/map_coord.h"
-#include "core/map_part.h"
 #include "core/objects/object.h"
 #include "core/objects/text_object.h"
 #include "core/renderables/renderable.h"
@@ -53,8 +53,6 @@
 #include "core/virtual_path.h"
 #include "util/util.h"
 
-
-const float TextSymbol::internal_point_size = 256;
 
 TextSymbol::TextSymbol()
 : Symbol(Symbol::Text)
@@ -286,7 +284,7 @@ const MapColor* TextSymbol::guessDominantColor() const
 
 void TextSymbol::scale(double factor)
 {
-	font_size = qRound(factor * font_size);
+	font_size = qMax(10, qRound(factor * font_size)); // minimum 0.01 mm
 	framing_line_half_width = qRound(factor * framing_line_half_width);
 	framing_shadow_x_offset = qRound(factor * framing_shadow_x_offset);
 	framing_shadow_y_offset = qRound(factor * framing_shadow_y_offset);
@@ -307,7 +305,7 @@ void TextSymbol::updateQFont()
 	qfont.setHintingPreference(QFont::PreferNoHinting);
 	qfont.setKerning(kerning);
 	metrics = QFontMetricsF(qfont);
-	qfont.setLetterSpacing(QFont::AbsoluteSpacing, metrics.width(QString(QLatin1Char{' '})) * character_spacing);
+	qfont.setLetterSpacing(QFont::AbsoluteSpacing, metrics.width(QString(QLatin1String{" "})) * character_spacing);
 	
 	qfont.setStyleStrategy(QFont::ForceOutline);
 

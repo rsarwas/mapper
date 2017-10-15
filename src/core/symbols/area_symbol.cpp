@@ -28,13 +28,13 @@
 
 #include <QtMath>
 #include <QIODevice>
+#include <QLatin1String>
 #include <QStringRef>
 #include <QXmlStreamReader> // IWYU pragma: keep
 
 #include "core/map.h"
 #include "core/map_color.h"
 #include "core/map_coord.h"
-#include "core/map_part.h"
 #include "core/objects/object.h"
 #include "core/renderables/renderable.h"
 #include "core/renderables/renderable_implementation.h"
@@ -199,8 +199,7 @@ bool AreaSymbol::FillPattern::equals(const AreaSymbol::FillPattern& other, Qt::C
 			return false;
 		if (point_distance != other.point_distance)
 			return false;
-		if ((point == nullptr && other.point != nullptr) ||
-		    (point != nullptr && other.point == nullptr))
+		if (bool(point) != bool(other.point))
 			return false;
 		if (point && !point->equals(other.point, case_sensitivity))
 			return false;
@@ -322,7 +321,7 @@ void AreaSymbol::FillPattern::createRenderables(
         const AreaRenderable& outline,
         float delta_rotation,
         const MapCoord& pattern_origin,
-        QRectF point_extent,
+        const QRectF& point_extent,
         LineSymbol* line,
         qreal rotation,
         ObjectRenderables& output ) const
@@ -701,7 +700,7 @@ void AreaSymbol::createHatchingRenderables(
 			{
 				const AreaSymbol::FillPattern& orig_pattern = orig_symbol->getFillPattern(0);
 				pattern.angle = orig_pattern.angle;
-				pattern.flags = orig_pattern.flags;
+				pattern.flags = orig_pattern.flags & ~FillPattern::AlternativeToClipping;
 				if (orig_pattern.type == AreaSymbol::FillPattern::LinePattern)
 				{
 					pattern.line_spacing = std::max(1000, orig_pattern.line_spacing);

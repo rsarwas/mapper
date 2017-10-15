@@ -31,11 +31,9 @@
 #include <QRgb>
 #include <QString>
 
-QT_BEGIN_NAMESPACE
 class QIODevice;
 class QXmlStreamReader;
 class QXmlStreamWriter;
-QT_END_NAMESPACE
 
 class AreaSymbol;
 class CombinedSymbol;
@@ -99,8 +97,16 @@ public:
 	
 	/** Constructs an empty symbol */
 	Symbol(Type type) noexcept;
+	
+	Symbol(const Symbol&) = delete;
+	Symbol(Symbol&&) = delete;
+	
 	virtual ~Symbol();
+	
 	virtual Symbol* duplicate(const MapColorMap* color_map = nullptr) const = 0;
+	
+	Symbol& operator=(const Symbol&) = delete;
+	Symbol& operator=(Symbol&&) = delete;
 	
 	virtual bool validate() const;
 	
@@ -243,7 +249,7 @@ public:
 	/**
 	 * Called by the map in which the symbol is to notify it of a symbol being
 	 * changed (pointer becomes invalid).
-	 * If new_symbol == nullptr, the symbol is being deleted.
+	 * If !new_symbol, the symbol is being deleted.
 	 * Must return true if this symbol contained the deleted symbol.
 	 */
 	virtual bool symbolChanged(const Symbol* old_symbol, const Symbol* new_symbol);

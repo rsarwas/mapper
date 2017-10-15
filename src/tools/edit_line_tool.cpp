@@ -21,29 +21,26 @@
 
 #include "edit_line_tool.h"
 
-#include <algorithm>
 #include <limits>
 
 #include <QKeyEvent>
 
+#include "settings.h"
 #include "core/map.h"
-#include "undo/object_undo.h"
-#include "gui/map/map_widget.h"
 #include "core/objects/object.h"
+#include "core/objects/object_mover.h"
 #include "core/objects/text_object.h"
 #include "core/renderables/renderable.h"
 #include "core/symbols/combined_symbol.h"
-#include "core/symbols/line_symbol.h"
-#include "settings.h"
 #include "core/symbols/symbol.h"
-#include "tool_helpers.h"
-#include "util/util.h"
-#include "gui/map/map_editor.h"
-#include "gui/main_window.h"
 #include "gui/modifier_key.h"
+#include "gui/map/map_editor.h"
+#include "gui/map/map_widget.h"
 #include "gui/widgets/key_button_bar.h"
+#include "tools/object_selector.h"
+#include "tools/tool_helpers.h"
+#include "util/util.h"
 
-class SymbolWidget;
 
 namespace
 {
@@ -213,8 +210,8 @@ void EditLineTool::dragStart()
 		object_mover.reset(new ObjectMover(map, click_pos_map));
 		if (hoveringOverFrame())
 		{
-			for (Map::ObjectSelection::const_iterator it = map->selectedObjectsBegin(), it_end = map->selectedObjectsEnd(); it != it_end; ++it)
-				object_mover->addObject(*it);
+			for (auto object : map->selectedObjects())
+				object_mover->addObject(object);
 		}
 		else
 		{
@@ -276,7 +273,7 @@ void EditLineTool::dragMove()
 		}
 		
 		qint32 dx, dy;
-		object_mover->move(constrained_pos_map, !(active_modifiers & Qt::ShiftModifier), &dx, &dy);
+		object_mover->move(constrained_pos_map, false, &dx, &dy);
 		if (highlight_object)
 		{
 			highlight_renderables->removeRenderablesOfObject(highlight_object, false);
@@ -424,8 +421,8 @@ int EditLineTool::updateDirtyRectImpl(QRectF& rect)
 	// Control points
 	if (show_object_points)
 	{
-		for (Map::ObjectSelection::const_iterator it = map()->selectedObjectsBegin(), end = map()->selectedObjectsEnd(); it != end; ++it)
-			(*it)->includeControlPointsRect(rect);
+		for (auto object : map()->selectedObjects())
+			object->includeControlPointsRect(rect);
 	}
 	
 	// Box selection

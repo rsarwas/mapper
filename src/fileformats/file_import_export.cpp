@@ -21,30 +21,37 @@
 
 #include "file_import_export.h"
 
-#include <QFileInfo>
+#include <QLatin1Char>
 
 #include "core/map.h"
-#include "core/symbols/symbol.h"
-#include "../templates/template.h"
+#include "core/map_part.h"
+#include "core/map_view.h"
 #include "core/objects/object.h"
 #include "core/symbols/line_symbol.h"
 #include "core/symbols/point_symbol.h"
+#include "core/symbols/symbol.h"
+#include "fileformats/file_format.h"
+#include "templates/template.h"
 
 
 // ### ImportExport ###
 
-ImportExport::~ImportExport()
+ImportExport::~ImportExport() = default;
+
+
+QVariant ImportExport::option(const QString& name) const
 {
-	// Nothing, not inlined
+	if (!options.contains(name))
+		throw FileFormatException(ImportExport::tr("No such option: %1", "No such import / export option").arg(name));
+	return options[name];
 }
+
 
 
 // ### Importer ###
 
-Importer::~Importer()
-{
-	// Nothing, not inlined
-}
+Importer::~Importer() = default;
+
 
 void Importer::doImport(bool load_symbols_only, const QString& map_path)
 {
@@ -60,7 +67,7 @@ void Importer::doImport(bool load_symbols_only, const QString& map_path)
 		for (int o = 0; o < part->getNumObjects(); ++o)
 		{
 			Object* object = part->getObject(o);
-			if (object->getSymbol() == NULL)
+			if (object->getSymbol() == nullptr)
 			{
 				addWarning(Importer::tr("Found an object without symbol."));
 				if (object->getType() == Object::Point)
@@ -105,27 +112,39 @@ void Importer::doImport(bool load_symbols_only, const QString& map_path)
 	for (int i = 0; i < map->getNumTemplates(); ++i)
 	{
 		Template* temp = map->getTemplate(i);
-		
-		bool loaded_from_template_dir = false;
-		temp->tryToFindAndReloadTemplateFile(map_path, &loaded_from_template_dir);
-		
-		if (loaded_from_template_dir)
-		{
-			addWarning(Importer::tr("Template \"%1\" has been loaded from the map's directory instead of the relative location to the map file where it was previously.").arg(temp->getTemplateFilename()));
-		}
-		
-		if (temp->getTemplateState() != Template::Loaded)
+		bool found_in_map_dir = false;
+		if (!temp->tryToFindTemplateFile(map_path, &found_in_map_dir))
 		{
 			have_lost_template = true;
-			addWarning(tr("Failed to load template '%1', reason: %2")
-			           .arg(temp->getTemplateFilename(), temp->errorString()));
 		}
-		else if (!temp->errorString().isEmpty())
+		else if (!view || view->getTemplateVisibility(temp).visible)
 		{
-			addWarning(tr("Warnings when loading template '%1':\n%2")
-			           .arg(temp->getTemplateFilename(), temp->errorString()));
+			if (!temp->loadTemplateFile(false))
+			{
+				addWarning(tr("Failed to load template '%1', reason: %2")
+				           .arg(temp->getTemplateFilename(), temp->errorString()));
+			}
+			else
+			{
+				auto error_string = temp->errorString();
+				if (found_in_map_dir)
+				{
+					error_string.prepend(
+					            Importer::tr(
+					               "Template \"%1\" has been loaded from the map's directory instead of"
+					               " the relative location to the map file where it was previously."
+					               ).arg(temp->getTemplateFilename()) + QLatin1Char('\n') );
+				}
+				
+				if (!error_string.isEmpty())
+				{
+					addWarning(tr("Warnings when loading template '%1':\n%2")
+					           .arg(temp->getTemplateFilename(), temp->errorString()));
+				}
+			}
 		}
 	}
+	
 	if (have_lost_template)
 	{
 #if defined(Q_OS_ANDROID)
@@ -143,9 +162,7 @@ void Importer::finishImport()
 }
 
 
+
 // ### Exporter ###
 
-Exporter::~Exporter()
-{
-	// Nothing, not inlined
-}
+Exporter::~Exporter() = default;

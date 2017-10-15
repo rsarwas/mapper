@@ -19,19 +19,28 @@
  */
 
 
-#ifndef _OPENORIENTEERING_EDIT_LINE_TOOL_H_
-#define _OPENORIENTEERING_EDIT_LINE_TOOL_H_
+#ifndef OPENORIENTEERING_EDIT_LINE_TOOL_H
+#define OPENORIENTEERING_EDIT_LINE_TOOL_H
 
-#include <QScopedPointer>
 #include <QElapsedTimer>
+#include <QObject>
+#include <QRectF>
+#include <QScopedPointer>
 
-#include "edit_tool.h"
+#include "core/map_coord.h"
+#include "tools/edit_tool.h"
 
+class QAction;
+class QKeyEvent;
+class QMouseEvent;
+class QPainter;
+class QRectF;
+
+class MapEditorController;
+class MapRenderables;
 class MapWidget;
-class CombinedSymbol;
-class PointObject;
+class ObjectMover;
 class PathObject;
-class Symbol;
 
 
 /**
@@ -42,7 +51,7 @@ class EditLineTool : public EditTool
 Q_OBJECT
 public:
 	EditLineTool(MapEditorController* editor, QAction* tool_action);
-	virtual ~EditLineTool();
+	~EditLineTool() override;
 	
 	bool mousePressEvent(QMouseEvent* event, MapCoordF map_coord, MapWidget* widget) override;
 	bool mouseMoveEvent(QMouseEvent* event, MapCoordF map_coord, MapWidget* widget) override;

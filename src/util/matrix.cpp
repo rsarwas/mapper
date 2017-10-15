@@ -22,12 +22,17 @@
 
 #include <cstdio>
 
+#include <QtNumeric>
 #include <QDebug>
 #include <QIODevice>
+#include <QLatin1String>
+#include <QString>
+#include <QStringRef>
+#include <QXmlStreamAttributes>
 #include <QXmlStreamReader>
-#include <QXmlStreamWriter>
 
 #include "util/xml_stream_util.h"
+
 
 #ifndef NO_NATIVE_FILE_FORMAT
 
@@ -43,7 +48,7 @@ void Matrix::load(QIODevice* file)
 
 #endif
 
-void Matrix::save(QXmlStreamWriter& xml, const QString role) const
+void Matrix::save(QXmlStreamWriter& xml, const QString& role) const
 {
 	XmlElementWriter matrix{xml, QLatin1String("matrix")};
 	matrix.writeAttribute(QLatin1String("role"), role);

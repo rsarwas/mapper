@@ -18,18 +18,18 @@
  */
 
 
-#ifndef _OPENORIENTEERING_KEY_BUTTON_BAR_H_
-#define _OPENORIENTEERING_KEY_BUTTON_BAR_H_
+#ifndef OPENORIENTEERING_KEY_BUTTON_BAR_H
+#define OPENORIENTEERING_KEY_BUTTON_BAR_H
 
-#include <QWidget>
+#include <QHash>
 #include <QIcon>
+#include <QObject>
+#include <QString>
+#include <QWidget>
 
-QT_BEGIN_NAMESPACE
 class QHBoxLayout;
 class QToolButton;
-QT_END_NAMESPACE
 
-class MapEditorController;
 class MapEditorTool;
 class MapWidget;
 
@@ -43,13 +43,13 @@ public:
 	KeyButtonBar(MapEditorTool* tool, MapWidget* map_widget, QWidget* parent = 0);
 	
 	/** Adds a non-checkable button. */
-	void addPressKey(int key_code, QString text, QIcon icon = QIcon());
+	void addPressKey(int key_code, const QString& text, const QIcon& icon = QIcon());
 	
 	/** Adds a non-checkable button for which in addition a modifier key is pressed while the key is pressed. */
-	void addPressKeyWithModifier(int key_code, int modifier_code, QString text, QIcon icon = QIcon());
+	void addPressKeyWithModifier(int key_code, int modifier_code, const QString& text, const QIcon& icon = QIcon());
 	
 	/** Adds a checkable button which may add a modifier code while checked. */
-	void addModifierKey(int key_code, int modifier_code, QString text, QIcon icon = QIcon());
+	void addModifierKey(int key_code, int modifier_code, const QString& text, const QIcon& icon = QIcon());
 	
 	/** Returns the active modifier flags. Is intended to be combined with the modifier flags returned by mouse events,
 	 *  because the key simulation cannot insert modifiers there. */
@@ -66,7 +66,7 @@ private:
 		bool is_checkable;
 	};
 	
-	QToolButton* createButton(int key_code, QString text, QIcon icon, bool is_checkable, int modifier_code);
+	QToolButton* createButton(int key_code, const QString& text, const QIcon& icon, bool is_checkable, int modifier_code);
 	void sendKeyPressEvent(int key_code, int modifier_code);
 	void sendKeyReleaseEvent(int key_code, int modifier_code);
 	
@@ -77,4 +77,4 @@ private:
 	MapEditorTool* tool;
 };
 
-#endif // _OPENORIENTEERING_KEY_BUTTON_BAR_H_
+#endif // OPENORIENTEERING_KEY_BUTTON_BAR_H

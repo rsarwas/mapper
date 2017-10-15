@@ -18,12 +18,13 @@
  */
 
 
-#ifndef _OPENORIENTEERING_COMPASS_H_
-#define _OPENORIENTEERING_COMPASS_H_
+#ifndef OPENORIENTEERING_COMPASS_H
+#define OPENORIENTEERING_COMPASS_H
 
 #include <QObject>
 
 class CompassPrivate;
+class QMetaMethod;
 
 
 /** Provides access to the device's compass. Singleton class. */
@@ -32,7 +33,7 @@ class Compass : public QObject
 Q_OBJECT
 friend class CompassPrivate;
 public:
-	~Compass();
+	~Compass() override;
 	
 	/** Singleton accessor method. Constructs the object on first use. */
 	static Compass& getInstance();

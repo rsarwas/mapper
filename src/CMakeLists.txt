@@ -63,6 +63,7 @@ set(Mapper_Common_SRCS
   
   core/objects/boolean_tool.cpp
   core/objects/object.cpp
+  core/objects/object_mover.cpp
   core/objects/object_query.cpp
   core/objects/symbol_rule_set.cpp
   core/objects/text_object.cpp
@@ -92,6 +93,7 @@ set(Mapper_Common_SRCS
   gui/autosave_dialog.cpp
   gui/color_dialog.cpp
   gui/configure_grid_dialog.cpp
+  gui/file_dialog.cpp
   gui/georeferencing_dialog.cpp
   gui/home_screen_controller.cpp
   gui/main_window.cpp
@@ -171,6 +173,7 @@ set(Mapper_Common_SRCS
   
   tools/cut_tool.cpp
   tools/cut_hole_tool.cpp
+  tools/cutout_operation.cpp
   tools/cutout_tool.cpp
   tools/distribute_points_tool.cpp
   tools/draw_line_and_area_tool.cpp
@@ -185,6 +188,7 @@ set(Mapper_Common_SRCS
   tools/edit_point_tool.cpp
   tools/edit_line_tool.cpp
   tools/fill_tool.cpp
+  tools/object_selector.cpp
   tools/pan_tool.cpp
   tools/rotate_tool.cpp
   tools/rotate_pattern_tool.cpp
@@ -278,6 +282,7 @@ target_compile_definitions(Mapper_Common PRIVATE
   QT_NO_CAST_FROM_ASCII
   QT_NO_CAST_TO_ASCII
   QT_USE_QSTRINGBUILDER
+  # MAPPER_ENABLE_COMPATIBILITY
 )
 
 mapper_translations_sources(${Mapper_Common_SRCS} ${Mapper_Common_HEADERS})
@@ -322,10 +327,9 @@ install(TARGETS Mapper
 # Workaround Qt private include dir issue
 # Cf. https://bugreports.qt.io/browse/QTBUG-37417
 
+set(PRIVATE_MODULES Core Gui)
 if(WIN32)
-	set(PRIVATE_MODULES Core Gui PrintSupport)
-else()
-	set(PRIVATE_MODULES)
+	list(APPEND PRIVATE_MODULES PrintSupport)
 endif()
 foreach(module ${PRIVATE_MODULES})
 	set(qt_module Qt${module})
@@ -339,16 +343,3 @@ foreach(module ${PRIVATE_MODULES})
 	endif()
 	target_include_directories(Mapper_Common PRIVATE ${${qt5_module}_PRIVATE_INCLUDE_DIRS})
 endforeach()
-
-
-# qmake configuration
-
-foreach(cpp_file ${Mapper_Common_SRCS})
-	string(REPLACE ".cpp" ".h" h_file "${cpp_file}")
-	if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/${h_file}")
-		list(APPEND Mapper_Common_HEADERS "${h_file}")
-	endif()
-endforeach()
-list(REMOVE_DUPLICATES Mapper_Common_HEADERS)
-list(SORT Mapper_Common_HEADERS)
-list(SORT Mapper_Common_SRCS)

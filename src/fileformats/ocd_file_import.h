@@ -23,35 +23,52 @@
 #ifndef OPENORIENTEERING_OCD_FILE_IMPORT
 #define OPENORIENTEERING_OCD_FILE_IMPORT
 
-#include "file_import_export.h"
+#include <cstddef>
+#include <initializer_list>
+#include <limits>
 
-#include <cmath>
-
+#include <QtGlobal>
+#include <QtMath>
+#include <QByteArray>
+#include <QCoreApplication>
+#include <QHash>
 #include <QLocale>
+#include <QObject>
+#include <QScopedPointer>
+#include <QString>
 #include <QTextCodec>
 
-#include "ocd_types.h"
-#include "ocd_types_v8.h"
+#include "core/map_coord.h"
 #include "core/objects/object.h"
 #include "core/objects/text_object.h"
-#include "core/symbols/symbol.h"
 #include "core/symbols/area_symbol.h"
 #include "core/symbols/line_symbol.h"
 #include "core/symbols/point_symbol.h"
 #include "core/symbols/text_symbol.h"
+#include "fileformats/file_import_export.h"
+#include "fileformats/ocd_types.h"
+#include "fileformats/ocd_types_v8.h" // IWYU pragma: keep
 
+class QChar;
+class QIODevice;
+
+class CombinedSymbol;
 class Georeferencing;
+class Map;
 class MapColor;
 class MapPart;
+class MapView;
 class OCAD8FileImport;
-class Template;
+class Symbol;
+
 
 /**
  * An map file importer for OC*D files.
  */
 class OcdFileImport : public Importer
 {
-Q_OBJECT
+	Q_DECLARE_TR_FUNCTIONS(OcdFileImport)
+	
 protected:
 	/// Information about an OC*D rectangle symbol
 	struct RectangleInfo
@@ -98,13 +115,17 @@ protected:
 		
 	public:
 		OcdImportedPathObject(Symbol* symbol = nullptr) : PathObject(symbol) { }
+		OcdImportedPathObject(const OcdImportedPathObject&) = delete;
+		OcdImportedPathObject(OcdImportedPathObject&&) = delete;
+		OcdImportedPathObject& operator=(const OcdImportedPathObject&) = delete;
+		OcdImportedPathObject& operator=(OcdImportedPathObject&&) = delete;
 		~OcdImportedPathObject() override;
 	};
 	
 public:
 	OcdFileImport(QIODevice* stream, Map *map, MapView *view);
 	
-	virtual ~OcdFileImport() override;
+	~OcdFileImport() override;
 	
 	
 	void setCustom8BitEncoding(QTextCodec* encoding);
@@ -146,10 +167,10 @@ public:
 	
 	void addSymbolWarning(const TextSymbol* symbol, const QString& warning);
 	
-	virtual void finishImport() override;
+	void finishImport() override;
 	
 protected:
-	virtual void import(bool load_symbols_only) override;
+	void import(bool load_symbols_only) override;
 	
 	void importImplementationLegacy(bool load_symbols_only);
 	

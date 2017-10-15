@@ -21,13 +21,27 @@
 
 #include "object_query.h"
 
+#include <algorithm>
+#include <functional>
+#include <iterator>
+#include <new>
+
+#include <Qt>
+#include <QtGlobal>
+#include <QChar>
+#include <QCoreApplication>
+#include <QHash>
+#include <QLatin1Char>
+#include <QLatin1String>
+#include <QString>
+#include <QVarLengthArray>
+
 #include "object.h"
 #include "core/map.h"
 #include "core/map_part.h"
+#include "core/symbols/symbol.h"
 #include "gui/map/map_editor.h"
 #include "tools/tool.h"
-
-#include <QVarLengthArray>
 
 
 // ### Local utilites ###
@@ -101,14 +115,26 @@ ObjectQuery::LogicalOperands::LogicalOperands(const ObjectQuery::LogicalOperands
 }
 
 
+ObjectQuery::LogicalOperands::~LogicalOperands() = default;
+
+
 ObjectQuery::LogicalOperands& ObjectQuery::LogicalOperands::operator=(const ObjectQuery::LogicalOperands& proto)
 {
+	if (&proto == this)
+		return *this;
+	
 	if (proto.first)
 		first = std::make_unique<ObjectQuery>(*proto.first);
 	if (proto.second)
 		second = std::make_unique<ObjectQuery>(*proto.second);
 	return *this;
 }
+
+
+
+// ### ObjectQuery::TagOperands ###
+
+ObjectQuery::TagOperands::~TagOperands() = default;
 
 
 
@@ -152,6 +178,9 @@ ObjectQuery::ObjectQuery(ObjectQuery&& proto) noexcept
 
 ObjectQuery& ObjectQuery::operator=(const ObjectQuery& proto) noexcept
 {
+	if (&proto == this)
+		return *this;
+	
 	reset();
 	consume(ObjectQuery{proto});
 	return *this;
@@ -160,6 +189,9 @@ ObjectQuery& ObjectQuery::operator=(const ObjectQuery& proto) noexcept
 
 ObjectQuery& ObjectQuery::operator=(ObjectQuery&& proto) noexcept
 {
+	if (&proto == this)
+		return *this;
+	
 	reset();
 	consume(std::move(proto));	
 	return *this;
@@ -340,17 +372,15 @@ void ObjectQuery::selectMatchingObjects(Map* map, MapEditorController* controlle
 	map->clearObjectSelection(false);
 
 	// Lambda to add objects to the selection
-	auto select_object = [map](Object* const object, MapPart*, int)
+	auto select_object = [map](Object* object)
 	{
 		map->addObjectToSelection(object, false);
-		return false; // applyOnMatchingObjects tells us if this op fails, so if we fail we made a selection
 	};
 
-	MapPart *part = map->getCurrentPart();
+	auto part = map->getCurrentPart();
+	part->applyOnMatchingObjects(select_object, std::cref(*this));
 
-	// This reports failure if we made a selection
-	auto object_selected = !part->applyOnMatchingObjects(select_object, *this);
-
+	auto object_selected = !map->selectedObjects().empty();
 	if (object_selected || had_selection)
 		map->emitSelectionChanged();
 

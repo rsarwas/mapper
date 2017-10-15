@@ -23,11 +23,15 @@
 #define OPENORIENTEERING_SYMBOL_SETTING_DIALOG_H
 
 #include <memory>
+#include <vector>
 
 #include <QDialog>
+#include <QObject>
 
 class QLabel;
+class QPushButton;
 class QToolButton;
+class QWidget;
 
 class MainWindow;
 class Map;
@@ -54,7 +58,7 @@ public:
 	/**
 	 * Destructs the dialog and cleans up temporary objects. 
 	 */
-	virtual ~SymbolSettingDialog();
+	~SymbolSettingDialog() override;
 	
 	/**
 	 * Returns a copy of the currently edited symbol. 

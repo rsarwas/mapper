@@ -21,12 +21,11 @@
 
 #include "cut_tool.h"
 
-#include <QApplication>
+#include <QGuiApplication>
 #include <QMessageBox>
 #include <QMouseEvent>
 #include <QPainter>
 
-#include "settings.h"
 #include "core/map.h"
 #include "core/objects/boolean_tool.h"
 #include "core/renderables/renderable.h"
@@ -172,14 +171,14 @@ bool CutTool::mouseDoubleClickEvent(QMouseEvent* event, MapCoordF map_coord, Map
 void CutTool::leaveEvent(QEvent* event)
 {
 	if (path_tool)
-		return path_tool->leaveEvent(event);
+		path_tool->leaveEvent(event);
 }
 
 
 void CutTool::focusOutEvent(QFocusEvent* event)
 {
 	if (path_tool)
-		return path_tool->focusOutEvent(event);
+		path_tool->focusOutEvent(event);
 }
 
 
@@ -364,6 +363,7 @@ bool CutTool::startCuttingArea(const ObjectPathCoord& point)
 	});
 	connect(path_tool, &DrawLineAndAreaTool::pathAborted, this, &CutTool::abortCuttingArea);
 	connect(path_tool, &DrawLineAndAreaTool::pathFinished, this, &CutTool::finishCuttingArea);
+	path_tool->init();
 	
 	QMouseEvent event { QEvent::MouseButtonPress, cur_map_widget->mapToViewport(point.pos), Qt::LeftButton, QGuiApplication::mouseButtons(), active_modifiers };
 	path_tool->mousePressEvent(&event, point.pos, cur_map_widget);
@@ -394,7 +394,7 @@ void CutTool::finishCuttingArea(PathObject* split_path)
 	float distance_sq;
 	edit_object->calcClosestPointOnPath(MapCoordF(path_end), distance_sq, end_path_coord);
 	
-	auto click_tolerance_map = 0.001 * cur_map_widget->getMapView()->pixelToLength(qreal(clickTolerance()));
+	auto click_tolerance_map = 0.001 * cur_map_widget->getMapView()->pixelToLength(clickTolerance());
 	if (double(distance_sq) > click_tolerance_map*click_tolerance_map)
 	{
 		QMessageBox::warning(window(), tr("Error"), tr("The split line must end on the area boundary!"));
@@ -433,7 +433,7 @@ void CutTool::finishCuttingArea(PathObject* split_path)
 	const PathPart& drag_part = edit_object->parts()[drag_part_index];
 	if (drag_part.isClosed())
 	{
-		out_paths[1] = new PathObject { *out_paths[0] };
+		out_paths[1] = out_paths[0]->duplicate();
 		
 		out_paths[0]->changePathBounds(drag_part_index, drag_start_len, end_path_coord.clen);
 		ok = out_paths[0]->connectIfClose(split_path, split_threshold);
@@ -453,13 +453,13 @@ void CutTool::finishCuttingArea(PathObject* split_path)
 			ok = out_paths[0]->connectIfClose(split_path, split_threshold);
 			Q_ASSERT(ok);
 			
-			out_paths[1] = new PathObject { *split_path };
+			out_paths[1] = split_path->duplicate();
 			out_paths[1]->setSymbol(edit_object->getSymbol(), false);
 		}
 		else if (min_cut_pos <= 0 || max_cut_pos >= path_len)
 		{
 			float cut_pos = (min_cut_pos <= 0) ? max_cut_pos : min_cut_pos;
-			out_paths[1] = new PathObject { *out_paths[0] };
+			out_paths[1] = out_paths[0]->duplicate();
 			
 			out_paths[0]->changePathBounds(drag_part_index, 0, cut_pos);
 			ok = out_paths[0]->connectIfClose(split_path, split_threshold);
@@ -471,8 +471,8 @@ void CutTool::finishCuttingArea(PathObject* split_path)
 		}
 		else
 		{
-			out_paths[1] = new PathObject { *out_paths[0] };
-			PathObject* temp_path = new PathObject { *out_paths[0] };
+			out_paths[1] = out_paths[0]->duplicate();
+			PathObject* temp_path = out_paths[0]->duplicate();
 			
 			out_paths[0]->changePathBounds(drag_part_index, min_cut_pos, max_cut_pos);
 			ok = out_paths[0]->connectIfClose(split_path, split_threshold);
@@ -687,7 +687,7 @@ ObjectPathCoord CutTool::findEditPoint(MapCoordF cursor_pos_map, int with_type, 
 	else
 	{
 		// Check if a line segment was clicked
-		const auto click_tolerance_map = 0.001 * cur_map_widget->getMapView()->pixelToLength(qreal(clickTolerance()));
+		const auto click_tolerance_map = 0.001 * cur_map_widget->getMapView()->pixelToLength(clickTolerance());
 		auto min_distance_sq = float(qMin(999999.9, click_tolerance_map * click_tolerance_map));
 		for (const auto object : map()->selectedObjects())
 		{

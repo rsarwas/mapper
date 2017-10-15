@@ -19,15 +19,18 @@
  */
 
 
-#ifndef _OPENORIENTEERING_CRS_TEMPLATE_IMPLEMENTATION_H_
-#define _OPENORIENTEERING_CRS_TEMPLATE_IMPLEMENTATION_H_
+#ifndef OPENORIENTEERING_CRS_TEMPLATE_IMPLEMENTATION_H
+#define OPENORIENTEERING_CRS_TEMPLATE_IMPLEMENTATION_H
 
 #include "crs_template.h"
 
-#include <memory>
+#include <utility>
+#include <vector>
 
-class QLineEdit;
-class QVariant;
+#include <QLineEdit>
+#include <QString>
+#include <QVariant>
+
 class QWidget;
 
 class LatLon;
@@ -60,6 +63,7 @@ public:
 protected:
 	/// The type of editor widget returned from createEditor.
 	using Editor = QLineEdit;
+	
 };
 
 
@@ -84,7 +88,7 @@ class UTMZoneParameter : public CRSTemplateParameter
 {
 public:
 	UTMZoneParameter(const QString& id, const QString& name);
-	~UTMZoneParameter();
+	~UTMZoneParameter() override;
 	QWidget* createEditor(WidgetObserver& observer) const override;
 	std::vector<QString> specValues(const QString& edit_value) const override;
 	QString value(const QWidget* edit_widget) const override;
@@ -110,7 +114,7 @@ public:
 	
 	IntRangeParameter(const QString& id, const QString& name, int min_value, int max_value);
 	IntRangeParameter(const QString& id, const QString& name, int min_value, int max_value, OutputList&& outputs);
-	~IntRangeParameter();
+	~IntRangeParameter() override;
 	QWidget* createEditor(WidgetObserver& observer) const override;
 	std::vector<QString> specValues(const QString& edit_value) const override;
 	QString value(const QWidget* edit_widget) const override;

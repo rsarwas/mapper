@@ -25,20 +25,19 @@
 #include <QMouseEvent>
 #include <QPainter>
 
+#include "settings.h"
 #include "core/map.h"
-#include "gui/map/map_editor.h"
-#include "undo/object_undo.h"
-#include "gui/map/map_widget.h"
+#include "core/symbols/line_symbol.h"
+#include "core/symbols/symbol.h"
 #include "core/objects/object.h"
 #include "core/renderables/renderable.h"
-#include "settings.h"
-#include "core/symbols/symbol.h"
-#include "core/symbols/line_symbol.h"
+#include "gui/modifier_key.h"
+#include "gui/map/map_editor.h"
+#include "gui/map/map_widget.h"
+#include "gui/widgets/key_button_bar.h"
 #include "tool_helpers.h"
 #include "util/util.h"
-#include "gui/modifier_key.h"
-#include "gui/widgets/key_button_bar.h"
-#include "gui/map/map_editor.h"
+#include "undo/object_undo.h"
 
 
 DrawPathTool::DrawPathTool(MapEditorController* editor, QAction* tool_button, bool is_helper_tool, bool allow_closing_paths)
@@ -49,13 +48,13 @@ DrawPathTool::DrawPathTool(MapEditorController* editor, QAction* tool_button, bo
 , angle_helper(new ConstrainAngleToolHelper())
 , snap_helper(new SnappingToolHelper(this))
 , follow_helper(new FollowPathToolHelper())
-, key_button_bar(NULL)
+, key_button_bar(nullptr)
 {
 	angle_helper->setActive(false);
-	connect(angle_helper.data(), SIGNAL(displayChanged()), this, SLOT(updateDirtyRect()));
+	connect(angle_helper.data(), &ConstrainAngleToolHelper::displayChanged, this, &DrawPathTool::updateDirtyRect);
 	
 	updateSnapHelper();
-	connect(snap_helper.data(), SIGNAL(displayChanged()), this, SLOT(updateDirtyRect()));
+	connect(snap_helper.data(), &SnappingToolHelper::displayChanged, this, &DrawPathTool::updateDirtyRect);
 	
 	dragging = false;
 	appending = false;
@@ -66,7 +65,7 @@ DrawPathTool::DrawPathTool(MapEditorController* editor, QAction* tool_button, bo
 	shift_pressed = false;
 	ctrl_pressed = false;
 	
-	connect(map(), SIGNAL(objectSelectionChanged()), this, SLOT(objectSelectionChanged()));
+	connect(map(), &Map::objectSelectionChanged, this, &DrawPathTool::objectSelectionChanged);
 }
 
 DrawPathTool::~DrawPathTool()
@@ -801,7 +800,7 @@ void DrawPathTool::finishDrawing()
 	{
 		renderables->removeRenderablesOfObject(preview_path, false);
 		delete preview_path;
-		preview_path = NULL;
+		preview_path = nullptr;
 	}
 	
 	dragging = false;
@@ -813,7 +812,7 @@ void DrawPathTool::finishDrawing()
 	updateStatusText();
 	hidePreviewPoints();
 	
-	DrawLineAndAreaTool::finishDrawing(appending ? append_to_object : NULL);
+	DrawLineAndAreaTool::finishDrawing(appending ? append_to_object : nullptr);
 	
 	finished_path_is_selected = true;
 }
@@ -857,7 +856,7 @@ void DrawPathTool::updateDirtyRect()
 	includePreviewRects(rect);
 	
 	if (is_helper_tool)
-		emit(dirtyRectChanged(rect));
+		emit dirtyRectChanged(rect);
 	else
 	{
 		if (rect.isValid())
@@ -1047,7 +1046,7 @@ void DrawPathTool::updateDashPointDrawing()
 		// Auto-activate dash points depending on if the selected symbol has a dash symbol.
 		// TODO: instead of just looking if it is a line symbol with dash points,
 		// could also check for combined symbols containing lines with dash points
-		draw_dash_points = (symbol->asLine()->getDashSymbol() != NULL);
+		draw_dash_points = (symbol->asLine()->getDashSymbol());
 		
 		updateStatusText();
 	}
@@ -1062,63 +1061,95 @@ void DrawPathTool::updateDashPointDrawing()
 void DrawPathTool::updateStatusText()
 {
 	QString text;
-	static const QString text_more_shift_control_space(MapEditorTool::tr("More: %1, %2, %3").arg(ModifierKey::shift(), ModifierKey::control(), ModifierKey::space()));
-	static const QString text_more_shift_space(MapEditorTool::tr("More: %1, %2").arg(ModifierKey::shift(), ModifierKey::space()));
-	static const QString text_more_control_space(MapEditorTool::tr("More: %1, %2").arg(ModifierKey::control(), ModifierKey::space()));
-	QString text_more(text_more_shift_control_space);
-	
 	if (editingInProgress() && preview_path && preview_path->getCoordinateCount() >= 2)
 	{
 		//Q_ASSERT(!preview_path->isDirty());
 		float length = map()->getScaleDenominator() * preview_path->parts().front().path_coords.back().clen * 0.001f;
-		text = text + tr("<b>Length:</b> %1 m ").arg(QLocale().toString(length, 'f', 1)) + QLatin1String("| ");
+		text += tr("<b>Length:</b> %1 m ").arg(QLocale().toString(length, 'f', 1)) + QLatin1String("| ");
 	}
 	
 	if (draw_dash_points && !is_helper_tool)
+	{
 		text += DrawLineAndAreaTool::tr("<b>Dash points on.</b> ") + QLatin1String("| ");
+	}
 	
+	QVarLengthArray<QString, 3> modifier_keys;
 	if (!editingInProgress())
 	{
 		if (shift_pressed)
 		{
 			text += DrawLineAndAreaTool::tr("<b>%1+Click</b>: Snap or append to existing objects. ").arg(ModifierKey::shift());
-			text_more = text_more_control_space;
-		}
-		else if (ctrl_pressed)
-		{
-			text += DrawLineAndAreaTool::tr("<b>%1+Click</b>: Pick direction from existing objects. ").arg(ModifierKey::control());
-			text_more = text_more_shift_space;
 		}
 		else
 		{
-			text += tr("<b>Click</b>: Start a straight line. <b>Drag</b>: Start a curve. ");
-// 			text += DrawLineAndAreaTool::tr(draw_dash_points ? "<b>%1</b> Disable dash points. " : "<b>%1</b>: Enable dash points. ").arg(ModifierKey::space());
+			modifier_keys.append(ModifierKey::shift());
+		
+			if (ctrl_pressed)
+			{
+				text += DrawLineAndAreaTool::tr("<b>%1+Click</b>: Pick direction from existing objects. ").arg(ModifierKey::control());
+			}
+			else
+			{
+				modifier_keys.append(ModifierKey::control());
+			
+				text += tr("<b>Click</b>: Start a straight line. <b>Drag</b>: Start a curve. ");
+				
+				// text += DrawLineAndAreaTool::tr(draw_dash_points ? "<b>%1</b> Disable dash points. " : "<b>%1</b>: Enable dash points. ").arg(ModifierKey::space());
+			}
 		}
 	}
 	else
 	{
 		if (shift_pressed)
 		{
-			text += DrawLineAndAreaTool::tr("<b>%1+Click</b>: Snap to existing objects. ").arg(ModifierKey::shift());
-			text += tr("<b>%1+Drag</b>: Follow existing objects. ").arg(ModifierKey::shift());
-			text_more = text_more_control_space;
-		}
-		else if (ctrl_pressed && angle_helper->isActive())
-		{
-			text += DrawLineAndAreaTool::tr("<b>%1</b>: Fixed angles. ").arg(ModifierKey::control());
-			text_more = text_more_shift_space;
+			text += DrawLineAndAreaTool::tr("<b>%1+Click</b>: Snap to existing objects. ").arg(ModifierKey::shift())
+			        + tr("<b>%1+Drag</b>: Follow existing objects. ").arg(ModifierKey::shift());
 		}
 		else
 		{
-			text += tr("<b>Click</b>: Draw a straight line. <b>Drag</b>: Draw a curve. "
-			           "<b>Right or double click</b>: Finish the path. "
-			           "<b>%1</b>: Close the path. ").arg(ModifierKey::return_key());
-			text += DrawLineAndAreaTool::tr("<b>%1</b>: Undo last point. ").arg(ModifierKey::backspace());
-			text += MapEditorTool::tr("<b>%1</b>: Abort. ").arg(ModifierKey::escape());
+			modifier_keys.append(ModifierKey::shift());
+			
+			if (ctrl_pressed && angle_helper->isActive())
+			{
+				text += DrawLineAndAreaTool::tr("<b>%1</b>: Fixed angles. ").arg(ModifierKey::control());
+			}
+			else
+			{
+				modifier_keys.append(ModifierKey::control());
+				
+				text += tr("<b>Click</b>: Draw a straight line. <b>Drag</b>: Draw a curve. "
+				           "<b>Right or double click</b>: Finish the path. "
+				           "<b>%1</b>: Close the path. ").arg(ModifierKey::return_key())
+				        + DrawLineAndAreaTool::tr("<b>%1</b>: Undo last point. ").arg(ModifierKey::backspace())
+				        + MapEditorTool::tr("<b>%1</b>: Abort. ").arg(ModifierKey::escape());
+			}
 		}
 	}
 	
-	text += QLatin1String("| ") + text_more;
+	if (!is_helper_tool)
+	{
+		modifier_keys.append(ModifierKey::space());
+	}
+	
+	if (!modifier_keys.isEmpty())
+	{
+		QString text_more;
+		switch (modifier_keys.length())
+		{
+		case 1:
+			text_more = MapEditorTool::tr("More: %1").arg(modifier_keys[0]);
+			break;
+		case 2:
+			text_more = MapEditorTool::tr("More: %1, %2").arg(modifier_keys[0], modifier_keys[1]);
+			break;
+		case 3:
+			text_more = MapEditorTool::tr("More: %1, %2, %3").arg(modifier_keys[0], modifier_keys[1], modifier_keys[2]);
+			break;
+		default:
+			Q_UNREACHABLE();
+		}
+		text += QLatin1String("| ") + text_more;
+	}
 	
 	setStatusBarText(text);
 }

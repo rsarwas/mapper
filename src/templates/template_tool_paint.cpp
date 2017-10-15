@@ -29,10 +29,11 @@
 #include <QSettings>
 #include <QVBoxLayout>
 
-#include "gui/map/map_widget.h"
-#include "template.h"
-#include "util/util.h"
+#include "core/map.h"
 #include "gui/map/map_editor.h"
+#include "gui/map/map_widget.h"
+#include "templates/template.h"
+#include "util/util.h"
 
 
 // ### PaintOnTemplateTool ###
@@ -45,7 +46,7 @@ PaintOnTemplateTool::PaintOnTemplateTool(MapEditorController* editor, QAction* t
 	dragging = false;
 	
 	this->temp = temp;
-	connect(map(), SIGNAL(templateDeleted(int, const Template*)), this, SLOT(templateDeleted(int, const Template*)));
+	connect(map(), &Map::templateDeleted, this, &PaintOnTemplateTool::templateDeleted);
 }
 
 PaintOnTemplateTool::~PaintOnTemplateTool()
@@ -59,9 +60,9 @@ void PaintOnTemplateTool::init()
 	
 	widget = new PaintOnTemplatePaletteWidget(false);
 	editor->showPopupWidget(widget, tr("Color selection"));
-	connect(widget, SIGNAL(colorSelected(QColor)), this, SLOT(colorSelected(QColor)));
-	connect(widget, SIGNAL(undoSelected()), this, SLOT(undoSelected()));
-	connect(widget, SIGNAL(redoSelected()), this, SLOT(redoSelected()));
+	connect(widget, &PaintOnTemplatePaletteWidget::colorSelected, this, &PaintOnTemplateTool::colorSelected);
+	connect(widget, &PaintOnTemplatePaletteWidget::undoSelected, this, &PaintOnTemplateTool::undoSelected);
+	connect(widget, &PaintOnTemplatePaletteWidget::redoSelected, this, &PaintOnTemplateTool::redoSelected);
 	colorSelected(widget->getSelectedColor());
 	
 	MapEditorTool::init();
@@ -226,15 +227,22 @@ void PaintOnTemplatePaletteWidget::paintEvent(QPaintEvent* event)
 				drawIcon(&painter, QString::fromLatin1(":/images/undo.png"), field_rect);
 			else if (isRedoField(x, y))
 				drawIcon(&painter, QString::fromLatin1(":/images/redo.png"), field_rect);
-			else if (selected_color == x + getNumFieldsX()*y)
-			{
-				int line_width = qMax(1, qRound(Util::mmToPixelLogical(0.2f)));
-				painter.fillRect(field_rect, Qt::black);
-				painter.fillRect(field_rect.adjusted(line_width, line_width, -1 * line_width, -field_rect.height() / 2), Qt::white);
-				painter.fillRect(field_rect.adjusted(2 * line_width, 2 * line_width, -2 * line_width, -2 * line_width), getFieldColor(x, y));
-			}
 			else
+			{
+				if (selected_color == x + getNumFieldsX()*y)
+				{
+					int line_width = qMax(1, qRound(Util::mmToPixelLogical(0.5)));
+					painter.fillRect(field_rect, Qt::black);
+					QPen pen(Qt::white);
+					pen.setStyle(Qt::DotLine);
+					pen.setWidth(line_width);
+					painter.setPen(pen);
+					field_rect.adjust(line_width, line_width, -line_width, -line_width);
+					painter.drawRect(field_rect);
+					field_rect.adjust(line_width, line_width, -line_width, -line_width);
+				}
 				painter.fillRect(field_rect, getFieldColor(x, y));
+			}
 		}
 	}
 	
@@ -353,20 +361,20 @@ PaintOnTemplateSelectDialog::PaintOnTemplateSelectDialog(Map* map, QWidget* pare
 	layout->addLayout(buttons_layout);
 	setLayout(layout);
 	
-	connect(cancel_button, SIGNAL(clicked(bool)), this, SLOT(reject()));
-	connect(draw_button, SIGNAL(clicked(bool)), this, SLOT(accept()));
-	connect(template_list, SIGNAL(currentItemChanged(QListWidgetItem*,QListWidgetItem*)), this, SLOT(currentTemplateChanged(QListWidgetItem*,QListWidgetItem*)));
+	connect(cancel_button, &QAbstractButton::clicked, this, &QDialog::reject);
+	connect(draw_button, &QAbstractButton::clicked, this, &QDialog::accept);
+	connect(template_list, &QListWidget::currentItemChanged, this, &PaintOnTemplateSelectDialog::currentTemplateChanged);
 	
-	selection = NULL;
+	selection = nullptr;
 	template_list->setCurrentRow(0);
-	draw_button->setEnabled(selection != NULL);
+	draw_button->setEnabled(selection);
 }
 
 void PaintOnTemplateSelectDialog::currentTemplateChanged(QListWidgetItem* current, QListWidgetItem* previous)
 {
 	Q_UNUSED(previous);
 	
-	draw_button->setEnabled(current != NULL);
+	draw_button->setEnabled(current);
 	if (current)
 		selection = reinterpret_cast<Template*>(current->data(Qt::UserRole).value<void*>());
 }

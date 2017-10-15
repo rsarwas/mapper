@@ -25,12 +25,12 @@
 
 #include <limits>
 
+#include <QAbstractButton> // IWYU pragma: keep
 #include <QButtonGroup>
 #include <QCheckBox>
 #include <QComboBox>
 #include <QDialogButtonBox>
 #include <QDoubleSpinBox>
-#include <QFileDialog>
 #include <QFileInfo>
 #include <QFormLayout>
 #include <QHBoxLayout>
@@ -41,6 +41,7 @@
 #include <QPrintPreviewDialog>
 #include <QPushButton>
 #include <QRadioButton>
+#include <QRectF>
 #include <QScrollArea>
 #include <QScrollBar>
 #include <QSpinBox>
@@ -50,19 +51,18 @@
 
 #include <printer_properties.h>
 
-#include "main_window.h"
-#include "print_progress_dialog.h"
-#include "print_tool.h"
-#include "../core/map_printer.h"
 #include "core/map.h"
+#include "core/map_printer.h"
+#include "gui/file_dialog.h"
+#include "gui/main_window.h"
+#include "gui/print_progress_dialog.h"
+#include "gui/print_tool.h"
+#include "gui/util_gui.h"
 #include "gui/map/map_editor.h"
 #include "gui/map/map_widget.h"
-#include "../settings.h"
-#include "../templates/template.h"
-#include "util/util.h"
-#include "util_gui.h"
-#include "../util/backports.h"
-#include "../util/scoped_signals_blocker.h"
+#include "templates/template.h" // IWYU pragma: keep
+#include "util/backports.h"
+#include "util/scoped_signals_blocker.h"
 
 
 namespace
@@ -289,6 +289,7 @@ PrintWidget::PrintWidget(Map* map, MainWindow* main_window, MapView* main_view, 
 	
 	connect(mode_button_group, QOverload<QAbstractButton*>::of(&QButtonGroup::buttonClicked), this, &PrintWidget::printModeChanged);
 	connect(dpi_combo->lineEdit(), &QLineEdit::textEdited, this, &PrintWidget::resolutionEdited);
+	connect(dpi_combo, QOverload<int>::of(&QComboBox::currentIndexChanged), this, &PrintWidget::resolutionEdited);
 	connect(different_scale_check, &QAbstractButton::clicked, this, &PrintWidget::differentScaleClicked);
 	connect(different_scale_edit, QOverload<int>::of(&QSpinBox::valueChanged), this, &PrintWidget::differentScaleEdited);
 	connect(show_templates_check, &QAbstractButton::clicked, this, &PrintWidget::showTemplatesClicked);
@@ -436,13 +437,13 @@ void PrintWidget::setActive(bool active)
 			if (zoom_to_map)
 			{
 				// Ensure the visibility of the whole map.
-				QRectF map_extent = map->calculateExtent(true, !main_view->areAllTemplatesHidden(), main_view);
+				auto map_extent = map->calculateExtent(true, !main_view->areAllTemplatesHidden(), main_view);
 				editor->getMainWidget()->ensureVisibilityOfRect(map_extent, MapWidget::ContinuousZoom);
 			}
 			else
 			{
 				// Ensure the visibility of the print area.
-				QRectF print_area(map_printer->getPrintArea());
+				auto print_area(map_printer->getPrintArea());
 				editor->getMainWidget()->ensureVisibilityOfRect(print_area, MapWidget::ContinuousZoom);
 			}
 			
@@ -493,17 +494,6 @@ void PrintWidget::updateTargets()
 			target_combo->setCurrentIndex(0);
 			
 			// Printers
-#if QT_VERSION < 0x050300
-			printers = QPrinterInfo::availablePrinters();
-			for (int i = 0; i < printers.size(); ++i)
-			{
-				if (printers[i].printerName() == saved_printer_name)
-					saved_target_index = target_combo->count();
-				if (printers[i].isDefault())
-					default_printer_index = target_combo->count();
-				target_combo->addItem(printers[i].printerName(), i);
-			}
-#else
 			auto default_printer_name = QPrinterInfo::defaultPrinterName();
 			printers = QPrinterInfo::availablePrinterNames();
 			for (int i = 0; i < printers.size(); ++i)
@@ -515,7 +505,6 @@ void PrintWidget::updateTargets()
 					default_printer_index = target_combo->count();
 				target_combo->addItem(name, i);
 			}
-#endif
 		}
 		
 		// Restore selected target if possible and exit on success
@@ -553,11 +542,7 @@ void PrintWidget::setTarget(const QPrinterInfo* target)
 	{
 		for (; target_index >= 0; target_index--)
 		{
-#if QT_VERSION < 0x050300
-			if (target && printers[target_index].printerName() == target->printerName())
-#else
 			if (target && printers[target_index] == target->printerName())
-#endif
 				break;
 			else if (!target)
 				break;
@@ -608,14 +593,10 @@ void PrintWidget::targetChanged(int index) const
 	else if (target_index == ImageExporter)
 		map_printer->setTarget(MapPrinter::imageTarget());
 	else
-#if QT_VERSION < 0x050300
-		map_printer->setTarget(&printers[target_index]);
-#else
 	{
 		auto info = QPrinterInfo::printerInfo(printers[target_index]);
 		map_printer->setTarget(&info);
 	}
-#endif
 }
 
 // slot
@@ -728,7 +709,7 @@ void PrintWidget::applyPrintAreaPolicy() const
 	if (policy == SinglePage)
 	{
 		setOverlapEditEnabled(false);
-		QRectF print_area = map_printer->getPrintArea();
+		auto print_area = map_printer->getPrintArea();
 		print_area.setSize(map_printer->getPageRectPrintAreaSize());
 		if (center_check->isChecked())
 			centerOnMap(print_area);
@@ -745,7 +726,7 @@ void PrintWidget::applyCenterPolicy() const
 {
 	if (center_check->isChecked())
 	{
-		QRectF print_area = map_printer->getPrintArea();
+		auto print_area = map_printer->getPrintArea();
 		centerOnMap(print_area);
 		map_printer->setPrintArea(print_area);
 	}
@@ -753,9 +734,9 @@ void PrintWidget::applyCenterPolicy() const
 
 void PrintWidget::centerOnMap(QRectF& area) const
 {
-	QRectF map_extent = map->calculateExtent(false, show_templates_check->isChecked(), main_view);
-	area.moveLeft(map_extent.center().x() - 0.5f * area.width());
-	area.moveTop(map_extent.center().y() - 0.5f * area.height());
+	auto map_extent = map->calculateExtent(false, show_templates_check->isChecked(), main_view);
+	area.moveLeft(map_extent.center().x() - area.width() / 2);
+	area.moveTop(map_extent.center().y() - area.height() / 2);
 }
 
 
@@ -775,7 +756,7 @@ void PrintWidget::setPrintArea(const QRectF& area)
 	
 	if (center_check->isChecked())
 	{
-		QRectF centered_area = map_printer->getPrintArea();
+		auto centered_area = map_printer->getPrintArea();
 		centerOnMap(centered_area);
 		if ( qAbs(centered_area.left() - area.left()) > 0.005 ||
 			 qAbs(centered_area.top()  - area.top())  > 0.005 )
@@ -816,7 +797,7 @@ void PrintWidget::setPrintArea(const QRectF& area)
 // slot
 void PrintWidget::printAreaMoved()
 {
-	QRectF area = map_printer->getPrintArea();
+	auto area = map_printer->getPrintArea();
 	area.moveLeft(left_edit->value());
 	area.moveTop(-top_edit->value()); // Flip sign!
 	map_printer->setPrintArea(area);
@@ -825,7 +806,7 @@ void PrintWidget::printAreaMoved()
 // slot
 void PrintWidget::printAreaResized()
 {
-	QRectF area = map_printer->getPrintArea();
+	auto area = map_printer->getPrintArea();
 	area.setWidth(width_edit->value());
 	area.setHeight(height_edit->value());
 	map_printer->setPrintArea(area);
@@ -955,6 +936,7 @@ void PrintWidget::updateResolutions(const QPrinterInfo* target) const
 	// Resolution list item with unit "dpi"
 	static QString dpi_template(QLatin1String("%1 ") + tr("dpi"));
 	QStringList resolutions;
+	resolutions.reserve(supported_resolutions.size());
 	for (auto resolution : qAsConst(supported_resolutions))
 		resolutions << dpi_template.arg(resolution);
 	
@@ -1141,7 +1123,7 @@ void PrintWidget::exportToImage()
 	                        filter_template.arg(tr("TIFF"), QString::fromLatin1("*.tif *.tiff")),
 	                        filter_template.arg(tr("JPEG"), QString::fromLatin1("*.jpg *.jpeg")),
 	                        tr("All files (*.*)") };
-	QString path = QFileDialog::getSaveFileName(this, tr("Export map ..."), {}, filters.join(QString::fromLatin1(";;")));
+	QString path = FileDialog::getSaveFileName(this, tr("Export map ..."), {}, filters.join(QString::fromLatin1(";;")));
 	if (path.isEmpty())
 		return;
 	
@@ -1205,7 +1187,7 @@ void PrintWidget::exportToPdf()
 	static const QString filter_template(QString::fromLatin1("%1 (%2)"));
 	QStringList filters = { filter_template.arg(tr("PDF"), QString::fromLatin1("*.pdf")),
 	                        tr("All files (*.*)") };
-	QString path = QFileDialog::getSaveFileName(this, tr("Export map ..."), {}, filters.join(QString::fromLatin1(";;")));
+	QString path = FileDialog::getSaveFileName(this, tr("Export map ..."), {}, filters.join(QString::fromLatin1(";;")));
 	if (path.isEmpty())
 	{
 		return;

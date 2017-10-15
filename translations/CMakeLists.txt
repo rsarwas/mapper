@@ -57,9 +57,12 @@ set(Mapper_translations_template
 # Translation files which are updated by SymbolSetTool.
 set(map_symbols_translations
   map_symbols_cs.ts
+  map_symbols_da.ts
   map_symbols_de.ts
+  map_symbols_eo.ts
   map_symbols_fi.ts
   map_symbols_fr.ts
+  map_symbols_nl.ts
   map_symbols_ru.ts
   map_symbols_sv.ts
   map_symbols_uk.ts
@@ -147,8 +150,6 @@ else()
 		          "${listfile}"
 		  COMMAND "${Qt5_LUPDATE_EXECUTABLE}" ${lupdate_options} "@${listfile}" -ts "${CMAKE_CURRENT_SOURCE_DIR}/${translation}"
 		  COMMAND sed -i -e "/<name>Q[A-Z]/,/<context>/d" "${CMAKE_CURRENT_SOURCE_DIR}/${translation}"
-		  # Reformat for Weblate to minimize git noise
-		  COMMAND sed -i -e "/<source\\|<translation\\|<[a-z]*comment/,/\\/source>\\|\\/translation>\\|\\/[a-z]*comment>/{s/&apos;/'/g;s/&quot;/\"/g}" ${CMAKE_CURRENT_SOURCE_DIR}/${translation}
 		  VERBATIM
 		)
 		add_dependencies(Mapper_translations_update Mapper_${ts_filename}_update)

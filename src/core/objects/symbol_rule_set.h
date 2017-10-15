@@ -21,16 +21,15 @@
 #ifndef OPENORIENTEERING_SYMBOL_RULE_SET_H
 #define OPENORIENTEERING_SYMBOL_RULE_SET_H
 
+#include <vector>
 
 #include <QFlags>
-#include <QString>
 
 #include "core/objects/object_query.h"
 
 class QTextStream;
 
 class Map;
-class MapPart;
 class Object;
 class Symbol;
 
@@ -166,7 +165,7 @@ public:
 	 * 
 	 * \see apply
 	 */
-	bool operator()(Object* object, MapPart*, int) const;
+	void operator()(Object* object) const;
 	
 	
 	/**

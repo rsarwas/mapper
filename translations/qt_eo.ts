@@ -2,6 +2,37 @@
 <!DOCTYPE TS>
 <TS version="2.1" language="eo">
 <context>
+    <name>MAC_APPLICATION_MENU</name>
+    <message>
+        <source>Services</source>
+        <translation>Servoj</translation>
+    </message>
+    <message>
+        <source>Hide %1</source>
+        <translation>Kaŝi %1</translation>
+    </message>
+    <message>
+        <source>Hide Others</source>
+        <translation>Kaŝi aliajn</translation>
+    </message>
+    <message>
+        <source>Show All</source>
+        <translation>Montri ĉiujn</translation>
+    </message>
+    <message>
+        <source>Preferences...</source>
+        <translation>Agordoj…</translation>
+    </message>
+    <message>
+        <source>Quit %1</source>
+        <translation>Ĉesi %1</translation>
+    </message>
+    <message>
+        <source>About %1</source>
+        <translation>Pri %1</translation>
+    </message>
+</context>
+<context>
     <name>QAbstractSpinBox</name>
     <message>
         <source>Step &amp;down</source>
@@ -34,7 +65,7 @@
 <context>
     <name>QDialog</name>
     <message>
-        <source>What's This?</source>
+        <source>What&apos;s This?</source>
         <translation>Kio estas tio?</translation>
     </message>
 </context>
@@ -133,7 +164,7 @@
         <translation>Jes por ĉi&amp;uj</translation>
     </message>
     <message>
-        <source>Don't Save</source>
+        <source>Don&apos;t Save</source>
         <translation>Ne konservi</translation>
     </message>
 </context>
@@ -254,18 +285,18 @@
         <translation>Montri </translation>
     </message>
     <message>
-        <source>'%1' is write protected.
+        <source>&apos;%1&apos; is write protected.
 Do you want to delete it anyway?</source>
-        <translation>'%1' estas kontraŭskribe protektita.
+        <translation>&apos;%1&apos; estas kontraŭskribe protektita.
 Ĉu vi volas forigi ĝin ĉiuokaze?</translation>
     </message>
     <message>
-        <source>Are you sure you want to delete '%1'?</source>
-        <translation>Ĉu vi certas, ke vi volas forigi '%1'?</translation>
+        <source>Are you sure you want to delete &apos;%1&apos;?</source>
+        <translation>Ĉu vi certas, ke vi volas forigi &apos;%1&apos;?</translation>
     </message>
     <message>
         <source>List of places and bookmarks</source>
-        <translation type="unfinished"></translation>
+        <translation>Listo de lokoj kaj legosignoj</translation>
     </message>
     <message>
         <source>File &amp;name:</source>
@@ -305,7 +336,7 @@ Do you want to delete it anyway?</source>
     </message>
     <message>
         <source>Look in:</source>
-        <translation type="unfinished"></translation>
+        <translation>Transiri al:</translation>
     </message>
     <message>
         <source>Create a New Folder</source>
@@ -331,7 +362,9 @@ Do you want to delete it anyway?</source>
         <source>%1
 Directory not found.
 Please verify the correct directory name was given.</source>
-        <translation type="unfinished"></translation>
+        <translation>%1
+Dosierujo ne trovita.
+Bonvolu kontroli, ke dosierujonomo estis ĝusta.</translation>
     </message>
     <message>
         <source>Sidebar</source>
@@ -401,7 +434,7 @@ Do you want to replace it?</source>
     </message>
     <message>
         <source>Change to detail view mode</source>
-        <translation type="unfinished"></translation>
+        <translation>Ŝanĝi al detala rigarda reĝimo</translation>
     </message>
     <message>
         <source>Create New Folder</source>
@@ -419,11 +452,13 @@ Do you want to replace it?</source>
         <source>%1
 File not found.
 Please verify the correct file name was given.</source>
-        <translation type="unfinished"></translation>
+        <translation>%1
+Dosiero ne trovita.
+Bonvolu kontroli, ke dosiernomo estis ĝusta.</translation>
     </message>
     <message>
         <source>Change to list view mode</source>
-        <translation type="unfinished"></translation>
+        <translation>Ŝanĝi al lista rigarda reĝimo</translation>
     </message>
 </context>
 <context>
@@ -461,7 +496,7 @@ Please verify the correct file name was given.</source>
         <translation>%1 TB</translation>
     </message>
     <message>
-        <source>&lt;b&gt;The name "%1" can not be used.&lt;/b&gt;&lt;p&gt;Try using another name, with fewer characters or no punctuations marks.</source>
+        <source>&lt;b&gt;The name &quot;%1&quot; can not be used.&lt;/b&gt;&lt;p&gt;Try using another name, with fewer characters or no punctuations marks.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -487,6 +522,14 @@ Please verify the correct file name was given.</source>
     <message>
         <source>Date Modified</source>
         <translation>Dato de modifo</translation>
+    </message>
+</context>
+<context>
+    <name>QGuiApplication</name>
+    <message>
+        <source>QT_LAYOUT_DIRECTION</source>
+        <comment>Translate this string to the string &apos;LTR&apos; in left-to-right languages or to &apos;RTL&apos; in right-to-left languages (such as Hebrew and Arabic) to get proper widget layout.</comment>
+        <translation>LTR</translation>
     </message>
 </context>
 <context>
@@ -576,6 +619,10 @@ Please verify the correct file name was given.</source>
         <source>&lt;h3&gt;About Qt&lt;/h3&gt;&lt;p&gt;This program uses Qt version %1.&lt;/p&gt;</source>
         <translation>&lt;h3&gt;Pri Qt&lt;/h3&gt;&lt;p&gt;Ĉi tiu programo uzos Qt-version %1.&lt;/p&gt;</translation>
     </message>
+    <message>
+        <source>&lt;p&gt;Qt is a C++ toolkit for cross-platform application development.&lt;/p&gt;&lt;p&gt;Qt provides single-source portability across all major desktop operating systems. It is also available for embedded Linux and other embedded and mobile operating systems.&lt;/p&gt;&lt;p&gt;Qt is available under three different licensing options designed to accommodate the needs of our various users.&lt;/p&gt;&lt;p&gt;Qt licensed under our commercial license agreement is appropriate for development of proprietary/commercial software where you do not want to share any source code with third parties or otherwise cannot comply with the terms of the GNU LGPL version 3 or GNU LGPL version 2.1.&lt;/p&gt;&lt;p&gt;Qt licensed under the GNU LGPL version 3 is appropriate for the development of Qt&amp;nbsp;applications provided you can comply with the terms and conditions of the GNU LGPL version 3.&lt;/p&gt;&lt;p&gt;Qt licensed under the GNU LGPL version 2.1 is appropriate for the development of Qt&amp;nbsp;applications provided you can comply with the terms and conditions of the GNU LGPL version 2.1.&lt;/p&gt;&lt;p&gt;Please see &lt;a href=&quot;http://%2/&quot;&gt;%2&lt;/a&gt; for an overview of Qt licensing.&lt;/p&gt;&lt;p&gt;Copyright (C) %1 The Qt Company Ltd and other contributors.&lt;/p&gt;&lt;p&gt;Qt and the Qt logo are trademarks of The Qt Company Ltd.&lt;/p&gt;&lt;p&gt;Qt is The Qt Company Ltd product developed as an open source project. See &lt;a href=&quot;http://%3/&quot;&gt;%3&lt;/a&gt; for more information.&lt;/p&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>QPPDOptionsModel</name>
@@ -592,7 +639,7 @@ Please verify the correct file name was given.</source>
     <name>QPageSetupWidget</name>
     <message>
         <source>Form</source>
-        <translation type="unfinished"></translation>
+        <translation>Formo</translation>
     </message>
     <message>
         <source>bottom margin</source>
@@ -656,11 +703,11 @@ Please verify the correct file name was given.</source>
     </message>
     <message>
         <source>Points (pt)</source>
-        <translation type="unfinished"></translation>
+        <translation>Punktoj (pt)</translation>
     </message>
     <message>
         <source>Inches (in)</source>
-        <translation type="unfinished"></translation>
+        <translation>Coloj (in)</translation>
     </message>
     <message>
         <source>Reverse landscape</source>
@@ -674,9 +721,41 @@ Please verify the correct file name was given.</source>
 <context>
     <name>QPlatformTheme</name>
     <message>
+        <source>OK</source>
+        <translation>Bone</translation>
+    </message>
+    <message>
+        <source>Save</source>
+        <translation>Konservi</translation>
+    </message>
+    <message>
+        <source>&amp;Yes</source>
+        <translation>&amp;Jes</translation>
+    </message>
+    <message>
+        <source>&amp;No</source>
+        <translation>&amp;Ne</translation>
+    </message>
+    <message>
         <location filename="../src/gui/text_browser_dialog.cpp" line="63"/>
         <source>Close</source>
         <translation>Fermi</translation>
+    </message>
+    <message>
+        <source>Cancel</source>
+        <translation>Rezigni</translation>
+    </message>
+    <message>
+        <source>Discard</source>
+        <translation>Forĵeti</translation>
+    </message>
+    <message>
+        <source>Help</source>
+        <translation>Helpo</translation>
+    </message>
+    <message>
+        <source>Reset</source>
+        <translation>Reagordi</translation>
     </message>
 </context>
 <context>
@@ -779,11 +858,11 @@ Please verify the correct file name was given.</source>
     </message>
     <message>
         <source>Folio</source>
-        <translation type="unfinished"></translation>
+        <translation>Folio</translation>
     </message>
     <message>
         <source>Legal</source>
-        <translation type="unfinished"></translation>
+        <translation>Legal</translation>
     </message>
     <message>
         <source>Print</source>
@@ -817,11 +896,11 @@ Do you want to overwrite it?</source>
     </message>
     <message>
         <source>Ledger</source>
-        <translation type="unfinished"></translation>
+        <translation>Ledger</translation>
     </message>
     <message>
         <source>Letter</source>
-        <translation type="unfinished"></translation>
+        <translation>Letter</translation>
     </message>
     <message>
         <source>Local file</source>
@@ -837,19 +916,19 @@ Do you want to overwrite it?</source>
     </message>
     <message>
         <source>Tabloid</source>
-        <translation type="unfinished"></translation>
+        <translation>Tabloid</translation>
     </message>
     <message>
         <source>Executive</source>
-        <translation type="unfinished"></translation>
+        <translation>Executive</translation>
     </message>
     <message>
-        <source>The 'From' value cannot be greater than the 'To' value.</source>
+        <source>The &apos;From&apos; value cannot be greater than the &apos;To&apos; value.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <source>US Common #10 Envelope</source>
-        <translation type="unfinished"></translation>
+        <translation>US Common #10 Envelope</translation>
     </message>
     <message>
         <source>%1 is a directory.
@@ -924,7 +1003,7 @@ Bonvolu elekti malsaman dosiernomon.</translation>
     </message>
     <message>
         <source>Show single page</source>
-        <translation type="unfinished"></translation>
+        <translation>Montri unuopan paĝon</translation>
     </message>
     <message>
         <source>Export to PDF</source>
@@ -1112,7 +1191,7 @@ Bonvolu elekti malsaman dosiernomon.</translation>
     </message>
     <message>
         <source>Could not open output redirection for writing</source>
-        <translation type="unfinished"></translation>
+        <translation>Ne povas malfermi eligan alidirekton por skribado</translation>
     </message>
     <message>
         <source>Process operation timed out</source>
@@ -1120,7 +1199,7 @@ Bonvolu elekti malsaman dosiernomon.</translation>
     </message>
     <message>
         <source>Process crashed</source>
-        <translation type="unfinished"></translation>
+        <translation>Procezo kolapsis</translation>
     </message>
 </context>
 <context>
@@ -1170,7 +1249,7 @@ Bonvolu elekti malsaman dosiernomon.</translation>
     </message>
     <message>
         <source>Left edge</source>
-        <translation type="unfinished"></translation>
+        <translation>Maldekstra rando</translation>
     </message>
     <message>
         <source>Page down</source>
@@ -1182,7 +1261,7 @@ Bonvolu elekti malsaman dosiernomon.</translation>
     </message>
     <message>
         <source>Right edge</source>
-        <translation type="unfinished"></translation>
+        <translation>Dekstra rando</translation>
     </message>
 </context>
 <context>
@@ -1193,7 +1272,7 @@ Bonvolu elekti malsaman dosiernomon.</translation>
     </message>
     <message>
         <source>Go</source>
-        <translation type="unfinished"></translation>
+        <translation>Transiri</translation>
     </message>
     <message>
         <source>No</source>
@@ -1245,7 +1324,7 @@ Bonvolu elekti malsaman dosiernomon.</translation>
     </message>
     <message>
         <source>Away</source>
-        <translation type="unfinished"></translation>
+        <translation>For</translation>
     </message>
     <message>
         <source>Book</source>
@@ -1373,7 +1452,7 @@ Bonvolu elekti malsaman dosiernomon.</translation>
     </message>
     <message>
         <source>Escape</source>
-        <translation type="unfinished"></translation>
+        <translation>Escape</translation>
     </message>
     <message>
         <source>Insert</source>
@@ -1429,7 +1508,7 @@ Bonvolu elekti malsaman dosiernomon.</translation>
     </message>
     <message>
         <source>System Request</source>
-        <translation type="unfinished"></translation>
+        <translation>Sistempeto</translation>
     </message>
     <message>
         <source>CapsLock</source>
@@ -1449,7 +1528,7 @@ Bonvolu elekti malsaman dosiernomon.</translation>
     </message>
     <message>
         <source>Wake Up</source>
-        <translation type="unfinished"></translation>
+        <translation>Vekiĝo</translation>
     </message>
     <message>
         <source>Monitor Brightness Down</source>
@@ -1476,7 +1555,7 @@ Bonvolu elekti malsaman dosiernomon.</translation>
     </message>
     <message>
         <source>Shared Cache</source>
-        <translation type="unfinished"></translation>
+        <translation>Kunhavata kaŝmemoro</translation>
     </message>
     <message>
         <source>Movies</source>
@@ -1492,11 +1571,11 @@ Bonvolu elekti malsaman dosiernomon.</translation>
     </message>
     <message>
         <source>Application Data</source>
-        <translation type="unfinished"></translation>
+        <translation>Aplikaĵaj datumoj</translation>
     </message>
     <message>
         <source>Runtime</source>
-        <translation type="unfinished"></translation>
+        <translation>Plenumtempo</translation>
     </message>
     <message>
         <source>Documents</source>
@@ -1504,7 +1583,7 @@ Bonvolu elekti malsaman dosiernomon.</translation>
     </message>
     <message>
         <source>Desktop</source>
-        <translation type="unfinished"></translation>
+        <translation>Labortablo</translation>
     </message>
     <message>
         <source>Temporary Directory</source>
@@ -1512,7 +1591,7 @@ Bonvolu elekti malsaman dosiernomon.</translation>
     </message>
     <message>
         <source>Shared Data</source>
-        <translation type="unfinished"></translation>
+        <translation>Kunhavata datumo</translation>
     </message>
     <message>
         <source>Applications</source>
@@ -1582,7 +1661,7 @@ Bonvolu elekti malsaman dosiernomon.</translation>
 <context>
     <name>QWhatsThisAction</name>
     <message>
-        <source>What's This?</source>
+        <source>What&apos;s This?</source>
         <translation>Kio estas tio?</translation>
     </message>
 </context>
@@ -1625,7 +1704,7 @@ Bonvolu elekti malsaman dosiernomon.</translation>
     </message>
     <message>
         <source>Copy &amp;Link Location</source>
-        <translation type="unfinished"></translation>
+        <translation>Kopii &amp;adreson de ligilo</translation>
     </message>
 </context>
 <context>
@@ -1652,7 +1731,7 @@ Bonvolu elekti malsaman dosiernomon.</translation>
     </message>
     <message>
         <source>Commit</source>
-        <translation type="unfinished"></translation>
+        <translation>Enmeti</translation>
     </message>
     <message>
         <source>Continue</source>
@@ -1668,7 +1747,7 @@ Bonvolu elekti malsaman dosiernomon.</translation>
     </message>
     <message>
         <source>Go Back</source>
-        <translation type="unfinished"></translation>
+        <translation>Reiri</translation>
     </message>
     <message>
         <source>&lt; &amp;Back</source>

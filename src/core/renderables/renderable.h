@@ -18,12 +18,14 @@
  *    along with OpenOrienteering.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef _OPENORIENTEERING_RENDERABLE_H_
-#define _OPENORIENTEERING_RENDERABLE_H_
+#ifndef OPENORIENTEERING_RENDERABLE_H
+#define OPENORIENTEERING_RENDERABLE_H
 
 #include <map>
 #include <vector>
 
+#include <QtGlobal>
+#include <QFlags>
 #include <QRectF>
 #include <QSharedData>
 #include <QExplicitlySharedDataPointer>
@@ -33,6 +35,7 @@
 class QColor;
 class QPainter;
 class QPainterPath;
+// IWYU pragma: no_forward_declare QRectF
 
 class Map;
 class Object;
@@ -108,23 +111,23 @@ public:
  * This is the abstract base class. Inheriting classes must implement the
  * abstract methods, and they must set the extent during construction.
  */
-class Renderable
+class Renderable  // clazy:exclude=copyable-polymorphic
 {
 protected:
 	/** The constructor for new renderables. */
 	explicit Renderable(const MapColor* color);
 	
-	/** The copy constructor is default but protected. */
-	explicit Renderable(const Renderable&) = default;
-	
-	/** The assignment operator is default but protected. */
-	Renderable& operator=(const Renderable&) = default;
-	
 public:
+	Renderable(const Renderable&) = delete;
+	Renderable(Renderable&&) = delete;
+	
 	/**
 	 * The destructor.
 	 */
 	virtual ~Renderable();
+	
+	Renderable& operator=(const Renderable&) = delete;
+	Renderable& operator=(Renderable&&) = delete;
 	
 	/**
 	 * Returns the extent (bounding box).
@@ -235,6 +238,9 @@ class SharedRenderables : public QSharedData, public std::map< PainterConfig, Re
 {
 public:
 	typedef QExplicitlySharedDataPointer<SharedRenderables> Pointer;
+	SharedRenderables() = default;
+	SharedRenderables(const SharedRenderables&) = delete;
+	SharedRenderables& operator=(const SharedRenderables&) = delete;
 	~SharedRenderables();
 	void deleteRenderables();
 	void compact(); // release memory which is occupied by unused PainterConfig, FIXME: maybe call this regularly...
@@ -251,10 +257,12 @@ class ObjectRenderables : protected std::map<int, SharedRenderables::Pointer>
 friend class MapRenderables;
 public:
 	ObjectRenderables(Object& object);
+	ObjectRenderables(const ObjectRenderables&) = delete;
+	ObjectRenderables& operator=(const ObjectRenderables&) = delete;
 	~ObjectRenderables();
 	
 	inline void insertRenderable(Renderable* r);
-	void insertRenderable(Renderable* r, PainterConfig state);
+	void insertRenderable(Renderable* r, const PainterConfig& state);
 	
 	void clear();
 	void deleteRenderables();

@@ -23,19 +23,18 @@
 
 #include "native_file_format.h"
 
-#include <QFile>
 #include <QScopedValueRollback>
 
 #include "core/georeferencing.h"
+#include "core/map.h"
 #include "core/map_color.h"
 #include "core/map_grid.h"
 #include "core/map_printer.h"
 #include "core/map_view.h"
-#include "file_import_export.h"
-#include "core/map.h"
 #include "core/symbols/symbol.h"
-#include "../templates/template.h"
-#include "../templates/template_image.h"
+#include "fileformats/file_import_export.h"
+#include "templates/template.h"
+#include "templates/template_image.h"
 #include "undo/undo_manager.h"
 #include "util/util.h"
 
@@ -56,12 +55,12 @@ public:
 
 	/** Destroys this importer.
 	 */
-	~NativeFileImport();
+	~NativeFileImport() override;
 
 protected:
 	/** Imports a native file.
 	 */
-	void import(bool load_symbols_only);
+	void import(bool load_symbols_only) override;
 };
 
 
@@ -97,7 +96,7 @@ NativeFileFormat::NativeFileFormat()
 	// Nothing
 }
 
-bool NativeFileFormat::understands(const unsigned char *buffer, size_t sz) const
+bool NativeFileFormat::understands(const unsigned char *buffer, std::size_t sz) const
 {
 	// The first four bytes of the file must be 'OMAP'.
 	return (sz >= 4 && memcmp(buffer, magic_bytes, 4) == 0);
@@ -200,8 +199,7 @@ void NativeFileImport::import(bool load_symbols_only)
 		{
 			addWarning(
 			  Importer::tr("The geographic coordinate reference system of the map was \"%1\". This CRS is not supported. Using \"%2\".").
-			  arg(geographic_crs_spec).
-			  arg(Georeferencing::geographic_crs_spec)
+			  arg(geographic_crs_spec, Georeferencing::geographic_crs_spec)
 			);
 		}
 		if (version <= 17)

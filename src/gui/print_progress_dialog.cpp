@@ -22,11 +22,11 @@
 
 #include "print_progress_dialog.h"
 
+#include <QtGlobal>
 #include <QApplication>
 #include <QMessageBox>
-#include <QPrintPreviewDialog>
 
-#include "../core/map_printer.h"
+#include "core/map_printer.h"
 
 
 PrintProgressDialog::PrintProgressDialog(MapPrinter* map_printer, QWidget* parent, Qt::WindowFlags f)
@@ -59,7 +59,7 @@ void PrintProgressDialog::paintRequested(QPrinter* printer)
 	}
 }
 
-void PrintProgressDialog::setProgress(int value, QString status)
+void PrintProgressDialog::setProgress(int value, const QString& status)
 {
 	setLabelText(status);
 	setValue(value);

@@ -20,6 +20,8 @@
 
 #include "duplicate_equals_t.h"
 
+#include <QtTest>
+
 #include "global.h"
 #include "core/map.h"
 #include "core/objects/object.h"
@@ -105,7 +107,7 @@ void DuplicateEqualsTest::objects()
 			
 			Object* assigned = Object::getObjectForType(original->getType(), original->getSymbol());
 			QVERIFY(assigned);
-			*assigned = *original;
+			assigned->copyFrom(*original);
 			QVERIFY(original->equals(assigned, true));
 			QVERIFY(!assigned->getMap());
 		}
@@ -122,7 +124,9 @@ void DuplicateEqualsTest::objects()
  * while running with "minimal" platform plugin.
  */
 #ifndef Q_OS_MACOS
-static auto qpa_selected = qputenv("QT_QPA_PLATFORM", "minimal");
+namespace  {
+	auto qpa_selected = qputenv("QT_QPA_PLATFORM", "minimal");  // clazy:exclude=non-pod-global-static
+}
 #endif
 
 

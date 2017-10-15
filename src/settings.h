@@ -19,11 +19,12 @@
  */
 
 
-#ifndef _OPENORIENTEERING_SETTINGS_H_
-#define _OPENORIENTEERING_SETTINGS_H_
+#ifndef OPENORIENTEERING_SETTINGS_H
+#define OPENORIENTEERING_SETTINGS_H
 
 #include <QHash>
 #include <QObject>
+#include <QString>
 #include <QVariant>
 
 class QSettings;
@@ -55,6 +56,7 @@ public:
 		SymbolWidget_IconSizeMM,
 		ActionGridBar_ButtonSizeMM,
 		General_RetainCompatiblity,
+		General_SaveUndoRedo,
 		General_AutosaveInterval,
 		General_Language,
 		General_PixelsPerInch,
@@ -83,13 +85,13 @@ public:
 	QVariant getSettingCached(SettingsEnum setting);
 	
 	/// Change a setting, but only in the cache. Do not use this if in doubt.
-	void setSettingInCache(Settings::SettingsEnum setting, QVariant value);
+	void setSettingInCache(Settings::SettingsEnum setting, const QVariant& value);
 	
 	/// This must be called after cached settings have been changed and on application startup.
 	void applySettings();
 	
 	/// Change a setting immediately.
-	void setSetting(Settings::SettingsEnum setting, QVariant value);
+	void setSetting(Settings::SettingsEnum setting, const QVariant& value);
 	
 	/// Removes a setting immediately. Next reading will return the default value.
 	void remove(Settings::SettingsEnum setting);
@@ -111,7 +113,7 @@ public:
 	// Methods related to specific settings
 	
 	int getSymbolWidgetIconSizePx();
-	float getMapEditorClickTolerancePx();
+	qreal getMapEditorClickTolerancePx();
 	float getMapEditorSnapDistancePx();
 	float getRectangleToolHelperCrossRadiusPx();
 	int getStartDragDistancePx();
@@ -123,7 +125,7 @@ private:
 	Settings();
 	void registerSetting(SettingsEnum id, const char* path_latin1, const QVariant& default_value);
 	
-	void migrateSettings(QSettings& settings, QVariant version);
+	void migrateSettings(QSettings& settings, const QVariant& version);
 	
 	/** Migrates a value from an old key to a new key.
 	 *  Uses the given or a newly constructed QSettings object.

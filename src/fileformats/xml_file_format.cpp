@@ -22,32 +22,24 @@
 #include "xml_file_format.h"
 #include "xml_file_format_p.h"
 
-#include <QBuffer>
 #include <QDebug>
-#include <QFile>
+#include <QDir>
+#include <QFileDevice>
+#include <QFileInfo>
 #include <QScopedValueRollback>
 #include <QXmlStreamReader>
 #include <QXmlStreamWriter>
-
-#ifdef QT_PRINTSUPPORT_LIB
-#  include <QPrinter>
-#endif
 
 #include "file_import_export.h"
 #include "settings.h"
 #include "core/georeferencing.h"
 #include "core/map_color.h"
 #include "core/map_grid.h"
-#include "core/map_printer.h"
+#include "core/map_printer.h"  // IWYU pragma: keep
 #include "core/map_view.h"
 #include "core/map.h"
-#include "core/objects/object.h"
-#include "core/objects/text_object.h"
-#include "core/symbols/area_symbol.h"
-#include "core/symbols/combined_symbol.h"
 #include "core/symbols/line_symbol.h"
 #include "core/symbols/point_symbol.h"
-#include "core/symbols/text_symbol.h"
 #include "templates/template.h"
 #include "undo/undo_manager.h"
 #include "util/xml_stream_util.h"
@@ -55,15 +47,25 @@
 
 // ### XMLFileFormat definition ###
 
-const int XMLFileFormat::minimum_version = 2;
-const int XMLFileFormat::current_version = 7;
+constexpr int XMLFileFormat::minimum_version = 2;
+constexpr int XMLFileFormat::current_version = 7;
 
 int XMLFileFormat::active_version = 5; // updated by XMLFileExporter::doExport()
 
+
+
 namespace {
+
 const char* magic_string = "<?xml ";
-const QString mapper_namespace = QString::fromLatin1("http://openorienteering.org/apps/mapper/xml/v2");
+
+QString mapperNamespace()
+{
+	return QStringLiteral("http://openorienteering.org/apps/mapper/xml/v2");
 }
+
+}  // namespace
+
+
 
 XMLFileFormat::XMLFileFormat()
  : FileFormat(MapFile, "XML", ImportExport::tr("OpenOrienteering Mapper"), QString::fromLatin1("omap"),
@@ -72,7 +74,7 @@ XMLFileFormat::XMLFileFormat()
 	addExtension(QString::fromLatin1("xmap"));
 }
 
-bool XMLFileFormat::understands(const unsigned char *buffer, size_t sz) const
+bool XMLFileFormat::understands(const unsigned char *buffer, std::size_t sz) const
 {
 	static const uint len = qstrlen(magic_string);
 	return (sz >= len && memcmp(buffer, magic_string, len) == 0);
@@ -177,6 +179,7 @@ void XMLFileExporter::doExport()
 	if (option(QString::fromLatin1("autoFormatting")).toBool())
 		xml.setAutoFormatting(true);
 	
+#ifdef MAPPER_ENABLE_COMPATIBILITY
 	int current_version = XMLFileFormat::current_version;
 	bool retain_compatibility = Settings::getInstance().getSetting(Settings::General_RetainCompatiblity).toBool();
 	XMLFileFormat::active_version = retain_compatibility ? 5 : current_version;
@@ -185,8 +188,11 @@ void XMLFileExporter::doExport()
 	{
 		throw FileFormatException(tr("Older versions of Mapper do not support multiple map parts. To save the map in compatibility mode, you must first merge all map parts."));
 	}
+#else
+	XMLFileFormat::active_version = XMLFileFormat::current_version;
+#endif
 	
-	xml.writeDefaultNamespace(mapper_namespace);
+	xml.writeDefaultNamespace(mapperNamespace());
 	xml.writeStartDocument();
 	writeLineBreak(xml);
 	
@@ -202,7 +208,7 @@ void XMLFileExporter::doExport()
 		exportColors();
 		writeLineBreak(xml);
 
-		XmlElementWriter* barrier = NULL;
+		XmlElementWriter* barrier = nullptr;
 		if (XMLFileFormat::active_version >= 6)
 		{
 			// Prevent Mapper versions < 0.6.0 from crashing
@@ -225,17 +231,21 @@ void XMLFileExporter::doExport()
 		delete barrier;
 		writeLineBreak(xml);
 
-		// Prevent Mapper versions < 0.6.0 from crashing
-		// when compatibilty mode IS activated
-		// Incompatible feature: new undo step types
-		barrier = new XmlElementWriter(xml, literal::barrier);
-		barrier->writeAttribute(literal::version, 6);
-		barrier->writeAttribute(literal::required, "0.6.0");
-		writeLineBreak(xml);
-		exportUndo();
-		exportRedo();
-		delete barrier;
-		writeLineBreak(xml);
+		if (Settings::getInstance().getSetting(Settings::General_SaveUndoRedo).toBool())
+		{
+			{
+				// Prevent Mapper versions < 0.6.0 from crashing
+				// when compatibilty mode IS activated
+				// Incompatible feature: new undo step types
+				XmlElementWriter barrier(xml, literal::barrier);
+				barrier.writeAttribute(literal::version, 6);
+				barrier.writeAttribute(literal::required, "0.6.0");
+				writeLineBreak(xml);
+				exportUndo();
+				exportRedo();
+			}
+			writeLineBreak(xml);
+		}
 	}
 	
 	xml.writeEndDocument();
@@ -360,6 +370,28 @@ void XMLFileExporter::exportMapParts()
 
 void XMLFileExporter::exportTemplates()
 {
+	// Update the relative paths of templates
+	if (auto file = qobject_cast<const QFileDevice*>(stream))
+	{
+		auto filename = file->fileName();
+		auto map_dir = QFileInfo(filename).absoluteDir();
+		if (!filename.isEmpty() && map_dir.exists())
+		{
+			for (int i = 0; i < map->getNumTemplates(); ++i)
+			{
+				auto temp = map->getTemplate(i);
+				if (temp->getTemplateState() != Template::Invalid)
+					temp->setTemplateRelativePath(map_dir.relativeFilePath(temp->getTemplatePath()));
+			}
+			for (int i = 0; i < map->getNumClosedTemplates(); ++i)
+			{
+				auto temp = map->getClosedTemplate(i);
+				if (temp->getTemplateState() != Template::Invalid)
+					temp->setTemplateRelativePath(map_dir.relativeFilePath(temp->getTemplatePath()));
+			}
+		}
+	}
+	
 	XmlElementWriter templates_element(xml, literal::templates);
 	
 	int num_templates = map->getNumTemplates() + map->getNumClosedTemplates();
@@ -586,8 +618,7 @@ void XMLFileImporter::importGeoreferencing(bool load_symbols_only)
 		if (error_text.isEmpty())
 			error_text = tr("Unknown error");
 		addWarning(tr("Unsupported or invalid georeferencing specification '%1': %2").
-		           arg(georef.getProjectedCRSSpec()).
-		           arg(error_text));
+		           arg(georef.getProjectedCRSSpec(), error_text));
 	}
 	
 	if (MapCoord::boundsOffset().isZero())
@@ -744,7 +775,7 @@ void XMLFileImporter::importColors()
 		for (auto&& in_component : item.components)
 		{
 			const MapColor* out_color = map->getColor(in_component.spot_color->getPriority());
-			if (out_color == NULL || out_color->getSpotColorMethod() != MapColor::SpotColor)
+			if (!out_color || out_color->getSpotColorMethod() != MapColor::SpotColor)
 			{
 				addWarning(tr("Spot color %1 not found while processing %2 (%3).").
 				  arg(in_component.spot_color->getPriority()).
@@ -935,6 +966,12 @@ void XMLFileImporter::importPrint()
 
 void XMLFileImporter::importUndo()
 {
+	if (!Settings::getInstance().getSetting(Settings::General_SaveUndoRedo).toBool())
+	{
+		xml.skipCurrentElement();
+		return;
+	}
+	
 	try
 	{
 		map->undoManager().loadUndo(xml, symbol_dict);
@@ -949,6 +986,12 @@ void XMLFileImporter::importUndo()
 
 void XMLFileImporter::importRedo()
 {
+	if (!Settings::getInstance().getSetting(Settings::General_SaveUndoRedo).toBool())
+	{
+		xml.skipCurrentElement();
+		return;
+	}
+	
 	try
 	{
 		map->undoManager().loadRedo(xml, symbol_dict);

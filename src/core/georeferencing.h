@@ -21,17 +21,21 @@
 #ifndef OPENORIENTEERING_GEOREFERENCING_H
 #define OPENORIENTEERING_GEOREFERENCING_H
 
+#include <cmath>
+#include <vector>
+
+#include <QObject>
 #include <QPointF>
 #include <QString>
 #include <QTransform>
 
-#include "latlon.h"
-#include "map_coord.h"
-#include "../fileformats/file_format.h"
+#include "core/latlon.h"
+#include "core/map_coord.h"
 
 class QDebug;
 class QXmlStreamReader;
 class QXmlStreamWriter;
+// IWYU pragma: no_forward_declare QPointF
 
 typedef void* projPJ;
 
@@ -71,7 +75,7 @@ extern "C" void registerProjFileHelper();
  * Conversions between "map coordinates" and "geographic coordinates" use the
  * projected coordinates as intermediate step.
  */
-class Georeferencing : public QObject
+class Georeferencing : public QObject  // clazy:exclude=copyable-polymorphic
 {
 Q_OBJECT
 
@@ -89,6 +93,12 @@ public:
 		/// crs specification).
 		Normal = 2
 	};
+	
+	
+	/**
+	 * A shared PROJ.4 specification of a WGS84 geographic CRS.
+	 */
+	static const QString geographic_crs_spec;
 	
 	
 	/**
@@ -141,7 +151,7 @@ public:
 	/** 
 	 * Cleans up memory allocated by the georeferencing 
 	 */
-	~Georeferencing();
+	~Georeferencing() override;
 	
 	
 	/** 
@@ -182,6 +192,13 @@ public:
 	 * convert coordinates from and to geographic coordinate systems.
 	 */
 	bool isLocal() const;
+	
+	/**
+	 * Returns true if the "projected CRS" is actually geographic.
+	 * 
+	 * \see pj_is_latlong(projPJ pj) in PROJ.4
+	 */
+	bool isGeographic() const;
 	
 	
 	/**
@@ -360,7 +377,7 @@ public:
 	 * @param params parameter values (ignore for empty spec)
 	 * @return true if the specification is valid or empty, false otherwise
 	 */
-	bool setProjectedCRS(const QString& id, QString spec = QString{}, std::vector< QString > params = std::vector<QString>());
+	bool setProjectedCRS(const QString& id, QString spec, std::vector< QString > params = std::vector<QString>());
 	
 	/**
 	 * Calculates the meridian convergence at the reference point.
@@ -425,19 +442,19 @@ public:
 	/**
 	 * Transforms geographic coordinates (lat/lon) to map coordinates.
 	 */
-	MapCoord toMapCoords(const LatLon& lat_lon, bool* ok = NULL) const;
+	MapCoord toMapCoords(const LatLon& lat_lon, bool* ok = nullptr) const;
 	
 	/**
 	 * Transforms geographic coordinates (lat/lon) to map coordinates.
 	 */
-	MapCoordF toMapCoordF(const LatLon& lat_lon, bool* ok = NULL) const;
+	MapCoordF toMapCoordF(const LatLon& lat_lon, bool* ok = nullptr) const;
 	
 	
 	/**
 	 * Transforms map coordinates from the other georeferencing to
 	 * map coordinates of this georeferencing, if possible. 
 	 */
-	MapCoordF toMapCoordF(const Georeferencing* other, const MapCoordF& map_coords, bool* ok = NULL) const;
+	MapCoordF toMapCoordF(const Georeferencing* other, const MapCoordF& map_coords, bool* ok = nullptr) const;
 	
 	
 	/**
@@ -548,7 +565,6 @@ private:
 	
 	projPJ geographic_crs;
 	
-	static const QString geographic_crs_spec;
 };
 
 /**
@@ -592,7 +608,7 @@ double Georeferencing::roundDeclination(double value)
 inline
 bool Georeferencing::isValid() const
 {
-	return state == Local || projected_crs != NULL;
+	return state == Local || projected_crs;
 }
 
 inline

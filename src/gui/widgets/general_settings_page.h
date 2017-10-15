@@ -21,12 +21,18 @@
 #ifndef OPENORIENTEERING_GENERAL_SETTINGS_PAGE_H
 #define OPENORIENTEERING_GENERAL_SETTINGS_PAGE_H
 
+#include <QObject>
+#include <QString>
+#include <QVariant>
+
 #include "settings_page.h"
 
 class QCheckBox;
 class QComboBox;
 class QDoubleSpinBox;
+class QEvent;
 class QSpinBox;
+class QWidget;
 
 
 class GeneralSettingsPage : public SettingsPage
@@ -76,6 +82,7 @@ private:
 	QCheckBox* tips_visible_check;
 	
 	QCheckBox* compatibility_check;
+	QCheckBox* undo_check;
 	QCheckBox* autosave_check;
 	QSpinBox*  autosave_interval_edit;
 	

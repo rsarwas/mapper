@@ -22,25 +22,22 @@
 #ifndef OPENORIENTEERING_LINE_SYMBOL_H
 #define OPENORIENTEERING_LINE_SYMBOL_H
 
-#include <vector>
+#include <vector>  // IWYU pragma: keep
 
 #include <Qt>
 #include <QtGlobal>
 #include <QString>
 
-#include "symbol.h"
+#include "core/map_coord.h"  // IWYU pragma: keep
+#include "core/symbols/symbol.h"
 
-QT_BEGIN_NAMESPACE
 class QIODevice;
 class QXmlStreamReader;
 class QXmlStreamWriter;
-QT_END_NAMESPACE
 
 class Map;
 class MapColor;
 class MapColorMap;
-class MapCoord;
-class MapCoordF;
 class Object;
 class ObjectRenderables;
 class PathObject;
@@ -105,7 +102,7 @@ public:
 	
 	/** Constructs an empty line symbol. */
 	LineSymbol() noexcept;
-	virtual ~LineSymbol();
+	~LineSymbol() override;
 	Symbol* duplicate(const MapColorMap* color_map = nullptr) const override;
 	
 	bool validate() const override;
@@ -173,7 +170,7 @@ public:
 	 * TODO: Should that better be a line property?
 	 * FIXME: shall be 0 for border lines.
 	 */
-	static float miterLimit() {return 1;}
+	static constexpr qreal miterLimit() { return 1; }
 	
 	// Getters / Setters
 	inline int getLineWidth() const {return line_width;}
@@ -207,6 +204,8 @@ public:
 	
 	inline bool getSuppressDashSymbolAtLineEnds() const {return suppress_dash_symbol_at_ends;}
 	inline void setSuppressDashSymbolAtLineEnds(bool value) {suppress_dash_symbol_at_ends = value;}
+	bool getScaleDashSymbol() const { return scale_dash_symbol; }
+	void setScaleDashSymbol(bool value) { scale_dash_symbol = value; }
 	
 	inline int getSegmentLength() const {return segment_length;}
 	inline void setSegmentLength(int value) {segment_length = value;}
@@ -346,6 +345,7 @@ protected:
 	int mid_symbols_per_spot;
 	int mid_symbol_distance;
 	bool suppress_dash_symbol_at_ends;
+	bool scale_dash_symbol;
 	
 	// Not dashed
 	int segment_length;

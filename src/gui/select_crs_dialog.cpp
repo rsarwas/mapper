@@ -21,15 +21,19 @@
 
 #include "select_crs_dialog.h"
 
+#include <Qt>
 #include <QCoreApplication>
 #include <QDialogButtonBox>
 #include <QFormLayout>
+#include <QLabel>
+#include <QLatin1String>
 #include <QPushButton>
+#include <QSpacerItem>
 #include <QVBoxLayout>
 
-#include "../core/georeferencing.h"
-#include "util_gui.h"
-#include "widgets/crs_selector.h"
+#include "core/georeferencing.h"
+#include "gui/util_gui.h"
+#include "gui/widgets/crs_selector.h"
 
 
 namespace {
@@ -110,7 +114,7 @@ QString SelectCRSDialog::currentCRSSpec() const
 		// nothing
 		break;
 	case SpecialCRS::Geographic:
-		spec = QLatin1String("+proj=latlong +datum=WGS84");
+		spec = Georeferencing::geographic_crs_spec;
 		break;
 	default:
 		spec = crs_selector->currentCRSSpec();

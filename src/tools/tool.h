@@ -22,26 +22,36 @@
 #ifndef OPENORIENTEERING_MAP_EDITOR_TOOL_H
 #define OPENORIENTEERING_MAP_EDITOR_TOOL_H
 
+#include <Qt>
 #include <QAction>
+#include <QCursor>
+#include <QObject>
 #include <QPointer>
+#include <QPointF>
+#include <QRgb>
+#include <QString>
+#include <QVariant>
 
 #include "core/map_coord.h"
 #include "gui/point_handles.h"
 
-class QAction;
+class QEvent;
 class QFocusEvent;
 class QGestureEvent;
+class QInputMethodEvent;
 class QKeyEvent;
 class QMouseEvent;
+class QPainter;
+class QPointF;
+class QWidget;
 
 class MainWindow;
 class Map;
 class MapEditorController;
-class MapRenderables;
 class MapWidget;
 class Object;
-class Renderable;
 class Symbol;
+
 
 /** 
  * @brief An abstract tool for editing a map.
@@ -93,7 +103,7 @@ public:
 	/**
 	 * @brief Destructs the MapEditorTool.
 	 */
-	virtual ~MapEditorTool();
+	~MapEditorTool() override;
 	
 	/**
 	 * @brief Performs initialization when the tool becomes active.
@@ -159,7 +169,7 @@ public:
 	
 	// Input method support
 	virtual bool inputMethodEvent(QInputMethodEvent *event);
-	virtual QVariant inputMethodQuery(Qt::InputMethodQuery, QVariant) const;
+	virtual QVariant inputMethodQuery(Qt::InputMethodQuery, const QVariant&) const;
 	
 	// Gesture input
 	virtual bool gestureEvent(QGestureEvent* event, MapWidget* widget);
@@ -262,7 +272,7 @@ public:
 	/**
 	 * @brief A value representing how close the user must click or hover to select a point.
 	 */
-	float clickTolerance() const;
+	qreal clickTolerance() const;
 	
 	// General color definitions which are used by all tools
 	
@@ -357,7 +367,7 @@ protected:
 private:	
 	QPointer<QAction> tool_action;
 	Type tool_type;
-	float click_tolerance;
+	qreal click_tolerance;
 	int scale_factor;
 	bool editing_in_progress;
 	bool uses_touch_cursor;
@@ -412,7 +422,7 @@ int MapEditorTool::scaleFactor() const
 }
 
 inline
-float MapEditorTool::clickTolerance() const
+qreal MapEditorTool::clickTolerance() const
 {
 	return click_tolerance;
 }

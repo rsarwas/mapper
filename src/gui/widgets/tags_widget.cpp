@@ -27,11 +27,11 @@
 #include <QToolButton>
 #include <QVBoxLayout>
 
-#include "../main_window.h"
 #include "core/map.h"
+#include "core/objects/object.h"
+#include "gui/main_window.h"
 #include "gui/map/map_editor.h"
 #include "undo/object_undo.h"
-#include "core/objects/object.h"
 #include "util/util.h"
 
 
@@ -78,10 +78,10 @@ TagsWidget::TagsWidget(Map* map, MapView* main_view, MapEditorController* contro
 	
 	setLayout(layout);
 	
-	connect(tags_table, SIGNAL(cellChanged(int,int)), this, SLOT(cellChange(int,int)));
+	connect(tags_table, &QTableWidget::cellChanged, this, &TagsWidget::cellChange);
 	
-	connect(map, SIGNAL(objectSelectionChanged()), this, SLOT(objectTagsChanged()));
-	connect(map, SIGNAL(selectedObjectEdited()), this, SLOT(objectTagsChanged()));
+	connect(map, &Map::objectSelectionChanged, this, &TagsWidget::objectTagsChanged);
+	connect(map, &Map::selectedObjectEdited, this, &TagsWidget::objectTagsChanged);
 	
 	react_to_changes = true;
 	objectTagsChanged();

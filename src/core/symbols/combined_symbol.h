@@ -27,13 +27,10 @@
 #include <vector>
 
 #include <Qt>
-#include <QtGlobal>
 
-QT_BEGIN_NAMESPACE
 class QIODevice;
 class QXmlStreamReader;
 class QXmlStreamWriter;
-QT_END_NAMESPACE
 
 class Map;
 class MapColor;
@@ -62,7 +59,7 @@ friend class PointSymbolEditorWidget;
 friend class OCAD8FileImport;
 public:
 	CombinedSymbol();
-	virtual ~CombinedSymbol();
+	~CombinedSymbol() override;
 	Symbol* duplicate(const MapColorMap* color_map = nullptr) const override;
 	
 	bool validate() const override;

@@ -19,10 +19,17 @@
 
 #include "compass.h"
 
-#include <qmath.h>
+#include <cmath>
+
+#include <QtMath>  // IWYU pragma: keep
+#include <QtGlobal>  // IWYU pragma: keep
 #include <QMetaMethod>
-#include <QMutex>
+#include <QMetaObject>
+#include <QMutex>  // IWYU pragma: keep
 #include <QTime>
+
+
+// clazy:excludeall=missing-qobject-macro
 
 
 namespace SensorHelpers
@@ -238,7 +245,7 @@ public:
 		thread.start();
 	}
 	
-	~CompassPrivate()
+	~CompassPrivate() override
 	{
 		thread.keep_running = false;
 		thread.condition.wakeAll();
@@ -276,7 +283,7 @@ public:
 	}
 	
 	/** Called on new gyro readings */
-	virtual bool filter(QGyroscopeReading* reading)
+	bool filter(QGyroscopeReading* reading) override
 	{
 		if (! gyro_orientation_initialized)
 			return false;
@@ -333,6 +340,7 @@ public:
 	}
 	
 private:
+	/// \todo Review QThread inheritance / Q_OBJECT macro usage
 	class SensorThread : public QThread
 	{
 	// no Q_OBJECT as it is not required here and was problematic in .cpp
@@ -367,8 +375,8 @@ private:
 		
 		void filter()
 		{
-			if (p->accelerometer.reading() == NULL ||
-				p->magnetometer.reading() == NULL)
+			if (p->accelerometer.reading() == nullptr ||
+				p->magnetometer.reading() == nullptr)
 				return;
 			
 			// Make copies of the sensor readings (and hope that the reading thread
@@ -450,7 +458,7 @@ private:
 			p->compass->emitAzimuthChanged(p->latest_azimuth);
 		}
 		
-		void run()
+		void run() override
 		{
 			// Wait until sensors are initialized
 			QThread::msleep(1000);
@@ -504,7 +512,7 @@ Compass::Compass(): QObject()
 #ifdef QT_SENSORS_LIB
 	p = new CompassPrivate(this);
 #else
-	p = NULL;
+	p = nullptr;
 #endif
 }
 

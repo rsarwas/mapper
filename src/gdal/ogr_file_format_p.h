@@ -23,6 +23,7 @@
 #include <memory>
 
 #include <QByteArray>
+#include <QCoreApplication>
 #include <QHash>
 
 // The GDAL/OGR C API is more stable than the C++ API.
@@ -30,12 +31,10 @@
 #include <ogr_srs_api.h>
 
 #include "core/map_coord.h"
-#include "fileformats/file_import_export.h"
 #include "core/symbols/symbol.h"
+#include "fileformats/file_import_export.h"
 
-QT_BEGIN_NAMESPACE
 class QFile;
-QT_END_NAMESPACE
 
 class AreaSymbol;
 class Georeferencing;
@@ -110,7 +109,8 @@ namespace ogr
  */
 class OgrFileImport : public Importer
 {
-Q_OBJECT
+	Q_DECLARE_TR_FUNCTIONS(OgrFileImport)
+	
 public:
 	/**
 	 * The unit type indicates the coordinate system the data units refers to.
@@ -134,6 +134,12 @@ public:
 	~OgrFileImport() override;
 	
 	
+	/**
+	 * Enables the import of georeferencing from the geospatial data.
+	 * 
+	 * If this import is not enabled, the georeferencing of the Map given to
+	 * the constructor will be used instead.
+	 */
 	void setGeoreferencingImportEnabled(bool enabled);
 	
 	
@@ -153,9 +159,20 @@ public:
 	
 	
 protected:
+	ogr::unique_srs srsFromMap();
+	
+	/**
+	 * Tests if the file's spatial references can be used with the given georeferencing.
+	 * 
+	 * This returns true only if all layers' spatial references can be
+	 * transformed to the spatial reference systems represented by georef.
+	 * It will always return false for a local or invalid Georeferencing.
+	 */
+	static bool checkGeoreferencing(OGRDataSourceH data_source, const Georeferencing& georef);
+	
 	void import(bool load_symbols_only) override;
 	
-	void importGeoreferencing(OGRDataSourceH data_source);
+	ogr::unique_srs importGeoreferencing(OGRDataSourceH data_source);
 	
 	void importStyles(OGRDataSourceH data_source);
 	

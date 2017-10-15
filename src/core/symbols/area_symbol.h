@@ -33,12 +33,10 @@
 
 #include "symbol.h"
 
-QT_BEGIN_NAMESPACE
 class QIODevice;
 class QRectF;
 class QXmlStreamReader;
 class QXmlStreamWriter;
-QT_END_NAMESPACE
 
 class AreaRenderable;
 class LineSymbol;
@@ -200,7 +198,7 @@ public:
 			const AreaRenderable& outline,
 			float delta_rotation,
 			const MapCoord& pattern_origin,
-			QRectF point_extent,
+			const QRectF& point_extent,
 			LineSymbol* line,
 			qreal rotation,
 			ObjectRenderables& output

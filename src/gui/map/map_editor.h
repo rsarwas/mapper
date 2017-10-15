@@ -24,7 +24,6 @@
 
 #include <memory>
 
-#include <QtGlobal>
 #include <QClipboard>
 #include <QHash>
 #include <QObject>
@@ -35,7 +34,6 @@
 
 #include "gui/main_window_controller.h"
 
-QT_BEGIN_NAMESPACE
 class QAction;
 class QByteArray;
 class QComboBox;
@@ -49,7 +47,6 @@ class QSignalMapper;
 class QToolBar;
 class QToolButton;
 class QWidget;
-QT_END_NAMESPACE
 
 class ActionGridBar;
 class CompassDisplay;
@@ -758,7 +755,6 @@ private:
 	
 	QFrame* statusbar_zoom_frame;
 	QLabel* statusbar_cursorpos_label;
-	QLabel* statusbar_objecttag_label;
 	QAction* copy_coords_act;
 	
 	QToolBar* toolbar_view;
@@ -772,6 +768,7 @@ private:
 	ActionGridBar* top_action_bar;
 	QToolButton* show_top_bar_button;
 	QAction* mobile_symbol_selector_action;
+	QMenu* mobile_symbol_button_menu;
 	
 	QComboBox* mappart_selector_box;
 	

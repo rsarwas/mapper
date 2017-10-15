@@ -18,22 +18,29 @@
  */
 
 
-#ifndef _OPENORIENTEERING_DRAW_POINT_GPS_H_
-#define _OPENORIENTEERING_DRAW_POINT_GPS_H_
+#ifndef OPENORIENTEERING_DRAW_POINT_GPS_H
+#define OPENORIENTEERING_DRAW_POINT_GPS_H
 
+#include <QObject>
 #include <QPointer>
 #include <QScopedPointer>
 
-#include "tool_base.h"
+#include "tools/tool_base.h"
 
-QT_BEGIN_NAMESPACE
+class QAction;
+class QKeyEvent;
 class QLabel;
-QT_END_NAMESPACE
+class QPainter;
+class QRectF;
+
 class GPSDisplay;
+class MapCoordF;
+class MapEditorController;
+class MapRenderables;
 class MapWidget;
 class PointObject;
 class Symbol;
-class SymbolWidget;
+
 
 /**
  * Tool to draw a PointObject at the GPS position.
@@ -43,7 +50,7 @@ class DrawPointGPSTool : public MapEditorToolBase
 Q_OBJECT
 public:
 	DrawPointGPSTool(GPSDisplay* gps_display, MapEditorController* editor, QAction* tool_action);
-	virtual ~DrawPointGPSTool();
+	~DrawPointGPSTool() override;
 	
 public slots:
 	void newGPSPosition(MapCoordF coord, float accuracy);
@@ -53,14 +60,14 @@ protected slots:
 	void symbolDeleted(int pos, const Symbol* old_symbol);
 	
 protected:
-	virtual void initImpl();
-	virtual int updateDirtyRectImpl(QRectF& rect);
-	virtual void drawImpl(QPainter* painter, MapWidget* widget);
-	virtual void updateStatusText();
-	virtual void objectSelectionChangedImpl();
+	void initImpl() override;
+	int updateDirtyRectImpl(QRectF& rect) override;
+	void drawImpl(QPainter* painter, MapWidget* widget) override;
+	void updateStatusText() override;
+	void objectSelectionChangedImpl() override;
 	
-	virtual void clickRelease();
-	virtual bool keyPress(QKeyEvent* event);
+	void clickRelease() override;
+	bool keyPress(QKeyEvent* event) override;
 	
 	double x_sum;
 	double y_sum;

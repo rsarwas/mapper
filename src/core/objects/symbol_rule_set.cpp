@@ -20,8 +20,20 @@
 
 #include "symbol_rule_set.h"
 
+#include <algorithm>
+#include <cstddef>
+#include <functional>
+#include <iterator>
+#include <memory>
+#include <type_traits>
 #include <unordered_set>
 
+#include <QtGlobal>
+#include <QChar>
+#include <QHash>
+#include <QLatin1Char>
+#include <QLatin1String>
+#include <QString>
 #include <QTextStream>
 
 #include "core/map.h"
@@ -294,7 +306,7 @@ void SymbolRuleSet::writeCrt(QTextStream& stream) const
 
 
 
-bool SymbolRuleSet::operator()(Object* object, MapPart*, int) const
+void SymbolRuleSet::operator()(Object* object) const
 {
 	for (const auto& item : *this)
 	{
@@ -304,7 +316,6 @@ bool SymbolRuleSet::operator()(Object* object, MapPart*, int) const
 			break;
 		}
 	}
-	return true;
 }
 
 
@@ -358,7 +369,7 @@ void SymbolRuleSet::apply(Map& object_map, const Map& symbol_set, Options option
 	}
 	
 	// Change symbols for all objects
-	object_map.applyOnAllObjects(*this);
+	object_map.applyOnAllObjects(std::cref(*this));
 	
 	// Delete unused old symbols
 	if (!old_symbols.empty())

@@ -23,11 +23,12 @@
 
 #include <QPainter>
 
-#include "core/map_grid.h"
-#include "gui/map/map_widget.h"
-#include "core/objects/object.h"
 #include "settings.h"
-#include "draw_text_tool.h"
+#include "core/map.h"
+#include "core/map_grid.h"
+#include "core/objects/object.h"
+#include "gui/map/map_widget.h"
+#include "tools/tool.h"
 #include "util/util.h"
 
 
@@ -39,7 +40,7 @@ ConstrainAngleToolHelper::ConstrainAngleToolHelper()
    active(true),
    have_default_angles_only(false)
 {
-	connect(&Settings::getInstance(), SIGNAL(settingsChanged()), this, SLOT(settingsChanged()));
+	connect(&Settings::getInstance(), &Settings::settingsChanged, this, &ConstrainAngleToolHelper::settingsChanged);
 }
 
 ConstrainAngleToolHelper::ConstrainAngleToolHelper(const MapCoordF& center)
@@ -74,10 +75,10 @@ void ConstrainAngleToolHelper::addAngle(double angle)
 	}
 	
 	// Fuzzy compare for existing angle as otherwise very similar angles will be added
-	for (std::set<double>::const_iterator it = angles.begin(), end = angles.end(); it != end; ++it)
+	for (auto value : angles)
 	{
 		const double min_delta = 0.25 * 2*M_PI / 360;	// minimum 1/4 degree difference
-		if (qAbs(angle - *it) < min_delta || qAbs(angle - *it) > 2*M_PI - min_delta)
+		if (qAbs(angle - value) < min_delta || qAbs(angle - value) > 2*M_PI - min_delta)
 			return;
 	}
 	
@@ -131,20 +132,20 @@ double ConstrainAngleToolHelper::getConstrainedCursorPosMap(const MapCoordF& in_
 	
 	double lower_angle = in_angle, lower_angle_delta = 999;
 	double higher_angle = in_angle, higher_angle_delta = -999;
-	for (std::set<double>::const_iterator it = angles.begin(), end = angles.end(); it != end; ++it)
+	for (auto value : angles)
 	{
-		double delta = in_angle - *it;
+		double delta = in_angle - value;
 		if (delta < -M_PI)
-			delta = in_angle - (*it - 2*M_PI);
+			delta = in_angle - (value - 2*M_PI);
 		else if (delta > M_PI)
-			delta = (in_angle - 2*M_PI) - *it;
+			delta = (in_angle - 2*M_PI) - value;
 		
 		if (delta > 0)
 		{
 			if (delta < lower_angle_delta)
 			{
 				lower_angle_delta = delta;
-				lower_angle = *it;
+				lower_angle = value;
 			}
 		}
 		else
@@ -152,7 +153,7 @@ double ConstrainAngleToolHelper::getConstrainedCursorPosMap(const MapCoordF& in_
 			if (delta > higher_angle_delta)
 			{
 				higher_angle_delta = delta;
-				higher_angle = *it;
+				higher_angle = value;
 			}
 		}
 	}
@@ -230,18 +231,18 @@ void ConstrainAngleToolHelper::draw(QPainter* painter, MapWidget* widget)
 	painter->setOpacity(opacity);
 	painter->setPen(MapEditorTool::inactive_color);
 	painter->setBrush(Qt::NoBrush);
-	for (std::set<double>::const_iterator it = angles.begin(), end = angles.end(); it != end; ++it)
+	for (auto value : angles)
 	{
-		if (*it == active_angle)
+		if (value == active_angle)
 		{
 			painter->setPen(MapEditorTool::active_color);
 			painter->setOpacity(1.0f);
 		}
 		
-		QPointF outer_point = center_point + getDisplayRadius() * QPointF(cos(*it), -sin(*it));
+		QPointF outer_point = center_point + getDisplayRadius() * QPointF(cos(value), -sin(value));
 		painter->drawLine(center_point, outer_point);
 		
-		if (*it == active_angle)
+		if (value == active_angle)
 		{
 			painter->setPen(MapEditorTool::inactive_color);
 			painter->setOpacity(opacity);
@@ -268,7 +269,7 @@ void ConstrainAngleToolHelper::settingsChanged()
 // ### SnappingToolHelper ###
 
 SnappingToolHelper::SnappingToolHelper(MapEditorTool* tool, SnapObjects filter)
- : QObject(NULL),
+ : QObject(nullptr),
    filter(filter),
    snapped_type(NoSnapping),
    map(tool->map()),
@@ -295,7 +296,7 @@ MapCoord SnappingToolHelper::snapToObject(MapCoordF position, MapWidget* widget,
 	auto result_position = MapCoord { position };
 	SnappingToolHelperSnapInfo result_info;
 	result_info.type = NoSnapping;
-	result_info.object = NULL;
+	result_info.object = nullptr;
 	result_info.coord_index = -1;
 	result_info.path_coord.pos = MapCoordF(0, 0);
 	result_info.path_coord.index = -1;
@@ -309,9 +310,9 @@ MapCoord SnappingToolHelper::snapToObject(MapCoordF position, MapWidget* widget,
 		map->findAllObjectsAt(position, snap_distance, true, false, false, true, objects);
 		
 		// Find closest snap spot from map objects
-		for (SelectionInfoVector::const_iterator it = objects.begin(), end = objects.end(); it != end; ++it)
+		for (const auto& info : objects)
 		{
-			Object* object = it->second;
+			Object* object = info.second;
 			if (object == exclude_object)
 				continue;
 			
@@ -387,7 +388,7 @@ MapCoord SnappingToolHelper::snapToObject(MapCoordF position, MapWidget* widget,
 			closest_distance_sq = distance_sq;
 			result_position = MapCoord(closest_grid_point);
 			result_info.type = GridCorners;
-			result_info.object = NULL;
+			result_info.object = nullptr;
 			result_info.coord_index = -1;
 		}
 	}
@@ -400,7 +401,7 @@ MapCoord SnappingToolHelper::snapToObject(MapCoordF position, MapWidget* widget,
 		emit displayChanged();
 	}
 	
-	if (info != NULL)
+	if (info)
 		*info = result_info;
 	return result_position;
 }

@@ -33,12 +33,6 @@
 #include <QImageReader>
 
 #include "settings.h"
-#include "ocad8_file_format.h"
-#include "ocad8_file_format_p.h"
-#include "ocd_types_v9.h"
-#include "ocd_types_v10.h"
-#include "ocd_types_v11.h"
-#include "ocd_types_v12.h"
 #include "core/crs_template.h"
 #include "core/georeferencing.h"
 #include "core/map.h"
@@ -50,6 +44,12 @@
 #include "core/symbols/line_symbol.h"
 #include "core/symbols/point_symbol.h"
 #include "core/symbols/text_symbol.h"
+#include "fileformats/file_format.h"
+#include "fileformats/ocad8_file_format_p.h"
+#include "fileformats/ocd_types_v9.h"
+#include "fileformats/ocd_types_v10.h"
+#include "fileformats/ocd_types_v11.h"
+#include "fileformats/ocd_types_v12.h"
 #include "templates/template.h"
 #include "templates/template_image.h"
 #include "templates/template_map.h"
@@ -208,6 +208,7 @@ void OcdFileImport::importImplementation(bool load_symbols_only)
 	}
 #endif
 	
+	map->setSymbolSetId(QStringLiteral("OCD"));
 	importGeoreferencing(file);
 	importColors(file);
 	importSymbols(file);
@@ -913,7 +914,7 @@ Symbol* OcdFileImport::importLineSymbol(const S& ocd_symbol, int ocd_version)
 	
 	// Create point symbols along line; middle ("normal") dash, corners, start, and end.
 	OcdImportedLineSymbol* symbol_line = main_line ? main_line : double_line;	// Find the line to attach the symbols to
-	if (symbol_line == nullptr)
+	if (!symbol_line)
 	{
 		main_line = new OcdImportedLineSymbol();
 		symbol_line = main_line;
@@ -927,15 +928,15 @@ Symbol* OcdFileImport::importLineSymbol(const S& ocd_symbol, int ocd_version)
 	
 	// TODO: taper fields (tmode and tlast)
 	
-	if (main_line == nullptr && framing_line == nullptr)
+	if (!main_line && !framing_line)
 	{
 		return double_line;
 	}
-	else if (double_line == nullptr && framing_line == nullptr)
+	else if (!double_line && !framing_line)
 	{
 		return main_line;
 	}
-	else if (main_line == nullptr && double_line == nullptr)
+	else if (!main_line && !double_line)
 	{
 		return framing_line;
 	}
@@ -1001,9 +1002,9 @@ OcdFileImport::OcdImportedLineSymbol* OcdFileImport::importLineSymbolBase(const 
 			ocd_length = (attributes.dist_from_start + attributes.dist_from_end) / 2;
 			addSymbolWarning( symbol,
 			  tr("Different lengths for pointed caps at begin (%1 mm) and end (%2 mm) are not supported. Using %3 mm.").
-			  arg(locale.toString(0.001f * convertLength(attributes.dist_from_start))).
-			  arg(locale.toString(0.001f * convertLength(attributes.dist_from_end))).
-			  arg(locale.toString(0.001f * convertLength(ocd_length))) );
+			  arg(locale.toString(0.001f * convertLength(attributes.dist_from_start)),
+			      locale.toString(0.001f * convertLength(attributes.dist_from_end)),
+			      locale.toString(0.001f * convertLength(ocd_length))) );
 		}
 		symbol->pointed_cap_length = convertLength(ocd_length);
 		symbol->join_style = LineSymbol::RoundJoin;	// NOTE: while the setting may be different (see what is set in the first place), OC*D always draws round joins if the line cap is pointed!
@@ -1032,15 +1033,15 @@ OcdFileImport::OcdImportedLineSymbol* OcdFileImport::importLineSymbolBase(const 
 					// End length not equal to 0.5 * main length
 					addSymbolWarning( symbol,
 					  tr("The dash pattern's end length (%1 mm) cannot be imported correctly. Using %2 mm.").
-					  arg(locale.toString(0.001f * convertLength(attributes.end_length))).
-					  arg(locale.toString(0.001f * symbol->dash_length)) );
+					  arg(locale.toString(0.001f * convertLength(attributes.end_length)),
+					      locale.toString(0.001f * symbol->dash_length)) );
 				}
 				if (attributes.end_gap)
 				{
 					addSymbolWarning( symbol,
 					  tr("The dash pattern's end gap (%1 mm) cannot be imported correctly. Using %2 mm.").
-					  arg(locale.toString(0.001f * convertLength(attributes.end_gap))).
-					  arg(locale.toString(0.001f * symbol->break_length)) );
+					  arg(locale.toString(0.001f * convertLength(attributes.end_gap)),
+					      locale.toString(0.001f * symbol->break_length)) );
 				}
 			}
 		}
@@ -1064,8 +1065,8 @@ OcdFileImport::OcdImportedLineSymbol* OcdFileImport::importLineSymbolBase(const 
 					// End length not equal to 0.5 * main length
 					addSymbolWarning( symbol,
 					  tr("The dash pattern's end length (%1 mm) cannot be imported correctly. Using %2 mm.").
-					  arg(locale.toString(0.001f * convertLength(attributes.end_length))).
-					  arg(locale.toString(0.001f * (symbol->half_outer_dashes ? (symbol->dash_length/2) : symbol->dash_length))) );
+					  arg(locale.toString(0.001f * convertLength(attributes.end_length)),
+					      locale.toString(0.001f * (symbol->half_outer_dashes ? (symbol->dash_length/2) : symbol->dash_length))) );
 				}
 			}
 			
@@ -1079,8 +1080,8 @@ OcdFileImport::OcdImportedLineSymbol* OcdFileImport::importLineSymbolBase(const 
 				{
 					addSymbolWarning( symbol,
 					  tr("The dash pattern's end gap (%1 mm) cannot be imported correctly. Using %2 mm.").
-					  arg(locale.toString(0.001f * convertLength(attributes.end_gap))).
-					  arg(locale.toString(0.001f * symbol->in_group_break_length)) );
+					  arg(locale.toString(0.001f * convertLength(attributes.end_gap)),
+					      locale.toString(0.001f * symbol->in_group_break_length)) );
 				}
 			}
 		}
@@ -1441,7 +1442,7 @@ LineSymbol* OcdFileImport::importRectangleSymbol(const S& ocd_symbol)
 
 void OcdFileImport::setupPointSymbolPattern(PointSymbol* symbol, std::size_t data_size, const Ocd::PointSymbolElementV8* elements, int version)
 {
-	Q_ASSERT(symbol != nullptr);
+	Q_ASSERT(symbol);
 	
 	symbol->setRotatable(true);
 	bool base_symbol_used = false;

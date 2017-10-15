@@ -26,6 +26,7 @@
 #include <QCoreApplication>
 #include <QMetaType>
 #include <QString>
+#include <QStringRef>
 
 class Map;
 class MapEditorController;
@@ -74,9 +75,9 @@ public:
 		std::unique_ptr<ObjectQuery> second;
 		
 		LogicalOperands() = default;
-		LogicalOperands(const LogicalOperands& proto);
+		explicit LogicalOperands(const LogicalOperands& proto); // maybe expensive copying
 		LogicalOperands(LogicalOperands&&) = default;
-		~LogicalOperands() = default;
+		~LogicalOperands();
 		LogicalOperands& operator=(const LogicalOperands& proto);
 		LogicalOperands& operator=(LogicalOperands&&) = default;
 	 };
@@ -86,10 +87,12 @@ public:
 	{
 		QString key;
 		QString value;
+		
+		~TagOperands();
 	};
 
 	ObjectQuery() noexcept;
-	ObjectQuery(const ObjectQuery& query);
+	explicit ObjectQuery(const ObjectQuery& query); // maybe expensive copying
 	ObjectQuery(ObjectQuery&& proto) noexcept;
 	ObjectQuery& operator=(const ObjectQuery& proto) noexcept;
 	ObjectQuery& operator=(ObjectQuery&& proto) noexcept;

@@ -25,19 +25,16 @@
 
 #include <vector>
 
-#include <QtGlobal>
 #include <QObject>
 #include <QString>
 #include <QTabWidget>
 
-QT_BEGIN_NAMESPACE
 class QCheckBox;
 class QComboBox;
 class QLineEdit;
 class QPushButton;
 class QTextEdit;
 class QWidget;
-QT_END_NAMESPACE
 
 class Symbol;
 class SymbolSettingDialog;
@@ -87,10 +84,10 @@ signals:
 	void propertiesModified();
 	
 protected slots:
-	void numberChanged(QString text);
+	void numberChanged(const QString& text);
 	void languageChanged();
 	void editClicked();
-	void nameChanged(QString text);
+	void nameChanged(const QString& text);
 	void descriptionChanged();
 	void helperSymbolChanged(bool checked);
 	

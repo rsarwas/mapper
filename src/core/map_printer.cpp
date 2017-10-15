@@ -21,18 +21,27 @@
 
 #include "map_printer.h"
 
-#include <limits>
+#include <cmath>
 
+#include <Qt>
+#include <QtMath>
+#include <QColor>
 #include <QDebug>
-#include <QPaintEngine>
+#include <QHash>
+#include <QImage>
+#include <QLatin1String>
+#include <QPagedPaintDevice>
+#include <QPaintDevice>
+#include <QPaintEngine> // IWYU pragma: keep
 #include <QPainter>
-#include <QScopedValueRollback>
-#include <QXmlStreamAttributes>
+#include <QPointF>
+#include <QStringRef>
+#include <QTransform>
 #include <QXmlStreamReader>
-#include <QXmlStreamWriter>
 
 
 #if defined(QT_PRINTSUPPORT_LIB)
+#  include <QPrinter>
 #  include <advanced_pdf_printer.h>
 #  include <printer_properties.h>
 #  if defined(Q_OS_WIN)
@@ -40,15 +49,13 @@
 #  endif
 #endif
 
-#include "../core/georeferencing.h"
-#include "map_color.h"
-#include "../core/map_view.h"
-#include "map.h"
+#include "core/georeferencing.h"
+#include "core/map.h"
+#include "core/map_color.h"
+#include "core/map_view.h"
 #include "core/renderables/renderable.h"
-#include "../settings.h"
-#include "../templates/template.h"
-#include "util/util.h"
-#include "../util/xml_stream_util.h"
+#include "templates/template.h"
+#include "util/xml_stream_util.h"
 
 
 // ### A namespace which collects various string constants of type QLatin1String. ###
@@ -1148,12 +1155,42 @@ bool MapPrinter::printMap(QPrinter* printer)
 		return false;
 	}
 	
-	if (printer->paintEngine()->type() == QPaintEngine::Windows)
+	/* Non-opaque drawing of vector data to the raw printer will trigger
+	 * internal rasterization in Qt.
+	 */
+	auto engine_will_rasterize = [](const Map& map, const MapView* view, const MapPrinterOptions& options)->bool {
+		if (!view)
+			return false;
+		
+		if (options.mode != MapPrinterOptions::Raster)
+		{
+			auto visibility = view->effectiveMapVisibility();
+			if (visibility.visible && visibility.opacity < 1.0)
+				return true;
+		}
+			
+		for (int i = 0; i < map.getNumTemplates(); ++i)
+		{
+			auto temp = map.getTemplate(i);
+			if (temp->isRasterGraphics())
+				continue;
+			auto visibility = view->getTemplateVisibility(temp);
+			if (visibility.visible && visibility.opacity < 1.0)
+				return true;
+		}
+		
+		return false;
+	};
+
+	if (printer->paintEngine()->type() == QPaintEngine::Windows
+	    && !engine_will_rasterize(map, view, options) )
 	{
 		/* QWin32PrintEngine will (have to) do rounding when passing coordinates
 		 * to GDI, using the device's reported logical resolution.
 		 * We establish an MM_ISOTROPIC transformation from a higher resolution
 		 * to avoid the loss of precision due to this rounding.
+		 * However, output of rasterization produced by Qt fails when the
+		 * MM_ISOTROPIC transformation is active.
 		 */
 		
 		QWin32PrintEngine* engine = static_cast<QWin32PrintEngine*>(printer->printEngine());

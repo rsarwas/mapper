@@ -22,7 +22,6 @@
 #include "template_list_widget.h"
 
 #include <QCheckBox>
-#include <QFileDialog>
 #include <QHeaderView>
 #include <QInputDialog>
 #include <QKeyEvent>
@@ -35,19 +34,20 @@
 #include <QSignalBlocker>
 #include <QTableWidget>
 #include <QToolButton>
+#include <QToolTip>
 
 #include "settings.h"
 #include "core/georeferencing.h"
 #include "core/map.h"
 #include "core/objects/object.h"
-#include "gui/widgets/segmented_button_layout.h"
+#include "gui/file_dialog.h"
 #include "gui/main_window.h"
 #include "gui/map/map_editor.h"
 #include "gui/map/map_widget.h"
+#include "gui/widgets/segmented_button_layout.h"
 #include "templates/template.h"
 #include "templates/template_adjust.h"
 #include "templates/template_map.h"
-#include "templates/template_position_dock_widget.h"
 #include "templates/template_tool_move.h"
 #include "util/item_delegates.h"
 #include "util/util.h"
@@ -60,24 +60,15 @@
  */
 struct ApplyTemplateTransform
 {
-	constexpr ApplyTemplateTransform(const TemplateTransform& transform)
-	 : transform(transform)
-	{
-		// nothing else
-	}
+	const TemplateTransform& transform;
 	
-	inline bool operator()(Object* object, MapPart* part, int object_index) const
+	void operator()(Object* object) const
 	{ 
-		Q_UNUSED(part);
-		Q_UNUSED(object_index);
 		object->rotate(transform.template_rotation);
 		object->scale(transform.template_scale_x, transform.template_scale_y);
 		object->move(transform.template_x, transform.template_y);
 		object->update();
-		return true;
 	}
-private:
-	const TemplateTransform& transform;
 };
 
 
@@ -379,15 +370,13 @@ std::unique_ptr<Template> TemplateListWidget::showOpenTemplateDialog(QWidget* di
 	{
 		pattern.append(QLatin1String(" *."));
 		pattern.append(QLatin1String(extension));
-		pattern.append(QLatin1String(" *."));
-		pattern.append(QString(QLatin1String(extension)).toUpper());
 	}
 	pattern.remove(0, 1);
-	QString path = QFileDialog::getOpenFileName(dialog_parent,
-	                                            tr("Open image, GPS track or DXF file"),
-	                                            template_directory,
-	                                            QString::fromLatin1("%1 (%2);;%3 (*.*)").arg(
-	                                                tr("Template files"), pattern, tr("All files")));
+	QString path = FileDialog::getOpenFileName(dialog_parent,
+	                                           tr("Open image, GPS track or DXF file"),
+	                                           template_directory,
+	                                           QString::fromLatin1("%1 (%2);;%3 (*.*)").arg(
+	                                               tr("Template files"), pattern, tr("All files")));
 	path = QFileInfo(path).canonicalFilePath();
 	
 	if (path.isEmpty())
@@ -650,7 +639,7 @@ void TemplateListWidget::cellChange(int row, int column)
 		visibility = main_view->getTemplateVisibility(temp);
 	}
 	
-	auto updateVisibility = [this](const Template* temp, TemplateVisibility vis)
+	auto updateVisibility = [this](Template* temp, TemplateVisibility vis)
 	{
 		if (temp)
 			main_view->setTemplateVisibility(temp, vis);
@@ -689,9 +678,31 @@ void TemplateListWidget::cellChange(int row, int column)
 					}
 					else
 					{
+						if (state != Template::Loaded)
+						{
+							// Ensure feedback before slow loading/drawing
+							QSignalBlocker block(template_table);
+							template_table->item(row, 0)->setCheckState(Qt::PartiallyChecked);
+							auto item_rect = template_table->visualItemRect(template_table->item(row, 1));
+							QToolTip::showText(template_table->mapToGlobal(item_rect.bottomLeft()),
+							                   qApp->translate("MainWindow", "Opening %1").arg(temp->getTemplateFilename()) );
+							// QToolTip seems to need to event loop runs.
+							qApp->processEvents(QEventLoop::ExcludeUserInputEvents);
+							qApp->processEvents(QEventLoop::ExcludeUserInputEvents);
+						}
 						visibility.visible = true;
 						updateVisibility(temp, visibility);
 						setAreaDirty();
+						if (state != Template::Loaded)
+						{
+							QToolTip::hideText();
+							if (temp->getTemplateState() != Template::Loaded)
+							{
+								QMessageBox::warning(this, qApp->translate("MainWindow", "Error"),
+								                     qApp->translate("Importer", "Failed to load template '%1', reason: %2")
+								                     .arg(temp->getTemplateFilename(), temp->errorString()) );
+							}
+						}
 					}
 					updateRow(row);
 					updateButtons();
@@ -951,13 +962,13 @@ void TemplateListWidget::importClicked()
 	{
 		template_map.setGeoreferencing(prototype->templateMap()->getGeoreferencing());
 		template_map.importMap(prototype->templateMap(), Map::MinimalObjectImport, window());
-		template_map.applyOnAllObjects(ApplyTemplateTransform(transform));
+		template_map.applyOnAllObjects(ApplyTemplateTransform{transform});
 	}
 	else if (qstrcmp(prototype->getTemplateType(), "TemplateMap") == 0
 	         && template_map.loadFrom(prototype->getTemplatePath(), this, nullptr, false, true))
 	{
 		if (!prototype->isTemplateGeoreferenced())
-			template_map.applyOnAllObjects(ApplyTemplateTransform(transform));
+			template_map.applyOnAllObjects(ApplyTemplateTransform{transform});
 		
 		double nominal_scale = (double)template_map.getScaleDenominator() / (double)map->getScaleDenominator();
 		double current_scale = 0.5 * (transform.template_scale_x + transform.template_scale_y);
@@ -1236,6 +1247,7 @@ void TemplateListWidget::updateRow(int row)
 		name_item->setForeground(foreground);
 		name_item->setText(name);
 		name_item->setData(Qt::ToolTipRole, path);
+		name_item->setData(Qt::DecorationRole, {});
 		auto prev_checkable = name_item->flags() & Qt::ItemIsUserCheckable;
 		name_item->setFlags(Qt::ItemIsSelectable | Qt::ItemIsEnabled | prev_checkable);
 	}

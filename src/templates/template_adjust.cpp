@@ -34,21 +34,22 @@
 #include <QToolBar>
 #include <QVBoxLayout>
 
+#include "core/map.h"
 #include "gui/main_window.h"
+#include "gui/modifier_key.h"
 #include "gui/map/map_editor.h"
 #include "gui/map/map_widget.h"
-#include "template.h"
+#include "templates/template.h"
 #include "util/transformation.h"
 #include "util/util.h"
-#include "gui/modifier_key.h"
 
 float TemplateAdjustActivity::cross_radius = 4;
 
 TemplateAdjustActivity::TemplateAdjustActivity(Template* temp, MapEditorController* controller) : controller(controller)
 {
 	setActivityObject(temp);
-	connect(controller->getMap(), SIGNAL(templateChanged(int, const Template*)), this, SLOT(templateChanged(int, const Template*)));
-	connect(controller->getMap(), SIGNAL(templateDeleted(int, const Template*)), this, SLOT(templateDeleted(int, const Template*)));
+	connect(controller->getMap(), &Map::templateChanged, this, &TemplateAdjustActivity::templateChanged);
+	connect(controller->getMap(), &Map::templateDeleted, this, &TemplateAdjustActivity::templateDeleted);
 }
 TemplateAdjustActivity::~TemplateAdjustActivity()
 {
@@ -157,7 +158,7 @@ void TemplateAdjustActivity::templateDeleted(int index, const Template* temp)
 {
 	Q_UNUSED(index);
 	if ((Template*)activity_object == temp)
-		controller->setEditorActivity(NULL);
+		controller->setEditorActivity(nullptr);
 }
 
 // ### TemplateAdjustDockWidget ###
@@ -178,8 +179,8 @@ bool TemplateAdjustDockWidget::event(QEvent* event)
 void TemplateAdjustDockWidget::closeEvent(QCloseEvent* event)
 {
 	Q_UNUSED(event);
-	emit(closed());
-	controller->setEditorActivity(NULL);
+	emit closed();
+	controller->setEditorActivity(nullptr);
 }
 
 TemplateAdjustWidget::TemplateAdjustWidget(Template* temp, MapEditorController* controller, QWidget* parent): QWidget(parent), temp(temp), controller(controller)
@@ -242,14 +243,14 @@ TemplateAdjustWidget::TemplateAdjustWidget(Template* temp, MapEditorController* 
 	
 	updateActions();
 	
-	connect(new_act, SIGNAL(triggered(bool)), this, SLOT(newClicked(bool)));
-	connect(move_act, SIGNAL(triggered(bool)), this, SLOT(moveClicked(bool)));
-	connect(delete_act, SIGNAL(triggered(bool)), this, SLOT(deleteClicked(bool)));
+	connect(new_act, &QAction::triggered, this, &TemplateAdjustWidget::newClicked);
+	connect(move_act, &QAction::triggered, this, &TemplateAdjustWidget::moveClicked);
+	connect(delete_act, &QAction::triggered, this, &TemplateAdjustWidget::deleteClicked);
 	
-	connect(apply_check, SIGNAL(clicked(bool)), this, SLOT(applyClicked(bool)));
-	connect(help_button, SIGNAL(clicked(bool)), this, SLOT(showHelp()));
-	connect(clear_and_apply_button, SIGNAL(clicked(bool)), this, SLOT(clearAndApplyClicked(bool)));
-	connect(clear_and_revert_button, SIGNAL(clicked(bool)), this, SLOT(clearAndRevertClicked(bool)));
+	connect(apply_check, &QAbstractButton::clicked, this, &TemplateAdjustWidget::applyClicked);
+	connect(help_button, &QAbstractButton::clicked, this, &TemplateAdjustWidget::showHelp);
+	connect(clear_and_apply_button, &QAbstractButton::clicked, this, &TemplateAdjustWidget::clearAndApplyClicked);
+	connect(clear_and_revert_button, &QAbstractButton::clicked, this, &TemplateAdjustWidget::clearAndRevertClicked);
 	
 	updateDirtyRect();
 }
@@ -320,7 +321,7 @@ void TemplateAdjustWidget::stopTemplateAdjust()
 	// If one of these is checked, the corresponding tool should be set. The last condition is just to be sure.
 	if ((new_act->isChecked() || move_act->isChecked() || delete_act->isChecked()) && controller->getTool())
 	{
-		controller->setTool(NULL);
+		controller->setTool(nullptr);
 	}
 }
 
@@ -663,8 +664,8 @@ void TemplateAdjustAddTool::setDirtyRect(MapCoordF mouse_pos)
 
 // ### TemplateAdjustMoveTool ###
 
-QCursor* TemplateAdjustMoveTool::cursor = NULL;
-QCursor* TemplateAdjustMoveTool::cursor_invisible = NULL;
+QCursor* TemplateAdjustMoveTool::cursor = nullptr;
+QCursor* TemplateAdjustMoveTool::cursor_invisible = nullptr;
 
 TemplateAdjustMoveTool::TemplateAdjustMoveTool(MapEditorController* editor, QAction* tool_button, TemplateAdjustWidget* widget): TemplateAdjustEditTool(editor, tool_button, widget)
 {

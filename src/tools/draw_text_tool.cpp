@@ -26,7 +26,6 @@
 #include <QMouseEvent>
 #include <QPainter>
 
-#include "settings.h"
 #include "core/map.h"
 #include "core/objects/text_object.h"
 #include "core/renderables/renderable.h"
@@ -217,8 +216,7 @@ bool DrawTextTool::mouseReleaseEvent(QMouseEvent* event, MapCoordF map_coord, Ma
 		if (!event->buttons())
 			resetWaitingForMouseRelease();
 		return true;
-	}
-	
+	}	
 	return MapEditorToolBase::mouseReleaseEvent(event, map_coord, widget);
 }
 
@@ -231,7 +229,7 @@ bool DrawTextTool::inputMethodEvent(QInputMethodEvent* event)
 	return MapEditorTool::inputMethodEvent(event);
 }
 
-QVariant DrawTextTool::inputMethodQuery(Qt::InputMethodQuery property, QVariant argument) const
+QVariant DrawTextTool::inputMethodQuery(Qt::InputMethodQuery property, const QVariant& argument) const
 {
 	auto result = QVariant { };
 	if (text_editor)

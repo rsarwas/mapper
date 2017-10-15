@@ -19,22 +19,34 @@
  */
 
 
-#ifndef _OPENORIENTEERING_DRAW_LINE_AND_AREA_H_
-#define _OPENORIENTEERING_DRAW_LINE_AND_AREA_H_
+#ifndef OPENORIENTEERING_DRAW_LINE_AND_AREA_H
+#define OPENORIENTEERING_DRAW_LINE_AND_AREA_H
 
-#include "tool.h"
+#include <vector>
 
+#include <QObject>
+#include <QRectF>
 #include <QScopedPointer>
 
+#include "tools/tool.h"
+
+class QAction;
+class QEvent;
+class QPainter;
+class QRectF;
+
 class CombinedSymbol;
-class PointObject;
-class PathObject;
-class MapRenderables;
-class Symbol;
-class PointSymbol;
-class SymbolWidget;
 class LineSymbol;
 struct LineSymbolBorder;
+class MapCoordF;
+class MapEditorController;
+class MapRenderables;
+class MapWidget;
+class PathObject;
+class PointObject;
+class PointSymbol;
+class Symbol;
+
 
 /**
  * Base class for drawing tools for line and area symbols.
@@ -46,9 +58,9 @@ class DrawLineAndAreaTool : public MapEditorTool
 Q_OBJECT
 public:
 	DrawLineAndAreaTool(MapEditorController* editor, Type tool_type, QAction* tool_action, bool is_helper_tool);
-	virtual ~DrawLineAndAreaTool();
+	~DrawLineAndAreaTool() override;
 	
-	virtual void leaveEvent(QEvent* event);
+	void leaveEvent(QEvent* event) override;
 	
 signals:
 	void dirtyRectChanged(const QRectF& rect);
@@ -95,7 +107,7 @@ protected:
 	/** Finishes drawing, creating a new undo step. */
 	virtual void finishDrawing();
 	
-	/** Finishes drawing, appending to the given object if not NULL. */
+	/** Finishes drawing, appending to the given object if not nullptr. */
 	void finishDrawing(PathObject* append_to_object);
 	
 	

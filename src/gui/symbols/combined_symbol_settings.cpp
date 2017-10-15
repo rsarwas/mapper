@@ -21,20 +21,17 @@
 
 #include "combined_symbol_settings.h"
 
-#include <QDialogButtonBox>
 #include <QFormLayout>
 #include <QLabel>
-#include <QListWidget>
-#include <QMenu>
 #include <QMessageBox>
 #include <QPushButton>
 #include <QSignalMapper>
 #include <QSpinBox>
 
-#include "core/map.h"
-#include "core/objects/object.h"
+#include "core/symbols/combined_symbol.h"
 #include "gui/widgets/symbol_dropdown.h"
 #include "gui/symbols/symbol_setting_dialog.h"
+#include "util/backports.h"
 
 
 // ### CombinedSymbol ###
@@ -61,13 +58,13 @@ CombinedSymbolSettings::CombinedSymbolSettings(CombinedSymbol* symbol, SymbolSet
 	number_edit = new QSpinBox();
 	number_edit->setRange(2, qMax<int>(max_count, symbol->getNumParts()));
 	number_edit->setValue(symbol->getNumParts());
-	connect(number_edit, SIGNAL(valueChanged(int)), this, SLOT(numberChanged(int)));
+	connect(number_edit, QOverload<int>::of(&QSpinBox::valueChanged), this, &CombinedSymbolSettings::numberChanged);
 	layout->addRow(tr("&Number of parts:"), number_edit);
 	
 	QSignalMapper* button_signal_mapper = new QSignalMapper(this);
-	connect(button_signal_mapper, SIGNAL(mapped(int)), this, SLOT(editClicked(int)));
+	connect(button_signal_mapper, QOverload<int>::of(&QSignalMapper::mapped), this, &CombinedSymbolSettings::editClicked);
 	QSignalMapper* symbol_signal_mapper = new QSignalMapper(this);
-	connect(symbol_signal_mapper, SIGNAL(mapped(int)), this, SLOT(symbolChanged(int)));
+	connect(symbol_signal_mapper, QOverload<int>::of(&QSignalMapper::mapped), this, &CombinedSymbolSettings::symbolChanged);
 	
 	symbol_labels = new QLabel*[max_count];
 	symbol_edits = new SymbolDropDown*[max_count];
@@ -76,17 +73,17 @@ CombinedSymbolSettings::CombinedSymbolSettings(CombinedSymbol* symbol, SymbolSet
 	{
 		symbol_labels[i] = new QLabel(tr("Symbol %1:").arg(i+1));
 		
-		symbol_edits[i] = new SymbolDropDown(source_map, Symbol::Line | Symbol::Area | Symbol::Combined, ((int)symbol->parts.size() > i) ? symbol->parts[i] : NULL, source_symbol);
+		symbol_edits[i] = new SymbolDropDown(source_map, Symbol::Line | Symbol::Area | Symbol::Combined, ((int)symbol->parts.size() > i) ? symbol->parts[i] : nullptr, source_symbol);
 		symbol_edits[i]->addCustomItem(tr("- Private line symbol -"), 1);
 		symbol_edits[i]->addCustomItem(tr("- Private area symbol -"), 2);
 		if (((int)symbol->parts.size() > i) && symbol->isPartPrivate(i))
 			symbol_edits[i]->setCustomItem((symbol->getPart(i)->getType() == Symbol::Line) ? 1 : 2);
-		connect(symbol_edits[i], SIGNAL(currentIndexChanged(int)), symbol_signal_mapper, SLOT(map()));
+		connect(symbol_edits[i], QOverload<int>::of(&SymbolDropDown::currentIndexChanged), symbol_signal_mapper, QOverload<>::of(&QSignalMapper::map));
 		symbol_signal_mapper->setMapping(symbol_edits[i], i);
 		
 		edit_buttons[i] = new QPushButton(tr("Edit private symbol..."));
 		edit_buttons[i]->setEnabled((int)symbol->parts.size() > i && symbol->private_parts[i]);
-		connect(edit_buttons[i], SIGNAL(clicked()), button_signal_mapper, SLOT(map()));
+		connect(edit_buttons[i], QOverload<bool>::of(&QAbstractButton::clicked), button_signal_mapper, QOverload<>::of(&QSignalMapper::map));
 		button_signal_mapper->setMapping(edit_buttons[i], i);
 		
 		QHBoxLayout* row_layout = new QHBoxLayout();
@@ -131,9 +128,9 @@ void CombinedSymbolSettings::numberChanged(int value)
 		if (i >= old_num_items && i < num_items)
 		{
 			// This item appears now
-			symbol->setPart(i, NULL, false);
+			symbol->setPart(i, nullptr, false);
 			symbol_edits[i]->blockSignals(true);
-			symbol_edits[i]->setSymbol(NULL);
+			symbol_edits[i]->setSymbol(nullptr);
 			symbol_edits[i]->blockSignals(false);
 			edit_buttons[i]->setEnabled(symbol->isPartPrivate(i));
 		}
@@ -143,7 +140,7 @@ void CombinedSymbolSettings::numberChanged(int value)
 
 void CombinedSymbolSettings::symbolChanged(int index)
 {
-	if (symbol_edits[index]->symbol() != NULL)
+	if (symbol_edits[index]->symbol())
 		symbol->setPart(index, symbol_edits[index]->symbol(), false);
 	else if (symbol_edits[index]->customID() > 0)
 	{
@@ -154,8 +151,8 @@ void CombinedSymbolSettings::symbolChanged(int index)
 		else // if (symbol_edits[index]->customID() == 2)
 			new_symbol_type = Symbol::Area;
 		
-		Symbol* new_symbol = NULL;
-		if (symbol->getPart(index) != NULL && new_symbol_type == symbol->getPart(index)->getType())
+		Symbol* new_symbol = nullptr;
+		if (symbol->getPart(index) && new_symbol_type == symbol->getPart(index)->getType())
 		{
 			if (QMessageBox::question(this, tr("Change from public to private symbol"),
 				tr("Take the old symbol as template for the private symbol?"), QMessageBox::Yes | QMessageBox::No) == QMessageBox::Yes)
@@ -164,14 +161,14 @@ void CombinedSymbolSettings::symbolChanged(int index)
 			}
 		}
 		
-		if (new_symbol == NULL)
+		if (!new_symbol)
 			new_symbol = Symbol::getSymbolForType(new_symbol_type);
 		
 		symbol->setPart(index, new_symbol, true);
 		editClicked(index);
 	}
 	else
-		symbol->setPart(index, NULL, false);
+		symbol->setPart(index, nullptr, false);
 	
 	edit_buttons[index]->setEnabled(symbol->isPartPrivate(index));
 	emit propertiesModified();
@@ -222,7 +219,7 @@ void CombinedSymbolSettings::updateContents()
 		}
 		else
 		{
-			symbol_edits[i]->setSymbol(NULL);
+			symbol_edits[i]->setSymbol(nullptr);
 			symbol_edits[i]->hide();
 			symbol_labels[i]->hide();
 			edit_buttons[i]->hide();
