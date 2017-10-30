@@ -24,7 +24,6 @@
 #include <memory>
 
 #include <Qt>
-#include <QtMath>
 #include <QtGlobal>
 #include <QByteArray>
 #include <QDialog>
@@ -33,6 +32,7 @@
 #include <QPoint>
 #include <QPointF>
 #include <QStringRef>
+#include <QTimer>
 #include <QTransform>
 #include <QXmlStreamReader>
 #include <QXmlStreamWriter>
@@ -41,6 +41,7 @@
 #include "core/latlon.h"
 #include "core/map.h"
 #include "core/map_coord.h"
+#include "core/objects/object.h"
 #include "fileformats/file_format.h"
 #include "gdal/gdal_manager.h"
 #include "gdal/ogr_file_format_p.h"
@@ -111,6 +112,9 @@ OgrTemplate::OgrTemplate(const QString& path, Map* map)
 : TemplateMap(path, map)
 {
 	// nothing else
+	const Georeferencing& georef = map->getGeoreferencing();
+	connect(&georef, &Georeferencing::projectionChanged, this, &OgrTemplate::mapTransformationChanged);
+	connect(&georef, &Georeferencing::transformationChanged, this, &OgrTemplate::mapTransformationChanged);
 }
 
 OgrTemplate::~OgrTemplate()
@@ -256,7 +260,7 @@ try
 	auto unit_type = use_real_coords ? OgrFileImport::UnitOnGround : OgrFileImport::UnitOnPaper;
 	OgrFileImport importer{ &file, new_template_map.get(), nullptr, unit_type };
 	
-	const auto& georef = map->getGeoreferencing();
+	const auto& map_georef = map->getGeoreferencing();
 	
 	if (template_track_compatibility)
 	{
@@ -282,7 +286,6 @@ try
 		}
 		else
 		{
-			Q_ASSERT(!explicit_georef);
 			if (is_georeferenced)
 			{
 				// Data is to be transformed to the map CRS directly.
@@ -293,7 +296,7 @@ try
 				// Nothing to do with this configuration
 				Q_ASSERT(projected_crs_spec.isEmpty());
 			}
-			else
+			else if (!explicit_georef)
 			{
 				// Data is to be transformed to the projected CRS.
 				if (projected_crs_spec.isEmpty())
@@ -320,7 +323,7 @@ try
 				if (!explicit_georef)
 				{
 					explicit_georef.reset(new Georeferencing());
-					explicit_georef->setScaleDenominator(int(georef.getScaleDenominator()));
+					explicit_georef->setScaleDenominator(int(map_georef.getScaleDenominator()));
 					explicit_georef->setProjectedCRS(QString{}, projected_crs_spec);
 					explicit_georef->setProjectedRefPoint({}, false);
 				}
@@ -329,43 +332,27 @@ try
 	}
 	
 	
-	if (is_georeferenced)
+	if (is_georeferenced || !explicit_georef)
 	{
-		new_template_map->setGeoreferencing(georef);
-		importer.setGeoreferencingImportEnabled(false);
-	}
-	else if (explicit_georef)
-	{
-		new_template_map->setGeoreferencing(*explicit_georef);
-		importer.setGeoreferencingImportEnabled(false);
+		new_template_map->setGeoreferencing(map_georef);
 	}
 	else
 	{
-		new_template_map->setGeoreferencing(georef);
-		importer.setGeoreferencingImportEnabled(false);
+		new_template_map->setGeoreferencing(*explicit_georef);
 	}
 	
+	const auto pp0 = new_template_map->getGeoreferencing().getProjectedRefPoint();
+	importer.setGeoreferencingImportEnabled(false);
 	importer.doImport(false, template_path);
 	
-	accounted_offset = {};
-	if (is_georeferenced || !explicit_georef)
-	{
-		// Handle data which has been subject to bounds handling during doImport().
-		// p1 := ref_point + offset; p2: = ref_point;
-		auto p1 = georef.toMapCoords(new_template_map->getGeoreferencing().getProjectedRefPoint());
-		auto p2 = georef.getMapRefPoint();
-		if (p1 != p2)
-		{
-			accounted_offset = QPointF{p1 - p2};
-			if (accounted_offset != QPointF{})
-			{
-				QTransform t;
-				t.rotate(-qRadiansToDegrees(getTemplateRotation()));
-				t.scale(getTemplateScaleX(), getTemplateScaleY());
-				setTemplatePosition(templatePosition() + MapCoord{t.map(accounted_offset)});
-			}
-		}
-	}
+	// MapCoord bounds handling may have moved the paper position of the
+	// template data during import. The template position might need to be
+	// adjusted accordingly.
+	// However, this will happen again the next time the template is loaded.
+	// So this adjustment must not affect the saved configuration.
+	const auto pm0 = new_template_map->getGeoreferencing().toMapCoords(pp0);
+	const auto pm1 = new_template_map->getGeoreferencing().getMapRefPoint();
+	setTemplatePositionOffset(pm1 - pm0);
 	
 	setTemplateMap(std::move(new_template_map));
 	
@@ -398,6 +385,70 @@ bool OgrTemplate::postLoadConfiguration(QWidget* dialog_parent, bool& out_center
 	out_center_in_view = center_in_view;
 	return true;
 }
+
+
+
+void OgrTemplate::mapProjectionChanged()
+{
+	if (is_georeferenced && template_state == Template::Loaded)
+		reloadLater();
+}
+
+void OgrTemplate::mapTransformationChanged()
+{
+	if (is_georeferenced)
+	{
+		if (template_state != Template::Loaded)
+			return;
+		
+		if (templateMap()->getScaleDenominator() != map->getScaleDenominator())
+		{
+			// We can't know how to correctly scale symbol dimension.
+			reloadLater();
+			return;
+		}
+		
+		QTransform t = templateMap()->getGeoreferencing().mapToProjected();
+		t *= map->getGeoreferencing().projectedToMap();
+		templateMap()->applyOnAllObjects([&t](Object* o) { o->transform(t); });
+		templateMap()->setGeoreferencing(map->getGeoreferencing());
+	}
+	else if (explicit_georef)
+	{
+		template_track_compatibility = false;
+	}
+	else if (template_state == Template::Loaded)
+	{
+		template_track_compatibility = false;
+		if (!explicit_georef)
+		{
+			explicit_georef = std::make_unique<Georeferencing>(templateMap()->getGeoreferencing());
+			resetTemplatePositionOffset();
+		}
+	}
+}
+
+
+
+void OgrTemplate::reloadLater()
+{
+	if (reload_pending)
+		return;
+		
+	if (template_state == Loaded)
+		templateMap()->clear(); // no expensive operations before reloading
+	QTimer::singleShot(0, this, SLOT(reload()));
+	reload_pending = true;
+}
+
+void OgrTemplate::reload()
+{
+	if (template_state == Loaded)
+		unloadTemplateFile();
+	loadTemplateFile(false);
+	reload_pending = false;
+}
+
 
 
 OgrTemplate* OgrTemplate::duplicateImpl() const
