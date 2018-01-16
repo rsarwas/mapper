@@ -54,6 +54,8 @@
 #include "core/virtual_path.h"
 
 
+namespace OpenOrienteering {
+
 // ### LineSymbolBorder ###
 
 void LineSymbolBorder::reset() noexcept
@@ -569,7 +571,7 @@ void LineSymbol::shiftCoordinates(const VirtualPath& path, double main_shift, Ma
 		{
 			// Rare but existing case.  No valid solution, but
 			// at least we need to output a point to handle the flags correctly.
-			//qDebug() << "No valid tangent at" << __FILE__ << __LINE__;
+			//qDebug("No valid tangent");
 			segment_start = coords_i;
 		}
 		else if (i == 0 && !path.isClosed())
@@ -1667,34 +1669,54 @@ void LineSymbol::cleanupPointSymbols()
 	}
 }
 
-float LineSymbol::calculateLargestLineExtent(Map* map) const
+
+
+qreal LineSymbol::dimensionForIcon() const
 {
-	Q_UNUSED(map);
-	float line_extent_f = 0.001f * 0.5f * getLineWidth();
-	float result = line_extent_f;
+	// calculateLargestLineExtent() gives half line width, and for the icon,
+	// we suggest a half line width of white space on each side.
+	auto size = 4 * calculateLargestLineExtent();
+	if (start_symbol && !start_symbol->isEmpty())
+		size = qMax(size, start_symbol->dimensionForIcon());
+	if (mid_symbol && !mid_symbol->isEmpty())
+		size = qMax(size, 2 * mid_symbol->dimensionForIcon() + getMidSymbolDistance() * (getMidSymbolsPerSpot() - 1) / 1000);
+	if (dash_symbol && !dash_symbol->isEmpty())
+		size = qMax(size, 2 * dash_symbol->dimensionForIcon());
+	if (end_symbol && !end_symbol->isEmpty())
+		size = qMax(size, end_symbol->dimensionForIcon());
+	return size;
+}
+
+
+qreal LineSymbol::calculateLargestLineExtent() const
+{
+	auto line_extent_f = 0.001 * 0.5 * getLineWidth();
+	auto result = line_extent_f;
 	if (hasBorder())
 	{
-		result = qMax(result, line_extent_f + 0.001f * (getBorder().shift + 0.5f * getBorder().width));
-		result = qMax(result, line_extent_f + 0.001f * (getRightBorder().shift + 0.5f * getRightBorder().width));
+		result = qMax(result, line_extent_f + 0.001 * (getBorder().shift + getBorder().width)/2);
+		result = qMax(result, line_extent_f + 0.001 * (getRightBorder().shift + getRightBorder().width)/2);
 	}
 	return result;
 }
 
+
+
 void LineSymbol::setStartSymbol(PointSymbol* symbol)
 {
-	replaceSymbol(start_symbol, symbol, QCoreApplication::translate("LineSymbolSettings", "Start symbol"));
+	replaceSymbol(start_symbol, symbol, QCoreApplication::translate("OpenOrienteering::LineSymbolSettings", "Start symbol"));
 }
 void LineSymbol::setMidSymbol(PointSymbol* symbol)
 {
-	replaceSymbol(mid_symbol, symbol, QCoreApplication::translate("LineSymbolSettings", "Mid symbol"));
+	replaceSymbol(mid_symbol, symbol, QCoreApplication::translate("OpenOrienteering::LineSymbolSettings", "Mid symbol"));
 }
 void LineSymbol::setEndSymbol(PointSymbol* symbol)
 {
-	replaceSymbol(end_symbol, symbol, QCoreApplication::translate("LineSymbolSettings", "End symbol"));
+	replaceSymbol(end_symbol, symbol, QCoreApplication::translate("OpenOrienteering::LineSymbolSettings", "End symbol"));
 }
 void LineSymbol::setDashSymbol(PointSymbol* symbol)
 {
-	replaceSymbol(dash_symbol, symbol, QCoreApplication::translate("LineSymbolSettings", "Dash symbol"));
+	replaceSymbol(dash_symbol, symbol, QCoreApplication::translate("OpenOrienteering::LineSymbolSettings", "Dash symbol"));
 }
 void LineSymbol::replaceSymbol(PointSymbol*& old_symbol, PointSymbol* replace_with, const QString& name)
 {
@@ -2049,3 +2071,6 @@ bool LineSymbol::equalsImpl(const Symbol* other, Qt::CaseSensitivity case_sensit
 	
 	return true;
 }
+
+
+}  // namespace OpenOrienteering

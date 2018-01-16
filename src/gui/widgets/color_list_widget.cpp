@@ -54,12 +54,15 @@
 #include "core/map_color.h"
 #include "gui/color_dialog.h"
 #include "gui/main_window.h"
+#include "gui/util_gui.h"
 #include "gui/widgets/segmented_button_layout.h"
 #include "util/item_delegates.h"
 #include "util/util.h"
 
 // IWYU pragma: no_forward_declare QTableWidgetItem
 
+
+namespace OpenOrienteering {
 
 ColorListWidget::ColorListWidget(Map* map, MainWindow* window, QWidget* parent)
 : QWidget(parent)
@@ -107,7 +110,7 @@ ColorListWidget::ColorListWidget(Map* map, MainWindow* window, QWidget* parent)
 	up_down_layout->addWidget(move_down_button);
 	
 	// TODO: In Mapper >= 0.6, switch to ColorWidget (or generic) translation context.
-	edit_button = newToolButton(QIcon(QString::fromLatin1(":/images/settings.png")), QApplication::translate("MapEditorController", "&Edit").remove(QLatin1Char('&')));
+	edit_button = newToolButton(QIcon(QString::fromLatin1(":/images/settings.png")), QApplication::translate("OpenOrienteering::MapEditorController", "&Edit").remove(QLatin1Char('&')));
 	edit_button->setToolButtonStyle(Qt::ToolButtonTextBesideIcon);
 	
 	auto help_button = newToolButton(QIcon(QString::fromLatin1(":/images/help.png")), tr("Help"));
@@ -498,3 +501,5 @@ void ColorListWidget::updateRow(int row)
 	react_to_changes = true;
 }
 
+
+}  // namespace OpenOrienteering

@@ -1,6 +1,6 @@
 /*
  *    Copyright 2012, 2013 Thomas Schöps
- *    Copyright 2012-2016  Kai Pastor
+ *    Copyright 2012-2017  Kai Pastor
  *
  *    This file is part of OpenOrienteering.
  *
@@ -24,28 +24,54 @@
 #include "print_widget.h"
 
 #include <limits>
+#include <memory>
 
+#include <Qt>
+#include <QtGlobal>
 #include <QAbstractButton> // IWYU pragma: keep
 #include <QButtonGroup>
 #include <QCheckBox>
 #include <QComboBox>
+#include <QDialog>
 #include <QDialogButtonBox>
 #include <QDoubleSpinBox>
+#include <QFile>
 #include <QFileInfo>
 #include <QFormLayout>
+#include <QHash>
 #include <QHBoxLayout>
+#include <QIcon>
+#include <QImage>
+#include <QLabel>
+#include <QLatin1Char>
+#include <QLatin1String>
+#include <QLayout>
 #include <QLineEdit>
+#include <QMargins>
 #include <QMessageBox>
+#include <QPagedPaintDevice>
 #include <QPainter>
+#include <QPointF>
+#include <QPrinterInfo>
 #include <QPrintDialog>
 #include <QPrintPreviewDialog>
 #include <QPushButton>
 #include <QRadioButton>
 #include <QRectF>
+#include <QRegExp>
+#include <QRegExpValidator>
 #include <QScrollArea>
 #include <QScrollBar>
+#include <QSignalBlocker>
+#include <QSizeF>
+#include <QSpacerItem>
 #include <QSpinBox>
+#include <QStringRef>
+#include <QStyle>
+#include <QStyleOption>
 #include <QToolButton>
+#include <QVBoxLayout>
+#include <QVariant>
 #include <QXmlStreamReader>
 #include <QXmlStreamWriter>
 
@@ -53,6 +79,7 @@
 
 #include "core/map.h"
 #include "core/map_printer.h"
+#include "core/map_view.h"
 #include "gui/file_dialog.h"
 #include "gui/main_window.h"
 #include "gui/print_progress_dialog.h"
@@ -65,12 +92,14 @@
 #include "util/scoped_signals_blocker.h"
 
 
-namespace
-{
+namespace OpenOrienteering {
+
+namespace {
+	
 	QToolButton* createPrintModeButton(const QIcon& icon, const QString& label, QWidget* parent = nullptr)
 	{
 		static const QSize icon_size(48,48);
-		QToolButton* button = new QToolButton(parent);
+		auto button = new QToolButton(parent);
 		button->setAutoRaise(true);
 		button->setCheckable(true);
 		button->setIconSize(icon_size);
@@ -79,7 +108,10 @@ namespace
 		button->setToolButtonStyle(Qt::ToolButtonTextUnderIcon);
 		return button;
 	}
-}
+	
+	
+}  // namespace
+
 
 //### PrintWidget ###
 
@@ -116,8 +148,8 @@ PrintWidget::PrintWidget(Map* map, MainWindow* main_window, MapView* main_view, 
 	paper_size_combo = new QComboBox();
 	layout->addRow(tr("Page format:"), paper_size_combo);
 	
-	QWidget* page_size_widget = new QWidget();
-	QHBoxLayout* page_size_layout = new QHBoxLayout();
+	auto page_size_widget = new QWidget();
+	auto page_size_layout = new QHBoxLayout();
 	page_size_widget->setLayout(page_size_layout);
 	page_size_layout->setMargin(0);
 	page_width_edit = Util::SpinBox::create(1, 0.1, 1000.0, tr("mm"), 1.0);
@@ -130,12 +162,12 @@ PrintWidget::PrintWidget(Map* map, MainWindow* main_window, MapView* main_view, 
 	layout->addRow({}, page_size_widget);
 	
 	page_orientation_widget = new QWidget();
-	QBoxLayout* page_orientation_layout = new QHBoxLayout();
+	auto page_orientation_layout = new QHBoxLayout();
 	page_orientation_layout->setContentsMargins(QMargins());
 	page_orientation_widget->setLayout(page_orientation_layout);
-	QRadioButton* portrait_button = new QRadioButton(tr("Portrait"));
+	auto portrait_button = new QRadioButton(tr("Portrait"));
 	page_orientation_layout->addWidget(portrait_button);
-	QRadioButton* landscape_button = new QRadioButton(tr("Landscape"));
+	auto landscape_button = new QRadioButton(tr("Landscape"));
 	page_orientation_layout->addWidget(landscape_button);
 	page_orientation_group = new QButtonGroup(this);
 	page_orientation_group->addButton(portrait_button, QPrinter::Portrait);
@@ -174,8 +206,8 @@ PrintWidget::PrintWidget(Map* map, MainWindow* main_window, MapView* main_view, 
 	
 	layout->addRow(Util::Headline::create(tr("Options")));
 	
-	QWidget* mode_widget = new QWidget();
-	QBoxLayout* mode_layout = new QHBoxLayout();
+	auto mode_widget = new QWidget();
+	auto mode_layout = new QHBoxLayout();
 	mode_widget->setLayout(mode_layout);
 	mode_layout->setMargin(0);
 	
@@ -184,7 +216,7 @@ PrintWidget::PrintWidget(Map* map, MainWindow* main_window, MapView* main_view, 
 	separations_mode_button = createPrintModeButton(QIcon(QString::fromLatin1(":/images/print-mode-separations.png")), tr("Color\nseparations"));
 	vector_mode_button->setChecked(true);
 	
-	QButtonGroup* mode_button_group = new QButtonGroup(this);
+	auto mode_button_group = new QButtonGroup(this);
 	mode_button_group->addButton(vector_mode_button);
 	mode_button_group->addButton(raster_mode_button);
 	mode_button_group->addButton(separations_mode_button);
@@ -217,7 +249,7 @@ PrintWidget::PrintWidget(Map* map, MainWindow* main_window, MapView* main_view, 
 	
 	// this must be created before its value is used to determine the default setting of page_orientation_combo
 	show_templates_check = new QCheckBox(tr("Show templates"));
-	QHBoxLayout* templates_warning_layout = new QHBoxLayout();
+	auto templates_warning_layout = new QHBoxLayout();
 	QIcon warning_icon = style()->standardIcon(QStyle::SP_MessageBoxWarning);
 	templates_warning_icon = new QLabel();
 	int pixmap_size = qBound(8, style()->pixelMetric(QStyle::PM_IndicatorHeight), 32);
@@ -242,7 +274,7 @@ PrintWidget::PrintWidget(Map* map, MainWindow* main_window, MapView* main_view, 
 	scrolling_content = new QWidget();
 	scrolling_content->setLayout(layout);
 	
-	QBoxLayout* outer_layout = new QVBoxLayout();
+	auto outer_layout = new QVBoxLayout();
 	outer_layout->setContentsMargins(QMargins());
 	
 	scroll_area = new QScrollArea();
@@ -268,7 +300,7 @@ PrintWidget::PrintWidget(Map* map, MainWindow* main_window, MapView* main_view, 
 	export_button = new QPushButton(tr("Export..."));
 	export_button->hide();
 	button_box->addButton(export_button, QDialogButtonBox::ActionRole);
-	QPushButton* close_button = button_box->addButton(QDialogButtonBox::Close);
+	auto close_button = button_box->addButton(QDialogButtonBox::Close);
 	outer_layout->addWidget(button_box);
 	
 	setLayout(outer_layout);
@@ -478,7 +510,7 @@ void PrintWidget::setActive(bool active)
 void PrintWidget::updateTargets()
 {
 	QVariant current_target = target_combo->itemData(target_combo->currentIndex());
-	const QPrinterInfo* saved_printer = map_printer->getTarget();
+	const auto saved_printer = map_printer->getTarget();
 	const QString saved_printer_name = saved_printer ? saved_printer->printerName() : QString{};
 	int saved_target_index = -1;
 	int default_printer_index = -1;
@@ -846,7 +878,7 @@ void PrintWidget::setOptions(const MapPrinterOptions& options)
 	switch (options.mode)
 	{
 	default:
-		Q_ASSERT(false && "Unhandled MapPrinterOptions::MapPrinterMode");
+		qWarning("Unhandled MapPrinterMode");
 		// fall through in release build
 	case MapPrinterOptions::Vector:
 		vector_mode_button->setChecked(true);
@@ -880,7 +912,7 @@ void PrintWidget::setOptions(const MapPrinterOptions& options)
 	switch (options.color_mode)
 	{
 	default:
-		Q_ASSERT(false && "Unhandled MapPrinterOptions::ColorMode");
+		qWarning("Unhandled ColorMode");
 		// fall through in release build
 	case MapPrinterOptions::DefaultColorMode:
 		color_mode_combo->setCurrentIndex(0);
@@ -1322,3 +1354,6 @@ bool PrintWidget::checkForEmptyMap()
 }
 
 #endif
+
+
+}  // namespace OpenOrienteering

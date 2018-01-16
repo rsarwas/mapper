@@ -29,6 +29,9 @@
 
 #include "main_window.h"
 
+
+namespace OpenOrienteering {
+
 AutosaveDialog::AutosaveDialog(const QString& path, const QString& autosave_path, const QString& actual_path, MainWindow* parent, Qt::WindowFlags f)
 : QDialog(parent, f)
 , main_window(parent)
@@ -130,7 +133,7 @@ QString AutosaveDialog::selectedPath() const
 	case -1:
 		break; // Nothing selected?
 	default:
-		Q_ASSERT(false && "Undefined index");
+		qWarning("Undefined index");
 	}
 	return QString();
 }
@@ -159,7 +162,7 @@ void AutosaveDialog::currentRowChanged(int row)
 	case -1:
 		return; // Nothing selected?
 	default:
-		Q_ASSERT(false && "Undefined index");
+		qWarning("Undefined index");
 	}
 }
 
@@ -180,13 +183,16 @@ const QTextDocument* AutosaveDialog::textDoc(const QModelIndex& index) const
 			ret = &user_saved_text;
 			break;
 		default:
-			Q_ASSERT(false && "Undefined index");
+			qWarning("Undefined index");
 		}
 	}
 	else
 	{
-		Q_ASSERT(false && "Invalid data for UserRole");
+		qWarning("Invalid data for UserRole");
 	}
 	
 	return ret;
 }
+
+
+}  // namespace OpenOrienteering

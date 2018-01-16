@@ -69,8 +69,10 @@
 // IWYU pragma: no_forward_declare QFile
 
 
-namespace ogr
-{
+namespace OpenOrienteering {
+
+namespace ogr {
+	
 	class OGRDataSourceHDeleter
 	{
 	public:
@@ -109,10 +111,12 @@ namespace ogr
 	/** A convenience class for OGR C API geometry handles, similar to std::unique_ptr. */
 	using unique_geometry = std::unique_ptr<typename std::remove_pointer<OGRGeometryH>::type, OGRGeometryHDeleter>;
 	
-}
+}  // namespace ogr
 
-namespace
-{
+
+
+namespace {
+	
 	void applyPenWidth(OGRStyleToolH tool, LineSymbol* line_symbol)
 	{
 		int is_null;
@@ -281,20 +285,20 @@ namespace
 		return srs_wkt;
 	}
 	
-}
+}  // namespace
 
 
 
 // ### OgrFileFormat ###
 
 OgrFileFormat::OgrFileFormat()
- : FileFormat(OgrFile, "OGR", ImportExport::tr("Geospatial vector data"), QString{}, ImportSupported)
+ : FileFormat(OgrFile, "OGR", ::OpenOrienteering::ImportExport::tr("Geospatial vector data"), QString{}, ImportSupported)
 {
 	for (const auto& extension : GdalManager().supportedVectorExtensions())
 		addExtension(QString::fromLatin1(extension));
 }
 
-bool OgrFileFormat::understands(const unsigned char*, std::size_t) const
+bool OgrFileFormat::understands(const unsigned char* /*buffer*/, std::size_t /*size*/) const
 {
 	return true;
 }
@@ -409,7 +413,7 @@ void OgrFileImport::import(bool load_symbols_only)
 	auto data_source = ogr::unique_datasource(OGROpen(filename.toUtf8().constData(), 0, nullptr));
 	if (!data_source)
 	{
-		throw FileFormatException(Importer::tr("Could not read '%1': %2")
+		throw FileFormatException(::OpenOrienteering::Importer::tr("Could not read '%1': %2")
 		                          .arg(filename, QString::fromLatin1(CPLGetLastErrorMsg())));
 	}
 	
@@ -557,7 +561,7 @@ ogr::unique_srs OgrFileImport::importGeoreferencing(OGRDataSourceH data_source)
 		auto transformation = OCTNewCoordinateTransformation(spatial_reference, orthographic.get());
 		if (!transformation)
 		{
-			addWarning(tr("Cannot use this spatial reference:\n%s").arg(toPrettyWkt(spatial_reference)));
+			addWarning(tr("Cannot use this spatial reference:\n%1").arg(toPrettyWkt(spatial_reference)));
 			continue;
 		}
 		OCTDestroyCoordinateTransformation(transformation);
@@ -1138,7 +1142,7 @@ PointSymbol* OgrFileImport::getSymbolForOgrSymbol(OGRStyleToolH tool, const QByt
 	return point_symbol;
 }
 
-TextSymbol* OgrFileImport::getSymbolForLabel(OGRStyleToolH tool, const QByteArray&)
+TextSymbol* OgrFileImport::getSymbolForLabel(OGRStyleToolH tool, const QByteArray& /*style_string*/)
 {
 	Q_ASSERT(OGR_ST_GetType(tool) == OGRSTCLabel);
 	
@@ -1278,7 +1282,7 @@ bool OgrFileImport::checkGeoreferencing(QFile& file, const Georeferencing& geore
 	auto data_source = ogr::unique_datasource(OGROpen(filename.toUtf8().constData(), 0, nullptr));
 	if (!data_source)
 	{
-		throw FileFormatException(Importer::tr("Could not read '%1': %2")
+		throw FileFormatException(::OpenOrienteering::Importer::tr("Could not read '%1': %2")
 		                          .arg(filename, QString::fromLatin1(CPLGetLastErrorMsg())));
 	}
 	
@@ -1331,7 +1335,7 @@ LatLon OgrFileImport::calcAverageLatLon(QFile& file)
 	auto data_source = ogr::unique_datasource(OGROpen(filename.toUtf8().constData(), 0, nullptr));
 	if (!data_source)
 	{
-		throw FileFormatException(Importer::tr("Could not read '%1': %2")
+		throw FileFormatException(::OpenOrienteering::Importer::tr("Could not read '%1': %2")
 		                          .arg(filename, QString::fromLatin1(CPLGetLastErrorMsg())));
 	}
 	
@@ -1384,3 +1388,6 @@ LatLon OgrFileImport::calcAverageLatLon(OGRDataSourceH data_source)
 	
 	return num_coords ? LatLon{ y / num_coords, x / num_coords } : LatLon{};
 }
+
+
+}  // namespace OpenOrienteering

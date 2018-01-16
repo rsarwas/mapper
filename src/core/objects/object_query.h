@@ -28,8 +28,8 @@
 #include <QString>
 #include <QStringRef>
 
-class Map;
-class MapEditorController;
+namespace OpenOrienteering {
+
 class Object;
 class Symbol;
 
@@ -48,7 +48,7 @@ class Symbol;
  */
 class ObjectQuery
 {
-	Q_DECLARE_TR_FUNCTIONS(ObjectQuery)
+	Q_DECLARE_TR_FUNCTIONS(OpenOrienteering::ObjectQuery)
 	
 public:
 	enum Operator {
@@ -56,11 +56,12 @@ public:
 		OperatorAnd      = 1,  ///< And-chains two object queries
 		OperatorOr       = 2,  ///< Or-chains two object queries
 		
-		// Operators 16 .. 18 operate on object tags
+		// Operators 16 .. 18 operate on object tags and other strings
 		OperatorIs       = 16, ///< Tests an existing tag for equality with the given value (case-sensitive)
 		OperatorIsNot    = 17, ///< Tests an existing tag for inequality with the given value (case-sensitive)
 		OperatorContains = 18, ///< Tests an existing tag for containing the given value (case-sensitive)
 		OperatorSearch   = 19, ///< Tests if the symbol name, a tag key or a tag value contains the given value (case-insensitive)
+		OperatorObjectText = 20, ///< Text object content (case-insensitive)
 		
 		// More operators, 32 ..
 		OperatorSymbol   = 32, ///< Test the symbol for equality.
@@ -83,12 +84,12 @@ public:
 	 };
 	
 	// Parameters for operations on tags.
-	struct TagOperands
+	struct StringOperands
 	{
 		QString key;
 		QString value;
 		
-		~TagOperands();
+		~StringOperands();
 	};
 
 	ObjectQuery() noexcept;
@@ -153,12 +154,6 @@ public:
 	
 	
 	/**
-	 * Select the objects in the current part which match to this query.
-	 */
-	void selectMatchingObjects(Map* map, MapEditorController* controller) const;
-	
-	
-	/**
 	 * Returns the operands of logical query operations.
 	 */
 	const LogicalOperands* logicalOperands() const;
@@ -166,7 +161,7 @@ public:
 	/**
 	 * Returns the operands of logical query operations.
 	 */
-	const TagOperands* tagOperands() const;
+	const StringOperands* tagOperands() const;
 	
 	/**
 	 * Returns the operand of symbol operations.
@@ -205,21 +200,19 @@ private:
 	union
 	{
 		LogicalOperands subqueries;
-		TagOperands     tags;
+		StringOperands     tags;
 		SymbolOperand   symbol;
 	};
 	
 };
 
-Q_DECLARE_METATYPE(ObjectQuery::Operator)
-
 bool operator==(const ObjectQuery& lhs, const ObjectQuery& rhs);
 
 bool operator!=(const ObjectQuery& lhs, const ObjectQuery& rhs);
 
-bool operator==(const ObjectQuery::TagOperands& lhs, const ObjectQuery::TagOperands& rhs);
+bool operator==(const ObjectQuery::StringOperands& lhs, const ObjectQuery::StringOperands& rhs);
 
-bool operator!=(const ObjectQuery::TagOperands& lhs, const ObjectQuery::TagOperands& rhs);
+bool operator!=(const ObjectQuery::StringOperands& lhs, const ObjectQuery::StringOperands& rhs);
 
 
 
@@ -278,9 +271,15 @@ bool operator!=(const ObjectQuery& lhs, const ObjectQuery& rhs)
 }
 
 inline
-bool operator!=(const ObjectQuery::TagOperands& lhs, const ObjectQuery::TagOperands& rhs)
+bool operator!=(const ObjectQuery::StringOperands& lhs, const ObjectQuery::StringOperands& rhs)
 {
 	return !(lhs==rhs);
 }
+
+
+}  // namespace OpenOrienteering
+
+Q_DECLARE_METATYPE(OpenOrienteering::ObjectQuery::Operator)
+
 
 #endif

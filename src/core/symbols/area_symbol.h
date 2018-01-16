@@ -38,6 +38,8 @@ class QRectF;
 class QXmlStreamReader;
 class QXmlStreamWriter;
 
+namespace OpenOrienteering {
+
 class AreaRenderable;
 class LineSymbol;
 class Map;
@@ -227,6 +229,9 @@ public:
 		
 		/** Spatially scales the pattern settings by the given factor. */
 		void scale(double factor);
+		
+		qreal dimensionForIcon() const;
+		
 	};
 	
 	AreaSymbol() noexcept;
@@ -265,6 +270,8 @@ public:
 	const MapColor* guessDominantColor() const override;
 	void scale(double factor) override;
 	
+	qreal dimensionForIcon() const override;
+	
 	// Getters / Setters
 	inline const MapColor* getColor() const {return color;}
 	inline void setColor(const MapColor* color) {this->color = color;}
@@ -297,8 +304,6 @@ protected:
 
 
 
-Q_DECLARE_OPERATORS_FOR_FLAGS(AreaSymbol::FillPattern::Options)
-
 inline
 bool AreaSymbol::FillPattern::rotatable() const
 {
@@ -310,6 +315,12 @@ AreaSymbol::FillPattern::Options AreaSymbol::FillPattern::clipping() const
 {
 	return flags & Option::AlternativeToClipping;
 }
+
+
+}  // namespace OpenOrienteering
+
+
+Q_DECLARE_OPERATORS_FOR_FLAGS(OpenOrienteering::AreaSymbol::FillPattern::Options)
 
 
 #endif

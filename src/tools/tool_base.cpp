@@ -21,24 +21,33 @@
 
 #include "tool_base.h"
 
+#include <iterator>
+#include <type_traits>
+
+#include <QtGlobal>
 #include <QMouseEvent>
 #include <QTimer>
+#include <QEvent>
+#include <QKeyEvent>
+#include <QRectF>
 
-#include "settings.h"
 #include "core/map.h"
 #include "core/objects/object.h"
+#include "core/renderables/renderable.h"
 #include "gui/map/map_editor.h"
 #include "gui/map/map_widget.h"
-#include "gui/widgets/key_button_bar.h"
-#include "tool_helpers.h"
+#include "gui/widgets/key_button_bar.h"  // IWYU pragma: keep
+#include "tools/tool_helpers.h"
 #include "undo/object_undo.h"
 
 
+namespace OpenOrienteering {
+
 // ### MapEditorToolBase::EditedItem ###
 
-MapEditorToolBase::EditedItem::EditedItem(Object* original)
-: active_object { original }
-, duplicate     { original ? original->duplicate() : nullptr }
+MapEditorToolBase::EditedItem::EditedItem(Object* active_object)
+: active_object { active_object }
+, duplicate     { active_object ? active_object->duplicate() : nullptr }
 {
 	// nothing else
 	
@@ -99,18 +108,13 @@ bool MapEditorToolBase::EditedItem::isModified() const
 
 // ### MapEditorToolBase ###
 
-MapEditorToolBase::MapEditorToolBase(const QCursor& cursor, MapEditorTool::Type type, MapEditorController* editor, QAction* tool_button)
-: MapEditorTool(editor, type, tool_button),
-  start_drag_distance(Settings::getInstance().getStartDragDistancePx()),
+MapEditorToolBase::MapEditorToolBase(const QCursor& cursor, MapEditorTool::Type type, MapEditorController* editor, QAction* tool_action)
+: MapEditorTool(editor, type, tool_action),
+  effective_start_drag_distance(startDragDistance()),
   angle_helper(new ConstrainAngleToolHelper()),
   snap_helper(new SnappingToolHelper(this)),
-  snap_exclude_object(nullptr),
   cur_map_widget(editor->getMainWidget()),
-  key_button_bar(nullptr),
   cursor(scaledToScreen(cursor)),
-  preview_update_triggered(false),
-  dragging(false),
-  dragging_canceled(false),
   renderables(new MapRenderables(map())),
   old_renderables(new MapRenderables(map()))
 {
@@ -123,6 +127,7 @@ MapEditorToolBase::~MapEditorToolBase()
 	if (key_button_bar)
 		editor->deletePopupWidget(key_button_bar);
 }
+
 
 void MapEditorToolBase::init()
 {
@@ -147,16 +152,9 @@ const QCursor& MapEditorToolBase::getCursor() const
 
 
 
-Qt::KeyboardModifiers MapEditorToolBase::keyButtonBarModifiers() const
-{
-	return Qt::KeyboardModifiers(key_button_bar ? key_button_bar->activeModifiers() : 0);
-}
-
-
-
 void MapEditorToolBase::mousePositionEvent(QMouseEvent* event, MapCoordF map_coord, MapWidget* widget)
 {
-	active_modifiers = event->modifiers() | keyButtonBarModifiers();
+	active_modifiers = event->modifiers();
 	cur_pos = event->pos();
 	cur_pos_map = map_coord;
 	cur_map_widget = widget;
@@ -210,7 +208,7 @@ bool MapEditorToolBase::mouseMoveEvent(QMouseEvent* event, MapCoordF map_coord, 
 		{
 			updateDragging();
 		}
-		else if ((cur_pos - click_pos).manhattanLength() >= start_drag_distance)
+		else if ((cur_pos - click_pos).manhattanLength() >= effective_start_drag_distance)
 		{
 			startDragging();
 		}
@@ -252,7 +250,7 @@ bool MapEditorToolBase::mouseReleaseEvent(QMouseEvent* event, MapCoordF map_coor
 
 bool MapEditorToolBase::keyPressEvent(QKeyEvent* event)
 {
-	active_modifiers = event->modifiers() | keyButtonBarModifiers();
+	active_modifiers = event->modifiers();
 #if defined(Q_OS_MACOS)
 	// FIXME: On Mac, QKeyEvent::modifiers() seems to return the keyboard 
 	// modifier flags that existed immediately before the event occurred.
@@ -282,7 +280,7 @@ bool MapEditorToolBase::keyPressEvent(QKeyEvent* event)
 
 bool MapEditorToolBase::keyReleaseEvent(QKeyEvent* event)
 {
-	active_modifiers = event->modifiers() | keyButtonBarModifiers();
+	active_modifiers = event->modifiers();
 #if defined(Q_OS_MACOS)
 	// FIXME: On Mac, QKeyEvent::modifiers() seems to return the keyboard 
 	// modifier flags that existed immediately before the event occurred.
@@ -483,7 +481,7 @@ void MapEditorToolBase::updatePreviewObjectsAsynchronously()
 
 void MapEditorToolBase::drawSelectionOrPreviewObjects(QPainter* painter, MapWidget* widget, bool draw_opaque)
 {
-	map()->drawSelection(painter, true, widget, renderables->empty() ? nullptr : renderables.data(), draw_opaque);
+	map()->drawSelection(painter, true, widget, renderables->empty() ? nullptr : renderables.get(), draw_opaque);
 }
 
 
@@ -648,3 +646,6 @@ void MapEditorToolBase::updateConstrainedPositions()
 		angle_helper->getConstrainedCursorPositions(constrained_pos_map, constrained_pos_map, constrained_pos, cur_map_widget);
 	}
 }
+
+
+}  // namespace OpenOrienteering

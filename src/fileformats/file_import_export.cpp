@@ -34,6 +34,8 @@
 #include "templates/template.h"
 
 
+namespace OpenOrienteering {
+
 // ### ImportExport ###
 
 ImportExport::~ImportExport() = default;
@@ -42,7 +44,7 @@ ImportExport::~ImportExport() = default;
 QVariant ImportExport::option(const QString& name) const
 {
 	if (!options.contains(name))
-		throw FileFormatException(ImportExport::tr("No such option: %1", "No such import / export option").arg(name));
+		throw FileFormatException(::OpenOrienteering::ImportExport::tr("No such option: %1", "No such import / export option").arg(name));
 	return options[name];
 }
 
@@ -55,6 +57,9 @@ Importer::~Importer() = default;
 
 void Importer::doImport(bool load_symbols_only, const QString& map_path)
 {
+	if (view)
+		view->setTemplateLoadingBlocked(true);
+	
 	import(load_symbols_only);
 	
 	// Object post processing:
@@ -69,7 +74,7 @@ void Importer::doImport(bool load_symbols_only, const QString& map_path)
 			Object* object = part->getObject(o);
 			if (object->getSymbol() == nullptr)
 			{
-				addWarning(Importer::tr("Found an object without symbol."));
+				addWarning(::OpenOrienteering::Importer::tr("Found an object without symbol."));
 				if (object->getType() == Object::Point)
 					object->setSymbol(map->getUndefinedPoint(), true);
 				else if (object->getType() == Object::Path)
@@ -97,17 +102,19 @@ void Importer::doImport(bool load_symbols_only, const QString& map_path)
 	
 	if (auto deleted = map->deleteIrregularObjects())
 	{
-		addWarning(tr("Dropped %n irregular object(s).", 0, deleted));
+		addWarning(tr("Dropped %n irregular object(s).", nullptr, int(deleted)));
 	}
 	
 	// Symbol post processing
 	for (int i = 0; i < map->getNumSymbols(); ++i)
 	{
 		if (!map->getSymbol(i)->loadFinished(map))
-			throw FileFormatException(Importer::tr("Error during symbol post-processing."));
+			throw FileFormatException(::OpenOrienteering::Importer::tr("Error during symbol post-processing."));
 	}
 	
 	// Template loading: try to find all template files
+	if (view)
+		view->setTemplateLoadingBlocked(false);
 	bool have_lost_template = false;
 	for (int i = 0; i < map->getNumTemplates(); ++i)
 	{
@@ -130,7 +137,7 @@ void Importer::doImport(bool load_symbols_only, const QString& map_path)
 				if (found_in_map_dir)
 				{
 					error_string.prepend(
-					            Importer::tr(
+					            ::OpenOrienteering::Importer::tr(
 					               "Template \"%1\" has been loaded from the map's directory instead of"
 					               " the relative location to the map file where it was previously."
 					               ).arg(temp->getTemplateFilename()) + QLatin1Char('\n') );
@@ -166,3 +173,6 @@ void Importer::finishImport()
 // ### Exporter ###
 
 Exporter::~Exporter() = default;
+
+
+}  // namespace OpenOrienteering

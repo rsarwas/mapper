@@ -1,6 +1,6 @@
 /*
  *    Copyright 2012 Thomas Schöps
- *    Copyright 2013, 2014 Thomas Schöps, Kai Pastor
+ *    Copyright 2013, 2014,2017 Thomas Schöps, Kai Pastor
  *
  *    This file is part of OpenOrienteering.
  *
@@ -22,6 +22,7 @@
 #ifndef OPENORIENTEERING_SETTINGS_H
 #define OPENORIENTEERING_SETTINGS_H
 
+#include <QtGlobal>
 #include <QHash>
 #include <QObject>
 #include <QString>
@@ -29,6 +30,8 @@
 
 class QSettings;
 
+
+namespace OpenOrienteering {
 
 /** Singleton which handles the global application settings.
  *  If you need to do any action when the application settings are changed, connect to the settingsChanged() signal.
@@ -114,8 +117,8 @@ public:
 	
 	int getSymbolWidgetIconSizePx();
 	qreal getMapEditorClickTolerancePx();
-	float getMapEditorSnapDistancePx();
-	float getRectangleToolHelperCrossRadiusPx();
+	qreal getMapEditorSnapDistancePx();
+	qreal getRectangleToolHelperCrossRadiusPx();
 	int getStartDragDistancePx();
 	
 signals:
@@ -136,5 +139,8 @@ private:
 	QHash<SettingsEnum, QString> setting_paths;
 	QHash<SettingsEnum, QVariant> setting_defaults;
 };
+
+
+}  // namespace OpenOrienteering
 
 #endif

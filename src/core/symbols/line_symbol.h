@@ -35,6 +35,9 @@ class QIODevice;
 class QXmlStreamReader;
 class QXmlStreamWriter;
 
+namespace OpenOrienteering {
+
+class LineSymbol;
 class Map;
 class MapColor;
 class MapColorMap;
@@ -52,8 +55,6 @@ class VirtualPath;
 using MapCoordVector = std::vector<MapCoord>;
 using MapCoordVectorF = std::vector<MapCoordF>;
 
-
-class LineSymbol;
 
 /** Settings for a line symbol's border. */
 struct LineSymbolBorder
@@ -159,10 +160,18 @@ public:
 	 */
 	void cleanupPointSymbols();
 	
+	
+	/**
+	 * Returns the dimension which shall considered when scaling the icon.
+	 */
+	qreal dimensionForIcon() const override;
+	
 	/**
 	 * Returns the largest extent (half width) of the components of this line.
 	 */
-	float calculateLargestLineExtent(Map* map) const override;
+	qreal calculateLargestLineExtent() const override;
+	
+	
 	
 	/**
 	 * Returns the limit for miter joins in units of the line width.
@@ -366,5 +375,8 @@ protected:
 	LineSymbolBorder border;
 	LineSymbolBorder right_border;
 };
+
+
+}  // namespace OpenOrienteering
 
 #endif

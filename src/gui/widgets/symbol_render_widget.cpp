@@ -49,6 +49,8 @@
 #include "util/overriding_shortcut.h"
 
 
+namespace OpenOrienteering {
+
 namespace MimeType {
 
 /// The index of a symbol during drag-and-drop
@@ -63,7 +65,9 @@ const QString OpenOrienteeringSymbols()
 	return QStringLiteral("openorienteering/symbols");
 }
 
+
 }  // namespace MimeType
+
 
 
 //### SymbolIconDecorator ###
@@ -296,6 +300,8 @@ SymbolRenderWidget::SymbolRenderWidget(Map* map, bool mobile_mode, QWidget* pare
 	connect(map, &Map::symbolDeleted, this, &SymbolRenderWidget::symbolDeleted);
 	connect(map, &Map::symbolChanged, this, &SymbolRenderWidget::symbolChanged);
 	connect(map, &Map::symbolIconChanged, this, &SymbolRenderWidget::updateSingleIcon);
+	connect(map, &Map::symbolIconZoomChanged, this, &SymbolRenderWidget::updateAll);
+	connect(&Settings::getInstance(), &Settings::settingsChanged, this, &SymbolRenderWidget::settingsChanged);
 }
 
 SymbolRenderWidget::~SymbolRenderWidget()
@@ -353,6 +359,23 @@ void SymbolRenderWidget::updateSingleIcon(int i)
 	}
 }
 
+void SymbolRenderWidget::settingsChanged()
+{
+	const auto new_size = Settings::getInstance().getSymbolWidgetIconSizePx();
+	if (icon_size != new_size)
+	{
+		for (int i = 0; i < map->getNumSymbols(); ++i)
+		{
+			auto symbol = map->getSymbol(i);
+			if (symbol->getIcon(map).width() != new_size)
+				symbol->resetIcon();
+		}
+		updateAll();
+	}
+}
+
+
+
 QSize SymbolRenderWidget::sizeHint() const
 {
 	return preferred_size;
@@ -360,15 +383,19 @@ QSize SymbolRenderWidget::sizeHint() const
 
 void SymbolRenderWidget::adjustLayout()
 {
-	icon_size = Settings::getInstance().getSymbolWidgetIconSizePx();
+	auto old_icon_size = icon_size;
+	icon_size = Settings::getInstance().getSymbolWidgetIconSizePx() + 1;
 	// Allow symbol widget to be that much wider than the viewport
 	int overflow = icon_size / 3;
 	icons_per_row = qMax(1, (width() + overflow) / icon_size);
 	num_rows = qMax(1, (map->getNumSymbols() + icons_per_row -1) / icons_per_row);
 	setFixedHeight(num_rows * icon_size);
 	
-	hidden_symbol_decoration.reset(new HiddenSymbolDecorator(icon_size));
-	protected_symbol_decoration.reset(new ProtectedSymbolDecorator(icon_size));
+	if (old_icon_size != icon_size)
+	{
+		hidden_symbol_decoration.reset(new HiddenSymbolDecorator(icon_size));
+		protected_symbol_decoration.reset(new ProtectedSymbolDecorator(icon_size));
+	}
 }
 
 void SymbolRenderWidget::emitGuarded_selectedSymbolsChanged()
@@ -1233,3 +1260,6 @@ void SymbolRenderWidget::sort(T compare)
 	
 	update();
 }
+
+
+}  // namespace OpenOrienteering

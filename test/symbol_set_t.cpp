@@ -47,6 +47,8 @@
 #include <QXmlStreamReader>
 #include <QXmlStreamWriter>
 
+#include "test_config.h"
+
 #include "global.h"
 #include "settings.h"
 #include "core/map.h"
@@ -59,7 +61,10 @@
 #include "fileformats/xml_file_format_p.h"
 #include "templates/template.h"
 #include "undo/undo_manager.h"
+#include "util/backports.h"
 
+
+using namespace OpenOrienteering;
 
 namespace
 {
@@ -67,7 +72,7 @@ namespace
 const auto Obsolete = QString::fromLatin1("obsolete");       // clazy:exclude=non-pod-global-static
 const auto NeedsReview = QString::fromLatin1("unfinished");  // clazy:exclude=non-pod-global-static
 
-const auto translation_suffix = { "template", "cs", "de", "fi", "fr", "ru", "sv", "uk" };
+const auto translation_suffix = { "template", "cs", "de", "eo", "fi", "fr", "nl", "ru", "sv", "uk" };
 
 using TranslationEntries = std::vector<SymbolSetTool::TranslationEntry>;
 
@@ -270,16 +275,16 @@ void SymbolSetTool::initTestCase()
 	
 	doStaticInitializations();
 	
-	symbol_set_dir.cd(QFileInfo(QString::fromUtf8(__FILE__)).dir().absoluteFilePath(QString::fromLatin1("../symbol sets")));
+	symbol_set_dir.cd(QDir(QString::fromUtf8(MAPPER_TEST_SOURCE_DIR)).absoluteFilePath(QStringLiteral("../symbol sets")));
 	QVERIFY(symbol_set_dir.exists());
 	
-	examples_dir.cd(QFileInfo(QString::fromUtf8(__FILE__)).dir().absoluteFilePath(QString::fromLatin1("../examples")));
+	examples_dir.cd(QDir(QString::fromUtf8(MAPPER_TEST_SOURCE_DIR)).absoluteFilePath(QStringLiteral("../examples")));
 	QVERIFY(examples_dir.exists());
 	
-	test_data_dir.cd(QFileInfo(QString::fromUtf8(__FILE__)).dir().absoluteFilePath(QString::fromLatin1("../test/data")));
+	test_data_dir.cd(QDir(QString::fromUtf8(MAPPER_TEST_SOURCE_DIR)).absoluteFilePath(QStringLiteral("../test/data")));
 	QVERIFY(test_data_dir.exists());
 	
-	translations_dir.cd(QFileInfo(QString::fromUtf8(__FILE__)).dir().absoluteFilePath(QString::fromLatin1("../translations")));
+	translations_dir.cd(QDir(QString::fromUtf8(MAPPER_TEST_SOURCE_DIR)).absoluteFilePath(QStringLiteral("../translations")));
 	QVERIFY(translations_dir.exists());
 	
 	Template::pathForSaving = &Template::getTemplateRelativePath;
@@ -569,7 +574,7 @@ void SymbolSetTool::processSymbolSet()
 			source = symbol->getDescription();
 			comment = QString{QLatin1String("Description of symbol ") + symbol->getNumberAsString()};
 			if (source.isEmpty())
-				qWarning("%s: empty", qPrintable(comment));
+				qInfo("%s: empty", qPrintable(comment));
 			else
 				addSource(translation_entries, id, source, comment);
 		}
@@ -636,6 +641,7 @@ void SymbolSetTool::processSymbolSetTranslations()
 		
 		// Workaround Weblate quirk
 		existing_data.replace("\n    </message>", "\n        </message>");
+		existing_data.replace("&apos;", "'");
 		
 		new_data.reserve(existing_data.size()*2);
 	}

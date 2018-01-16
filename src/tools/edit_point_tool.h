@@ -27,6 +27,7 @@
 
 #include <Qt>
 #include <QObject>
+#include <QPointer>
 #include <QRectF>
 #include <QString>
 #include <QVariant>
@@ -41,6 +42,9 @@ class QKeyEvent;
 class QMouseEvent;
 class QPainter;
 class QRectF;
+class QToolButton;
+
+namespace OpenOrienteering {
 
 class MapEditorController;
 class MapWidget;
@@ -143,6 +147,9 @@ protected:
 	bool moveOppositeHandle() const;
 	
 	
+	QPointer<QToolButton> dash_points_button;
+	
+	
 	/** Measures the time a click takes to decide whether to do selection. */
 	QElapsedTimer click_timer;
 	
@@ -153,27 +160,27 @@ protected:
 	/**
 	 * Provides general information on what is hovered over.
 	 */
-	HoverState hover_state;
+	HoverState hover_state = OverNothing;
 	
 	/**
 	 * Object which is hovered over (if any).
 	 */
-	Object* hover_object;
+	Object* hover_object = nullptr;
 	
 	/**
 	 * Index of the object's coordinate which is hovered over.
 	 */
-	MapCoordVector::size_type hover_point;
+	MapCoordVector::size_type hover_point = 0;
 	
 	
 	/** Is a box selection in progress? */
-	bool box_selection;
+	bool box_selection = false;
 	
 	QScopedPointer<ObjectMover> object_mover;
 	
 	// Mouse / key handling
-	bool waiting_for_mouse_release;
-	bool space_pressed;
+	bool waiting_for_mouse_release = false;
+	bool switch_dash_points = false;
 	
 	/**
 	 * Offset from cursor position to drag handle of moved element.
@@ -182,7 +189,7 @@ protected:
 	MapCoordF handle_offset;
 	
 	/** Text editor tool helper */
-	TextObjectEditorHelper* text_editor;
+	TextObjectEditorHelper* text_editor = nullptr;
 	
 	/**
 	 * To prevent creating an undo step if text edit mode is entered and
@@ -204,5 +211,8 @@ bool EditPointTool::hoveringOverFrame() const
 {
 	return hover_state == OverFrame;
 }
+
+
+}  // namespace OpenOrienteering
 
 #endif

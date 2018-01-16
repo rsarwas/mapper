@@ -70,13 +70,14 @@ class QGesture;
 // IWYU pragma: no_forward_declare QPinchGesture
 
 
+namespace OpenOrienteering {
+
 MapWidget::MapWidget(bool show_help, bool force_antialiasing, QWidget* parent)
  : QWidget(parent)
  , view(nullptr)
  , tool(nullptr)
  , activity(nullptr)
  , coords_type(MAP_COORDS)
- , zoom_label(nullptr)
  , cursorpos_label(nullptr)
  , show_help(show_help)
  , force_antialiasing(force_antialiasing)
@@ -264,7 +265,7 @@ void MapWidget::viewChanged(MapView::ChangeFlags changes)
 	setActivityBoundingBox(activity_dirty_rect_map, activity_dirty_rect_border, true);
 	updateEverything();
 	if (changes.testFlag(MapView::ZoomChange))
-		updateZoomLabel();
+		updateZoomDisplay();
 }
 
 void MapWidget::setPanOffset(QPoint offset)
@@ -320,6 +321,7 @@ void MapWidget::updatePinching(QPoint center, qreal factor)
 	Q_ASSERT(pinching);
 	pinching_center = center;
 	pinching_factor = factor;
+	updateZoomDisplay();
 	update();
 }
 
@@ -348,7 +350,7 @@ void MapWidget::moveMap(int steps_x, int steps_y)
 			                                      qRound64(view->pixelToLength(height() * steps_y * move_factor)) );
 			view->setCenter(view->center() + offset);
 		}
-		catch (std::range_error)
+		catch (std::range_error&)
 		{
 			// Do nothing
 		}
@@ -492,20 +494,20 @@ void MapWidget::updateDrawing(const QRectF& map_rect, int pixel_border)
 		update(viewport_rect);
 }
 
-void MapWidget::updateMapRect(const QRectF& map_rect, int pixel_border, QRect& dirty_rect)
+void MapWidget::updateMapRect(const QRectF& map_rect, int pixel_border, QRect& cache_dirty_rect)
 {
 	QRect viewport_rect = calculateViewportBoundingBox(map_rect, pixel_border);
-	updateViewportRect(viewport_rect, dirty_rect);
+	updateViewportRect(viewport_rect, cache_dirty_rect);
 }
 
-void MapWidget::updateViewportRect(QRect viewport_rect, QRect& dirty_rect)
+void MapWidget::updateViewportRect(QRect viewport_rect, QRect& cache_dirty_rect)
 {
 	if (viewport_rect.intersects(rect()))
 	{
-		if (dirty_rect.isValid())
-			dirty_rect = dirty_rect.united(viewport_rect);
+		if (cache_dirty_rect.isValid())
+			cache_dirty_rect = cache_dirty_rect.united(viewport_rect);
 		else
-			dirty_rect = viewport_rect;
+			cache_dirty_rect = viewport_rect;
 		
 		update(viewport_rect);
 	}
@@ -557,10 +559,10 @@ QRect MapWidget::calculateViewportBoundingBox(const QRectF& map_rect, int pixel_
 	return viewToViewport(view_rect).toAlignedRect();
 }
 
-void MapWidget::setZoomLabel(QLabel* zoom_label)
+void MapWidget::setZoomDisplay(std::function<void(const QString&)> setter)
 {
-	this->zoom_label = zoom_label;
-	updateZoomLabel();
+	this->zoom_display = setter;
+	updateZoomDisplay();
 }
 
 void MapWidget::setCursorposLabel(QLabel* cursorpos_label)
@@ -568,10 +570,15 @@ void MapWidget::setCursorposLabel(QLabel* cursorpos_label)
 	this->cursorpos_label = cursorpos_label;
 }
 
-void MapWidget::updateZoomLabel()
+void MapWidget::updateZoomDisplay()
 {
-	if (zoom_label)
-		zoom_label->setText(tr("%1x", "Zoom factor").arg(view->getZoom(), 0, 'g', 3));
+	if (zoom_display)
+	{
+		auto zoom = view->getZoom();
+		if (pinching)
+			zoom *= pinching_factor;
+		zoom_display(tr("%1x", "Zoom factor").arg(zoom, 0, 'g', 3));
+	}
 }
 
 void MapWidget::setCoordsDisplay(CoordsType type)
@@ -762,7 +769,7 @@ void MapWidget::gestureEvent(QGestureEvent* event)
 			cancelPinching();
 			break;
 		default:
-			Q_ASSERT(false && "Unknown gesture state");
+			Q_UNREACHABLE(); // unknown gesture state
 		}
 		event->accept();
 	}
@@ -1119,7 +1126,7 @@ bool MapWidget::keyReleaseEventFilter(QKeyEvent* event)
 {
 	if (tool && tool->keyReleaseEvent(event))
 	{
-		return true;
+		return true; // NOLINT
 	}
 	
 	return false;
@@ -1349,3 +1356,6 @@ void MapWidget::shiftCache(int sx, int sy, QPixmap& cache)
 		cache.scroll(sx, sy, cache.rect());
 	}
 }
+
+
+}  // namespace OpenOrienteering

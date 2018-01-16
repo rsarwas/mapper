@@ -33,7 +33,6 @@
 #include <QCoreApplication>
 #include <QHash>
 #include <QLocale>
-#include <QObject>
 #include <QScopedPointer>
 #include <QString>
 #include <QTextCodec>
@@ -52,6 +51,8 @@
 class QChar;
 class QIODevice;
 
+namespace OpenOrienteering {
+
 class CombinedSymbol;
 class Georeferencing;
 class Map;
@@ -67,7 +68,7 @@ class Symbol;
  */
 class OcdFileImport : public Importer
 {
-	Q_DECLARE_TR_FUNCTIONS(OcdFileImport)
+	Q_DECLARE_TR_FUNCTIONS(OpenOrienteering::OcdFileImport)
 	
 protected:
 	/// Information about an OC*D rectangle symbol
@@ -313,7 +314,7 @@ protected:
 	
 	void setPointFlags(OcdImportedPathObject* object, quint32 pos, bool is_area, const Ocd::OcdPoint32& ocd_point);
 	
-	void setPathHolePoint(OcdFileImport::OcdImportedPathObject* object, quint32 i);
+	void setPathHolePoint(OcdFileImport::OcdImportedPathObject* object, quint32 pos);
 	
 	void fillPathCoords(OcdFileImport::OcdImportedPathObject* object, bool is_area, quint32 num_points, const Ocd::OcdPoint32* ocd_points);
 	
@@ -458,5 +459,7 @@ MapColor *OcdFileImport::convertColor(int ocd_color)
 	return color_index[ocd_color];
 }
 
+
+}  // namespace OpenOrienteering
 
 #endif // OPENORIENTEERING_OCD_FILE_IMPORT

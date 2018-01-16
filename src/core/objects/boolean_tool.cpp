@@ -51,8 +51,7 @@
  * This is a C++ language issue, not a Qt issue.
  * Cf. https://bugreports.qt-project.org/browse/QTBUG-34912
  */
-namespace ClipperLib
-{
+namespace ClipperLib {
 
 /**
  * Implements qHash for ClipperLib::IntPoint.
@@ -65,7 +64,12 @@ uint qHash(const IntPoint& point, uint seed)
 	return ::qHash(tmp, seed); // must use :: namespace to prevent endless recursion
 }
 
-} // namespace ClipperLib
+
+}  // namespace ClipperLib
+
+
+
+namespace OpenOrienteering {
 
 /**
  * Removes flags from the coordinate to be able to use it in the reconstruction.
@@ -109,7 +113,7 @@ bool BooleanTool::execute()
 	Object* const primary_object = map->getFirstSelectedObject();
 	if (primary_object->getType() != Object::Path)
 	{
-		Q_ASSERT(false && "The first selected object must be a path.");
+		qWarning("The first selected object must be a path.");
 		return false; // in release build
 	}
 
@@ -292,7 +296,7 @@ bool BooleanTool::executeForObjects(PathObject* subject, PathObjects& in_objects
 	case MergeHoles:    clip_type = ClipperLib::ctUnion;
 	                    fill_type = ClipperLib::pftPositive;
 	                    break;
-	default:            Q_ASSERT(false && "Undefined operation");
+	default:            qWarning("Undefined operation");
 	                    return false;
 	}
 
@@ -1077,3 +1081,5 @@ bool BooleanTool::checkSegmentMatch(
 	return found;
 }
 
+
+}  // namespace OpenOrienteering

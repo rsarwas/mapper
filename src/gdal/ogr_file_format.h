@@ -26,6 +26,8 @@
 
 class QIODevice;
 
+namespace OpenOrienteering {
+
 class Importer;
 class Map;
 class MapView;
@@ -52,7 +54,7 @@ public:
 	 * 
 	 * There is no cheap way to determine the answer via OGR.
 	 */
-	bool understands(const unsigned char *, std::size_t) const override;
+	bool understands(const unsigned char* buffer, std::size_t size) const override;
 	
 	/**
 	 * Creates an importer object and configures it for the given input stream
@@ -60,5 +62,8 @@ public:
 	 */
 	Importer* createImporter(QIODevice* stream, Map *map, MapView *view) const override;
 };
+
+
+}  // namespace OpenOrienteering
 
 #endif // OPENORIENTEERING_OGR_FILE_FORMAT_H

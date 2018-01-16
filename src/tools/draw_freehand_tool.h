@@ -22,8 +22,10 @@
 #ifndef OPENORIENTEERING_DRAW_FREEHAND_TOOL_H
 #define OPENORIENTEERING_DRAW_FREEHAND_TOOL_H
 
+#include <cstddef>
 #include <vector>
 
+#include <QtGlobal>
 #include <QObject>
 #include <QPoint>
 
@@ -35,6 +37,8 @@ class QCursor;
 class QKeyEvent;
 class QMouseEvent;
 class QPainter;
+
+namespace OpenOrienteering {
 
 class MapEditorController;
 class MapWidget;
@@ -68,7 +72,7 @@ protected:
 	void updateStatusText();
 	
 private:
-	void checkLineSegment(std::size_t a, std::size_t b);
+	void checkLineSegment(std::size_t first, std::size_t last);
 	
 	std::vector<bool> point_mask;
 	qreal split_distance_sq;
@@ -77,5 +81,8 @@ private:
 	QPoint cur_pos;
 	MapCoordF cur_pos_map;
 };
+
+
+}  // namespace OpenOrienteering
 
 #endif

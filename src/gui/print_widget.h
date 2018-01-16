@@ -28,7 +28,7 @@
 #include <QList>
 #include <QObject>
 #include <QPrinter>
-#include <QRectF>
+// IWYU pragma: no_include <QRectF>
 #include <QSize>
 #include <QString>
 #include <QStringList>
@@ -45,19 +45,22 @@ class QFormLayout;
 class QLabel;
 class QPushButton;
 class QPrinterInfo;
-// IWYU pragma: no_forward_declare QRectF
+class QRectF;
 class QScrollArea;
 class QSpinBox;
 class QToolButton;
 
+namespace OpenOrienteering {
+
+class MainWindow;
 class Map;
 class MapEditorController;
 class MapPrinter;
 class MapPrinterOptions;
 class MapPrinterPageFormat;
 class MapView;
-class MainWindow;
 class PrintTool;
+
 
 /**
  * The print widget lets the user adjust targets and parameters
@@ -120,7 +123,7 @@ public slots:
 	void setPrintArea(const QRectF& area);
 	
 	/** Sets output options: resolution, overprinting. */
-	void setOptions(const MapPrinterOptions& parameters);
+	void setOptions(const MapPrinterOptions& options);
 	
 	/** Listens to view feature changes. */
 	void onVisibilityChanged();
@@ -325,8 +328,14 @@ private:
 	bool active;
 };
 
-Q_DECLARE_OPERATORS_FOR_FLAGS(PrintWidget::TaskFlags)
 
 #endif
+
+
+}  // namespace OpenOrienteering
+
+
+Q_DECLARE_OPERATORS_FOR_FLAGS(OpenOrienteering::PrintWidget::TaskFlags)
+
 
 #endif

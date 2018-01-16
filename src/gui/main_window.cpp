@@ -39,6 +39,7 @@
 #  include <QtAndroid>
 #  include <QAndroidJniObject>
 #  include <QDesktopWidget>
+#  include <QTimer>
 #  include <QUrl>
 #endif
 
@@ -55,12 +56,15 @@
 #include "gui/file_dialog.h"
 #include "gui/home_screen_controller.h"
 #include "gui/settings_dialog.h"
+#include "gui/util_gui.h"
 #include "gui/map/map_editor.h"
 #include "gui/map/new_map_dialog.h"
 #include "undo/undo_manager.h"
 #include "util/util.h"
 #include "util/backports.h"
 
+
+namespace OpenOrienteering {
 
 constexpr int MainWindow::max_recent_files;
 
@@ -400,6 +404,10 @@ void MainWindow::setCurrentPath(const QString& path)
 		}
 		setWindowFilePath(window_file_path);
 	}
+	else if (!windowFilePath().isEmpty() && !has_opened_file)
+	{
+		setWindowFilePath({});
+	}
 }
 
 void MainWindow::setMostRecentlyUsedFile(const QString& path)
@@ -441,13 +449,12 @@ void MainWindow::setStatusBarText(const QString& text)
 void MainWindow::showStatusBarMessage(const QString& text, int timeout)
 {
 #if defined(Q_OS_ANDROID)
-	Q_UNUSED(timeout);
 	QAndroidJniObject java_string = QAndroidJniObject::fromString(text);
 	QAndroidJniObject::callStaticMethod<void>(
 		"org/openorienteering/mapper/MapperActivity",
-		"showShortMessage",
-		"(Ljava/lang/String;)V",
-		java_string.object<jstring>());
+		"showToast",
+		"(Ljava/lang/String;I)V",
+		java_string.object<jstring>(), timeout);
 #else
 	statusBar()->showMessage(text, timeout);
 #endif
@@ -455,7 +462,12 @@ void MainWindow::showStatusBarMessage(const QString& text, int timeout)
 
 void MainWindow::clearStatusBarMessage()
 {
-#if !defined(Q_OS_ANDROID)
+#if defined(Q_OS_ANDROID)
+	QAndroidJniObject::callStaticMethod<void>(
+		"org/openorienteering/mapper/MapperActivity",
+		"hideToast",
+		"()V");
+#else
 	statusBar()->clearMessage();
 #endif
 }
@@ -587,7 +599,7 @@ bool MainWindow::showSaveOnCloseDialog()
 			break;
 			
 		default:
-			Q_ASSERT(false && "Unsupported return value from message box");
+			qWarning("Unsupported return value from message box");
 			break;
 		}
 		
@@ -626,7 +638,8 @@ void MainWindow::loadWindowSettings()
 	move(pos);
 	resize(size);
 	if (maximized)
-		showMaximized();
+		setWindowState((windowState() & ~(Qt::WindowMinimized | Qt::WindowFullScreen))
+		               | Qt::WindowMaximized); // Cf. QWidget::showMaximized()
 #endif
 }
 
@@ -696,6 +709,7 @@ void MainWindow::showNewMapWizard()
 	new_map->undoManager().clear();
 	
 	MainWindow* new_window = hasOpenedFile() ? new MainWindow() : this;
+	new_window->setWindowFilePath(tr("Unsaved file"));
 	new_window->setController(new MapEditorController(MapEditorController::MapEditor, new_map, map_view), QString());
 	
 	new_window->show();
@@ -1183,3 +1197,6 @@ bool MainWindow::eventFilter(QObject *object, QEvent *event)
 	
 	return false;
 }
+
+
+}  // namespace OpenOrienteering

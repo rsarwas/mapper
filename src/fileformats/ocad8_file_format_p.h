@@ -30,6 +30,7 @@
 #include "fileformats/file_import_export.h"
 #include "libocad/libocad.h"
 
+namespace OpenOrienteering {
 
 class Map;
 class MapColor;
@@ -45,12 +46,13 @@ class PointSymbol;
 class Template;
 class TextSymbol;
 
+
 /** Importer for OCD version 8 files. */
 class OCAD8FileImport : public Importer
 {
 	friend class OcdFileImport;
 	
-	Q_DECLARE_TR_FUNCTIONS(OCAD8FileImport)
+	Q_DECLARE_TR_FUNCTIONS(OpenOrienteering::OCAD8FileImport)
 	
 private:
 	/// Information about an OCAD rectangle symbol
@@ -148,7 +150,7 @@ private:
 /** Exporter for OCD version 8 files. */
 class OCAD8FileExport : public Exporter
 {
-	Q_DECLARE_TR_FUNCTIONS(OCAD8FileExport)
+	Q_DECLARE_TR_FUNCTIONS(OpenOrienteering::OCAD8FileExport)
 	
 public:
 	OCAD8FileExport(QIODevice* stream, Map *map, MapView *view);
@@ -163,6 +165,7 @@ protected:
 	
 	// Symbol export
 	void exportCommonSymbolFields(const Symbol* symbol, OCADSymbol* ocad_symbol, int size);
+	void exportSymbolIcon(const Symbol* symbol, u8 ocad_icon[]);
 	int getPatternSize(const PointSymbol* point);
 	s16 exportPattern(const PointSymbol* point, OCADPoint** buffer);		// returns the number of written coordinates, including the headers
 	s16 exportSubPattern(const Object* object, const Symbol* symbol, OCADPoint** buffer);
@@ -178,7 +181,7 @@ protected:
 	/// Returns the number of exported coordinates. If not nullptr, the given symbol is used to determine the meaning of dash points.
 	u16 exportCoordinates(const MapCoordVector& coords, OCADPoint** buffer, const Symbol* symbol);
 	u16 exportTextCoordinates(TextObject* object, OCADPoint** buffer);
-	int getOcadColor(QRgb rgb);
+	static int getOcadColor(QRgb rgb);
 	s16 getPointSymbolExtent(const PointSymbol* symbol);
 	
 	// Conversion functions
@@ -231,5 +234,8 @@ private:
 	
 	void addStringTruncationWarning(const QString& text, int truncation_pos);
 };
+
+
+}  // namespace OpenOrienteering
 
 #endif

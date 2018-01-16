@@ -22,7 +22,6 @@
 #include "object_query.h"
 
 #include <algorithm>
-#include <functional>
 #include <iterator>
 #include <new>
 
@@ -36,12 +35,9 @@
 #include <QString>
 #include <QVarLengthArray>
 
-#include "object.h"
-#include "core/map.h"
-#include "core/map_part.h"
+#include "core/objects/object.h"
+#include "core/objects/text_object.h"
 #include "core/symbols/symbol.h"
-#include "gui/map/map_editor.h"
-#include "tools/tool.h"
 
 
 // ### Local utilites ###
@@ -105,6 +101,8 @@ QString keyToString(const QString &key)
 
 
 
+namespace OpenOrienteering {
+
 // ### ObjectQuery::LogicalOperands ###
 
 ObjectQuery::LogicalOperands::LogicalOperands(const ObjectQuery::LogicalOperands& proto)
@@ -132,9 +130,9 @@ ObjectQuery::LogicalOperands& ObjectQuery::LogicalOperands::operator=(const Obje
 
 
 
-// ### ObjectQuery::TagOperands ###
+// ### ObjectQuery::StringOperands ###
 
-ObjectQuery::TagOperands::~TagOperands() = default;
+ObjectQuery::StringOperands::~StringOperands() = default;
 
 
 
@@ -160,7 +158,7 @@ ObjectQuery::ObjectQuery(const ObjectQuery& query)
 	}
 	else if (op < 32)
 	{
-		new (&tags) TagOperands(query.tags);
+		new (&tags) StringOperands(query.tags);
 	}
 	else if (op == ObjectQuery::OperatorSymbol)
 	{
@@ -226,8 +224,9 @@ ObjectQuery::ObjectQuery(ObjectQuery::Operator op, const QString& value)
 {
 	// Can't have an empty key (but can have empty value)
 	// Must be a key/value operator
-	Q_ASSERT(op == 19);
-	if (op != 19
+	Q_ASSERT(op >= 19);
+	Q_ASSERT(op <= 20);
+	if (op < 19 || op > 20
 	    || value.length() == 0)
 	{
 		reset();
@@ -303,6 +302,9 @@ QString ObjectQuery::labelFor(ObjectQuery::Operator op)
 	case OperatorSearch:
 		//: Very short label
 		return tr("Search");
+	case OperatorObjectText:
+		//: Very short label
+		return tr("Text");
 		
 	case OperatorAnd:
 		//: Very short label
@@ -348,6 +350,10 @@ bool ObjectQuery::operator()(const Object* object) const
 				return true;
 		}
 		return false;
+	case OperatorObjectText:
+		if (object->getType() == Object::Text)
+		    return static_cast<const TextObject*>(object)->getText().contains(tags.value, Qt::CaseInsensitive);
+		return false;
 		
 	case OperatorAnd:
 		return (*subqueries.first)(object) && (*subqueries.second)(object);
@@ -362,34 +368,6 @@ bool ObjectQuery::operator()(const Object* object) const
 	}
 	
 	Q_UNREACHABLE();
-}
-
-
-
-void ObjectQuery::selectMatchingObjects(Map* map, MapEditorController* controller) const
-{
-	bool had_selection = !map->selectedObjects().empty();
-	map->clearObjectSelection(false);
-
-	// Lambda to add objects to the selection
-	auto select_object = [map](Object* object)
-	{
-		map->addObjectToSelection(object, false);
-	};
-
-	auto part = map->getCurrentPart();
-	part->applyOnMatchingObjects(select_object, std::cref(*this));
-
-	auto object_selected = !map->selectedObjects().empty();
-	if (object_selected || had_selection)
-		map->emitSelectionChanged();
-
-	if (object_selected)
-	{
-		auto current_tool = controller->getTool();
-		if (current_tool && current_tool->isDrawTool())
-			controller->setEditTool();
-	}
 }
 
 
@@ -410,17 +388,17 @@ const ObjectQuery::LogicalOperands* ObjectQuery::logicalOperands() const
 }
 
 
-const ObjectQuery::TagOperands* ObjectQuery::tagOperands() const
+const ObjectQuery::StringOperands* ObjectQuery::tagOperands() const
 {
-	const TagOperands* result = nullptr;
-	if (op >= 16 && op <= 19)
+	const StringOperands* result = nullptr;
+	if (op >= 16 && op <= 20)
 	{
 		result = &tags;
 	}
 	else
 	{
 		Q_ASSERT(op >= 16);
-		Q_ASSERT(op <= 19);
+		Q_ASSERT(op <= 20);
 	}
 	return result;
 }
@@ -457,6 +435,7 @@ QString ObjectQuery::toString() const
 		ret = keyToString(tags.key) + QLatin1String(" ~= \"") + toEscaped(tags.value) + QLatin1Char('"');
 		break;
 	case OperatorSearch:
+	case OperatorObjectText:
 		ret = QLatin1Char('"') + toEscaped(tags.value) + QLatin1Char('"');
 		break;
 		
@@ -502,7 +481,7 @@ void ObjectQuery::reset()
 	}
 	else if (op < 32)
 	{
-		tags.~TagOperands();
+		tags.~StringOperands();
 		op = ObjectQuery::OperatorInvalid;
 	}
 	else if (op == ObjectQuery::OperatorSymbol)
@@ -527,8 +506,8 @@ void ObjectQuery::consume(ObjectQuery&& other)
 	}
 	else if (op < 32)
 	{
-		new (&tags) ObjectQuery::TagOperands(std::move(other.tags));
-		other.tags.~TagOperands();
+		new (&tags) ObjectQuery::StringOperands(std::move(other.tags));
+		other.tags.~StringOperands();
 	}
 	else if (op == ObjectQuery::OperatorSymbol)
 	{
@@ -539,7 +518,7 @@ void ObjectQuery::consume(ObjectQuery&& other)
 
 
 
-bool operator==(const ObjectQuery::TagOperands& lhs, const ObjectQuery::TagOperands& rhs)
+bool operator==(const ObjectQuery::StringOperands& lhs, const ObjectQuery::StringOperands& rhs)
 {
 	return lhs.key == rhs.key && lhs.value == rhs.value;
 }
@@ -555,6 +534,7 @@ bool operator==(const ObjectQuery& lhs, const ObjectQuery& rhs)
 	case ObjectQuery::OperatorIsNot:
 	case ObjectQuery::OperatorContains:
 	case ObjectQuery::OperatorSearch:
+	case ObjectQuery::OperatorObjectText:
 		return lhs.tags == rhs.tags;
 		
 	case ObjectQuery::OperatorAnd:
@@ -795,3 +775,6 @@ QString ObjectQueryParser::tokenAsString() const
 		string = fromEscaped(string);
 	return string;
 }
+
+
+}  // namespace OpenOrienteering

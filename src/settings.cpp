@@ -1,6 +1,6 @@
 /*
  *    Copyright 2012-2014 Thomas Schöps
- *    Copyright 2013-2015 Kai Pastor
+ *    Copyright 2013-2017 Kai Pastor
  *
  *    This file is part of OpenOrienteering.
  *
@@ -30,7 +30,57 @@
 #include <QSettings>
 #include <QStringList>
 
-#include "util/util.h"
+
+namespace OpenOrienteering {
+
+/*
+ * Implementation for some functions which need a Settings instance.
+ * 
+ * Settings has Qt dependencies only. The Util function are declared in
+ * gui/util_gui.h. By moving the definitions here, we facilitate the
+ * compilation of unit tests which depend on Settings.
+ */
+namespace Util
+{
+
+	qreal mmToPixelPhysical(qreal millimeters)
+	{
+		auto ppi = Settings::getInstance().getSettingCached(Settings::General_PixelsPerInch).toReal();
+		return millimeters * ppi / 25.4;
+	}
+	
+	qreal pixelToMMPhysical(qreal pixels)
+	{
+		auto ppi = Settings::getInstance().getSettingCached(Settings::General_PixelsPerInch).toReal();
+		return pixels * 25.4 / ppi;
+	}
+
+	
+	qreal mmToPixelLogical(qreal millimeters)
+	{
+		auto ppi = QApplication::primaryScreen()->logicalDotsPerInch();
+		return millimeters * ppi / qreal(25.4);
+	}
+	
+	qreal pixelToMMLogical(qreal pixels)
+	{
+		auto ppi = QApplication::primaryScreen()->logicalDotsPerInch();
+		return pixels * qreal(25.4) / ppi;
+	}
+	
+	
+	bool isAntialiasingRequired(qreal ppi)
+	{
+		return ppi < 200;
+	}
+	
+	bool isAntialiasingRequired()
+	{
+		return isAntialiasingRequired(Settings::getInstance().getSettingCached(Settings::General_PixelsPerInch).toReal());
+	}
+	
+}
+
 
 
 Settings::Settings()
@@ -68,8 +118,8 @@ Settings::Settings()
 	registerSetting(MapEditor_ZoomOutAwayFromCursor, "MapEditor/zoom_out_away_from_cursor", true);
 	registerSetting(MapEditor_DrawLastPointOnRightClick, "MapEditor/draw_last_point_on_right_click", true);
 	
-	registerSetting(EditTool_DeleteBezierPointAction, "EditTool/delete_bezier_point_action", (int)DeleteBezierPoint_RetainExistingShape);
-	registerSetting(EditTool_DeleteBezierPointActionAlternative, "EditTool/delete_bezier_point_action_alternative", (int)DeleteBezierPoint_ResetHandles);
+	registerSetting(EditTool_DeleteBezierPointAction, "EditTool/delete_bezier_point_action", int(DeleteBezierPoint_RetainExistingShape));
+	registerSetting(EditTool_DeleteBezierPointActionAlternative, "EditTool/delete_bezier_point_action_alternative", int(DeleteBezierPoint_ResetHandles));
 	
 	registerSetting(RectangleTool_HelperCrossRadiusMM, "RectangleTool/helper_cross_radius_mm", 100.0f);
 	registerSetting(RectangleTool_PreviewLineWidth, "RectangleTool/preview_line_with", true);
@@ -101,29 +151,14 @@ Settings::Settings()
 	static bool migration_checked = false;
 	if (!migration_checked)
 	{
-		QVariant current_version { QLatin1String("0.7") };
+		QVariant current_version { QLatin1String("0.8") };
 		QSettings settings;
-		if (settings.value(QString::fromLatin1("version")) != current_version)
+		auto settings_version = settings.value(QLatin1String("version")).toString();
+		if (!settings_version.isEmpty() && settings_version != current_version)
 		{
 			migrateSettings(settings, current_version);
 		}
-		
-		if (!settings.value(QString::fromLatin1("new_ocd8_implementation_v0.6")).isNull())
-		{
-			// Remove/reset to default
-			settings.remove(QString::fromLatin1("new_ocd8_implementation_v0.6"));
-			settings.remove(QString::fromLatin1("new_ocd8_implementation"));
-		}
-		
-		bool have_language_number;
-		auto language_number = getSetting(General_Language).toInt(&have_language_number);
-		if (have_language_number)
-		{
-			// Migrate old numeric language setting
-			auto language = QLocale(QLocale::Language(language_number)).name().left(2);
-			setSetting(Settings::General_Language, language);
-		}
-		
+		settings.setValue(QLatin1String("version"), current_version);
 		migration_checked = true;
 	}
 }
@@ -138,19 +173,47 @@ void Settings::migrateSettings(QSettings& settings, const QVariant& version)
 {
 	migrateValue("General/language", General_Language, settings);
 	if (migrateValue("MapEditor/click_tolerance", MapEditor_ClickToleranceMM, settings))
-		settings.setValue(getSettingPath(MapEditor_ClickToleranceMM), Util::pixelToMMLogical(settings.value(getSettingPath(MapEditor_ClickToleranceMM)).toFloat()));
+		settings.setValue(getSettingPath(MapEditor_ClickToleranceMM), Util::pixelToMMLogical(settings.value(getSettingPath(MapEditor_ClickToleranceMM)).toReal()));
 	if (migrateValue("MapEditor/snap_distance", MapEditor_SnapDistanceMM, settings))
-		settings.setValue(getSettingPath(MapEditor_SnapDistanceMM), Util::pixelToMMLogical(settings.value(getSettingPath(MapEditor_SnapDistanceMM)).toFloat()));
+		settings.setValue(getSettingPath(MapEditor_SnapDistanceMM), Util::pixelToMMLogical(settings.value(getSettingPath(MapEditor_SnapDistanceMM)).toReal()));
 	if (migrateValue("RectangleTool/helper_cross_radius", RectangleTool_HelperCrossRadiusMM, settings))
-		settings.setValue(getSettingPath(RectangleTool_HelperCrossRadiusMM), Util::pixelToMMLogical(settings.value(getSettingPath(RectangleTool_HelperCrossRadiusMM)).toFloat()));
+		settings.setValue(getSettingPath(RectangleTool_HelperCrossRadiusMM), Util::pixelToMMLogical(settings.value(getSettingPath(RectangleTool_HelperCrossRadiusMM)).toReal()));
+	
+	if (!settings.value(QLatin1String("MapEditor/units_rectified"), false).toBool())
+	{
+		const auto factor = QApplication::primaryScreen()->logicalDotsPerInch()
+		                    / getSetting(Settings::General_PixelsPerInch).toReal();
+		for (auto setting : { SymbolWidget_IconSizeMM, MapEditor_ClickToleranceMM, MapEditor_SnapDistanceMM, RectangleTool_HelperCrossRadiusMM })
+		{
+			const auto path = getSettingPath(setting);
+			const auto value = settings.value(path, getDefaultValue(setting)).toReal();
+			settings.setValue(path, qRound(value * factor));
+		}
+		settings.setValue(QLatin1String("MapEditor/units_rectified"), true);
+	}
+	
+	bool have_language_number;
+	auto language_number = getSetting(General_Language).toInt(&have_language_number);
+	if (have_language_number)
+	{
+		// Migrate old numeric language setting
+		auto language = QLocale(QLocale::Language(language_number)).name().left(2);
+		setSetting(Settings::General_Language, language);
+	}
+	
+	if (!settings.value(QLatin1String("new_ocd8_implementation_v0.6")).isNull())
+	{
+		// Remove/reset to default
+		settings.remove(QLatin1String("new_ocd8_implementation_v0.6"));
+		settings.remove(QLatin1String("new_ocd8_implementation"));
+	}
 	
 	if (!version.toByteArray().startsWith("0."))
 	{
 		// Future cleanup
-		settings.remove(QString::fromLatin1("new_ocd8_implementation"));
+		settings.remove(QLatin1String("new_ocd8_implementation"));
+		settings.remove(QLatin1String("MapEditor/units_rectified"));
 	}
-
-	settings.setValue(QString::fromLatin1("version"), version);
 }
 
 bool Settings::migrateValue(const char* old_key_latin1, SettingsEnum new_setting, QSettings& settings) const
@@ -239,25 +302,28 @@ void Settings::applySettings()
 
 int Settings::getSymbolWidgetIconSizePx()
 {
-	return qRound(Util::mmToPixelLogical(getSettingCached(Settings::SymbolWidget_IconSizeMM).toFloat()));
+	return qRound(Util::mmToPixelPhysical(getSettingCached(Settings::SymbolWidget_IconSizeMM).toReal()));
 }
 
 qreal Settings::getMapEditorClickTolerancePx()
 {
-	return Util::mmToPixelLogical(getSettingCached(Settings::MapEditor_ClickToleranceMM).toReal());
+	return Util::mmToPixelPhysical(getSettingCached(Settings::MapEditor_ClickToleranceMM).toReal());
 }
 
-float Settings::getMapEditorSnapDistancePx()
+qreal Settings::getMapEditorSnapDistancePx()
 {
-	return Util::mmToPixelLogical(getSettingCached(Settings::MapEditor_SnapDistanceMM).toFloat());
+	return Util::mmToPixelPhysical(getSettingCached(Settings::MapEditor_SnapDistanceMM).toReal());
 }
 
-float Settings::getRectangleToolHelperCrossRadiusPx()
+qreal Settings::getRectangleToolHelperCrossRadiusPx()
 {
-	return Util::mmToPixelLogical(getSettingCached(Settings::RectangleTool_HelperCrossRadiusMM).toFloat());
+	return Util::mmToPixelPhysical(getSettingCached(Settings::RectangleTool_HelperCrossRadiusMM).toReal());
 }
 
 int Settings::getStartDragDistancePx()
 {
 	return getSettingCached(Settings::General_StartDragDistance).toInt();
 }
+
+
+}  // namespace OpenOrienteering

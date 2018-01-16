@@ -21,9 +21,16 @@
 
 #include "world_file.h"
 
+#include <QCharRef>
 #include <QFile>
+#include <QFlags>
+#include <QIODevice>
+#include <QLatin1Char>
+#include <QLatin1String>
 #include <QTextStream>
 
+
+namespace OpenOrienteering {
 
 WorldFile::WorldFile()
 {
@@ -89,8 +96,10 @@ bool WorldFile::tryToLoadForImage(const QString& image_path)
 	// Possibility 3: replace original extension by 'wld'
 	test_path = path_without_ext + QLatin1String("wld");
 	if (load(test_path))
-		return true;
+		return true; // NOLINT
 	
 	return false;
 }
 
+
+}  // namespace OpenOrienteering

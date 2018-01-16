@@ -22,7 +22,9 @@
 #include "map_editor.h"
 #include "map_editor_p.h"
 
+#include <algorithm>
 #include <cstddef>
+#include <functional>
 #include <iterator>
 #include <limits>
 #include <set>
@@ -32,6 +34,7 @@
 #include <Qt>
 #include <QtGlobal>
 #include <QtMath>
+#include <QAbstractButton>
 #include <QAction>
 #include <QActionGroup>
 #include <QApplication>
@@ -51,7 +54,7 @@
 #include <QFrame>
 #include <QHBoxLayout>
 #include <QIcon>
-#include <QImage>
+#include <QImage> // IWYU pragma: keep
 #include <QInputDialog>
 #include <QIODevice>
 #include <QKeyEvent> // IWYU pragma: keep
@@ -112,6 +115,7 @@
 #include "gui/main_window.h"
 #include "gui/print_widget.h"
 #include "gui/text_browser_dialog.h"
+#include "gui/util_gui.h"
 #include "gui/map/map_dialog_rotate.h"
 #include "gui/map/map_dialog_scale.h"
 #include "gui/map/map_editor_activity.h"
@@ -124,7 +128,6 @@
 #include "gui/widgets/key_button_bar.h" // IWYU pragma: keep
 #include "gui/widgets/measure_widget.h"
 #include "gui/widgets/symbol_widget.h"
-#include "gui/widgets/tag_select_widget.h"
 #include "gui/widgets/tags_widget.h"
 #include "gui/widgets/template_list_widget.h"
 #include "sensors/compass.h"
@@ -159,12 +162,13 @@
 #include "undo/object_undo.h"
 #include "undo/undo.h"
 #include "undo/undo_manager.h"
-#include "util/util.h"
 #include "util/backports.h" // IWYU pragma: keep
 
 
-namespace
-{
+namespace OpenOrienteering {
+
+namespace {
+	
 	/**
 	 * Creates a partial, resizable widget overlay over the main window.
 	 * 
@@ -210,7 +214,8 @@ namespace
 		});
 	}
 	
-} // namespace
+	
+}  // namespace
 
 
 
@@ -222,7 +227,8 @@ QString OpenOrienteeringObjects()
 	return QStringLiteral("openorienteering/objects");
 }
 
-}
+
+}  // namespace MimeType
 
 
 
@@ -305,8 +311,6 @@ MapEditorController::~MapEditorController()
 		delete template_dock_widget;
 	if (tags_dock_widget)
 		delete tags_dock_widget;
-	if (tag_select_dock_widget)
-		delete tag_select_dock_widget;
 	delete cut_hole_menu;
 	delete mappart_merge_act;
 	delete mappart_merge_menu;
@@ -478,7 +482,7 @@ void MapEditorController::setEditorActivity(MapEditorActivity* new_activity)
 void MapEditorController::addTemplatePositionDockWidget(Template* temp)
 {
 	Q_ASSERT(!existsTemplatePositionDockWidget(temp));
-	TemplatePositionDockWidget* dock_widget = new TemplatePositionDockWidget(temp, this, window);
+	auto dock_widget = new TemplatePositionDockWidget(temp, this, window);
 	addFloatingDockWidget(dock_widget);
 	template_position_widgets.insert(temp, dock_widget);
 }
@@ -513,7 +517,7 @@ void MapEditorController::showPopupWidget(QWidget* child_widget, const QString& 
 	}
 	else
 	{
-		QDockWidget* dock_widget = new QDockWidget(title, window);
+		auto dock_widget = new QDockWidget(title, window);
 		dock_widget->setFeatures(dock_widget->features() & ~QDockWidget::DockWidgetClosable);
 		dock_widget->setWidget(child_widget);
 		
@@ -597,7 +601,7 @@ void MapEditorController::attach(MainWindow* window)
 	measure_dock_widget = nullptr;
 	color_dock_widget = nullptr;
 	symbol_dock_widget = nullptr;
-	QLabel* statusbar_zoom_label = nullptr;
+	std::function<void(const QString&)> zoom_display_function;
 	
 	this->window = window;
 	if (mode == MapEditor)
@@ -614,11 +618,14 @@ void MapEditorController::attach(MainWindow* window)
 	if (mobile_mode)
 	{
 		window->setWindowState(window->windowState() | Qt::WindowFullScreen);
+		zoom_display_function = [window](const QString& text) {
+			window->showStatusBarMessage(text, 1000);
+		};
 	}
 	else
 	{
 		// Add zoom / cursor position field to status bar
-		QLabel* statusbar_zoom_icon = new QLabel();
+		auto statusbar_zoom_icon = new QLabel();
 		auto fontmetrics = statusbar_zoom_icon->fontMetrics();
 		auto pixmap = QPixmap(QLatin1String(":/images/magnifying-glass.png"));
 		auto scale = qreal(fontmetrics.height()) / pixmap.height();
@@ -626,10 +633,14 @@ void MapEditorController::attach(MainWindow* window)
 			pixmap = pixmap.scaledToHeight(qRound(scale * pixmap.height()), Qt::SmoothTransformation);
 		statusbar_zoom_icon->setPixmap(pixmap);
 		
-		statusbar_zoom_label = new QLabel();
+		auto statusbar_zoom_label = new QLabel();
 		statusbar_zoom_label->setMinimumWidth(fontmetrics.width(QLatin1String(" 0.333x")));
 		statusbar_zoom_label->setAlignment(Qt::AlignRight | Qt::AlignVCenter);
 		statusbar_zoom_label->setFrameShape(QFrame::NoFrame);
+		
+		zoom_display_function = [statusbar_zoom_label](const QString& text) {
+			statusbar_zoom_label->setText(text);
+		};
 		
 		statusbar_zoom_frame = new QFrame();
 #ifdef Q_OS_WIN
@@ -661,6 +672,7 @@ void MapEditorController::attach(MainWindow* window)
 	// Create map widget
 	map_widget = new MapWidget(mode == MapEditor, mode == SymbolEditor);
 	map_widget->setMapView(main_view);
+	map_widget->setZoomDisplay(zoom_display_function);
 	
 	// Create menu and toolbar together, so actions can be inserted into one or both
 	if (mode == MapEditor)
@@ -677,7 +689,6 @@ void MapEditorController::attach(MainWindow* window)
 		}
 		else
 		{
-			map_widget->setZoomLabel(statusbar_zoom_label);
 			map_widget->setCursorposLabel(statusbar_cursorpos_label);
 			window->setCentralWidget(map_widget);
 			
@@ -687,7 +698,6 @@ void MapEditorController::attach(MainWindow* window)
 	}
 	else if (mode == SymbolEditor)
 	{
-		map_widget->setZoomLabel(statusbar_zoom_label);
 		map_widget->setCursorposLabel(statusbar_cursorpos_label);
 		window->setCentralWidget(map_widget);
 	}
@@ -712,7 +722,6 @@ void MapEditorController::attach(MainWindow* window)
 			createColorWindow();
 			createTemplateWindow();
 			createTagEditor();
-			createTagSelector();
 			
 			if (map->getNumColors() == 0)
 				QTimer::singleShot(0, color_dock_widget, SLOT(show()));  // clazy:exclude=old-style-connect
@@ -798,7 +807,6 @@ void MapEditorController::assignKeyboardShortcuts()
 	findAction("hidealltemplates")->setShortcut(QKeySequence(Qt::Key_F10));
 	findAction("overprintsimulation")->setShortcut(QKeySequence(Qt::Key_F4));
 	findAction("fullscreen")->setShortcut(QKeySequence(Qt::Key_F11));
-	tag_select_window_act->setShortcut(QKeySequence(Qt::CTRL + Qt::SHIFT + Qt::Key_5));
 	tags_window_act->setShortcut(QKeySequence(Qt::CTRL + Qt::SHIFT + Qt::Key_6));
 	color_window_act->setShortcut(QKeySequence(Qt::CTRL + Qt::SHIFT + Qt::Key_7));
 	symbol_window_act->setShortcut(QKeySequence(Qt::CTRL + Qt::SHIFT + Qt::Key_8));
@@ -832,7 +840,7 @@ void MapEditorController::createActions()
 {
 	// Define all the actions, saving them into variables as necessary. Can also get them by ID.
 #ifdef QT_PRINTSUPPORT_LIB
-	QSignalMapper* print_act_mapper = new QSignalMapper(this);
+	auto print_act_mapper = new QSignalMapper(this);
 	connect(print_act_mapper, QOverload<int>::of(&QSignalMapper::mapped), this, QOverload<int>::of(&MapEditorController::printClicked));
 	print_act = newAction("print", tr("Print..."), print_act_mapper, SLOT(map()), "print.png", QString{}, "file_menu.html");
 	print_act_mapper->setMapping(print_act, PrintWidget::PRINT_TASK);
@@ -855,8 +863,8 @@ void MapEditorController::createActions()
 	select_all_act = newAction("select-all", tr("Select all"), this, SLOT(selectAll()), nullptr, QString{}, "edit_menu.html");
 	select_nothing_act = newAction("select-nothing", tr("Select nothing"), this, SLOT(selectNothing()), nullptr, QString{}, "edit_menu.html");
 	invert_selection_act = newAction("invert-selection", tr("Invert selection"), this, SLOT(invertSelection()), nullptr, QString{}, "edit_menu.html");
-	select_by_current_symbol_act = newAction("select-by-symbol", QApplication::translate("SymbolRenderWidget", "Select all objects with selected symbols"), this, SLOT(selectByCurrentSymbols()), nullptr, QString{}, "edit_menu.html");
-	find_feature.reset(new MapFindFeature(*window, *this));
+	select_by_current_symbol_act = newAction("select-by-symbol", QApplication::translate("OpenOrienteering::SymbolRenderWidget", "Select all objects with selected symbols"), this, SLOT(selectByCurrentSymbols()), nullptr, QString{}, "edit_menu.html");
+	find_feature.reset(new MapFindFeature(*this));
 	
 	clear_undo_redo_history_act = newAction("clearundoredohistory", tr("Clear undo / redo history"), this, SLOT(clearUndoRedoHistory()), nullptr, tr("Clear the undo / redo history to reduce map file size."), "edit_menu.html");
 	
@@ -897,8 +905,6 @@ void MapEditorController::createActions()
 	reopen_template_act = newAction("reopentemplate", tr("Reopen template..."), this, SLOT(reopenTemplateClicked()), nullptr, QString{}, "templates_menu.html");
 	
 	tags_window_act = newCheckAction("tagswindow", tr("Tag editor"), this, SLOT(showTagsWindow(bool)), "window-new", tr("Show/Hide the tag editor window"), "tag_editor.html");
-
-	tag_select_window_act = newCheckAction("tagselectwindow", tr("Tag Selection"), this, SLOT(showTagSelectWindow(bool)), "tag-selector", tr("Show/Hide the tag selection window"), "tag_selector.html");
 	
 	edit_tool_act = newToolAction("editobjects", tr("Edit objects"), this, SLOT(editToolClicked()), "tool-edit.png", QString{}, "toolbars.html#tool_edit_point");
 	edit_line_tool_act = newToolAction("editlines", tr("Edit lines"), this, SLOT(editLineToolClicked()), "tool-edit-line.png", QString{}, "toolbars.html#tool_edit_line");
@@ -983,7 +989,7 @@ void MapEditorController::createActions()
 	geographic_coordinates_act->setCheckable(true);
 	geographic_coordinates_dms_act = new QAction(tr("Latitude/Longitude (DMS)"), this);
 	geographic_coordinates_dms_act->setCheckable(true);
-	QActionGroup* coordinates_group = new QActionGroup(this);
+	auto coordinates_group = new QActionGroup(this);
 	coordinates_group->addAction(map_coordinates_act);
 	coordinates_group->addAction(projected_coordinates_act);
 	coordinates_group->addAction(geographic_coordinates_act);
@@ -1040,7 +1046,7 @@ void MapEditorController::createMenuAndToolbars()
 	edit_menu->addAction(invert_selection_act);
 	edit_menu->addAction(select_by_current_symbol_act);
 	edit_menu->addSeparator();
-	edit_menu->addAction(find_feature->showAction());
+	edit_menu->addAction(find_feature->showDialogAction());
 	edit_menu->addAction(find_feature->findNextAction());
 	edit_menu->addSeparator();
 	edit_menu->addAction(clear_undo_redo_history_act);
@@ -1069,7 +1075,6 @@ void MapEditorController::createMenuAndToolbars()
 	view_menu->addSeparator();
 	view_menu->addAction(fullscreen_act);
 	view_menu->addSeparator();
-	view_menu->addAction(tag_select_window_act);
 	view_menu->addAction(tags_window_act);
 	view_menu->addAction(color_window_act);
 	view_menu->addAction(symbol_window_act);
@@ -1167,11 +1172,11 @@ void MapEditorController::createMenuAndToolbars()
 	// View toolbar
 	toolbar_view = window->addToolBar(tr("View"));
 	toolbar_view->setObjectName(QString::fromLatin1("View toolbar"));
-	QToolButton* grid_button = new QToolButton();
+	auto grid_button = new QToolButton();
 	grid_button->setCheckable(true);
 	grid_button->setDefaultAction(show_grid_act);
 	grid_button->setPopupMode(QToolButton::MenuButtonPopup);
-	QMenu* grid_menu = new QMenu(grid_button);
+	auto grid_menu = new QMenu(grid_button);
 	grid_menu->addAction(tr("Configure grid..."));
 	grid_button->setMenu(grid_menu);
 	connect(grid_menu, &QMenu::triggered, this, &MapEditorController::configureGrid);
@@ -1210,11 +1215,11 @@ void MapEditorController::createMenuAndToolbars()
 	toolbar_drawing->addAction(draw_text_act);
 	toolbar_drawing->addSeparator();
 	
-	QToolButton* paint_on_template_button = new QToolButton();
+	auto paint_on_template_button = new QToolButton();
 	paint_on_template_button->setCheckable(true);
 	paint_on_template_button->setDefaultAction(paint_on_template_act);
 	paint_on_template_button->setPopupMode(QToolButton::MenuButtonPopup);
-	QMenu* paint_on_template_menu = new QMenu(paint_on_template_button);
+	auto paint_on_template_menu = new QMenu(paint_on_template_button);
 	paint_on_template_menu->addAction(tr("Select template..."));
 	paint_on_template_button->setMenu(paint_on_template_menu);
 	connect(paint_on_template_menu, &QMenu::triggered, this, &MapEditorController::paintOnTemplateSelectClicked);
@@ -1232,7 +1237,7 @@ void MapEditorController::createMenuAndToolbars()
 	toolbar_editing->addAction(boolean_union_act);
 	toolbar_editing->addAction(cut_tool_act);
 	
-	QToolButton* cut_hole_button = new QToolButton();
+	auto cut_hole_button = new QToolButton();
 	cut_hole_button->setCheckable(true);
 	cut_hole_button->setToolButtonStyle(Qt::ToolButtonIconOnly);
 	cut_hole_button->setDefaultAction(cut_hole_act);
@@ -1278,7 +1283,7 @@ void MapEditorController::createMobileGUI()
 	
 	mobile_symbol_button_menu = new QMenu(window);
 	mobile_symbol_button_menu->addAction(QString{}); // reserved for symbol name
-	auto description_action = mobile_symbol_button_menu->addAction(QApplication::translate("SymbolPropertiesWidget", "Description"));
+	auto description_action = mobile_symbol_button_menu->addAction(QApplication::translate("OpenOrienteering::SymbolPropertiesWidget", "Description"));
 	connect(description_action, &QAction::triggered, [this]() {
 		auto symbol = symbol_widget->getSingleSelectedSymbol();
 		auto document = QString{ symbol->getNumberAsString() + QLatin1Char(' ')
@@ -1291,7 +1296,7 @@ void MapEditorController::createMobileGUI()
 		description_dialog.exec();
 	});
 	mobile_symbol_button_menu->addSeparator();
-	auto hide_symbol_action = mobile_symbol_button_menu->addAction(QApplication::translate("SymbolRenderWidget", "Hide objects with this symbol"));
+	auto hide_symbol_action = mobile_symbol_button_menu->addAction(QApplication::translate("OpenOrienteering::SymbolRenderWidget", "Hide objects with this symbol"));
 	hide_symbol_action->setCheckable(true);
 	connect(hide_symbol_action, &QAction::triggered, [this](bool value) {
 		auto symbol = symbol_widget->getSingleSelectedSymbol();
@@ -1302,7 +1307,7 @@ void MapEditorController::createMobileGUI()
 		map->setSymbolsDirty();
 		selectedSymbolsChanged();
 	});
-	auto protected_symbol_action = mobile_symbol_button_menu->addAction(QApplication::translate("SymbolRenderWidget", "Protect objects with this symbol"));
+	auto protected_symbol_action = mobile_symbol_button_menu->addAction(QApplication::translate("OpenOrienteering::SymbolRenderWidget", "Protect objects with this symbol"));
 	protected_symbol_action->setCheckable(true);
 	connect(protected_symbol_action, &QAction::triggered, [this](bool value) {
 		auto symbol = symbol_widget->getSingleSelectedSymbol();
@@ -1452,7 +1457,7 @@ void MapEditorController::createMobileGUI()
 	
 	top_action_bar->setParent(map_widget);
 	
-	QWidget* container_widget = new QWidget();
+	auto container_widget = new QWidget();
 	auto layout = new QVBoxLayout();
 	layout->setMargin(0);
 	layout->setSpacing(0);
@@ -1663,7 +1668,7 @@ void MapEditorController::copy()
 	}
 	
 	// Put buffer into clipboard
-	QMimeData* mime_data = new QMimeData();
+	auto mime_data = new QMimeData();
 	mime_data->setData(MimeType::OpenOrienteeringObjects(), buffer.data());
 	QApplication::clipboard()->setMimeData(mime_data);
 	
@@ -1930,7 +1935,7 @@ void MapEditorController::mapNotesClicked()
 	dialog.setWindowTitle(tr("Map notes"));
 	dialog.setWindowModality(Qt::WindowModal);
 	
-	QTextEdit* text_edit = new QTextEdit();
+	auto text_edit = new QTextEdit();
 	text_edit->setPlainText(map->getMapNotes());
 	QPushButton* cancel_button = new QPushButton(tr("Cancel"));
 	QPushButton* ok_button = new QPushButton(QIcon(QString::fromLatin1(":/images/arrow-right.png")), tr("OK"));
@@ -2013,7 +2018,7 @@ void MapEditorController::reopenTemplateClicked()
 	QString map_directory = window->currentPath();
 	if (!map_directory.isEmpty())
 		map_directory = QFileInfo(map_directory).canonicalPath();
-	ReopenTemplateDialog* dialog = new ReopenTemplateDialog(window, map, map_directory); 
+	auto dialog = new ReopenTemplateDialog(window, map, map_directory); 
 	dialog->setWindowModality(Qt::WindowModal);
 	dialog->exec();
 	delete dialog;
@@ -2034,7 +2039,7 @@ void MapEditorController::createTagEditor()
 {
 	Q_ASSERT(!tags_dock_widget);
 	
-	TagsWidget* tags_widget = new TagsWidget(map, main_view, this);
+	auto tags_widget = new TagsWidget(map, main_view, this);
 	tags_dock_widget = new EditorDockWidget(tr("Tag Editor"), tags_window_act, this, window);
 	tags_dock_widget->setWidget(tags_widget);
 	tags_dock_widget->setObjectName(QString::fromLatin1("Tag editor dock widget"));
@@ -2052,34 +2057,12 @@ void MapEditorController::showTagsWindow(bool show)
 	tags_dock_widget->setVisible(show);
 }
 
-void MapEditorController::createTagSelector()
-{
-	Q_ASSERT(!tag_select_dock_widget);
-
-	TagSelectWidget* tag_widget = new TagSelectWidget(map, main_view, this);
-	tag_select_dock_widget = new EditorDockWidget(tr("Tag Selector"), tag_select_window_act, this, window);
-	tag_select_dock_widget->setWidget(tag_widget);
-	tag_select_dock_widget->setObjectName(QString::fromLatin1("Tag selection dock widget"));
-	if (!window->restoreDockWidget(tag_select_dock_widget))
-		window->addDockWidget(Qt::RightDockWidgetArea, tag_select_dock_widget, Qt::Vertical);
-	tag_select_dock_widget->setVisible(false);
-}
-
-
-void MapEditorController::showTagSelectWindow(bool show)
-{
-	if (!tag_select_dock_widget)
-		createTagSelector();
-
-	tag_select_window_act->setChecked(show);
-	tag_select_dock_widget->setVisible(show);
-}
 
 void MapEditorController::editGeoreferencing()
 {
 	if (georeferencing_dialog.isNull())
 	{
-		GeoreferencingDialog* dialog = new GeoreferencingDialog(this); 
+		auto dialog = new GeoreferencingDialog(this); 
 		georeferencing_dialog.reset(dialog);
 		connect(dialog, &QDialog::finished, this, &MapEditorController::georeferencingDialogFinished);
 	}
@@ -2128,9 +2111,8 @@ void MapEditorController::selectedSymbolsChanged()
 		}
 		else //if (symbol_widget->getNumSelectedSymbols() == 1)
 		{
-			QImage image = symbol->createIcon(map, qMin(icon_size.width(), icon_size.height()), Util::isAntialiasingRequired(), 0, 4);
-			QPainter painter(&pixmap);
-			painter.drawImage(pixmap.rect(), image);
+			auto image = symbol->createIcon(*map, qMin(icon_size.width(), icon_size.height()));
+			pixmap = QPixmap::fromImage(image);
 			
 			symbol_button->setMenu(mobile_symbol_button_menu);
 			const auto actions = mobile_symbol_button_menu->actions();
@@ -2497,7 +2479,7 @@ void MapEditorController::duplicateClicked()
 		new_objects.push_back(duplicate);
 	}
 	
-	DeleteObjectsUndoStep* undo_step = new DeleteObjectsUndoStep(map);
+	auto undo_step = new DeleteObjectsUndoStep(map);
 	MapPart* part = map->getCurrentPart();
 	
 	map->clearObjectSelection(false);
@@ -2577,7 +2559,7 @@ void MapEditorController::switchSymbolClicked()
 			{
 				for (const auto& part : path_object->parts())
 				{
-					PathObject* new_object = new PathObject { part };
+					auto new_object = new PathObject { part };
 					new_object->setSymbol(symbol, true);
 					new_objects.push_back(new_object);
 				}
@@ -2621,7 +2603,7 @@ void MapEditorController::switchSymbolClicked()
 	}
 	else if (split_up)
 	{
-		CombinedUndoStep* combined_step = new CombinedUndoStep(map);
+		auto combined_step = new CombinedUndoStep(map);
 		combined_step->push(add_step);
 		combined_step->push(delete_step);
 		map->push(combined_step);
@@ -2648,7 +2630,7 @@ void MapEditorController::fillBorderClicked()
 	else if (contained_types & Symbol::Line && !(contained_types & Symbol::Area))
 		split_up = true;
 	
-	DeleteObjectsUndoStep* undo_step = new DeleteObjectsUndoStep(map);
+	auto undo_step = new DeleteObjectsUndoStep(map);
 	MapPart* part = map->getCurrentPart();
 	
 	for (const auto object : map->selectedObjects())
@@ -2658,7 +2640,7 @@ void MapEditorController::fillBorderClicked()
 			PathObject* path_object = object->asPath();
 			for (const auto& part : path_object->parts())
 			{
-				PathObject* new_object = new PathObject { part };
+				auto new_object = new PathObject { part };
 				new_object->setSymbol(symbol, true);
 				map->addObject(new_object);
 				new_objects.push_back(new_object);
@@ -2794,7 +2776,7 @@ void MapEditorController::selectByCurrentSymbols()
 
 void MapEditorController::switchDashesClicked()
 {
-	SwitchDashesUndoStep* undo_step = new SwitchDashesUndoStep(map);
+	auto undo_step = new SwitchDashesUndoStep(map);
 	MapPart* part = map->getCurrentPart();
 	
 	for (const auto object : map->selectedObjects())
@@ -2898,7 +2880,7 @@ void MapEditorController::connectPathsClicked()
 			
 			// Choose connection threshold as maximum of 0.35mm, 1.5 * largest line extent, and 6 pixels
 			// TODO: instead of 6 pixels, use a physical size as soon as screen dpi is in the settings
-			auto close_distance_sq = qMax(0.35, 1.5 * a->getSymbol()->calculateLargestLineExtent(map));
+			auto close_distance_sq = qMax(0.35, 1.5 * a->getSymbol()->calculateLargestLineExtent());
 			close_distance_sq = qMax(close_distance_sq, 0.001 * main_view->pixelToLength(6));
 			close_distance_sq = qPow(close_distance_sq, 2);
 			
@@ -3028,7 +3010,7 @@ void MapEditorController::connectPathsClicked()
 	
 	if (add_step || replace_step)
 	{
-		CombinedUndoStep* undo_step = new CombinedUndoStep(map);
+		auto undo_step = new CombinedUndoStep(map);
 		if (replace_step)
 			undo_step->push(replace_step);
 		if (add_step)
@@ -3080,7 +3062,7 @@ void MapEditorController::measureClicked(bool checked)
 	{
 		measure_dock_widget = new EditorDockWidget(tr("Measure"), measure_act, this, window);
 		measure_dock_widget->toggleViewAction()->setVisible(false);
-		MeasureWidget* measure_widget = new MeasureWidget(map);
+		auto measure_widget = new MeasureWidget(map);
 		measure_dock_widget->setWidget(measure_widget);
 		measure_dock_widget->setObjectName(QString::fromLatin1("Measure dock widget"));
 		addFloatingDockWidget(measure_dock_widget);
@@ -3124,7 +3106,7 @@ void MapEditorController::booleanMergeHolesClicked()
 
 void MapEditorController::convertToCurvesClicked()
 {
-	ReplaceObjectsUndoStep* undo_step = new ReplaceObjectsUndoStep(map);
+	auto undo_step = new ReplaceObjectsUndoStep(map);
 	MapPart* part = map->getCurrentPart();
 	
 	for (const auto object : map->selectedObjects())
@@ -3159,7 +3141,7 @@ void MapEditorController::simplifyPathClicked()
 	// TODO: make threshold configurable!
 	const auto threshold = 0.1;
 	
-	ReplaceObjectsUndoStep* undo_step = new ReplaceObjectsUndoStep(map);
+	auto undo_step = new ReplaceObjectsUndoStep(map);
 	MapPart* part = map->getCurrentPart();
 	
 	for (const auto object : map->selectedObjects())
@@ -3220,7 +3202,7 @@ void MapEditorController::distributePointsClicked()
 	// Create undo step and select new objects
 	map->clearObjectSelection(false);
 	MapPart* part = map->getCurrentPart();
-	DeleteObjectsUndoStep* delete_step = new DeleteObjectsUndoStep(map);
+	auto delete_step = new DeleteObjectsUndoStep(map);
 	for (std::size_t i = 0; i < created_objects.size(); ++i)
 	{
 		Object* object = created_objects[i];
@@ -3336,7 +3318,7 @@ void MapEditorController::enableGPSDisplay(bool enable)
 			if (template_index == -1)
 			{
 				// Create a new template
-				TemplateTrack* new_template = new TemplateTrack(gpx_file_path, map);
+				auto new_template = new TemplateTrack(gpx_file_path, map);
 				new_template->configureForGPSTrack();
 				template_index = map->getNumTemplates();
 				map->addTemplate(new_template, template_index);
@@ -3555,7 +3537,7 @@ void MapEditorController::updateMapPartsUI()
 			
 			if (i != current)
 			{
-				QAction* action = new QAction(part_name, this);
+				auto action = new QAction(part_name, this);
 				mappart_merge_mapper->setMapping(action, i);
 				connect(action, QOverload<bool>::of(&QAction::triggered), mappart_merge_mapper, QOverload<>::of(&QSignalMapper::map));
 				mappart_merge_menu->addAction(action);
@@ -3583,7 +3565,7 @@ void MapEditorController::addMapPart()
 	                   &accepted );
 	if (accepted && !name.isEmpty())
 	{
-		MapPart* part = new MapPart(name, map);
+		auto part = new MapPart(name, map);
 		map->addPart(part, map->getCurrentPartIndex() + 1);
 		map->setCurrentPart(part);
 		map->push(new MapPartUndoStep(map, MapPartUndoStep::RemoveMapPart, part));
@@ -3662,7 +3644,7 @@ void MapEditorController::reassignObjectsToMapPart(int target)
 	auto current = map->getCurrentPartIndex();
 	auto begin   = map->reassignObjectsToMapPart(map->selectedObjectsBegin(), map->selectedObjectsEnd(), current, target);
 	
-	SwitchPartUndoStep* undo = new SwitchPartUndoStep(map, target, current);
+	auto undo = new SwitchPartUndoStep(map, target, current);
 	for (std::size_t i = begin, end = map->getPart(target)->getNumObjects(); i < end; ++i)
 		undo->addObject(i);
 	map->push(undo);
@@ -3690,11 +3672,11 @@ void MapEditorController::mergeCurrentMapPartTo(int target)
 		
 		auto begin  = map->mergeParts(source, target);
 		
-		SwitchPartUndoStep* switch_part_undo = new SwitchPartUndoStep(map, target, source);
+		auto switch_part_undo = new SwitchPartUndoStep(map, target, source);
 		for (std::size_t i = begin, end = target_part->getNumObjects(); i < end; ++i)
 			switch_part_undo->addObject(i);
 		
-		CombinedUndoStep* undo = new CombinedUndoStep(map);
+		auto undo = new CombinedUndoStep(map);
 		undo->push(switch_part_undo);
 		undo->push(add_part_step);
 		map->push(undo);
@@ -3713,7 +3695,7 @@ void MapEditorController::mergeAllMapParts()
 	
 	if (button == QMessageBox::Yes)
 	{
-		CombinedUndoStep* undo = new CombinedUndoStep(map);
+		auto undo = new CombinedUndoStep(map);
 		
 		// For simplicity, we merge to the first part,
 		// but keep the properties (i.e. name) of the current part.
@@ -3724,7 +3706,7 @@ void MapEditorController::mergeAllMapParts()
 		{
 			UndoStep* add_part_step = new MapPartUndoStep(map, MapPartUndoStep::AddMapPart, i);
 			auto begin = map->mergeParts(i, 0);
-			SwitchPartUndoStep* switch_part_undo = new SwitchPartUndoStep(map, 0, i);
+			auto switch_part_undo = new SwitchPartUndoStep(map, 0, i);
 			for (std::size_t j = begin, end = target_part->getNumObjects(); j < end; ++j)
 				switch_part_undo->addObject(j);
 			undo->push(switch_part_undo);
@@ -3966,15 +3948,17 @@ bool MapEditorController::importMapFile(const QString& filename, bool show_error
 			QFile crt_file{ crt_filename };
 			if (!crt_file.open(QFile::ReadOnly))
 			{
-				QMessageBox::warning(window, Map::tr("Error"),
-				                     Map::tr("Cannot open file:\n%1\nfor reading.").arg(crt_filename));
+				QMessageBox::warning(window,
+				                     ::OpenOrienteering::Map::tr("Error"),
+				                     ::OpenOrienteering::Map::tr("Cannot open file:\n%1\nfor reading.").arg(crt_filename));
 				return false;
 			}
 			if (!ReplaceSymbolSetDialog::showDialogForCRT(window, imported_map, *map, crt_file))
 			{
-				auto choice = QMessageBox::question(window, Map::tr("Import..."),
-				                                    Map::tr("Symbol replacement was canceled.\n"
-				                                            "Import the data anyway?"),
+				auto choice = QMessageBox::question(window,
+				                                    ::OpenOrienteering::Map::tr("Import..."),
+				                                    ::OpenOrienteering::Map::tr("Symbol replacement was canceled.\n"
+				                                                                "Import the data anyway?"),
 				                                    QMessageBox::Yes | QMessageBox::No,
 				                                    QMessageBox::No);
 				if (choice == QMessageBox::No)
@@ -4073,3 +4057,6 @@ void MapEditorToolAction::triggeredImpl(bool checked)
 	else
 		setChecked(true);
 }
+
+
+}  // namespace OpenOrienteering

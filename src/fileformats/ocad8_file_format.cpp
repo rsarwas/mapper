@@ -25,7 +25,9 @@
 #include <QCoreApplication>
 #include <QDir>
 #include <QFileInfo>
+#include <QImage>
 #include <QImageReader>
+#include <QRgb>
 #include <QTextCodec>
 
 #include "settings.h"
@@ -52,10 +54,12 @@
 #include "util/encoding.h"
 
 
+namespace OpenOrienteering {
+
 // ### OCAD8FileFormat ###
 
 OCAD8FileFormat::OCAD8FileFormat()
- : FileFormat(MapFile, "OCAD78", ImportExport::tr("OCAD Versions 7, 8"), QString::fromLatin1("ocd"),
+ : FileFormat(MapFile, "OCAD78", ::OpenOrienteering::ImportExport::tr("OCAD Versions 7, 8"), QString::fromLatin1("ocd"),
               ImportSupported | ExportSupported | ExportLossy)
 {
 	// Nothing
@@ -113,12 +117,12 @@ void OCAD8FileImport::import(bool load_symbols_only)
 	if (!buffer)
 		throw FileFormatException(tr("Could not allocate buffer."));
 	if (stream->read((char*)buffer, size) != size)
-		throw FileFormatException(Importer::tr("Could not read file: %1").arg(stream->errorString()));
+		throw FileFormatException(::OpenOrienteering::Importer::tr("Could not read file: %1").arg(stream->errorString()));
 	int err = ocad_file_open_memory(&file, buffer, size);
-    if (err != 0) throw FileFormatException(Importer::tr("Could not read file: %1").arg(tr("libocad returned %1").arg(err)));
+    if (err != 0) throw FileFormatException(::OpenOrienteering::Importer::tr("Could not read file: %1").arg(tr("libocad returned %1").arg(err)));
 	
 	if (file->header->major <= 5 || file->header->major >= 9)
-		throw FileFormatException(Importer::tr("Could not read file: %1").arg(tr("OCAD files of version %1 are not supported!").arg(file->header->major)));
+		throw FileFormatException(::OpenOrienteering::Importer::tr("Could not read file: %1").arg(tr("OCAD files of version %1 are not supported!").arg(file->header->major)));
 
     //qDebug() << "file version is" << file->header->major << ", type is"
     //         << ((file->header->ftype == 2) ? "normal" : "other");
@@ -588,13 +592,13 @@ Symbol *OCAD8FileImport::importLineSymbol(const OCADLineSymbol *ocad_symbol)
     if( ocad_symbol->scnpts > 0 )
     {
 		symbol_line->dash_symbol = importPattern( ocad_symbol->scnpts, symbolptr);
-        symbol_line->dash_symbol->setName(QCoreApplication::translate("LineSymbolSettings", "Dash symbol"));
+        symbol_line->dash_symbol->setName(QCoreApplication::translate("OpenOrienteering::LineSymbolSettings", "Dash symbol"));
         symbolptr += ocad_symbol->scnpts; 
     }
     if( ocad_symbol->sbnpts > 0 )
     {
 		symbol_line->start_symbol = importPattern( ocad_symbol->sbnpts, symbolptr);
-        symbol_line->start_symbol->setName(QCoreApplication::translate("LineSymbolSettings", "Start symbol"));
+        symbol_line->start_symbol->setName(QCoreApplication::translate("OpenOrienteering::LineSymbolSettings", "Start symbol"));
         symbolptr += ocad_symbol->sbnpts;
     }
     if( ocad_symbol->senpts > 0 )
@@ -1556,7 +1560,7 @@ void OCAD8FileExport::doExport()
 	
 	// Create struct in memory
 	int err = ocad_file_new(&file);
-	if (err != 0) throw FileFormatException(Exporter::tr("Could not create new file: %1").arg(tr("libocad returned %1").arg(err)));
+	if (err != 0) throw FileFormatException(::OpenOrienteering::Exporter::tr("Could not create new file: %1").arg(tr("libocad returned %1").arg(err)));
 	
 	// Check for a neccessary offset (and add related warnings early).
 	auto area_offset = calculateAreaOffset();
@@ -1959,17 +1963,60 @@ void OCAD8FileExport::exportCommonSymbolFields(const Symbol* symbol, OCADSymbol*
 		}
 	}
 	
-	// Icon: 22x22 with 4 bit color code, origin at bottom left, some padding
-	const int icon_size = 22;
-	QImage image = symbol->createIcon(map, icon_size, false, 0);
-	u8* ocad_icon = (u8*)ocad_symbol->icon;
+	exportSymbolIcon(symbol, ocad_symbol->icon);
+}
+
+void OCAD8FileExport::exportSymbolIcon(const Symbol* symbol, u8 ocad_icon[])
+{
+	// Icon: 22x22 with 4 bit color code, origin at bottom left
+	constexpr int icon_size = 22;
+	QImage image = symbol->createIcon(*map, icon_size, false)
+	               .convertToFormat(QImage::Format_ARGB32_Premultiplied);
+	
+	auto process_pixel = [&image](int x, int y)->int
+	{
+		// Apply premultiplied pixel on white background
+		auto premultiplied = image.pixel(x, y);
+		auto alpha = qAlpha(premultiplied);
+		auto r = 255 - alpha + qRed(premultiplied);
+		auto g = 255 - alpha + qGreen(premultiplied);
+		auto b = 255 - alpha + qBlue(premultiplied);
+		auto pixel = qRgb(r, g, b);
+		
+		// Ordered dithering 2x2 threshold matrix, adjusted for o-map halftones
+		static int threshold[4] = { 24, 192, 136, 80 };
+		auto palette_color = getOcadColor(pixel);
+		switch (palette_color)
+		{
+		case 0:
+			// Black to gray (50%)
+			return  qGray(pixel) < 128-threshold[(x%2 + 2*(y%2))]/2 ? 0 : 7;
+			
+		case 7:
+			// Gray (50%) to light gray 
+			return  qGray(pixel) < 192-threshold[(x%2 + 2*(y%2))]/4 ? 7 : 8;
+			
+		case 8:
+			// Light gray to white
+			return  qGray(pixel) < 256-threshold[(x%2 + 2*(y%2))]/4 ? 8 : 15;
+			
+		case 15:
+			// Pure white
+			return palette_color;
+			
+		default:
+			// Color to white
+			return  QColor(pixel).saturation() >= threshold[(x%2 + 2*(y%2))] ? palette_color : 15;
+		}
+	};
+	
 	for (int y = icon_size - 1; y >= 0; --y)
 	{
 		for (int x = 0; x < icon_size; x += 2)
 		{
-			int first = getOcadColor(image.pixel(x, y));
-			int second = getOcadColor(image.pixel(x + 1, y));
-			*(ocad_icon++) = (first << 4) + (second);
+			auto first = process_pixel(x, y);
+			auto second = process_pixel(x+1, y);
+			*(ocad_icon++) = u8((first << 4) + second);
 		}
 		ocad_icon++;
 	}
@@ -2569,9 +2616,9 @@ u16 OCAD8FileExport::exportTextCoordinates(TextObject* object, OCADPoint** buffe
 	}
 }
 
+// static
 int OCAD8FileExport::getOcadColor(QRgb rgb)
 {
-	// Simple comparison function which takes the best matching color.
 	static const QColor ocad_colors[16] = {
 		QColor(  0,   0,   0).toHsv(),
 		QColor(128,   0,   0).toHsv(),
@@ -2591,37 +2638,46 @@ int OCAD8FileExport::getOcadColor(QRgb rgb)
 		QColor(255, 255, 255).toHsv()
 	};
 	
-	// Return white for transparent areas
-	if (qAlpha(rgb) < 128)
+	Q_ASSERT(qAlpha(rgb) == 255);
+	
+	// Quick return for frequent values
+	if (rgb == qRgb(255, 255, 255))
 		return 15;
+	else if (rgb == qRgb(0, 0, 0))
+		return 0;
 	
 	QColor color = QColor(rgb).toHsv();
-	int best_index = 0;
-	float best_distance = 999999;
-	for (int i = 0; i < 16; ++i)
+	if (color.hue() == -1 || color.saturation() < 32)
 	{
+		auto gray = qGray(rgb);  // qGray is used for dithering
+		if (gray >= 192)
+			return 8;
+		if (gray >= 128)
+			return 7;
+		return 0;
+	}
+	
+	int best_index = 0;
+	auto best_distance = std::numeric_limits<qreal>::max();
+	for (auto i : { 1, 2, 3, 4, 5, 6, 9, 10, 11, 12, 13, 14 })
+	{
+		// True color
 		int hue_dist = qAbs(color.hue() - ocad_colors[i].hue());
 		hue_dist = qMin(hue_dist, 360 - hue_dist);
-		float distance = qPow(hue_dist, 2) + 
-						  0.1f * qPow(color.saturation() - ocad_colors[i].saturation(), 2) +
-						  0.1f * qPow(color.value() - ocad_colors[i].value(), 2);
+		auto distance = qPow(hue_dist, 2)
+		                + 0.1 * qPow(color.saturation() - ocad_colors[i].saturation(), 2)
+		                + 0.1 * qPow(color.value() - ocad_colors[i].value(), 2);
 		
 		// (Too much) manual tweaking for orienteering colors
 		if (i == 1)
 			distance *= 1.5;	// Dark red
 		else if (i == 3)
 			distance *= 2;		// Olive
-		else if (i == 7)
-			distance *= 2;		// Dark gray
-		else if (i == 8)
-			distance *= 3;		// Light gray
 		else if (i == 11)
 			distance *= 2;		// Yellow
 		else if (i == 9)
 			distance *= 3;		// Red is unlikely
-		else if (i == 15)
-			distance *= 4;		// White is very unlikely
-			
+		
 		if (distance < best_distance)
 		{
 			best_distance = distance;
@@ -2794,3 +2850,6 @@ void OCAD8FileExport::addStringTruncationWarning(const QString& text, int trunca
 	temp.insert(truncation_pos, QLatin1String("|||"));
 	addWarning(tr("String truncated (truncation marked with three '|'): %1").arg(temp));
 }
+
+
+}  // namespace OpenOrienteering

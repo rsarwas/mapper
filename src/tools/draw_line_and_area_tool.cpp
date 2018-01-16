@@ -21,29 +21,37 @@
 
 #include "draw_line_and_area_tool.h"
 
+#include <algorithm>
+#include <cstddef>
+#include <iterator>
+
+#include <QtGlobal>
 #include <QPainter>
+#include <QPoint>
 
 #include "core/map.h"
-#include "gui/map/map_editor.h"
-#include "undo/object_undo.h"
-#include "gui/map/map_widget.h"
+#include "core/map_coord.h"
+#include "core/map_part.h"
+#include "core/map_view.h"
 #include "core/objects/object.h"
 #include "core/renderables/renderable.h"
-#include "core/symbols/symbol.h"
 #include "core/symbols/combined_symbol.h"
 #include "core/symbols/line_symbol.h"
 #include "core/symbols/point_symbol.h"
+#include "core/symbols/symbol.h"
+#include "gui/map/map_editor.h"
+#include "gui/map/map_widget.h"
+#include "undo/object_undo.h"
 #include "util/util.h"
+
+
+namespace OpenOrienteering {
 
 DrawLineAndAreaTool::DrawLineAndAreaTool(MapEditorController* editor, Type type, QAction* tool_action, bool is_helper_tool)
 : MapEditorTool(editor, type, tool_action)
-, is_helper_tool(is_helper_tool)
-, drawing_symbol(nullptr)
-, preview_point_radius(0)
-, preview_points_shown(false)
 , path_combination(Map::getCoveringCombinedLine()->duplicate()->asCombined())
-, preview_path(nullptr)
 , renderables(new MapRenderables(map()))
+, is_helper_tool(is_helper_tool)
 {
 	// Helper tools don't draw the active symbol.
 	if (!is_helper_tool)
@@ -57,10 +65,13 @@ DrawLineAndAreaTool::DrawLineAndAreaTool(MapEditorController* editor, Type type,
 	connect(editor, &MapEditorController::activeSymbolChanged, this, &DrawLineAndAreaTool::setDrawingSymbol);
 }
 
+
 DrawLineAndAreaTool::~DrawLineAndAreaTool()
 {
 	deletePreviewObjects();
 }
+
+
 
 void DrawLineAndAreaTool::leaveEvent(QEvent* event)
 {
@@ -115,9 +126,9 @@ void DrawLineAndAreaTool::createPreviewPoints()
 	}
 }
 
-void DrawLineAndAreaTool::setPreviewPointsPosition(MapCoordF map_coord, int index)
+void DrawLineAndAreaTool::setPreviewPointsPosition(MapCoordF map_coord, int points_index)
 {
-	const auto& preview_point_vector = preview_points[std::size_t(index)];
+	const auto& preview_point_vector = preview_points[std::size_t(points_index)];
 	for (const auto preview_point : preview_point_vector)
 	{
 		if (preview_points_shown)
@@ -188,7 +199,7 @@ void DrawLineAndAreaTool::startDrawing()
 		path_combination->setNumParts(num_symbol_parts);
 	}
 	
-	preview_path = new PathObject(path_combination.data());
+	preview_path = new PathObject(path_combination.get());
 	
 	setEditingInProgress(true);
 }
@@ -234,15 +245,15 @@ void DrawLineAndAreaTool::finishDrawing(PathObject* append_to_object)
 		
 		if (can_be_appended)
 		{
-			Object* undo_duplicate = append_to_object->duplicate();
+			auto undo_duplicate = append_to_object->duplicate();
 			append_to_object->connectIfClose(preview_path, 0.01*0.01);
 			delete preview_path;
 			
 			map()->clearObjectSelection(false);
 			map()->addObjectToSelection(append_to_object, true);
 			
-			MapPart* cur_part = map()->getCurrentPart();
-			ReplaceObjectsUndoStep* undo_step = new ReplaceObjectsUndoStep(map());
+			auto cur_part = map()->getCurrentPart();
+			auto undo_step = new ReplaceObjectsUndoStep(map());
 			undo_step->addObject(cur_part->findObjectIndex(append_to_object), undo_duplicate);
 			map()->push(undo_step);
 		}
@@ -252,7 +263,7 @@ void DrawLineAndAreaTool::finishDrawing(PathObject* append_to_object)
 			map()->clearObjectSelection(false);
 			map()->addObjectToSelection(preview_path, true);
 			
-			DeleteObjectsUndoStep* undo_step = new DeleteObjectsUndoStep(map());
+			auto undo_step = new DeleteObjectsUndoStep(map());
 			undo_step->addObject(index);
 			map()->push(undo_step);
 		}
@@ -324,7 +335,7 @@ void DrawLineAndAreaTool::addPreviewPointSymbols(const Symbol* symbol)
 		{
 			if (has_main_line)
 			{
-				PointSymbol* preview = new PointSymbol();
+				auto preview = new PointSymbol();
 				preview->setInnerRadius(line->getLineWidth() / 2);
 				preview->setInnerColor(line->getColor());
 				preview_point_symbols.push_back(preview);
@@ -367,7 +378,7 @@ void DrawLineAndAreaTool::addPreviewPointSymbolsForBorder(const LineSymbol* line
 	if (!border->isVisible())
 		return;
 	
-	PointSymbol* preview = new PointSymbol();
+	auto preview = new PointSymbol();
 	preview->setInnerRadius(line->getLineWidth() / 2 - border->width / 2 + border->shift);
 	preview->setOuterWidth(border->width);
 	preview->setOuterColor(border->color);
@@ -379,3 +390,5 @@ void DrawLineAndAreaTool::addPreviewPointSymbolsForBorder(const LineSymbol* line
 		preview_point_radius = qMax(preview_point_radius, preview->getInnerRadius() + preview->getOuterWidth());
 }
 
+
+}  // namespace OpenOrienteering

@@ -36,6 +36,8 @@
 #include "util/backports.h"
 
 
+namespace OpenOrienteering {
+
 class GdalManager::GdalManagerPrivate
 {
 public:
@@ -169,12 +171,17 @@ private:
 			if (qstrcmp(type, "YES") != 0)
 				continue;
 			
+			// Skip write-only drivers.
+			auto cap_open = GDALGetMetadataItem(driver_data, GDAL_DCAP_OPEN, nullptr);
+			if (qstrcmp(cap_open, "YES") != 0)
+				continue;
+			
 			auto extensions_raw = GDALGetMetadataItem(driver_data, GDAL_DMD_EXTENSIONS, nullptr);
 			auto extensions = QByteArray::fromRawData(extensions_raw, int(qstrlen(extensions_raw)));
 			for (auto pos = 0; pos >= 0; )
 			{
-				auto start = pos;
-				pos = extensions.indexOf(' ', start+1);
+				auto start = pos ? pos + 1 : 0;
+				pos = extensions.indexOf(' ', start);
 				auto extension = extensions.mid(start, pos - start);
 				if (extension.isEmpty())
 					continue;
@@ -190,7 +197,12 @@ private:
 		settings.endGroup();
 #else
 		// GDAL < 2.0 does not provide the supported extensions 
-		static const std::vector<QByteArray> default_extensions = { "shp", "shx" };
+		static const std::vector<QByteArray> default_extensions = {
+		    "shp", "dbf",
+		    /* "dxf", */
+		    /* "gpx", */
+		    /* "osm", */ "pbf",
+		};
 		enabled_vector_extensions.reserve(default_extensions.size() + 3);
 		enabled_vector_extensions = default_extensions;
 		
@@ -337,3 +349,6 @@ void GdalManager::unsetParameter(const QString& key)
 {
 	p->unsetParameter(key);
 }
+
+
+}  // namespace OpenOrienteering

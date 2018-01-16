@@ -27,6 +27,8 @@
 #include <QString>
 #include <QTransform>
 
+#include "test_config.h"
+
 #include "global.h"
 #include "core/georeferencing.h"
 #include "core/map.h"
@@ -34,6 +36,8 @@
 #include "fileformats/xml_file_format_p.h"
 #include "templates/template.h"
 #include "templates/world_file.h"
+
+using namespace OpenOrienteering;
 
 
 /**
@@ -49,7 +53,7 @@ private slots:
 		doStaticInitializations();
 		// Static map initializations
 		Map map;
-		QDir::addSearchPath(QStringLiteral("testdata"), QFileInfo(QString::fromUtf8(__FILE__)).dir().absoluteFilePath(QStringLiteral("data")));
+		QDir::addSearchPath(QStringLiteral("testdata"), QDir(QString::fromUtf8(MAPPER_TEST_SOURCE_DIR)).absoluteFilePath(QStringLiteral("data")));
 	}
 	
 	void worldFileUnitTest()

@@ -33,6 +33,8 @@ class QLabel;
 class QPainter;
 class QRectF;
 
+namespace OpenOrienteering {
+
 class GPSDisplay;
 class MapCoordF;
 class MapEditorController;
@@ -73,10 +75,12 @@ protected:
 	double y_sum;
 	double weights_sum;
 	
-	const Symbol* last_used_symbol;
-	PointObject* preview_object;
+	const Symbol* last_used_symbol = nullptr;
+	PointObject* preview_object = nullptr;
 	QScopedPointer<MapRenderables> renderables;
 	QPointer<QLabel> help_label;
 };
 
+
+}  // namespace OpenOrienteering
 #endif

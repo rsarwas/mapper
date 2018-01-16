@@ -32,6 +32,8 @@ class QSpinBox;
 class QWidget;
 
 
+namespace OpenOrienteering {
+
 class EditorSettingsPage : public SettingsPage
 {
 Q_OBJECT
@@ -50,6 +52,7 @@ protected:
 	void updateWidgets();
 	
 private:
+	QSpinBox* icon_size;
 	QCheckBox* antialiasing;
 	QCheckBox* text_antialiasing;
 	QSpinBox* tolerance;
@@ -67,5 +70,7 @@ private:
 	QCheckBox* rectangle_preview_line_width;
 };
 
+
+}  // namespace OpenOrienteering
 
 #endif

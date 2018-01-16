@@ -28,6 +28,7 @@
 #include <set>
 #include <vector>
 
+#include <QtGlobal>
 #include <QExplicitlySharedDataPointer>
 #include <QFlags>
 #include <QHash>
@@ -40,15 +41,17 @@
 #include <QString>
 #include <QTransform>
 
-#include "map_coord.h"
-#include "map_grid.h"
-#include "map_part.h"
+#include "core/map_coord.h"
+#include "core/map_grid.h"
+#include "core/map_part.h"
 
 class QIODevice;
 class QPainter;
 class QTranslator;
 class QWidget;
 // IWYU pragma: no_forward_declare QRectF
+
+namespace OpenOrienteering {
 
 class CombinedSymbol;
 class FileFormat;
@@ -88,7 +91,6 @@ Q_OBJECT
 friend class MapTest;
 friend class MapRenderables;
 friend class OCAD8FileImport;
-friend class XMLFileImport;
 friend class NativeFileImport;
 friend class NativeFileExport;
 friend class XMLFileImporter;
@@ -226,7 +228,7 @@ public:
 	QHash<const Symbol*, Symbol*> importMap(
 	        const Map& imported_map,
 	        ImportMode mode,
-	        std::vector<bool>* symbol_filter = nullptr,
+	        std::vector<bool>* filter = nullptr,
 	        int symbol_insert_pos = -1,
 	        bool merge_duplicate_symbols = true,
 	        const QTransform& transform = {}
@@ -585,6 +587,22 @@ public:
 	 * display the symbols indicated by the bitfield because of symbol dependencies.
 	 */
 	void determineSymbolUseClosure(std::vector< bool >& symbol_bitfield) const;
+	
+	/**
+	 * Returns the scale factor to be used for default symbol icons.
+	 * 
+	 * The full icon size (width, height) is represented by 1.0.
+	 */
+	qreal symbolIconZoom() const;
+	
+	/**
+	 * Updates the symbol icon zoom from the current set of symbols.
+	 * 
+	 * The symbol icon zoom is chosen so that most symbols fit into the full
+	 * icon space, and the number of symbol below 10% size is kept low.
+	 * For a map without symbols, this returns 1.0.
+	 */
+	void updateSymbolIconZoom();
 	
 	
 	// Templates
@@ -1354,6 +1372,9 @@ signals:
 	/** Emitted when a symbol in the map is deleted. */
 	void symbolDeleted(int pos, const Symbol* old_symbol);
 	
+	/** Emitted when the symbol icon zoom changes. */
+	void symbolIconZoomChanged();
+	
 	
 	/** Emitted when a template is added to the map, gives the template's index and pointer. */
 	void templateAdded(int pos, Template* temp);
@@ -1488,6 +1509,7 @@ private:
 	bool has_spot_colors;
 	QString symbol_set_id;
 	SymbolVector symbols;
+	mutable qreal symbol_icon_scale = 0;
 	TemplateVector templates;
 	TemplateVector closed_templates;
 	int first_front_template = 0;		// index of the first template in templates which should be drawn in front of the map
@@ -1539,12 +1561,9 @@ private:
 	static CombinedSymbol* covering_combined_line;
 };
 
-Q_DECLARE_METATYPE(const Map*)
 
 
 // ### Map inline code ###
-
-Q_DECLARE_OPERATORS_FOR_FLAGS(Map::ImportMode)
 
 inline
 int Map::getNumColors() const
@@ -1864,5 +1883,14 @@ TextSymbol* Map::getUndefinedText()
 {
 	return undefined_text;
 }
+
+
+}  // namespace OpenOrienteering
+
+
+Q_DECLARE_METATYPE(const OpenOrienteering::Map*)
+
+Q_DECLARE_OPERATORS_FOR_FLAGS(OpenOrienteering::Map::ImportMode)
+
 
 #endif

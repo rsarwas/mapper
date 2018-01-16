@@ -1,6 +1,6 @@
 /*
  *    Copyright 2013 Thomas Schöps
- *    Copyright 2014 Kai Pastor
+ *    Copyright 2014, 2017 Kai Pastor
  *
  *    This file is part of OpenOrienteering.
  *
@@ -36,11 +36,13 @@ class QPainter;
 class QPoint;
 class QRectF;
 
+namespace OpenOrienteering {
+
 class Map;
 class MapEditorController;
-class PathObject;
 class RenderConfig;
 class Symbol;
+
 
 /** 
  * Tool to fill bounded areas with PathObjects.
@@ -56,18 +58,6 @@ protected slots:
 	void setDrawingSymbol(const Symbol* symbol);
 	
 protected:
-	/**
-	 * Helper structure used to represent a section of a traced path
-	 * while constructing the fill object.
-	 */
-	struct PathSection
-	{
-		PathObject* object;
-		int part;
-		float start_clen;
-		float end_clen;
-	};
-	
 	void updateStatusText() override;
 	void objectSelectionChangedImpl() override;
 	
@@ -82,8 +72,8 @@ protected:
 	
 	/**
 	 * Rasterizes an area of the current map part with the given extent into an image.
-	 * Encodes object ids as colors, where the object with index 0 has color (0, 0, 0, 255),
-	 * the object with index 1 has (1, 0, 0, 255), and so on. The background is transparent.
+	 * 
+	 * The pixels encodes object IDs (with alpha = 255). The background is white.
 	 * Returns the image and the used map-to-image transform.
 	 */
 	QImage rasterizeMap(const QRectF& extent, QTransform& out_transform);
@@ -94,15 +84,19 @@ protected:
 	void drawObjectIDs(Map* map, QPainter* painter, const RenderConfig& config);
 	
 	/**
-	 * Traces the boundary around an "island" in the given image, starting from the
-	 * start_pixel / test_pixel pair, where start_pixel must reference a free (transparent)
-	 * pixel and test_pixel a 4-adjacent obstructed pixel of the island to trace.
-	 * Returns the found boundary as a vector of pixel positions. Returns:
+	 * Constructs the boundary around an area of free pixels in the given image.
+	 * 
+	 * The discovered boundary is stored as a vector of pixel positions.
+	 * The tracing starts from the free_pixel/boundary_pixel pair, where
+	 * free_pixel references a free (transparent) pixel next to boundary pixel
+	 * which reference an obstructed pixel of area to be traced.
+	 * 
+	 * Returns:
 	 * -1 if running out of the image borders,
 	 *  0 if the tracing fails because the start is not included in the shape,
 	 *  1 if the tracing succeeds.
 	 */
-	int traceBoundary(const QImage& image, QPoint start_pixel, QPoint test_pixel, std::vector<QPoint>& out_boundary);
+	int traceBoundary(const QImage& image, QPoint free_pixel, QPoint boundary_pixel, std::vector<QPoint>& out_boundary);
 	
 	/**
 	 * Creates a fill object for the given image, boundary vector (of pixel positions) and transform.
@@ -112,5 +106,8 @@ protected:
 	
 	const Symbol* drawing_symbol;
 };
+
+
+}  // namespace OpenOrienteering
 
 #endif

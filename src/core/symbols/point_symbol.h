@@ -34,6 +34,8 @@ class QPainterPath;
 class QXmlStreamReader;
 class QXmlStreamWriter;
 
+namespace OpenOrienteering {
+
 class Map;
 class MapColor;
 class MapColorMap;
@@ -87,6 +89,8 @@ public:
 	bool containsColor(const MapColor* color) const override;
 	const MapColor* guessDominantColor() const override;
 	void scale(double factor) override;
+	
+	qreal dimensionForIcon() const override;
 	
 	// Contained objects and symbols (elements)
 	
@@ -149,5 +153,8 @@ protected:
 	int outer_width;		// in 1/1000 mm
 	const MapColor* outer_color;
 };
+
+
+}  // namespace OpenOrienteering
 
 #endif

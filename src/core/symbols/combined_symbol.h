@@ -27,10 +27,13 @@
 #include <vector>
 
 #include <Qt>
+#include <QtGlobal> 
 
 class QIODevice;
 class QXmlStreamReader;
 class QXmlStreamWriter;
+
+namespace OpenOrienteering {
 
 class Map;
 class MapColor;
@@ -86,7 +89,9 @@ public:
 	
 	bool loadFinished(Map* map) override;
 	
-    float calculateLargestLineExtent(Map* map) const override;
+	qreal dimensionForIcon() const override;
+	
+    qreal calculateLargestLineExtent() const override;
 	
 	// Getters / Setter
 	inline int getNumParts() const {return (int)parts.size();}
@@ -112,5 +117,8 @@ protected:
 	std::vector<const Symbol*> parts;
 	std::vector<int> temp_part_indices;	// temporary vector of the indices of the 'parts' symbols, used just for loading
 };
+
+
+}  // namespace OpenOrienteering
 
 #endif

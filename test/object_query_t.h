@@ -23,7 +23,8 @@
 
 #include <QObject>
 
-class Object;
+namespace OpenOrienteering { class Object; }
+using OpenOrienteering::Object;
 
 
 /**
@@ -42,6 +43,7 @@ private slots:
 	void testOrQuery();
 	void testAndQuery();
 	void testSearch();
+	void testObjectText();
 	void testSymbol();
 	void testToString();
 	void testParser();

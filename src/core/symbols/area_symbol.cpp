@@ -48,6 +48,8 @@ class QXmlStreamWriter;
 // IWYU pragma: no_forward_declare QXmlStreamReader
 
 
+namespace OpenOrienteering {
+
 // ### FillPattern ###
 
 AreaSymbol::FillPattern::FillPattern() noexcept
@@ -579,6 +581,30 @@ void AreaSymbol::FillPattern::scale(double factor)
 }
 
 
+qreal AreaSymbol::FillPattern::dimensionForIcon() const
+{
+	// Ignore large spacing for icon scaling
+	auto size = qreal(0);
+	switch (type)
+	{
+	case LinePattern:
+		size = qreal(0.002 * line_width);
+		break;
+		
+	case PointPattern:
+		size = qreal(0.002 * point->dimensionForIcon());
+		if (point_distance < 5000)
+			size = std::max(size, qreal(0.002 * point_distance));
+		break;
+	}
+	
+	if (line_spacing < 5000)
+		size = std::max(size, qreal(0.0015 * line_spacing));
+	
+	return size;
+}
+
+
 
 // ### AreaSymbol ###
 
@@ -760,6 +786,17 @@ void AreaSymbol::scale(double factor)
 }
 
 
+
+qreal AreaSymbol::dimensionForIcon() const
+{
+	qreal size = 0;
+	for (auto& pattern : patterns)
+		size = qMax(size, pattern.dimensionForIcon());
+	return size;
+}
+
+
+
 bool AreaSymbol::hasRotatableFillPattern() const
 {
 	return std::any_of(begin(patterns), end(patterns), [](auto& pattern){
@@ -845,3 +882,6 @@ bool AreaSymbol::equalsImpl(const Symbol* other, Qt::CaseSensitivity case_sensit
 		return lhs.equals(rhs, case_sensitivity);
 	});
 }
+
+
+}  // namespace OpenOrienteering

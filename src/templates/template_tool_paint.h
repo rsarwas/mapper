@@ -1,5 +1,6 @@
 /*
  *    Copyright 2012, 2013 Thomas Schöps
+ *    Copyright 2017 Kai Pastor
  *
  *    This file is part of OpenOrienteering.
  *
@@ -23,6 +24,7 @@
 
 #include <vector>
 
+#include <QtGlobal>
 #include <QColor>
 #include <QDialog>
 #include <QObject>
@@ -44,11 +46,13 @@ class QPainter;
 class QPushButton;
 class QRect;
 
+namespace OpenOrienteering {
+
 class Map;
 class MapEditorController;
 class MapWidget;
-class Template;
 class PaintOnTemplatePaletteWidget;
+class Template;
 
 
 /** Tool to paint on image templates. */
@@ -75,8 +79,8 @@ public slots:
 	void redoSelected();
 	
 private:
-	bool dragging;
-	bool erasing;
+	bool dragging = false;
+	bool erasing  = false;
 	QColor paint_color;
 	QRectF map_bbox;
 	std::vector<MapCoordF> coords;
@@ -85,6 +89,8 @@ private:
 	QPointer<PaintOnTemplatePaletteWidget> widget;
 	
 	static int erase_width;
+	
+	Q_DISABLE_COPY(PaintOnTemplateTool)
 };
 
 /** Color selection widget for PaintOnTemplateTool. */
@@ -139,5 +145,8 @@ private:
 	Template* selection;
 	QPushButton* draw_button;
 };
+
+
+}  // namespace OpenOrienteering
 
 #endif

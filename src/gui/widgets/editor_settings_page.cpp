@@ -35,10 +35,15 @@
 #include "gui/widgets/settings_page.h"
 
 
+namespace OpenOrienteering {
+
 EditorSettingsPage::EditorSettingsPage(QWidget* parent)
  : SettingsPage(parent)
 {
 	auto layout = new QFormLayout(this);
+	
+	icon_size = Util::SpinBox::create(1, 25, tr("mm", "millimeters"));
+	layout->addRow(tr("Symbol icon size:"), icon_size);
 	
 	antialiasing = new QCheckBox(tr("High quality map display (antialiasing)"), this);
 	antialiasing->setToolTip(tr("Antialiasing makes the map look much better, but also slows down the map display"));
@@ -112,6 +117,7 @@ QString EditorSettingsPage::title() const
 
 void EditorSettingsPage::apply()
 {
+	setSetting(Settings::SymbolWidget_IconSizeMM, icon_size->value());
 	setSetting(Settings::MapDisplay_Antialiasing, antialiasing->isChecked());
 	setSetting(Settings::MapDisplay_TextAntialiasing, text_antialiasing->isChecked());
 	setSetting(Settings::MapEditor_ClickToleranceMM, tolerance->value());
@@ -134,6 +140,7 @@ void EditorSettingsPage::reset()
 
 void EditorSettingsPage::updateWidgets()
 {
+	icon_size->setValue(getSetting(Settings::SymbolWidget_IconSizeMM).toInt());
 	antialiasing->setChecked(getSetting(Settings::MapDisplay_Antialiasing).toBool());
 	text_antialiasing->setEnabled(antialiasing->isChecked());
 	text_antialiasing->setChecked(getSetting(Settings::MapDisplay_TextAntialiasing).toBool());
@@ -152,3 +159,5 @@ void EditorSettingsPage::updateWidgets()
 	rectangle_preview_line_width->setChecked(getSetting(Settings::RectangleTool_PreviewLineWidth).toBool());
 }
 
+
+}  // namespace OpenOrienteering

@@ -48,6 +48,67 @@
     </message>
 </context>
 <context>
+    <name>QColorDialog</name>
+    <message>
+        <source>Hu&amp;e:</source>
+        <translation>Kl&amp;eur:</translation>
+    </message>
+    <message>
+        <source>&amp;Sat:</source>
+        <translation>&amp;Verzadiging:</translation>
+    </message>
+    <message>
+        <source>&amp;Val:</source>
+        <translation>&amp;Waarde:</translation>
+    </message>
+    <message>
+        <source>&amp;Red:</source>
+        <translation>&amp;Rood:</translation>
+    </message>
+    <message>
+        <source>&amp;Green:</source>
+        <translation>&amp;Groen:</translation>
+    </message>
+    <message>
+        <source>Bl&amp;ue:</source>
+        <translation>Bla&amp;uw:</translation>
+    </message>
+    <message>
+        <source>A&amp;lpha channel:</source>
+        <translation>A&amp;lpha kanaal:</translation>
+    </message>
+    <message>
+        <source>&amp;HTML:</source>
+        <translation>&amp;HTML:</translation>
+    </message>
+    <message>
+        <source>Cursor at %1, %2
+Press ESC to cancel</source>
+        <translation>Cursor op %1, %2
+Druk op ESC om te annuleren</translation>
+    </message>
+    <message>
+        <source>&amp;Pick Screen Color</source>
+        <translation>&amp;Scherm kleur kiezen</translation>
+    </message>
+    <message>
+        <source>Select Color</source>
+        <translation>Selecteer Kleur</translation>
+    </message>
+    <message>
+        <source>&amp;Basic colors</source>
+        <translation>&amp;Basiskleuren</translation>
+    </message>
+    <message>
+        <source>&amp;Custom colors</source>
+        <translation>&amp;Aangepaste kleuren</translation>
+    </message>
+    <message>
+        <source>&amp;Add to Custom Colors</source>
+        <translation>&amp;Toevoegen aan aangepaste kleuren</translation>
+    </message>
+</context>
+<context>
     <name>QComboBox</name>
     <message>
         <source>True</source>
@@ -722,11 +783,11 @@ Controleer of de juiste bestandsnaam is opgegeven.</translation>
     <name>QPlatformTheme</name>
     <message>
         <source>OK</source>
-        <translation type="unfinished"></translation>
+        <translation>OK</translation>
     </message>
     <message>
         <source>Save</source>
-        <translation type="unfinished"></translation>
+        <translation>Opslaan</translation>
     </message>
     <message>
         <source>&amp;Yes</source>
@@ -747,11 +808,11 @@ Controleer of de juiste bestandsnaam is opgegeven.</translation>
     </message>
     <message>
         <source>Discard</source>
-        <translation type="unfinished"></translation>
+        <translation>Negeren</translation>
     </message>
     <message>
         <source>Help</source>
-        <translation type="unfinished"></translation>
+        <translation>Help</translation>
     </message>
     <message>
         <source>Reset</source>

@@ -43,10 +43,12 @@ class QPaintEvent;
 class QPainter;
 class QResizeEvent;
 
+namespace OpenOrienteering {
+
 class Map;
 class Symbol;
-class SymbolToolTip;
 class SymbolIconDecorator;
+class SymbolToolTip;
 
 
 /**
@@ -140,6 +142,11 @@ public slots:
 	 * @brief Marks the icon with the given index for repainting.
 	 */
 	void updateSingleIcon(int i);
+	
+	/**
+	 * Observes settings changes related to symbol display.
+	 */
+	void settingsChanged();
 	
 signals:
 	/**
@@ -368,5 +375,8 @@ int SymbolRenderWidget::selectedSymbolsCount() const
 {
 	return (int)selected_symbols.size();
 }
+
+
+}  // namespace OpenOrienteering
 
 #endif

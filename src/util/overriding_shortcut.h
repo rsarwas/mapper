@@ -24,10 +24,12 @@
 #include <QKeySequence>
 #include <QObject>
 #include <QShortcut>
-#include <QTime>
+#include <QElapsedTimer>
 
 class QEvent;
 class QWidget;
+
+namespace OpenOrienteering {
 
 
 /**
@@ -60,7 +62,9 @@ public:
 	 * parent must not be nullptr.
 	 * @see QShortcut::QShortcut(const QKeySequence&, QWidget*, const char*, const char*, Qt::ShortcutContext)
 	 */
-	OverridingShortcut(const QKeySequence& key, QWidget* parent, const char* member = 0, const char* ambiguousMember = 0, Qt::ShortcutContext context = Qt::WindowShortcut);
+	OverridingShortcut(const QKeySequence& key, QWidget* parent, const char* member = nullptr, const char* ambiguousMember = 0, Qt::ShortcutContext context = Qt::WindowShortcut);
+	
+	~OverridingShortcut();
 	
 	/**
 	 * Filters events of type QEvent::ShortcutOverride which match this
@@ -70,7 +74,11 @@ public:
 	bool eventFilter(QObject* watched, QEvent* event) override;
 	
 private:
-	QTime time;
+	QElapsedTimer timer;
+	
 };
+
+
+}  // namespace OpenOrienteering
 
 #endif

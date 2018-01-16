@@ -40,6 +40,8 @@ class QRadioButton;
 class QNetworkReply;
 class QWidget;
 
+namespace OpenOrienteering {
+
 class CRSSelector;
 class Georeferencing;
 class Map;
@@ -292,7 +294,7 @@ public:
 	GeoreferencingTool(
 	        GeoreferencingDialog* dialog,
 	        MapEditorController* controller,
-	        QAction* toolAction = nullptr
+	        QAction* action = nullptr
 	);
 	
 	/**
@@ -326,5 +328,6 @@ private:
 };
 
 
+}  // namespace OpenOrienteering
 
 #endif

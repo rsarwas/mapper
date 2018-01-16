@@ -40,6 +40,8 @@ class QRectF;
 class QXmlStreamReader;
 class QXmlStreamWriter;
 
+namespace OpenOrienteering {
+
 class Map;
 class Template;
 
@@ -321,6 +323,13 @@ public:
 	void setOverprintingSimulationEnabled(bool enabled);
 	
 	
+	/** Temporarily blocks automatic template loading on visibility changes. */
+	void setTemplateLoadingBlocked(bool blocked);
+	
+	/** Returns true when template loading on visibility changes is disabled. */
+	bool templateLoadingBlocked() const { return template_loading_blocked; }
+	
+	
 signals:
 	/**
 	 * Indicates a change of the viewed area of the map.
@@ -411,6 +420,8 @@ private:
 	bool all_templates_hidden;
 	bool grid_visible;
 	bool overprinting_simulation_enabled;
+	
+	bool template_loading_blocked;
 };
 
 
@@ -433,8 +444,6 @@ bool operator!=(TemplateVisibility lhs, TemplateVisibility rhs)
 
 
 // ### MapView inline code ###
-
-Q_DECLARE_OPERATORS_FOR_FLAGS(MapView::ChangeFlags)
 
 inline
 MapCoord MapView::viewToMap(QPointF point) const
@@ -520,6 +529,11 @@ bool MapView::isOverprintingSimulationEnabled() const
 	return overprinting_simulation_enabled;
 }
 
+
+}  // namespace OpenOrienteering
+
+
+Q_DECLARE_OPERATORS_FOR_FLAGS(OpenOrienteering::MapView::ChangeFlags)
 
 
 #endif

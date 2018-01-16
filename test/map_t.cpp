@@ -24,6 +24,8 @@
 #include <QMessageBox>
 #include <QTextStream>
 
+#include "test_config.h"
+
 #include "global.h"
 #include "core/map.h"
 #include "core/map_color.h"
@@ -31,6 +33,9 @@
 #include "core/map_view.h"
 #include "core/objects/symbol_rule_set.h"
 #include "core/symbols/symbol.h"
+#include "core/symbols/point_symbol.h"
+
+using namespace OpenOrienteering;
 
 
 namespace
@@ -46,10 +51,10 @@ void MapTest::initTestCase()
 	
 	doStaticInitializations();
 	
-	examples_dir.cd(QFileInfo(QString::fromUtf8(__FILE__)).dir().absoluteFilePath(QString::fromLatin1("../examples")));
+	examples_dir.cd(QDir(QString::fromUtf8(MAPPER_TEST_SOURCE_DIR)).absoluteFilePath(QStringLiteral("../examples")));
 	QVERIFY(examples_dir.exists());
 	
-	symbol_set_dir.cd(QFileInfo(QString::fromUtf8(__FILE__)).dir().absoluteFilePath(QString::fromLatin1("../symbol sets")));
+	symbol_set_dir.cd(QDir(QString::fromUtf8(MAPPER_TEST_SOURCE_DIR)).absoluteFilePath(QStringLiteral("../symbol sets")));
 	QVERIFY(symbol_set_dir.exists());
 	
 	// Static map initializations
@@ -62,6 +67,51 @@ void MapTest::initTestCase()
 	});
 }
 
+
+void MapTest::iconTest()
+{
+	Map map;
+	// Newly constructed map
+	QVERIFY(!qIsNull(map.symbolIconZoom()));
+	
+	// Explict update on newly constructed map
+	map.updateSymbolIconZoom();
+	QVERIFY(!qIsNull(map.symbolIconZoom()));
+	
+	// Single symbol, 1 mm
+	auto symbol = static_cast<PointSymbol*>(map.getUndefinedPoint()->duplicate());
+	symbol->setInnerRadius(500);
+	QCOMPARE(symbol->dimensionForIcon(), qreal(1));
+	map.addSymbol(symbol, 0);
+	map.updateSymbolIconZoom();
+	QCOMPARE(map.symbolIconZoom() * symbol->dimensionForIcon(), qreal(0.9));
+	
+	// Change symbol size to 4 mm
+	symbol->setInnerRadius(2000);
+	QCOMPARE(symbol->dimensionForIcon(), qreal(4));
+	map.updateSymbolIconZoom();
+	QCOMPARE(map.symbolIconZoom() * symbol->dimensionForIcon(), qreal(1));
+	
+	map.addSymbol(symbol->duplicate(), 1);
+	map.updateSymbolIconZoom();
+	QCOMPARE(map.symbolIconZoom() * symbol->dimensionForIcon(), qreal(1));
+	
+	map.addSymbol(symbol->duplicate(), 2);
+	map.updateSymbolIconZoom();
+	QCOMPARE(map.symbolIconZoom() * symbol->dimensionForIcon(), qreal(1));
+	
+	QCOMPARE(map.getNumSymbols(), 3);
+	symbol->setInnerRadius(100);
+	QCOMPARE(symbol->dimensionForIcon(), qreal(0.2));
+	map.updateSymbolIconZoom();
+	// Symbol dimensions, ordered:  0.2  4.0  4.0
+	// The small symbol has 5% of the size of the large symbols.
+	// Zoom is expected to be adjusted order to enlarge the smallest symbol.
+	// Thus the other symbol will result in more than 90% size...
+	QVERIFY(map.symbolIconZoom() * 4.0 > 0.9);
+	// ... while the smallest symbol will still be at most 10% size.
+	QVERIFY(map.symbolIconZoom() * 0.2 <= 0.1);
+}
 
 
 void MapTest::printerConfigTest()
@@ -141,15 +191,15 @@ void MapTest::importTest()
 	auto original_size = map.getNumObjects();
 	auto original_num_colors = map.getNumColors();
 	Map empty_map;
-	map.importMap(&empty_map, Map::CompleteImport);
+	map.importMap(empty_map, Map::CompleteImport);
 	QCOMPARE(map.getNumObjects(), original_size);
 	QCOMPARE(map.getNumColors(), original_num_colors);
 	
-	map.importMap(&map, Map::ColorImport);
+	map.importMap(map, Map::ColorImport);
 	QCOMPARE(map.getNumObjects(), original_size);
 	QCOMPARE(map.getNumColors(), original_num_colors);
 	
-	map.importMap(&map, Map::CompleteImport);
+	map.importMap(map, Map::CompleteImport);
 	QCOMPARE(map.getNumObjects(), 2*original_size);
 	QCOMPARE(map.getNumColors(), original_num_colors);
 	
@@ -159,8 +209,7 @@ void MapTest::importTest()
 	QVERIFY(imported_map.getNumSymbols() > 0);
 	
 	original_size = map.getNumObjects();
-	QHash<const Symbol*, Symbol*> symbol_map;
-	map.importMap(&imported_map, Map::CompleteImport, nullptr, nullptr, -1, false, &symbol_map);
+	auto symbol_map = map.importMap(imported_map, Map::CompleteImport, nullptr, -1, false);
 	QCOMPARE(map.getNumObjects(), original_size + imported_map.getNumObjects());
 	QCOMPARE(symbol_map.size(), imported_map.getNumSymbols());
 }

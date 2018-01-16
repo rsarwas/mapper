@@ -48,6 +48,67 @@
     </message>
 </context>
 <context>
+    <name>QColorDialog</name>
+    <message>
+        <source>Hu&amp;e:</source>
+        <translation>&amp;Nuanco:</translation>
+    </message>
+    <message>
+        <source>&amp;Sat:</source>
+        <translation>Inten&amp;seco:</translation>
+    </message>
+    <message>
+        <source>&amp;Val:</source>
+        <translation>&amp;Valoro:</translation>
+    </message>
+    <message>
+        <source>&amp;Red:</source>
+        <translation>&amp;Ruĝa:</translation>
+    </message>
+    <message>
+        <source>&amp;Green:</source>
+        <translation>Ver&amp;da:</translation>
+    </message>
+    <message>
+        <source>Bl&amp;ue:</source>
+        <translation>Bl&amp;ua:</translation>
+    </message>
+    <message>
+        <source>A&amp;lpha channel:</source>
+        <translation>A&amp;lfa-kanalo:</translation>
+    </message>
+    <message>
+        <source>&amp;HTML:</source>
+        <translation>&amp;HTML:</translation>
+    </message>
+    <message>
+        <source>Cursor at %1, %2
+Press ESC to cancel</source>
+        <translation>Kursoro ĉe %1, %2
+Premu ESC por rezigni</translation>
+    </message>
+    <message>
+        <source>&amp;Pick Screen Color</source>
+        <translation>&amp;Elekti ekrankoloron</translation>
+    </message>
+    <message>
+        <source>Select Color</source>
+        <translation>Elekti koloron</translation>
+    </message>
+    <message>
+        <source>&amp;Basic colors</source>
+        <translation>&amp;Bazaj koloroj</translation>
+    </message>
+    <message>
+        <source>&amp;Custom colors</source>
+        <translation>&amp;Propraj koloroj</translation>
+    </message>
+    <message>
+        <source>&amp;Add to Custom Colors</source>
+        <translation>&amp;Aldoni al propraj koloroj</translation>
+    </message>
+</context>
+<context>
     <name>QComboBox</name>
     <message>
         <source>True</source>

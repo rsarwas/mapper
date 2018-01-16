@@ -46,11 +46,14 @@
 #include "core/renderables/renderable_implementation.h"
 #include "core/symbols/symbol.h"
 #include "core/virtual_coord_vector.h"
+#include "util/util.h"
 
 // IWYU pragma: no_forward_declare QPainterPath
 // IWYU pragma: no_forward_declare QXmlStreamReader
 // IWYU pragma: no_forward_declare QXmlStreamWriter
 
+
+namespace OpenOrienteering {
 
 PointSymbol::PointSymbol() noexcept
 : Symbol{Symbol::Point}
@@ -559,6 +562,36 @@ void PointSymbol::scale(double factor)
 	resetIcon();
 }
 
+
+qreal PointSymbol::dimensionForIcon() const
+{
+	auto size = qreal(0);
+	if (getOuterColor())
+		size = 0.002 * (getInnerRadius() + getOuterWidth());
+	else if (getInnerColor())
+		size = 0.002 * getInnerRadius();
+	
+	QRectF extent;
+	for (int i = 0; i < getNumElements(); ++i)
+	{
+		auto object = std::unique_ptr<Object>(getElementObject(i)->duplicate());
+		object->setSymbol(getElementSymbol(i), true);
+		object->update();
+		rectIncludeSafe(extent, object->getExtent());
+		object->clearRenderables();
+	}
+	if (extent.isValid())
+	{
+		auto w = 2 * std::max(std::abs(extent.left()), std::abs(extent.right()));
+		auto h = 2 * std::max(std::abs(extent.top()), std::abs(extent.bottom()));
+		return std::max(size, std::max(w, h));
+	}
+	
+	return size;
+}
+
+
+
 #ifndef NO_NATIVE_FILE_FORMAT
 
 bool PointSymbol::loadImpl(QIODevice* file, int version, Map* map)
@@ -687,3 +720,6 @@ bool PointSymbol::equalsImpl(const Symbol* other, Qt::CaseSensitivity case_sensi
 	
 	return true;
 }
+
+
+}  // namespace OpenOrienteering

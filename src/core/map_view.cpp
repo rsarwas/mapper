@@ -37,6 +37,7 @@
 
 #include "core/map.h"
 #include "core/map_coord.h"
+#include "gui/util_gui.h"
 #include "templates/template.h" // IWYU pragma: keep
 #include "util/util.h"
 #include "util/xml_stream_util.h"
@@ -58,6 +59,10 @@ namespace literal
 	static const QLatin1String ref("ref");
 	static const QLatin1String template_string("template");
 }
+
+
+
+namespace OpenOrienteering {
 
 const double MapView::zoom_in_limit = 512;
 const double MapView::zoom_out_limit = 1 / 16.0;
@@ -462,7 +467,9 @@ TemplateVisibility MapView::getTemplateVisibility(const Template* temp) const
 void MapView::setTemplateVisibility(Template* temp, TemplateVisibility vis)
 {
 	auto visible = vis.visible && vis.opacity > 0;
-	if (visible && temp->getTemplateState() != Template::Loaded)
+	if (visible
+	    && temp->getTemplateState() != Template::Loaded
+	    && !templateLoadingBlocked())
 	{
 		vis.visible = visible = temp->loadTemplateFile(false);
 	}
@@ -527,3 +534,13 @@ void MapView::setOverprintingSimulationEnabled(bool enabled)
 		emit visibilityChanged(VisibilityFeature::OverprintingEnabled, enabled);
 	}
 }
+
+
+
+void MapView::setTemplateLoadingBlocked(bool blocked)
+{
+	template_loading_blocked = blocked;
+}
+
+
+}  // namespace OpenOrienteering

@@ -40,6 +40,8 @@
 #include "util/util.h"
 
 
+namespace OpenOrienteering {
+
 QStringList TemplateMap::locked_maps;
 
 const std::vector<QByteArray>& TemplateMap::supportedExtensions()
@@ -155,7 +157,7 @@ QRectF TemplateMap::getTemplateExtent() const
 
 Template* TemplateMap::duplicateImpl() const
 {
-	TemplateMap* copy = new TemplateMap(template_path, map);
+	auto copy = new TemplateMap(template_path, map);
 	if (template_state == Loaded)
 		copy->loadTemplateFileImpl(false);
 	return copy;
@@ -203,3 +205,6 @@ void TemplateMap::calculateTransformation()
 		/// \todo proper error message
 	}
 }
+
+
+}   // namespace OpenOrienteering

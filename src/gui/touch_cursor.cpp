@@ -25,8 +25,10 @@
 #include <QPainter>
 
 #include "gui/map/map_widget.h"
-#include "util/util.h"
+#include "gui/util_gui.h"
 
+
+namespace OpenOrienteering {
 
 // TODO: convert these to settings
 const float touch_pos_offset_mm = 25;
@@ -214,3 +216,6 @@ float TouchCursor::standardCursorRadiusPx() const
 {
 	return Util::mmToPixelLogical(1.5f);
 }
+
+
+}  // namespace OpenOrienteering

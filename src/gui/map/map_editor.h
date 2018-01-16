@@ -48,21 +48,23 @@ class QToolBar;
 class QToolButton;
 class QWidget;
 
+namespace OpenOrienteering {
+
 class ActionGridBar;
 class CompassDisplay;
 class EditorDockWidget;
 class FileFormat;
-class GeoreferencingDialog;
-class MainWindow;
-class Map;
-class MapView;
-class MapWidget;
-class MapEditorActivity;
-class MapEditorTool;
-class MapFindFeature;
 class GPSDisplay;
 class GPSTemporaryMarkers;
 class GPSTrackRecorder;
+class GeoreferencingDialog;
+class MainWindow;
+class Map;
+class MapEditorActivity;
+class MapEditorTool;
+class MapFindFeature;
+class MapView;
+class MapWidget;
 class PrintWidget;
 class ReopenTemplateDialog;
 class Symbol;
@@ -333,9 +335,6 @@ public slots:
 	
 	/** Shows or hides the tags editor dock widget. */
 	void showTagsWindow(bool show);
-
-	/** Shows or hides the tag selection dock widget. */
-	void showTagSelectWindow(bool show);
 	
 	/** Shows the GeoreferencingDialog. */
 	void editGeoreferencing();
@@ -588,8 +587,6 @@ private:
 	void createTemplateWindow();
 	
 	void createTagEditor();
-
-	void createTagSelector();
 	
 	QAction* newAction(const char* id, const QString& tr_text, QObject* receiver, const char* slot, const char* icon = nullptr, const QString& tr_tip = QString{}, const char* whats_this_link = nullptr);
 	QAction* newCheckAction(const char* id, const QString& tr_text, QObject* receiver, const char* slot, const char* icon = nullptr, const QString& tr_tip = QString{}, const char* whats_this_link = nullptr);
@@ -685,9 +682,6 @@ private:
 	
 	QAction* tags_window_act;
 	QPointer<EditorDockWidget> tags_dock_widget;
-
-	QAction* tag_select_window_act;
-	QPointer<EditorDockWidget> tag_select_dock_widget;
 	
 	QAction* edit_tool_act;
 	QAction* edit_line_tool_act;
@@ -790,5 +784,8 @@ Symbol* MapEditorController::activeSymbol() const
 {
 	return active_symbol;
 }
+
+
+}  // namespace OpenOrienteering
 
 #endif

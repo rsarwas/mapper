@@ -24,6 +24,7 @@
 #include <algorithm>
 #include <cstddef>
 #include <iterator>
+#include <numeric>
 
 #include <QtGlobal>
 #include <QIODevice>
@@ -39,6 +40,8 @@
 #include "core/objects/object.h"
 #include "core/symbols/symbol.h"
 
+
+namespace OpenOrienteering {
 
 CombinedSymbol::CombinedSymbol()
 : Symbol{Symbol::Combined}
@@ -354,16 +357,26 @@ bool CombinedSymbol::loadFinished(Map* map)
 	return last == end(temp_part_indices);
 }
 
-float CombinedSymbol::calculateLargestLineExtent(Map* map) const
+
+
+qreal CombinedSymbol::dimensionForIcon() const
 {
-	float result = 0;
-	for (auto subsymbol : parts)
+	return std::accumulate(begin(parts), end(parts), qreal(0), [](qreal value, auto subsymbol)
 	{
-		if (subsymbol)
-			result = qMax(result, subsymbol->calculateLargestLineExtent(map));
-	}
-	return result;
+		return subsymbol ? qMax(value, subsymbol->dimensionForIcon()) : value;
+	});
 }
+
+
+qreal CombinedSymbol::calculateLargestLineExtent() const
+{
+	return std::accumulate(begin(parts), end(parts), qreal(0), [](qreal value, auto subsymbol)
+	{
+		return subsymbol ? qMax(value, subsymbol->calculateLargestLineExtent()) : value;
+	});
+}
+
+
 
 void CombinedSymbol::setPart(int i, const Symbol* symbol, bool is_private)
 {
@@ -375,3 +388,6 @@ void CombinedSymbol::setPart(int i, const Symbol* symbol, bool is_private)
 	parts[index] = symbol;
 	private_parts[index] = symbol ? is_private : false;
 }
+
+
+}  // namespace OpenOrienteering

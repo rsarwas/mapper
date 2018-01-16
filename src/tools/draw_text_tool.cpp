@@ -21,12 +21,22 @@
 
 #include "draw_text_tool.h"
 
+#include <QtGlobal>
+#include <QCursor>
+#include <QFlags>
 #include <QGuiApplication>
 #include <QKeyEvent>
 #include <QMouseEvent>
 #include <QPainter>
+#include <QPixmap>
+#include <QPointer>
+#include <QRectF>
+#include <QRgb>
+#include <QString>
 
 #include "core/map.h"
+#include "core/map_coord.h"
+#include "core/map_view.h"
 #include "core/objects/text_object.h"
 #include "core/renderables/renderable.h"
 #include "core/symbols/symbol.h"
@@ -37,6 +47,7 @@
 #include "gui/widgets/key_button_bar.h"
 #include "tools/edit_tool.h"
 #include "tools/text_object_editor_helper.h"
+#include "tools/tool.h"
 #include "tools/tool_helpers.h"
 #include "undo/object_undo.h"
 #include "util/util.h"
@@ -48,12 +59,13 @@
 #endif
 
 
-DrawTextTool::DrawTextTool(MapEditorController* editor, QAction* tool_button)
-: MapEditorToolBase { QCursor{ QPixmap(QString::fromLatin1(":/images/cursor-draw-text.png")), 11, 11 }, DrawText, editor, tool_button }
+namespace OpenOrienteering {
+
+DrawTextTool::DrawTextTool(MapEditorController* editor, QAction* tool_action)
+: MapEditorToolBase { QCursor{ QPixmap(QString::fromLatin1(":/images/cursor-draw-text.png")), 11, 11 }, DrawText, editor, tool_action }
 , drawing_symbol { editor->activeSymbol() }
 , renderables    { map() }
 , preview_text   { new TextObject(), { renderables } }
-, waiting_for_mouse_release { false }
 {
 	connect(editor, &MapEditorController::activeSymbolChanged, this, &DrawTextTool::setDrawingSymbol);
 }
@@ -96,9 +108,9 @@ void DrawTextTool::initImpl()
 	if (editor->isInMobileMode())
 	{
 		// Create key replacement bar
-		key_button_bar = new KeyButtonBar(this, editor->getMainWidget());
+		key_button_bar = new KeyButtonBar(editor->getMainWidget());
 		//: Snap to existing objects
-		key_button_bar->addModifierKey(Qt::Key_Shift, Qt::ShiftModifier, tr("Snap"));
+		key_button_bar->addModifierButton(Qt::ShiftModifier, tr("Snap"));
 		editor->showPopupWidget(key_button_bar, QString{});
 	}
 }
@@ -112,6 +124,9 @@ void DrawTextTool::objectSelectionChangedImpl()
 
 void DrawTextTool::startEditing()
 {
+	if (key_button_bar)
+		key_button_bar->hide();
+	
 	snap_helper->setFilter(SnappingToolHelper::NoSnapping);
 	preview_text->setText(QString{});
 
@@ -135,6 +150,13 @@ void DrawTextTool::abortEditing()
 	
 	editor->setEditingInProgress(false);
 	resetWaitingForMouseRelease();
+	
+	if (key_button_bar)
+	{
+		key_button_bar->show();
+		if (key_button_bar->keyboardModifiers().testFlag(Qt::ShiftModifier))
+			snap_helper->setFilter(SnappingToolHelper::AllTypes);
+	}
 }
 
 void DrawTextTool::finishEditing()
@@ -153,7 +175,7 @@ void DrawTextTool::finishEditing()
 		map()->addObjectToSelection(object, true);
 		map()->setObjectsDirty();
 		
-		DeleteObjectsUndoStep* undo_step = new DeleteObjectsUndoStep(map());
+		auto undo_step = new DeleteObjectsUndoStep(map());
 		undo_step->addObject(index);
 		map()->push(undo_step);
 		
@@ -171,6 +193,13 @@ void DrawTextTool::finishEditing()
 	else
 	{
 		resetWaitingForMouseRelease();
+	}
+	
+	if (key_button_bar)
+	{
+		key_button_bar->show();
+		if (key_button_bar->keyboardModifiers().testFlag(Qt::ShiftModifier))
+			snap_helper->setFilter(SnappingToolHelper::AllTypes);
 	}
 }
 
@@ -331,7 +360,7 @@ bool DrawTextTool::keyRelease(QKeyEvent* event)
 }
 
 
-void DrawTextTool::leaveEvent(QEvent*)
+void DrawTextTool::leaveEvent(QEvent* /*event*/)
 {
 	if (!text_editor)
 		map()->clearDrawingBoundingBox();
@@ -452,7 +481,10 @@ void DrawTextTool::updateStatusText()
 		if (!isDragging())
 			text = tr("<b>Click</b>: Create a text object with a single anchor. <b>Drag</b>: Create a text box. ");
 		if (!(active_modifiers & Qt::ShiftModifier))
-			text += EditTool::tr("<b>%1</b>: Snap to existing objects. ").arg(ModifierKey::shift());
+			text += ::OpenOrienteering::EditTool::tr("<b>%1</b>: Snap to existing objects. ").arg(ModifierKey::shift());
 	}
 	setStatusBarText(text);
 }
+
+
+}  // namespace OpenOrienteering

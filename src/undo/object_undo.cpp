@@ -30,11 +30,15 @@
 #include "core/symbols/symbol.h"
 #include "util/xml_stream_util.h"
 
+
 namespace literal
 {
 	const QLatin1String source("source");
 	const QLatin1String part("part");
 }
+
+
+namespace OpenOrienteering {
 
 // ### ObjectModifyingUndoStep ###
 
@@ -180,7 +184,7 @@ bool ObjectCreatingUndoStep::isValid() const
 
 void ObjectCreatingUndoStep::addObject(int)
 {
-	Q_ASSERT(false && "This implementation must not be called");
+	qWarning("This implementation must not be called");
 	return;
 }
 
@@ -767,3 +771,6 @@ void ObjectTagsUndoStep::loadImpl(QXmlStreamReader &xml, SymbolDictionary &symbo
 		UndoStep::loadImpl(xml, symbol_dict);
 	}
 }
+
+
+}  // namespace OpenOrienteering

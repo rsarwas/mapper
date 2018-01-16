@@ -27,18 +27,42 @@
 
 #include <QtGlobal>
 #include <QtMath>
-#include <QDoubleValidator>
 #include <QPointF>
 #include <QRectF>
-#include <QString>
-#include <QValidator>
 
 class QIODevice;
 class QObject;
 class QRect;
-class QWidget;
+class QString;
 // IWYU pragma: no_forward_declare QPointF
 // IWYU pragma: no_forward_declare QRectF
+
+namespace std
+{
+	/**
+	 * Fallback for missing std::log2 in some distributions of gcc.
+	 * 
+	 * This template will be selected if std::log2 is not found. The function
+	 * std::log2 is part of C++11, but the following distributions of gcc are
+	 * known lack this function:
+	 * 
+	 * - GCC 4.8 in Android NDK R10d
+	 * 
+	 * The argument must be a floating point value in order to avoid ambiguity
+	 * when the regular std::log2 is present.
+	 */
+	template< class T >
+	constexpr double log2(T value)
+	{
+		static_assert(::std::is_floating_point<T>::value,
+					  "The argument to std::log2 must be called a floating point value");
+		return log(value)/M_LN2;
+	}
+}
+
+
+
+namespace OpenOrienteering {
 
 class MapCoordF;
 
@@ -58,41 +82,6 @@ class MapCoordF;
 #define BEZIER_HANDLE_DISTANCE 0.390524291729
 
 
-
-namespace std
-{
-	/**
-	 * Fallback for missing std::log2 in some distributions of gcc.
-	 * 
-	 * This template will be selected if std::log2 is not found. The function
-	 * std::log2 is part of C++11, but the following distributions of gcc are
-	 * known lack this function:
-	 * 
-	 * - GCC 4.8 in Android NDK R10d
-	 * 
-	 * The argument must be a floating point value in order to avoid ambiguity
-	 * when the regular std::log2 is present.
-	 */
-	template< class T >
-	constexpr double log2(T value)
-	{
-		static_assert(std::is_floating_point<T>::value,
-					  "The argument to std::log2 must be called a floating point value");
-		return log(value)/M_LN2;
-	}
-}
-
-
-
-/** Double validator for line edit widgets,
- *  ensures that only valid doubles can be entered. */
-class DoubleValidator : public QDoubleValidator
-{
-public:
-	DoubleValidator(double bottom, double top = 10e10, QObject* parent = nullptr, int decimals = 20);
-	
-	State validate(QString& input, int& pos) const override;
-};
 
 /** (Un-)blocks recursively all signals from a QObject and its child-objects. */
 void blockSignalsRecursively(QObject* obj, bool block);
@@ -179,39 +168,6 @@ void loadString(QIODevice* file, QString& str);
 // TODO: Refactor: put remaining stuff into this namespace, too
 namespace Util
 {
-	/**
-	 * Show the manual in Qt assistant.
-	 * 
-	 * @param filename_latin1 the name of the manual page html file
-	 * @param anchor_latin1 the anchor in the specified file to jump to
-	 */
-	void showHelp(QWidget* dialog_parent, const char* filename_latin1, const char* anchor_latin1);
-	
-	/**
-	 * Show the manual in Qt assistant.
-	 * 
-	 * The anchor may be left out or given with the filename.
-	 * 
-	 * @param file_and_anchor_latin1 the name of the manual page html file, optionally including an anchor
-	 */
-	void showHelp(QWidget* dialog_parent, const char* file_and_anchor_latin1 = "index.html");
-	
-	/**
-	 * Show the manual in Qt assistant.
-	 * 
-	 * The anchor may be left out or given with the filename.
-	 * 
-	 * @param file_and_anchor the name of the manual page html file, optionally including an anchor
-	 */
-	void showHelp(QWidget* dialog_parent, const QString& file_and_anchor);
-	
-	/**
-	 * Creates a What's-this text "See more" linking to the given page and
-	 * fragment in the manual.
-	 */
-	QString makeWhatThis(const char* reference_latin1);
-	
-	
 	/** See Util::gridOperation(). This function handles only parallel lines. */
 	template<typename T>
 	void hatchingOperation(const QRectF& extent, double spacing, double offset, double rotation, T& processor)
@@ -243,8 +199,8 @@ namespace Util
 		else
 		{
 			// General case
-			double xfactor = 1.0f / sin(rotation);
-			double yfactor = 1.0f / cos(rotation);
+			double xfactor = 1.0 / sin(rotation);
+			double yfactor = 1.0 / cos(rotation);
 			
 			double dist_x = xfactor * spacing;
 			double dist_y = yfactor * spacing;
@@ -348,39 +304,9 @@ namespace Util
 		hatchingOperation(extent, vert_spacing, vert_offset, rotation + M_PI / 2, processor);
 	}
 	
-	/**
-	 * Converts millimeters to pixels using the physical dpi setting of
-	 * Mapper's settings. This should be used to calculate sizes of map elements.
-	 * @sa mmToPixelLogical()
-	 */
-	qreal mmToPixelPhysical(qreal millimeters);
-	
-	/** Inverse of mmToPixelPhysical(). */
-	qreal pixelToMMPhysical(qreal pixels);
-	
-	/**
-	 * Converts millimeters to pixels using the "logical" dpi setting of
-	 * the operating system. This should be used to calculate sizes of UI
-	 * elements.
-	 * @sa mmToPixelPhysical()
-	 */
-	qreal mmToPixelLogical(qreal millimeters);
-	
-	/** Inverse of mmToPixelLogical(). */
-	qreal pixelToMMLogical(qreal pixels);
-	
-	/** Returns true for low-dpi screens, false for high-dpi screens. */
-	bool isAntialiasingRequired();
-	
-	/** Returns true for low-dpi screens, false for high-dpi screens. */
-	constexpr bool isAntialiasingRequired(qreal ppi);
-	
-	
-	
-	constexpr bool isAntialiasingRequired(qreal ppi)
-	{
-		return ppi < 200;
-	}
 }
+
+
+}  // namespace OpenOrienteering
 
 #endif

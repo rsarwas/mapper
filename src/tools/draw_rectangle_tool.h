@@ -38,6 +38,9 @@ class QCursor;
 class QKeyEvent;
 class QMouseEvent;
 class QPainter;
+class QToolButton;
+
+namespace OpenOrienteering {
 
 class ConstrainAngleToolHelper;
 class KeyButtonBar;
@@ -125,11 +128,11 @@ protected:
 	MapCoordF cur_pos_map;
 	MapCoordF constrained_pos_map;
 	bool dragging;
-	bool draw_dash_points;
-	bool shift_pressed;
-	bool ctrl_pressed;
-	bool picked_direction;
-	bool snapped_to_line;
+	bool draw_dash_points = true;
+	bool shift_pressed    = false;
+	bool ctrl_pressed     = false;
+	bool picked_direction = false;
+	bool snapped_to_line  = false;
 	MapCoord snapped_to_line_a;
 	MapCoord snapped_to_line_b;
 	
@@ -137,7 +140,7 @@ protected:
 	 * This can be set to true when a mouse button is pressed down to disable all
 	 * actions for the next mouse button release.
 	 */
-	bool no_more_effect_on_click;
+	bool no_more_effect_on_click = false;
 	
 	/**
 	 * List of angles for first, second, etc. edge.
@@ -154,6 +157,9 @@ protected:
 	MapWidget* cur_map_widget;
 	
 	QPointer<KeyButtonBar> key_button_bar;
+	QPointer<QToolButton> dash_points_button;
 };
 
+
+}  // namespace OpenOrienteering
 #endif

@@ -1,6 +1,6 @@
 /*
  *    Copyright 2012, 2013 Thomas Schöps
- *    Copyright 2012-2015 Kai Pastor
+ *    Copyright 2012-2017 Kai Pastor
  *
  *    This file is part of OpenOrienteering.
  *
@@ -37,9 +37,12 @@ class QPainter;
 class QPainterPath;
 // IWYU pragma: no_forward_declare QRectF
 
+namespace OpenOrienteering {
+
 class Map;
 class Object;
 class PainterConfig;
+
 
 /**
  * This class contains rendering configuration values.
@@ -269,10 +272,13 @@ public:
 	void takeRenderables();
 	
 	/**
-	 * Draws all renderables in this container directly with the given color.
-	 * May e.g. be used to encode object ids as colors.
+	 * Draws all renderables matching the given map color with the given color.
+	 * 
+	 * If map_color is -1, this functions draws all renderables of color which
+	 * are not in the list of map colors (i.e. objects with undefined symbol).
+	 * Used by FillTool to encode object IDs as colors.
 	 */
-	void draw(const QColor& color, QPainter* painter, const RenderConfig& config) const;
+	void draw(int map_color, const QColor& color, QPainter* painter, const RenderConfig& config) const;
 	
 	void setClipPath(const QPainterPath* path);
 	const QPainterPath* getClipPath() const;
@@ -281,7 +287,7 @@ public:
 	
 private:
 	QRectF& extent;
-	const QPainterPath* clip_path; // no memory management here!
+	const QPainterPath* clip_path = nullptr; // no memory management here!
 };
 
 
@@ -369,8 +375,6 @@ private:
 
 
 // ### RenderConfig ###
-
-Q_DECLARE_OPERATORS_FOR_FLAGS(RenderConfig::Options)
 
 inline
 bool RenderConfig::testFlag(const RenderConfig::Option flag) const
@@ -472,6 +476,11 @@ bool MapRenderables::empty() const
 	return std::map<int, ObjectRenderablesMap>::empty();
 }
 
+
+}  // namespace OpenOrienteering
+
+
+Q_DECLARE_OPERATORS_FOR_FLAGS(OpenOrienteering::RenderConfig::Options)
 
 
 #endif

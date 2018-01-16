@@ -1,5 +1,6 @@
 /*
  *    Copyright 2012, 2013 Thomas Schöps
+ *    Copyright 2017 Kai Pastor
  *
  *    This file is part of OpenOrienteering.
  *
@@ -21,6 +22,7 @@
 #ifndef OPENORIENTEERING_TEMPLATE_TOOL_MOVE_H
 #define OPENORIENTEERING_TEMPLATE_TOOL_MOVE_H
 
+#include <QtGlobal>
 #include <QObject>
 
 #include "core/map_coord.h"
@@ -29,6 +31,8 @@
 class QAction;
 class QCursor;
 class QMouseEvent;
+
+namespace OpenOrienteering {
 
 class MapEditorController;
 class MapWidget;
@@ -40,7 +44,8 @@ class TemplateMoveTool : public MapEditorTool
 {
 Q_OBJECT
 public:
-	TemplateMoveTool(Template* templ, MapEditorController* editor, QAction* toolAction = nullptr);
+	TemplateMoveTool(Template* templ, MapEditorController* editor, QAction* tool_action = nullptr);
+	~TemplateMoveTool();
 	
 	void init() override;
 	const QCursor& getCursor() const override;
@@ -56,8 +61,13 @@ private:
 	void updateDragging(MapCoordF mouse_pos_map);
 	
 	Template* templ;
-	bool dragging;
+	bool dragging = false;
 	MapCoordF click_pos_map;
+	
+	Q_DISABLE_COPY(TemplateMoveTool)
 };
+
+
+}  // namespace OpenOrienteering
 
 #endif

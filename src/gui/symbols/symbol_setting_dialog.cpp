@@ -40,14 +40,16 @@
 #include "core/symbols/symbol.h"
 #include "core/symbols/text_symbol.h"
 #include "gui/main_window.h"
+#include "gui/util_gui.h"
 #include "gui/map/map_editor.h"
 #include "gui/map/map_widget.h"
 #include "gui/symbols/symbol_properties_widget.h"
 #include "gui/widgets/template_list_widget.h"
 #include "templates/template.h"
 #include "templates/template_image.h"
-#include "util/util.h"
 
+
+namespace OpenOrienteering {
 
 SymbolSettingDialog::SymbolSettingDialog(const Symbol* source_symbol, Map* source_map, QWidget* parent)
 : QDialog(parent, Qt::CustomizeWindowHint | Qt::WindowTitleHint | Qt::WindowMaximizeButtonHint)
@@ -100,9 +102,9 @@ SymbolSettingDialog::SymbolSettingDialog(const Symbol* source_symbol, Map* sourc
 	if (symbol->getType() == Symbol::Point)
 	{
 		Q_UNUSED(QT_TR_NOOP("Template:")) /// \todo Switch the following line to Util::Headline::create
-		QLabel* template_label = new QLabel(tr("<b>Template:</b> "));
+		auto template_label = new QLabel(tr("<b>Template:</b> "));
 		template_file_label = new QLabel(tr("(none)"));
-		QPushButton* load_template_button = new QPushButton(tr("Open..."));
+		auto load_template_button = new QPushButton(tr("Open..."));
 		
 		center_template_button = new QToolButton();
 		center_template_button->setText(tr("Center template..."));
@@ -163,7 +165,7 @@ SymbolSettingDialog::SymbolSettingDialog(const Symbol* source_symbol, Map* sourc
 	splitter->addWidget(right);
 	splitter->setCollapsible(1, true);
 	
-	QBoxLayout* layout = new QHBoxLayout();
+	auto layout = new QHBoxLayout();
 	layout->setContentsMargins(0, 0, 0, 0);
 	layout->addWidget(splitter);
 	setLayout(layout);
@@ -184,7 +186,8 @@ std::unique_ptr<Symbol> SymbolSettingDialog::getNewSymbol() const
 
 void SymbolSettingDialog::updatePreview()
 {
-	symbol_icon_label->setPixmap(QPixmap::fromImage(symbol->getIcon(source_map, true)));
+	symbol->resetIcon();
+	symbol_icon_label->setPixmap(QPixmap::fromImage(symbol->getIcon(source_map)));
 	preview_map->updateAllObjects();
 }
 
@@ -215,7 +218,7 @@ void SymbolSettingDialog::loadTemplateClicked()
 void SymbolSettingDialog::centerTemplateBBox()
 {
 	Q_ASSERT(preview_map->getNumTemplates() == 1);
-	Template* temp = preview_map->getTemplate(0);
+	auto temp = preview_map->getTemplate(0);
 	
 	preview_map->setTemplateAreaDirty(0);
 	temp->setTemplatePosition(temp->templatePosition() - MapCoord { temp->calculateTemplateBoundingBox().center() } );
@@ -225,7 +228,7 @@ void SymbolSettingDialog::centerTemplateBBox()
 void SymbolSettingDialog::centerTemplateGravity()
 {
 	Q_ASSERT(preview_map->getNumTemplates() == 1);
-	Template* temp = preview_map->getTemplate(0);
+	auto temp = preview_map->getTemplate(0);
 	auto image = reinterpret_cast<TemplateImage*>(temp);
 	
 	QColor background_color = QColorDialog::getColor(Qt::white, this, tr("Select background color"));
@@ -498,3 +501,6 @@ void SymbolSettingDialog::updateButtons()
 	ok_button->setEnabled(symbol_modified && symbol->getNumberComponent(0)>=0 && !symbol->getName().isEmpty());
 	reset_button->setEnabled(symbol_modified);
 }
+
+
+}  // namespace OpenOrienteering
