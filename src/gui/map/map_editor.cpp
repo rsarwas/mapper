@@ -1,6 +1,6 @@
 /*
  *    Copyright 2012, 2013 Thomas Schöps
- *    Copyright 2012-2017 Kai Pastor
+ *    Copyright 2012-2018 Kai Pastor
  *
  *    This file is part of OpenOrienteering.
  *
@@ -107,6 +107,7 @@
 #include "core/symbols/point_symbol.h"
 #include "core/symbols/area_symbol.h"
 #include "core/symbols/symbol.h"
+#include "core/symbols/symbol_icon_decorator.h"
 #include "fileformats/file_format.h"
 #include "fileformats/file_format_registry.h"
 #include "gui/configure_grid_dialog.h"
@@ -749,6 +750,7 @@ QAction* MapEditorController::newAction(const char* id, const QString &tr_text, 
 	if (whats_this_link) action->setWhatsThis(Util::makeWhatThis(whats_this_link));
 	if (receiver) QObject::connect(action, SIGNAL(triggered()), receiver, slot);
 	actionsById[id] = action;
+	action->setMenuRole(QAction::NoRole);
 	return action;
 }
 
@@ -857,8 +859,11 @@ void MapEditorController::createActions()
 	undo_act = newAction("undo", tr("Undo"), this, SLOT(undo()), "undo.png", tr("Undo the last step"), "edit_menu.html");
 	redo_act = newAction("redo", tr("Redo"), this, SLOT(redo()), "redo.png", tr("Redo the last step"), "edit_menu.html");
 	cut_act = newAction("cut", tr("Cu&t"), this, SLOT(cut()), "cut.png", QString{}, "edit_menu.html");
+	cut_act->setMenuRole(QAction::TextHeuristicRole);
 	copy_act = newAction("copy", tr("C&opy"), this, SLOT(copy()), "copy.png", QString{}, "edit_menu.html");
+	copy_act->setMenuRole(QAction::TextHeuristicRole);
 	paste_act = newAction("paste", tr("&Paste"), this, SLOT(paste()), "paste", QString{}, "edit_menu.html");
+	paste_act->setMenuRole(QAction::TextHeuristicRole);
 	delete_act = newAction("delete", tr("Delete"), this, SLOT(deleteClicked()), "delete.png", QString{}, "toolbars.html#delete");
 	select_all_act = newAction("select-all", tr("Select all"), this, SLOT(selectAll()), nullptr, QString{}, "edit_menu.html");
 	select_nothing_act = newAction("select-nothing", tr("Select nothing"), this, SLOT(selectNothing()), nullptr, QString{}, "edit_menu.html");
@@ -870,10 +875,9 @@ void MapEditorController::createActions()
 	
 	show_grid_act = newCheckAction("showgrid", tr("Show grid"), this, SLOT(showGrid()), "grid.png", QString{}, "grid.html");
 	configure_grid_act = newAction("configuregrid", tr("Configure grid..."), this, SLOT(configureGrid()), "grid.png", QString{}, "grid.html");
-#if defined(Q_OS_MACOS)
-	configure_grid_act->setMenuRole(QAction::NoRole);
-#endif
 	pan_act = newToolAction("panmap", tr("Pan"), this, SLOT(pan()), "move.png", QString{}, "view_menu.html");
+	move_to_gps_pos_act = newAction("movegps", tr("Move to my location"), this, SLOT(moveToGpsPos()), "move-to-gps.png", QString{}, "view_menu.html");
+	move_to_gps_pos_act->setEnabled(false);
 	zoom_in_act = newAction("zoomin", tr("Zoom in"), this, SLOT(zoomIn()), "view-zoom-in.png", QString{}, "view_menu.html");
 	zoom_out_act = newAction("zoomout", tr("Zoom out"), this, SLOT(zoomOut()), "view-zoom-out.png", QString{}, "view_menu.html");
 	show_all_act = newAction("showall", tr("Show whole map"), this, SLOT(showWholeMap()), "view-show-all.png", QString{}, "view_menu.html");
@@ -926,6 +930,7 @@ void MapEditorController::createActions()
 	cut_hole_circle_act = newToolAction("cutholecircle", tr("Cut round hole"), this, SLOT(cutHoleCircleClicked()), "tool-cut-hole.png", QString{}, "toolbars.html#cut_hole");
 	cut_hole_rectangle_act = newToolAction("cutholerectangle", tr("Cut rectangular hole"), this, SLOT(cutHoleRectangleClicked()), "tool-cut-hole.png", QString{}, "toolbars.html#cut_hole");
 	cut_hole_menu = new QMenu(tr("Cut hole"));
+	cut_hole_menu->menuAction()->setMenuRole(QAction::NoRole);
 	cut_hole_menu->setIcon(QIcon(QString::fromLatin1(":/images/tool-cut-hole.png")));
 	cut_hole_menu->addAction(cut_hole_act);
 	cut_hole_menu->addAction(cut_hole_circle_act);
@@ -947,16 +952,16 @@ void MapEditorController::createActions()
 	distribute_points_act = newAction("distributepoints", tr("Distribute points along path"), this, SLOT(distributePointsClicked()), "tool-distribute-points.png", QString{}, "toolbars.html#distribute_points"); // TODO: write documentation
 	
 	paint_on_template_act = new QAction(QIcon(QString::fromLatin1(":/images/pencil.png")), tr("Paint on template"), this);
+	paint_on_template_act->setMenuRole(QAction::NoRole);
 	paint_on_template_act->setCheckable(true);
 	paint_on_template_act->setWhatsThis(Util::makeWhatThis("toolbars.html#draw_on_template"));
 	connect(paint_on_template_act, &QAction::triggered, this, &MapEditorController::paintOnTemplateClicked);
 
 	paint_on_template_settings_act = new QAction(QIcon(QString::fromLatin1(":/images/paint-on-template-settings.png")), tr("Paint on template settings"), this);
+	paint_on_template_settings_act->setMenuRole(QAction::NoRole);
 	paint_on_template_settings_act->setWhatsThis(Util::makeWhatThis("toolbars.html#draw_on_template"));
 	connect(paint_on_template_settings_act, &QAction::triggered, this, &MapEditorController::paintOnTemplateSelectClicked);
 
-	updatePaintOnTemplateAction();
-	
 	touch_cursor_action = newCheckAction("touchcursor", tr("Enable touch cursor"), map_widget, SLOT(enableTouchCursor(bool)), "tool-touch-cursor.png", QString{}, "toolbars.html#touch_cursor"); // TODO: write documentation
 	gps_display_action = newCheckAction("gpsdisplay", tr("Enable GPS display"), this, SLOT(enableGPSDisplay(bool)), "tool-gps-display.png", QString{}, "toolbars.html#gps_display"); // TODO: write documentation
 	gps_display_action->setEnabled(map->getGeoreferencing().isValid() && ! map->getGeoreferencing().isLocal());
@@ -1024,6 +1029,7 @@ void MapEditorController::createMenuAndToolbars()
 	file_menu->insertAction(insertion_act, import_act);
 #ifdef QT_PRINTSUPPORT_LIB
 	QMenu* export_menu = new QMenu(tr("&Export as..."), file_menu);
+	export_menu->menuAction()->setMenuRole(QAction::NoRole);
 	export_menu->addAction(export_image_act);
 	export_menu->addAction(export_pdf_act);
 	file_menu->insertMenu(insertion_act, export_menu);
@@ -1067,6 +1073,7 @@ void MapEditorController::createMenuAndToolbars()
 	view_menu->addAction(hide_all_templates_act);
 	view_menu->addSeparator();
 	QMenu* coordinates_menu = new QMenu(tr("Display coordinates as..."), view_menu);
+	coordinates_menu->menuAction()->setMenuRole(QAction::NoRole);
 	coordinates_menu->addAction(map_coordinates_act);
 	coordinates_menu->addAction(projected_coordinates_act);
 	coordinates_menu->addAction(geographic_coordinates_act);
@@ -1284,7 +1291,7 @@ void MapEditorController::createMobileGUI()
 	mobile_symbol_button_menu = new QMenu(window);
 	mobile_symbol_button_menu->addAction(QString{}); // reserved for symbol name
 	auto description_action = mobile_symbol_button_menu->addAction(QApplication::translate("OpenOrienteering::SymbolPropertiesWidget", "Description"));
-	connect(description_action, &QAction::triggered, [this]() {
+	connect(description_action, &QAction::triggered, this, [this]() {
 		auto symbol = symbol_widget->getSingleSelectedSymbol();
 		auto document = QString{ symbol->getNumberAsString() + QLatin1Char(' ')
 		                         + QLatin1String("<b>") + symbol->getName() + QLatin1String("</b>\n\n")
@@ -1298,7 +1305,7 @@ void MapEditorController::createMobileGUI()
 	mobile_symbol_button_menu->addSeparator();
 	auto hide_symbol_action = mobile_symbol_button_menu->addAction(QApplication::translate("OpenOrienteering::SymbolRenderWidget", "Hide objects with this symbol"));
 	hide_symbol_action->setCheckable(true);
-	connect(hide_symbol_action, &QAction::triggered, [this](bool value) {
+	connect(hide_symbol_action, &QAction::triggered, this, [this](bool value) {
 		auto symbol = symbol_widget->getSingleSelectedSymbol();
 		symbol->setHidden(value);
 		if (!value && map->removeSymbolFromSelection(symbol, false))
@@ -1309,7 +1316,7 @@ void MapEditorController::createMobileGUI()
 	});
 	auto protected_symbol_action = mobile_symbol_button_menu->addAction(QApplication::translate("OpenOrienteering::SymbolRenderWidget", "Protect objects with this symbol"));
 	protected_symbol_action->setCheckable(true);
-	connect(protected_symbol_action, &QAction::triggered, [this](bool value) {
+	connect(protected_symbol_action, &QAction::triggered, this, [this](bool value) {
 		auto symbol = symbol_widget->getSingleSelectedSymbol();
 		symbol->setProtected(value);
 		if (!value && map->removeSymbolFromSelection(symbol, false))
@@ -1326,7 +1333,7 @@ void MapEditorController::createMobileGUI()
 	
 	Q_ASSERT(mappart_selector_box);
 	QAction* mappart_action = new QAction(QIcon(QString::fromLatin1(":/images/map-parts.png")), tr("Map parts"), this);
-	connect(mappart_action, &QAction::triggered, [this, mappart_action]() {
+	connect(mappart_action, &QAction::triggered, this, [this, mappart_action]() {
 		auto mappart_button = top_action_bar->getButtonForAction(mappart_action);
 		if (!mappart_button)
 			mappart_button = top_action_bar->getButtonForAction(top_action_bar->getOverflowAction());
@@ -1366,11 +1373,25 @@ void MapEditorController::createMobileGUI()
 	bottom_action_bar->addAction(pan_act, 1, col++);
 	
 	bottom_action_bar->addAction(zoom_out_act, 0, col);
-	bottom_action_bar->addAction(gps_temporary_clear_act, 1, col++);
+	auto zoom_out_button = bottom_action_bar->getButtonForAction(zoom_out_act);
+	auto mobile_zoom_out_menu = new QMenu(zoom_out_button);
+	auto zoom_1x_action = mobile_zoom_out_menu->addAction(tr("1x zoom"));
+	connect(zoom_1x_action, &QAction::triggered, this, [this]() {
+		main_view->setZoom(1);
+	});
+	auto zoom_2x_action = mobile_zoom_out_menu->addAction(tr("2x zoom"));
+	connect(zoom_2x_action, &QAction::triggered, this, [this]() {
+		main_view->setZoom(2);
+	});
+	zoom_out_button->setMenu(mobile_zoom_out_menu);
+
+	bottom_action_bar->addAction(move_to_gps_pos_act, 1, col++);
 	
 	bottom_action_bar->addAction(gps_temporary_path_act, 0, col);
 	bottom_action_bar->addAction(gps_temporary_point_act, 1, col++);
 	
+	bottom_action_bar->addAction(gps_temporary_clear_act, 0, col++);
+
 	bottom_action_bar->addAction(paint_on_template_act, 0, col);
 	bottom_action_bar->addAction(paint_on_template_settings_act, 1, col++);
 	
@@ -1569,7 +1590,7 @@ void MapEditorController::printClicked(int task)
 		print_dock_widget->setAllowedAreas(Qt::NoDockWidgetArea);
 		print_dock_widget->toggleViewAction()->setVisible(false);
 		print_widget = new PrintWidget(map, window, main_view, this, print_dock_widget);
-		connect(print_dock_widget, &QDockWidget::visibilityChanged, [this]() {
+		connect(print_dock_widget, &QDockWidget::visibilityChanged, this, [this]() {
 			print_widget->setActive(print_dock_widget->isVisible());
 		} );
 		connect(print_widget, &PrintWidget::closeClicked, print_dock_widget, &QWidget::close);
@@ -1760,6 +1781,15 @@ void MapEditorController::pan()
 {
 	setTool(new PanTool(this, pan_act));
 }
+
+void MapEditorController::moveToGpsPos()
+{
+	if (!gps_display->hasValidPosition())
+		return;
+	auto cur_gps_pos = gps_display->getLatestGPSCoord();
+	main_view->setCenter({ cur_gps_pos.x(), cur_gps_pos.y() });
+}
+
 void MapEditorController::zoomIn()
 {
 	main_view->zoomSteps(1);
@@ -1974,7 +2004,7 @@ void MapEditorController::createTemplateWindow()
 	if (isInMobileMode())
 	{
 		template_dock_widget = createDockWidgetSubstitute(window, template_list_widget);
-		connect(template_list_widget, &TemplateListWidget::closeClicked, [this]() { showTemplateWindow(false); });
+		connect(template_list_widget, &TemplateListWidget::closeClicked, this, [this]() { showTemplateWindow(false); });
 	}
 	else
 	{
@@ -2103,8 +2133,10 @@ void MapEditorController::selectedSymbolsChanged()
 			QPainter painter(&pixmap);
 			painter.setFont(font);
 			QString text = (symbol_widget->selectedSymbolsCount() == 0) ?
-				tr("No\nsymbol\nselected", "Keep it short. Should not be much longer per line than the longest word in the original.") :
-				tr("Multiple\nsymbols\nselected", "Keep it short. Should not be much longer per line than the longest word in the original.");
+				//: Keep it short. Should not be much longer per line than the longest word in the original.
+				tr("No\nsymbol\nselected") :
+				//: Keep it short. Should not be much longer per line than the longest word in the original.
+				tr("Multiple\nsymbols\nselected");
 			painter.drawText(pixmap.rect(), Qt::AlignCenter, text);
 			
 			symbol_button->setMenu(nullptr);
@@ -2112,6 +2144,14 @@ void MapEditorController::selectedSymbolsChanged()
 		else //if (symbol_widget->getNumSelectedSymbols() == 1)
 		{
 			auto image = symbol->createIcon(*map, qMin(icon_size.width(), icon_size.height()));
+			if (symbol->isHidden() || symbol->isProtected())
+			{
+				QPainter p(&image);
+				if (symbol->isHidden())
+					HiddenSymbolDecorator(icon_size.width()).draw(p);
+				if (symbol->isProtected())
+					ProtectedSymbolDecorator(icon_size.width()).draw(p);
+			}
 			pixmap = QPixmap::fromImage(image);
 			
 			symbol_button->setMenu(mobile_symbol_button_menu);
@@ -3232,49 +3272,23 @@ void MapEditorController::addFloatingDockWidget(QDockWidget* dock_widget)
 
 void MapEditorController::paintOnTemplateClicked(bool checked)
 {
-	if (checked)
-	{
-		if (!last_painted_on_template)
-			paintOnTemplateSelectClicked();
-		else
-			paintOnTemplate(last_painted_on_template);
-	}
+	if (!checked)
+		finishPaintOnTemplate();
+	else if (last_painted_on_template)
+		paintOnTemplate(last_painted_on_template);
 	else
-		setTool(nullptr);
+		paintOnTemplateSelectClicked();
 }
 
 void MapEditorController::paintOnTemplateSelectClicked()
 {
-	Template* only_paintable_template = nullptr;
-	for (int i = 0; i < map->getNumTemplates(); ++i)
+	PaintOnTemplateSelectDialog paintDialog(map, main_view, last_painted_on_template, window);
+	paintDialog.setWindowModality(Qt::WindowModal);
+	if (paintDialog.exec() == QDialog::Accepted)
 	{
-		if (map->getTemplate(i)->canBeDrawnOnto())
-		{
-			if (!only_paintable_template)
-				only_paintable_template = map->getTemplate(i);
-			else
-			{
-				only_paintable_template = nullptr;
-				break;
-			}
-		}
-	}
-	
-	if (only_paintable_template)
-		last_painted_on_template = only_paintable_template;
-	else
-	{
-		PaintOnTemplateSelectDialog paintDialog(map, window);
-		paintDialog.setWindowModality(Qt::WindowModal);
-		if (paintDialog.exec() == QDialog::Rejected)
-		{
-			paint_on_template_act->setChecked(false);
-			return;
-		}
-		
 		last_painted_on_template = paintDialog.getSelectedTemplate();
+		paintOnTemplate(last_painted_on_template);
 	}
-	paintOnTemplate(last_painted_on_template);
 }
 
 void MapEditorController::enableGPSDisplay(bool enable)
@@ -3284,7 +3298,7 @@ void MapEditorController::enableGPSDisplay(bool enable)
 		gps_display->startUpdates();
 		
 		// Create gps_track_recorder if we can determine a template track filename
-		const float gps_track_draw_update_interval = 10 * 1000; // in milliseconds
+		constexpr int gps_track_draw_update_interval = 10 * 1000; // in milliseconds
 		if (! window->currentPath().isEmpty())
 		{
 			// Find or create a template for the track with a specific name
@@ -3296,37 +3310,46 @@ void MapEditorController::enableGPSDisplay(bool enable)
 				+ QDate::currentDate().toString(Qt::ISODate)
 				+ QLatin1String(".gpx");
 			
-			int template_index = -1;
-			for (int i = 0; i < map->getNumTemplates(); ++ i)
+			bool new_template = true;  // Indicates that we really add a new template.
+			TemplateTrack* track = nullptr;
+			int template_index = 0;
+			for ( ; template_index < map->getNumTemplates(); ++template_index)
 			{
-				if (map->getTemplate(i)->getTemplatePath().compare(gpx_file_path) == 0
-				    && qstrcmp(map->getTemplate(i)->getTemplateType(), "TemplateTrack") == 0)
+				auto temp = map->getTemplate(template_index);
+				if (temp->getTemplatePath() == gpx_file_path)
 				{
-					template_index = i;
-					if (map->getTemplate(i)->getTemplateState() != Template::Loaded)
+					// There is a template for this track.
+					new_template = false;
+					track = qobject_cast<TemplateTrack*>(temp);
+					if (!track)
 					{
-						// If the template file could not be loaded, don't care
-						// at this point; simply create a new file.
-						TemplateTrack* track = static_cast<TemplateTrack*>(map->getTemplate(i));
-						track->configureForGPSTrack();
-						track->setHasUnsavedChanges(true);
+						// Need to replace the template at template_index
+						map->setTemplateAreaDirty(template_index);
+						map->deleteTemplate(template_index);
 					}
 					break;
 				}
 			}
 			
-			if (template_index == -1)
+			if (!track)
 			{
-				// Create a new template
-				auto new_template = new TemplateTrack(gpx_file_path, map);
-				new_template->configureForGPSTrack();
-				template_index = map->getNumTemplates();
-				map->addTemplate(new_template, template_index);
-				map->setTemplateAreaDirty(template_index);
+				track = new TemplateTrack(gpx_file_path, map);
+				map->addTemplate(track, template_index);
+			}
+			if (track->getTemplateState() != Template::Loaded)
+			{
+				track->loadTemplateFile(false);
+			}
+			track->configureForGPSTrack();
+			map->setTemplateAreaDirty(template_index);
+			if (new_template)
+			{
+				// When the map is saved, the new track must be saved even if it is empty.
+				track->setHasUnsavedChanges(true);
 				map->setTemplatesDirty();
 			}
-			
-			gps_track_recorder = new GPSTrackRecorder(gps_display, static_cast<TemplateTrack*>(map->getTemplate(template_index)), gps_track_draw_update_interval, map_widget);
+				
+			gps_track_recorder = new GPSTrackRecorder(gps_display, track, gps_track_draw_update_interval, map_widget);
 		}
 	}
 	else
@@ -3359,6 +3382,7 @@ void MapEditorController::updateDrawPointGPSAvailability()
 {
 	const Symbol* symbol = activeSymbol();
 	draw_point_gps_act->setEnabled(symbol && gps_display->isVisible() && symbol->getType() == Symbol::Point && !symbol->isHidden());
+	move_to_gps_pos_act->setEnabled(gps_display->isVisible());
 }
 
 void MapEditorController::drawPointGPSClicked()
@@ -3499,12 +3523,14 @@ void MapEditorController::updateMapPartsUI()
 	if (!mappart_merge_menu)
 	{
 		mappart_merge_menu = new QMenu();
+		mappart_merge_menu->menuAction()->setMenuRole(QAction::NoRole);
 		mappart_merge_menu->setTitle(tr("Merge this part with"));
 	}
 	
 	if (!mappart_move_menu)
 	{
 		mappart_move_menu = new QMenu();
+		mappart_move_menu->menuAction()->setMenuRole(QAction::NoRole);
 		mappart_move_menu->setTitle(tr("Move selected objects to"));
 	}
 	
@@ -3723,48 +3749,38 @@ void MapEditorController::mergeAllMapParts()
 
 void MapEditorController::paintOnTemplate(Template* temp)
 {
-	setTool(new PaintOnTemplateTool(this, paint_on_template_act, temp));
-	paint_on_template_act->setChecked(true);
-}
-
-void MapEditorController::updatePaintOnTemplateAction()
-{
-	if (map)
+	auto tool = qobject_cast<PaintOnTemplateTool*>(getTool());
+	if (!tool)
 	{
-		int i;
-		for (i = 0; i < map->getNumTemplates(); ++i)
-		{
-			// TODO: check for visibility too?!
-			if (map->getTemplate(i)->canBeDrawnOnto() && map->getTemplate(i)->getTemplateState() != Template::Invalid)
-				break;
-		}
-		paint_on_template_act->setEnabled(i != map->getNumTemplates());
+		tool = new PaintOnTemplateTool(this, paint_on_template_act);
+		setTool(tool);
 	}
-	else
-		paint_on_template_act->setEnabled(false);
 	
-	if (paint_on_template_act->isEnabled())
-		paint_on_template_act->setStatusTip(tr("Paint free-handedly on a template"));
-	else
-		paint_on_template_act->setStatusTip(tr("Paint free-handedly on a template. Create or load a template which can be drawn onto to activate this button"));
-
-	paint_on_template_settings_act->setEnabled(paint_on_template_act->isEnabled());
+	hideAllTemplates(false);
+	auto vis = main_view->getTemplateVisibility(temp);
+	vis.visible = true;
+	main_view->setTemplateVisibility(temp, vis);
+	temp->setTemplateAreaDirty();
+	
+	tool->setTemplate(temp);
 }
 
-void MapEditorController::templateAdded(int pos, const Template* temp)
+void MapEditorController::finishPaintOnTemplate()
 {
-	Q_UNUSED(pos);
-	if (mode == MapEditor && temp->canBeDrawnOnto())
-		updatePaintOnTemplateAction();
+	if (auto tool = qobject_cast<PaintOnTemplateTool*>(current_tool))
+	{
+		tool->deactivate();
+	}
+}
+
+void MapEditorController::templateAdded(int /*pos*/, const Template* /*temp*/)
+{
 	if (map->getNumTemplates() == 1)
 		templateAvailabilityChanged();
 }
 
-void MapEditorController::templateDeleted(int pos, const Template* temp)
+void MapEditorController::templateDeleted(int /*pos*/, const Template* /*temp*/)
 {
-	Q_UNUSED(pos);
-	if (mode == MapEditor && temp->canBeDrawnOnto())
-		updatePaintOnTemplateAction();
 	if (map->getNumTemplates() == 0)
 		templateAvailabilityChanged();
 }
@@ -4047,6 +4063,7 @@ MapEditorToolAction::MapEditorToolAction(const QIcon& icon, const QString& text,
  : QAction(icon, text, parent)
 {
 	setCheckable(true);
+	setMenuRole(QAction::NoRole);
 	connect(this, &QAction::triggered, this, &MapEditorToolAction::triggeredImpl);
 }
 

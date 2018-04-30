@@ -45,6 +45,8 @@ set(Mapper_translations
   OpenOrienteering_uk.ts
   OpenOrienteering_zh_CN.ts
 )
+# Make translation list available for Qt translation lookup
+set(Mapper_translations ${Mapper_translations} PARENT_SCOPE)
 
 # Translation files which are updated but not deployed.
 set(Mapper_translations_template
@@ -64,11 +66,15 @@ set(map_symbols_translations
   map_symbols_es.ts
   map_symbols_fi.ts
   map_symbols_fr.ts
+  map_symbols_hu.ts
+  map_symbols_it.ts
   map_symbols_nl.ts
   map_symbols_ru.ts
   map_symbols_sv.ts
   map_symbols_uk.ts
 )
+# Make translation list available for SymbolSetTool
+set(map_symbols_translations ${map_symbols_translations} PARENT_SCOPE)
 
 # Translation files which are updated but not deployed.
 set(map_symbols_translations_template
@@ -85,7 +91,61 @@ set(qt_translations
   qt_nl.ts
 )
 
-qt5_add_translation(translations_qm ${Mapper_translations} ${map_symbols_translations} ${qt_translations})
+# Weblate vs. Qt quirks
+set(Mapper_translations_for_qt "${Mapper_translations}")
+# TODO: Replace remove_first_numerusform by CMake version of save_first_numerusform
+#       (Avoid sed dependency during build.)
+set(remove_first_numerusform "${CMAKE_CURRENT_BINARY_DIR}/remove-first-numerusform.cmake")
+file(GENERATE OUTPUT "${remove_first_numerusform}"
+  CONTENT [[
+    file(READ "${TS_FILE}.in" data)
+    string(REGEX REPLACE "(<translation>)[^<]*<numerusform>[^<]*</numerusform>" "\\1" data "${data}")
+    file(WRITE "${TS_FILE}" "${data}")
+]])
+set(save_first_numerusform "${CMAKE_CURRENT_BINARY_DIR}/save-first-numerusform.sed")
+file(GENERATE OUTPUT "${save_first_numerusform}"
+  CONTENT [[
+    /message numerus=.yes.>/,/\/message>/ {
+      /<translation/ {
+        :loop
+        /<\/numerusform/! {
+          N
+          b loop
+        }
+        h
+        s,.*<numerusform>\([^<]*\)</numerusform>.*,        <translatorcomment>numerusform:\1</translatorcomment>,
+        p
+        x
+        s,<translation>.*</numerusform>,<translation>,
+      }
+    }
+]])
+set(restore_first_numerusform "${CMAKE_CURRENT_BINARY_DIR}/restore-first-numerusform.sed")
+file(GENERATE OUTPUT "${restore_first_numerusform}"
+  CONTENT [[
+    /message numerus=.yes.>/,/\/message>/ {
+      /translatorcomment>numerusform:/ {
+        s,<.*>numerusform:\(.*\)<.*>,    <numerusform>\1</numerusform>,
+        h
+        s,.*,        <extracomment>The singular form will not be used!</extracomment>,
+      }
+    /<translation>/G
+  }
+]])
+# - Hungarian: Qt does not support singular form, but would drop the plural.
+file(MAKE_DIRECTORY "${CMAKE_CURRENT_BINARY_DIR}/ts")
+set(hu_ts "${CMAKE_CURRENT_BINARY_DIR}/ts/OpenOrienteering_hu.ts")
+list(REMOVE_ITEM Mapper_translations_for_qt OpenOrienteering_hu.ts)
+list(APPEND Mapper_translations_for_qt "${hu_ts}")
+configure_file(OpenOrienteering_hu.ts "${hu_ts}.in" COPYONLY)
+add_custom_command(OUTPUT "${hu_ts}"
+  DEPENDS "${hu_ts}.in"
+          "${remove_first_numerusform}"
+  COMMAND "${CMAKE_COMMAND}" -DTS_FILE="${hu_ts}" -P "${remove_first_numerusform}"
+  WORKING_DIRECTORY "${CMAKE_CURRENT_BINARY_DIR}"
+)
+
+qt5_add_translation(translations_qm ${Mapper_translations_for_qt} ${map_symbols_translations} ${qt_translations})
 
 # A target which builds all translations.
 add_custom_target(Mapper_translations ALL
@@ -104,7 +164,7 @@ install(
 
 if(APPLE)
 	# Localized resources just to enable localized native dialogs.
-	foreach(mapper_trans en ${Mapper_translations})
+	foreach(mapper_trans ${Mapper_translations})
 		get_filename_component(mapper_lang ${mapper_trans} NAME_WE)
 		string(REPLACE OpenOrienteering_ "" language_code ${mapper_lang})
 		configure_file(locversion.plist.in ${language_code}.lproj/locversion.plist @ONLY)
@@ -127,7 +187,7 @@ execute_process(
   COMMAND "${Qt5_LUPDATE_EXECUTABLE}" -version
   OUTPUT_VARIABLE lupdate_version
 )
-string(REGEX REPLACE "^.*([0-9]\\.[0-9]\\.[0-9]).*" "\\1" lupdate_version "${lupdate_version}")
+string(REGEX REPLACE "^.*([0-9]\\.1?[0-9]\\.[0-9]).*" "\\1" lupdate_version "${lupdate_version}")
 if(lupdate_version VERSION_LESS 5.6.1)
 	message(AUTHOR_WARNING "lupdate version ${lupdate_version} is less than 5.6.1. Updates disabled.")
 else()
@@ -159,9 +219,28 @@ else()
 		if("${ts_filename}" STREQUAL "OpenOrienteering_template")
 			list(APPEND lupdate_options -no-obsolete)
 		endif()
+		
+		set(pre_lupdate )
+		set(post_lupdate
+		  COMMAND sed -i -e "/<context>/N\\;/<name>Q[A-Z]/,/<.context>/d" "${CMAKE_CURRENT_SOURCE_DIR}/${translation}"
+		)
+		if("${ts_filename}" STREQUAL "OpenOrienteering_hu")
+			# No plural support for Hungarian in Qt
+			# Save first numerusform in translatorcomment
+			list(APPEND pre_lupdate
+			  COMMAND sed -i -f "${save_first_numerusform}" "${CMAKE_CURRENT_SOURCE_DIR}/${translation}"
+			)
+			# Restore first numerusform for translatorcomment
+			list(APPEND post_lupdate
+			  COMMAND sed -i -f "${restore_first_numerusform}" "${CMAKE_CURRENT_SOURCE_DIR}/${translation}"
+			)
+		endif()
+		
 		add_custom_target(Mapper_${ts_filename}_update
+		  ${pre_lupdate}
 		  COMMAND "${Qt5_LUPDATE_EXECUTABLE}" ${lupdate_options} "@${listfile}" -ts "${CMAKE_CURRENT_SOURCE_DIR}/${translation}"
 		  COMMAND sed -i -e "/<context>/N;/<name>Q[A-Z]/,/<.context>/d" "${CMAKE_CURRENT_SOURCE_DIR}/${translation}"
+		  ${post_lupdate}
 		  VERBATIM
 		)
 		add_dependencies(Mapper_translations_update Mapper_${ts_filename}_update)

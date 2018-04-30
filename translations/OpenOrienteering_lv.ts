@@ -6,12 +6,12 @@
     <message>
         <location filename="../packaging/translations.cpp" line="10"/>
         <source>Orienteering map</source>
-        <translation type="unfinished"></translation>
+        <translation>Orientēšanās karte</translation>
     </message>
     <message>
         <location filename="../packaging/translations.cpp" line="11"/>
         <source>Software for drawing orienteering maps</source>
-        <translation type="unfinished"></translation>
+        <translation>Orientēšanās karšu zīmēšanas programmatūra</translation>
     </message>
 </context>
 <context>
@@ -30,12 +30,12 @@
     <message>
         <location filename="../src/gui/about_dialog.cpp" line="181"/>
         <source>This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License (GPL), version&amp;nbsp;3, for &lt;a %1&gt;more details&lt;/a&gt;.</source>
-        <translation type="unfinished"></translation>
+        <translation>Šī programma tiek izplatīta ar cerību, ka tā būs noderīga, taču BEZ JELKĀDAS GARANTIJAS; bez pat netiešās garantijas attiecībā uz PREČU ATBILSTĪBU vai DERĪGUMU KONKRĒTIEM MĒRĶIEM. Skatiet GNU General Public License (GPL), versiju&amp;nbsp;3, par &lt;a %1&gt;citām detaļām&lt;/a&gt;.</translation>
     </message>
     <message>
         <location filename="../src/gui/about_dialog.cpp" line="186"/>
         <source>&lt;a %1&gt;All about licenses, copyright notices, conditions and disclaimers.&lt;/a&gt;</source>
-        <translation type="unfinished">&lt;a %1&gt;Viss par licensēm, autortiesību paziņojumiem un atrunām.&lt;/a&gt;</translation>
+        <translation>&lt;a %1&gt;Viss par licensēm, autortiesību paziņojumiem un atrunām.&lt;/a&gt;</translation>
     </message>
     <message>
         <location filename="../src/gui/about_dialog.cpp" line="188"/>
@@ -93,12 +93,12 @@
     <message>
         <location filename="../src/gui/widgets/general_settings_page.cpp" line="119"/>
         <source>Open most recently used file</source>
-        <translation type="unfinished">Atvērt nesen izmantoto datni</translation>
+        <translation>Atvērt pēdējo izmantoto datni</translation>
     </message>
     <message>
         <location filename="../src/gui/widgets/general_settings_page.cpp" line="122"/>
         <source>Show tip of the day</source>
-        <translation type="unfinished">Rādīt dienas padomu</translation>
+        <translation>Rādīt dienas padomu</translation>
     </message>
 </context>
 <context>
@@ -106,7 +106,7 @@
     <message>
         <location filename="../src/gui/widgets/action_grid_bar.cpp" line="52"/>
         <source>Show remaining items</source>
-        <translation type="unfinished"></translation>
+        <translation>Parādīt atlikušos vienumus</translation>
     </message>
 </context>
 <context>
@@ -213,27 +213,27 @@
     <message>
         <location filename="../src/gui/symbols/area_symbol_settings.cpp" line="229"/>
         <source>Element drawing at boundary</source>
-        <translation type="unfinished"></translation>
+        <translation>Elementa zīmējums pie robežas</translation>
     </message>
     <message>
         <location filename="../src/gui/symbols/area_symbol_settings.cpp" line="231"/>
         <source>Clip elements at the boundary.</source>
-        <translation type="unfinished"></translation>
+        <translation>Apgriezt elementus pa robežu.</translation>
     </message>
     <message>
         <location filename="../src/gui/symbols/area_symbol_settings.cpp" line="232"/>
         <source>Draw elements if the center is inside the boundary.</source>
-        <translation type="unfinished"></translation>
+        <translation>Zīmēt elementus, ja centrs atrodas robežas iekšienē.</translation>
     </message>
     <message>
         <location filename="../src/gui/symbols/area_symbol_settings.cpp" line="233"/>
         <source>Draw elements if any point is inside the boundary.</source>
-        <translation type="unfinished"></translation>
+        <translation>Zīmēt elementus, ja kāds punkts atrodas robežas iekšpusē.</translation>
     </message>
     <message>
         <location filename="../src/gui/symbols/area_symbol_settings.cpp" line="234"/>
         <source>Draw elements if all points are inside the boundary.</source>
-        <translation type="unfinished"></translation>
+        <translation>Zīmēt elementus, ja visi punkti atrodas robežas iekšpusē.</translation>
     </message>
     <message>
         <location filename="../src/gui/symbols/area_symbol_settings.cpp" line="249"/>
@@ -281,37 +281,37 @@
     <message>
         <location filename="../src/gui/autosave_dialog.cpp" line="46"/>
         <source>Autosaved file</source>
-        <translation type="unfinished"></translation>
+        <translation>Automātiski saglabāta datne</translation>
     </message>
     <message numerus="yes">
         <location filename="../src/gui/autosave_dialog.cpp" line="48"/>
         <location filename="../src/gui/autosave_dialog.cpp" line="54"/>
         <source>%n bytes</source>
-        <translation type="unfinished">
-            <numerusform></numerusform>
-            <numerusform></numerusform>
-            <numerusform></numerusform>
+        <translation>
+            <numerusform>%n baiti</numerusform>
+            <numerusform>%n baits</numerusform>
+            <numerusform>%n baiti</numerusform>
         </translation>
     </message>
     <message>
         <location filename="../src/gui/autosave_dialog.cpp" line="52"/>
         <source>File saved by the user</source>
-        <translation type="unfinished"></translation>
+        <translation>Lietotāja saglabāta datne</translation>
     </message>
     <message>
         <location filename="../src/gui/autosave_dialog.cpp" line="59"/>
         <source>File recovery</source>
-        <translation type="unfinished"></translation>
+        <translation>Datnes atgūšana</translation>
     </message>
     <message>
         <location filename="../src/gui/autosave_dialog.cpp" line="61"/>
         <source>File %1 was not properly closed. At the moment, there are two versions:</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 datne netika pareizi aizvērta. Šobrīd ir divas versijas:</translation>
     </message>
     <message>
         <location filename="../src/gui/autosave_dialog.cpp" line="75"/>
         <source>Save the active file to remove the conflicting version.</source>
-        <translation type="unfinished"></translation>
+        <translation>Saglabāt aktīvo datni, lai novērstu pretrunīgu versiju.</translation>
     </message>
 </context>
 <context>
@@ -324,7 +324,12 @@
     <message>
         <location filename="../src/gui/color_dialog.cpp" line="93"/>
         <source>Edit</source>
-        <translation type="unfinished">Rediģēt</translation>
+        <translation>Rediģēt</translation>
+    </message>
+    <message>
+        <location filename="../src/gui/color_dialog.cpp" line="101"/>
+        <source>Spot color printing</source>
+        <translation>Speckrāsas drukāšana</translation>
     </message>
     <message>
         <location filename="../src/gui/color_dialog.cpp" line="106"/>
@@ -350,6 +355,11 @@
         <location filename="../src/gui/color_dialog.cpp" line="135"/>
         <source>Knockout: erases lower colors</source>
         <translation>Nokauts: dzēš apakšējās krāsas</translation>
+    </message>
+    <message>
+        <location filename="../src/gui/color_dialog.cpp" line="148"/>
+        <source>CMYK</source>
+        <translation>CMYK</translation>
     </message>
     <message>
         <location filename="../src/gui/color_dialog.cpp" line="153"/>
@@ -386,6 +396,11 @@
         <location filename="../src/gui/color_dialog.cpp" line="184"/>
         <source>Black</source>
         <translation>Melns</translation>
+    </message>
+    <message>
+        <location filename="../src/gui/color_dialog.cpp" line="205"/>
+        <source>RGB</source>
+        <translation>RGB</translation>
     </message>
     <message>
         <location filename="../src/gui/color_dialog.cpp" line="215"/>
@@ -430,17 +445,17 @@
     <message>
         <location filename="../src/gui/color_dialog.cpp" line="279"/>
         <source>Name</source>
-        <translation type="unfinished">Nosaukums</translation>
+        <translation>Nosaukums</translation>
     </message>
     <message>
         <location filename="../src/gui/color_dialog.cpp" line="331"/>
         <source>- unnamed -</source>
-        <translation type="unfinished"></translation>
+        <translation>- nenosaukts -</translation>
     </message>
     <message>
         <location filename="../src/gui/color_dialog.cpp" line="600"/>
         <source>Warning</source>
-        <translation type="unfinished">Brīdinājums</translation>
+        <translation>Brīdinājums</translation>
     </message>
 </context>
 <context>
@@ -534,7 +549,7 @@
         <location filename="../src/gui/widgets/color_list_widget.cpp" line="250"/>
         <source>%1 (duplicate)</source>
         <extracomment>Future replacement for COLOR_NAME + &quot; (Duplicate)&quot;, for better localization.</extracomment>
-        <translation type="unfinished"></translation>
+        <translation>%1 (dublikāts)</translation>
     </message>
     <message>
         <location filename="../src/gui/widgets/color_list_widget.cpp" line="251"/>
@@ -558,7 +573,7 @@
     <message>
         <location filename="../src/gui/widgets/color_list_widget.cpp" line="417"/>
         <source>Click to select the name and click again to edit.</source>
-        <translation type="unfinished"></translation>
+        <translation>Noklikšķiniet, lai atlasītu vārdu, un noklikšķiniet vēlreiz, lai rediģētu.</translation>
     </message>
 </context>
 <context>
@@ -823,12 +838,12 @@
     <message>
         <location filename="../src/util/dxfparser.cpp" line="38"/>
         <source>Could not open the file.</source>
-        <translation type="unfinished"></translation>
+        <translation>Nevar atvērt datni.</translation>
     </message>
     <message>
         <location filename="../src/util/dxfparser.cpp" line="54"/>
         <source>The file is not an DXF file.</source>
-        <translation type="unfinished"></translation>
+        <translation>Datne nav DXF datne.</translation>
     </message>
 </context>
 <context>
@@ -867,38 +882,38 @@
     <message>
         <location filename="../src/tools/distribute_points_tool.cpp" line="129"/>
         <source>Distribute points evenly along path</source>
-        <translation type="unfinished"></translation>
+        <translation>Izplatīt punktus vienmērīgi pa līkni</translation>
     </message>
     <message>
         <location filename="../src/tools/distribute_points_tool.cpp" line="135"/>
         <source>Number of points per path:</source>
-        <translation type="unfinished"></translation>
+        <translation>Punktu skaits uz līniju:</translation>
     </message>
     <message>
         <location filename="../src/tools/distribute_points_tool.cpp" line="137"/>
         <source>Also place objects at line end points</source>
-        <translation type="unfinished"></translation>
+        <translation>Novietot objektus arī pie līnijas beigu punktiem</translation>
     </message>
     <message>
         <location filename="../src/tools/distribute_points_tool.cpp" line="143"/>
         <source>Rotation settings</source>
-        <translation type="unfinished"></translation>
+        <translation>Rotācijas iestatījumi</translation>
     </message>
     <message>
         <location filename="../src/tools/distribute_points_tool.cpp" line="146"/>
         <source>Align points with direction of line</source>
-        <translation type="unfinished"></translation>
+        <translation>Līdzināt punktus ar līnijas virzienu</translation>
     </message>
     <message>
         <location filename="../src/tools/distribute_points_tool.cpp" line="150"/>
         <source>°</source>
         <comment>degrees</comment>
-        <translation type="unfinished">°</translation>
+        <translation>°</translation>
     </message>
     <message>
         <location filename="../src/tools/distribute_points_tool.cpp" line="152"/>
         <source>Additional rotation angle (counter-clockwise):</source>
-        <translation type="unfinished"></translation>
+        <translation>Papildu rotācijas leņķis (pretēji pulksteņrādītāja virzienam):</translation>
     </message>
 </context>
 <context>
@@ -907,7 +922,7 @@
         <location filename="../src/tools/draw_circle_tool.cpp" line="69"/>
         <source>From center</source>
         <comment>Draw circle starting from center</comment>
-        <translation type="unfinished"></translation>
+        <translation>No centra</translation>
     </message>
     <message>
         <location filename="../src/tools/draw_circle_tool.cpp" line="308"/>
@@ -922,7 +937,7 @@
     <message>
         <location filename="../src/tools/draw_circle_tool.cpp" line="311"/>
         <source>Hold %1 to start drawing from the center.</source>
-        <translation type="unfinished"></translation>
+        <translation>Turiet %1, lai sāktu zīmēšanu no centra.</translation>
     </message>
     <message>
         <location filename="../src/tools/draw_circle_tool.cpp" line="315"/>
@@ -940,7 +955,7 @@
     <message>
         <location filename="../src/tools/draw_freehand_tool.cpp" line="289"/>
         <source>&lt;b&gt;Drag&lt;/b&gt;: Draw a path. </source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;Velciet&lt;/b&gt;: Zīmēt trajektoriju. </translation>
     </message>
 </context>
 <context>
@@ -966,7 +981,7 @@
         <location filename="../src/tools/draw_path_tool.cpp" line="1189"/>
         <location filename="../src/tools/draw_path_tool.cpp" line="1216"/>
         <source>&lt;b&gt;%1+%2&lt;/b&gt;: Segment azimuth and length. </source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;% 1 + % 2&lt;/b&gt;: segmenta azimuts un garums. </translation>
     </message>
     <message>
         <location filename="../src/tools/draw_path_tool.cpp" line="1205"/>
@@ -993,46 +1008,46 @@
     <message>
         <location filename="../src/tools/draw_path_tool.cpp" line="102"/>
         <source>Finish</source>
-        <translation type="unfinished"></translation>
+        <translation>Finišs</translation>
     </message>
     <message>
         <location filename="../src/tools/draw_path_tool.cpp" line="103"/>
         <source>Close</source>
-        <translation type="unfinished">Aizvērt</translation>
+        <translation>Aizvērt</translation>
     </message>
     <message>
         <location filename="../src/tools/draw_path_tool.cpp" line="104"/>
         <source>Snap</source>
         <comment>Snap to existing objects</comment>
-        <translation type="unfinished"></translation>
+        <translation>Pieķerties</translation>
     </message>
     <message>
         <location filename="../src/tools/draw_path_tool.cpp" line="105"/>
         <source>Angle</source>
         <comment>Using constrained angles</comment>
-        <translation type="unfinished"></translation>
+        <translation>Leņķis</translation>
     </message>
     <message>
         <location filename="../src/tools/draw_path_tool.cpp" line="106"/>
         <source>Info</source>
         <comment>Show segment azimuth and length</comment>
-        <translation type="unfinished"></translation>
+        <translation>Info</translation>
     </message>
     <message>
         <location filename="../src/tools/draw_path_tool.cpp" line="109"/>
         <source>Dash</source>
         <comment>Drawing dash points</comment>
-        <translation type="unfinished"></translation>
+        <translation>Svītra</translation>
     </message>
     <message>
         <location filename="../src/tools/draw_path_tool.cpp" line="112"/>
         <source>Undo</source>
-        <translation type="unfinished">Atsaukt</translation>
+        <translation>Atsaukt</translation>
     </message>
     <message>
         <location filename="../src/tools/draw_path_tool.cpp" line="113"/>
         <source>Abort</source>
-        <translation type="unfinished">Pārtraukt</translation>
+        <translation>Pārtraukt</translation>
     </message>
     <message>
         <location filename="../src/tools/draw_path_tool.cpp" line="1167"/>
@@ -1060,12 +1075,12 @@
     <message>
         <location filename="../src/tools/draw_point_gps_tool.cpp" line="81"/>
         <source>Touch the map to finish averaging</source>
-        <translation type="unfinished"></translation>
+        <translation>Pieskarieties kartei, lai pabeigtu vidējošanu</translation>
     </message>
     <message>
         <location filename="../src/tools/draw_point_gps_tool.cpp" line="193"/>
         <source>&lt;b&gt;Click&lt;/b&gt;: Finish setting the object. </source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;Klikšķis&lt;/b&gt;: Pabeigt objekta iestatīšanu. </translation>
     </message>
 </context>
 <context>
@@ -1074,19 +1089,19 @@
         <location filename="../src/tools/draw_point_tool.cpp" line="83"/>
         <source>Snap</source>
         <comment>Snap to existing objects</comment>
-        <translation type="unfinished"></translation>
+        <translation>Pieķerties</translation>
     </message>
     <message>
         <location filename="../src/tools/draw_point_tool.cpp" line="84"/>
         <source>Angle</source>
         <comment>Using constrained angles</comment>
-        <translation type="unfinished"></translation>
+        <translation>Leņķis</translation>
     </message>
     <message>
         <location filename="../src/tools/draw_point_tool.cpp" line="85"/>
         <source>Reset</source>
         <comment>Reset rotation</comment>
-        <translation type="unfinished">Atsākt</translation>
+        <translation>Atsākt</translation>
     </message>
     <message>
         <location filename="../src/tools/draw_point_tool.cpp" line="334"/>
@@ -1103,17 +1118,17 @@
         <location filename="../src/tools/draw_point_tool.cpp" line="340"/>
         <location filename="../src/tools/draw_point_tool.cpp" line="354"/>
         <source>&lt;b&gt;Click&lt;/b&gt;: Create a point object.</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;Klikšķis&lt;/b&gt;: Izveidot punktveida objektu.</translation>
     </message>
     <message>
         <location filename="../src/tools/draw_point_tool.cpp" line="341"/>
         <source>&lt;b&gt;Drag&lt;/b&gt;: Create an object and set its orientation.</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;Vilkt&lt;/b&gt;: Izveidot objektu un iestatīt tā orientāciju.</translation>
     </message>
     <message>
         <location filename="../src/tools/draw_point_tool.cpp" line="347"/>
         <source>&lt;b&gt;%1, 0&lt;/b&gt;: Reset rotation.</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;%1, 0&lt;/b&gt;: Atsaukt rotāciju.</translation>
     </message>
     <message>
         <source>&lt;b&gt;Click&lt;/b&gt;: Create a point object. &lt;b&gt;Drag&lt;/b&gt;: Create an object and set its orientation (if rotatable). </source>
@@ -1125,35 +1140,35 @@
     <message>
         <location filename="../src/tools/draw_rectangle_tool.cpp" line="90"/>
         <source>Finish</source>
-        <translation type="unfinished"></translation>
+        <translation>Finišs</translation>
     </message>
     <message>
         <location filename="../src/tools/draw_rectangle_tool.cpp" line="91"/>
         <source>Snap</source>
         <comment>Snap to existing objects</comment>
-        <translation type="unfinished"></translation>
+        <translation>Pieķerties</translation>
     </message>
     <message>
         <location filename="../src/tools/draw_rectangle_tool.cpp" line="92"/>
         <source>Line snap</source>
         <comment>Snap to previous lines</comment>
-        <translation type="unfinished"></translation>
+        <translation>Pieķerties līnijai</translation>
     </message>
     <message>
         <location filename="../src/tools/draw_rectangle_tool.cpp" line="93"/>
         <source>Dash</source>
         <comment>Drawing dash points</comment>
-        <translation type="unfinished"></translation>
+        <translation>Svītra</translation>
     </message>
     <message>
         <location filename="../src/tools/draw_rectangle_tool.cpp" line="96"/>
         <source>Undo</source>
-        <translation type="unfinished">Atsaukt</translation>
+        <translation>Atsaukt</translation>
     </message>
     <message>
         <location filename="../src/tools/draw_rectangle_tool.cpp" line="97"/>
         <source>Abort</source>
-        <translation type="unfinished">Pārtraukt</translation>
+        <translation>Pārtraukt</translation>
     </message>
     <message>
         <location filename="../src/tools/draw_rectangle_tool.cpp" line="741"/>
@@ -1177,17 +1192,17 @@
         <location filename="../src/tools/draw_text_tool.cpp" line="113"/>
         <source>Snap</source>
         <extracomment>Snap to existing objects</extracomment>
-        <translation type="unfinished"></translation>
+        <translation>Pieķerties</translation>
     </message>
     <message>
         <location filename="../src/tools/draw_text_tool.cpp" line="476"/>
         <source>&lt;b&gt;%1&lt;/b&gt;: Finish editing. </source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;%1&lt;/b&gt;: Pabeigt rediģēšanu. </translation>
     </message>
     <message>
         <location filename="../src/tools/draw_text_tool.cpp" line="477"/>
         <source>&lt;b&gt;%1+%2&lt;/b&gt;: Cancel editing. </source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;%1+%2&lt;/b&gt;: Atcelt rediģēšanu. </translation>
     </message>
     <message>
         <location filename="../src/tools/draw_text_tool.cpp" line="482"/>
@@ -1205,13 +1220,13 @@
         <location filename="../src/tools/edit_line_tool.cpp" line="405"/>
         <source>Snap</source>
         <comment>Snap to existing objects</comment>
-        <translation type="unfinished"></translation>
+        <translation>Pieķerties</translation>
     </message>
     <message>
         <location filename="../src/tools/edit_line_tool.cpp" line="406"/>
         <source>Toggle curve</source>
         <comment>Toggle between curved and flat segment</comment>
-        <translation type="unfinished"></translation>
+        <translation>Pārslēgt līkni</translation>
     </message>
     <message>
         <location filename="../src/tools/edit_line_tool.cpp" line="518"/>
@@ -1227,46 +1242,46 @@
 <context>
     <name>OpenOrienteering::EditPointTool</name>
     <message>
-        <location filename="../src/tools/edit_point_tool.cpp" line="535"/>
+        <location filename="../src/tools/edit_point_tool.cpp" line="536"/>
         <source>Snap</source>
         <comment>Snap to existing objects</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../src/tools/edit_point_tool.cpp" line="536"/>
-        <source>Point / Angle</source>
-        <comment>Modify points or use constrained angles</comment>
-        <translation type="unfinished"></translation>
+        <translation>Pieķerties</translation>
     </message>
     <message>
         <location filename="../src/tools/edit_point_tool.cpp" line="537"/>
+        <source>Point / Angle</source>
+        <comment>Modify points or use constrained angles</comment>
+        <translation>Punkts / Leņķis</translation>
+    </message>
+    <message>
+        <location filename="../src/tools/edit_point_tool.cpp" line="538"/>
         <source>Toggle dash</source>
         <comment>Toggle dash points</comment>
-        <translation type="unfinished"></translation>
+        <translation>Pārslēgt svītru</translation>
     </message>
     <message>
-        <location filename="../src/tools/edit_point_tool.cpp" line="716"/>
+        <location filename="../src/tools/edit_point_tool.cpp" line="717"/>
         <source>&lt;b&gt;%1&lt;/b&gt;: Finish editing. </source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;%1&lt;/b&gt;: Pabeigt rediģēšanu. </translation>
     </message>
     <message>
-        <location filename="../src/tools/edit_point_tool.cpp" line="735"/>
+        <location filename="../src/tools/edit_point_tool.cpp" line="736"/>
         <source>&lt;b&gt;%1&lt;/b&gt;: Keep opposite handle positions. </source>
         <extracomment>Actually, this means: &quot;Keep the opposite handle&apos;s position. &quot;</extracomment>
         <translation>&lt;b&gt;%1&lt;/b&gt;: Uzturēt punktu regulatorus opozīcijā. </translation>
     </message>
     <message>
-        <location filename="../src/tools/edit_point_tool.cpp" line="756"/>
+        <location filename="../src/tools/edit_point_tool.cpp" line="757"/>
         <source>&lt;b&gt;%1+Click&lt;/b&gt; on point: Delete it; on path: Add a new dash point; with &lt;b&gt;%2&lt;/b&gt;: Add a normal point. </source>
         <translation>&lt;b&gt;%1+Klikšķis&lt;/b&gt; uz punktu: Dzēst to; uz līniju: Pievienot jaunu mezgla punktu; ar &lt;b&gt;%2&lt;/b&gt;: Pievienot normālu punktu. </translation>
     </message>
     <message>
-        <location filename="../src/tools/edit_point_tool.cpp" line="759"/>
+        <location filename="../src/tools/edit_point_tool.cpp" line="760"/>
         <source>&lt;b&gt;%1+Click&lt;/b&gt; on point: Delete it; on path: Add a new point; with &lt;b&gt;%2&lt;/b&gt;: Add a dash point. </source>
         <translation>&lt;b&gt;%1+Klikškis&lt;/b&gt; uz punktu: Dzēst to; uz līniju: Pievienot jaunu punktu; ar &lt;b&gt;%2&lt;/b&gt;: Pievienot mezgla punktu. </translation>
     </message>
     <message>
-        <location filename="../src/tools/edit_point_tool.cpp" line="763"/>
+        <location filename="../src/tools/edit_point_tool.cpp" line="764"/>
         <source>&lt;b&gt;%1+Click&lt;/b&gt; on point to switch between dash and normal point. </source>
         <translation>&lt;b&gt;%1+Klikškis&lt;/b&gt; uz punktu, lai pārslēgtu starp mezgla punktu un normālu. </translation>
     </message>
@@ -1274,31 +1289,31 @@
 <context>
     <name>OpenOrienteering::EditTool</name>
     <message>
-        <location filename="../src/tools/edit_point_tool.cpp" line="721"/>
+        <location filename="../src/tools/edit_point_tool.cpp" line="722"/>
         <location filename="../src/tools/edit_line_tool.cpp" line="511"/>
         <source>&lt;b&gt;Coordinate offset:&lt;/b&gt; %1, %2 mm  &lt;b&gt;Distance:&lt;/b&gt; %3 m </source>
         <translation>&lt;b&gt;Koordinātu nobīde:&lt;/b&gt; %1, %2 mm  &lt;b&gt;Distance:&lt;/b&gt; %3 m </translation>
     </message>
     <message>
-        <location filename="../src/tools/edit_point_tool.cpp" line="728"/>
+        <location filename="../src/tools/edit_point_tool.cpp" line="729"/>
         <source>&lt;b&gt;%1&lt;/b&gt;: Fixed angles. </source>
         <translation>&lt;b&gt;%1&lt;/b&gt;: Fiksēti leņķi. </translation>
     </message>
     <message>
         <location filename="../src/tools/draw_text_tool.cpp" line="484"/>
-        <location filename="../src/tools/edit_point_tool.cpp" line="739"/>
+        <location filename="../src/tools/edit_point_tool.cpp" line="740"/>
         <location filename="../src/tools/edit_line_tool.cpp" line="520"/>
         <source>&lt;b&gt;%1&lt;/b&gt;: Snap to existing objects. </source>
         <translation>&lt;b&gt;%1&lt;/b&gt;: Pieķerties esošiem objektiem. </translation>
     </message>
     <message>
-        <location filename="../src/tools/edit_point_tool.cpp" line="745"/>
+        <location filename="../src/tools/edit_point_tool.cpp" line="746"/>
         <location filename="../src/tools/edit_line_tool.cpp" line="526"/>
         <source>&lt;b&gt;Click&lt;/b&gt;: Select a single object. &lt;b&gt;Drag&lt;/b&gt;: Select multiple objects. &lt;b&gt;%1+Click&lt;/b&gt;: Toggle selection. </source>
         <translation>&lt;b&gt;Klikškis&lt;/b&gt;: Atlasīt vienu objektu. &lt;b&gt;Vilkt&lt;/b&gt;: Atlasīt daudzus objektus. &lt;b&gt;%1+Klikškis&lt;/b&gt;: Pārslēgt izvēli uz pretējo. </translation>
     </message>
     <message>
-        <location filename="../src/tools/edit_point_tool.cpp" line="748"/>
+        <location filename="../src/tools/edit_point_tool.cpp" line="749"/>
         <location filename="../src/tools/edit_line_tool.cpp" line="529"/>
         <source>&lt;b&gt;%1&lt;/b&gt;: Delete selected objects. </source>
         <translation>&lt;b&gt;%1&lt;/b&gt;: Dzēst atlasītos objektus. </translation>
@@ -1338,7 +1353,7 @@
         <location filename="../src/gui/widgets/editor_settings_page.cpp" line="96"/>
         <source>mm</source>
         <comment>millimeters</comment>
-        <translation type="unfinished">mm</translation>
+        <translation>mm</translation>
     </message>
     <message>
         <location filename="../src/gui/widgets/editor_settings_page.cpp" line="60"/>
@@ -1359,7 +1374,7 @@
     <message>
         <location filename="../src/gui/widgets/editor_settings_page.cpp" line="46"/>
         <source>Symbol icon size:</source>
-        <translation type="unfinished"></translation>
+        <translation>Simbola ikonas izmērs:</translation>
     </message>
     <message>
         <location filename="../src/gui/widgets/editor_settings_page.cpp" line="65"/>
@@ -1428,7 +1443,7 @@
     <message>
         <location filename="../src/gui/widgets/editor_settings_page.cpp" line="115"/>
         <source>Editor</source>
-        <translation type="unfinished"></translation>
+        <translation>Redaktors</translation>
     </message>
 </context>
 <context>
@@ -1441,7 +1456,7 @@
     <message>
         <location filename="../src/fileformats/file_format.cpp" line="84"/>
         <source>Format (%1) does not support export</source>
-        <translation type="unfinished"></translation>
+        <translation>Formāts (%1) neatbalsta eksportu</translation>
     </message>
 </context>
 <context>
@@ -1449,39 +1464,39 @@
     <message>
         <location filename="../src/tools/fill_tool.cpp" line="156"/>
         <source>Warning</source>
-        <translation type="unfinished">Brīdinājums</translation>
+        <translation>Brīdinājums</translation>
     </message>
     <message>
         <location filename="../src/tools/fill_tool.cpp" line="157"/>
         <source>The map area is large. Use of the fill tool may be very slow. Do you want to use it anyway?</source>
-        <translation type="unfinished"></translation>
+        <translation>Kartes laukums ir liels. Aizpildījuma rīka izmantošana var būt ļoti lēna. Vai tomēr vēlaties to izmantot?</translation>
     </message>
     <message>
         <location filename="../src/tools/fill_tool.cpp" line="142"/>
         <location filename="../src/tools/fill_tool.cpp" line="176"/>
         <location filename="../src/tools/fill_tool.cpp" line="230"/>
         <source>Error</source>
-        <translation type="unfinished">Kļūda</translation>
+        <translation>Kļūda</translation>
     </message>
     <message>
         <location filename="../src/tools/fill_tool.cpp" line="143"/>
         <source>The clicked area is not bounded by lines or areas, cannot fill this area.</source>
-        <translation type="unfinished"></translation>
+        <translation>Klikšķis izdarīts zonā, kas nav ierobežota ar līnijām vai laukumiem, šādu zonu nevar aizpildīt.</translation>
     </message>
     <message>
         <location filename="../src/tools/fill_tool.cpp" line="177"/>
         <source>The clicked position is not free, cannot use the fill tool there.</source>
-        <translation type="unfinished"></translation>
+        <translation>Klikšķis ir vietā, kas nav brīva, tāpēc aizpildīšanas rīku tādā vietā nevar izmantot.</translation>
     </message>
     <message>
         <location filename="../src/tools/fill_tool.cpp" line="231"/>
         <source>Failed to create the fill object.</source>
-        <translation type="unfinished"></translation>
+        <translation>Neizdevās izveidot aizpildījuma objektu.</translation>
     </message>
     <message>
         <location filename="../src/tools/fill_tool.cpp" line="242"/>
         <source>&lt;b&gt;Click&lt;/b&gt;: Fill area with active symbol. The area to be filled must be bounded by lines or areas, other symbols are not taken into account. </source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;Klikšķis&lt;/b&gt;: Aizpildīt laukumu ar aktīvo simbolu. Aizpildāmajam laukumam jābūt ierobežotam ar līnijām vai laukumiem, citi simboli netiek ņemti vērā. </translation>
     </message>
 </context>
 <context>
@@ -1489,17 +1504,17 @@
     <message>
         <location filename="../src/sensors/gps_display.cpp" line="91"/>
         <source>GPS is disabled in the device settings. Open settings now?</source>
-        <translation type="unfinished"></translation>
+        <translation>GPS ierīces iestatījumos ir atspējots. Vai atvērt iestatījumus tagad?</translation>
     </message>
     <message>
         <location filename="../src/sensors/gps_display.cpp" line="92"/>
         <source>Yes</source>
-        <translation type="unfinished">Jā</translation>
+        <translation>Jā</translation>
     </message>
     <message>
         <location filename="../src/sensors/gps_display.cpp" line="93"/>
         <source>No</source>
-        <translation type="unfinished">Nē</translation>
+        <translation>Nē</translation>
     </message>
 </context>
 <context>
@@ -1507,42 +1522,42 @@
     <message>
         <location filename="../src/gdal/gdal_settings_page.cpp" line="50"/>
         <source>Import with GDAL/OGR:</source>
-        <translation type="unfinished"></translation>
+        <translation>Imports ar GDAL/OGR:</translation>
     </message>
     <message>
         <location filename="../src/gdal/gdal_settings_page.cpp" line="52"/>
         <source>DXF</source>
-        <translation type="unfinished"></translation>
+        <translation>DXF</translation>
     </message>
     <message>
         <location filename="../src/gdal/gdal_settings_page.cpp" line="55"/>
         <source>GPX</source>
-        <translation type="unfinished"></translation>
+        <translation>GPX</translation>
     </message>
     <message>
         <location filename="../src/gdal/gdal_settings_page.cpp" line="58"/>
         <source>OSM</source>
-        <translation type="unfinished"></translation>
+        <translation>OSM</translation>
     </message>
     <message>
         <location filename="../src/gdal/gdal_settings_page.cpp" line="62"/>
         <source>Configuration</source>
-        <translation type="unfinished">Konfigurēšana</translation>
+        <translation>Konfigurēšana</translation>
     </message>
     <message>
         <location filename="../src/gdal/gdal_settings_page.cpp" line="70"/>
         <source>Parameter</source>
-        <translation type="unfinished"></translation>
+        <translation>Parametrs</translation>
     </message>
     <message>
         <location filename="../src/gdal/gdal_settings_page.cpp" line="70"/>
         <source>Value</source>
-        <translation type="unfinished">Vērtība</translation>
+        <translation>Vērtība</translation>
     </message>
     <message>
         <location filename="../src/gdal/gdal_settings_page.cpp" line="89"/>
         <source>GDAL/OGR</source>
-        <translation type="unfinished"></translation>
+        <translation>GDAL/OGR</translation>
     </message>
 </context>
 <context>
@@ -1560,12 +1575,12 @@
     <message>
         <location filename="../src/gui/widgets/general_settings_page.cpp" line="102"/>
         <source>Screen</source>
-        <translation type="unfinished"></translation>
+        <translation>Ekrāns</translation>
     </message>
     <message>
         <location filename="../src/gui/widgets/general_settings_page.cpp" line="107"/>
         <source>Pixels per inch:</source>
-        <translation type="unfinished"></translation>
+        <translation>Punkti collā:</translation>
     </message>
     <message>
         <location filename="../src/gui/widgets/general_settings_page.cpp" line="117"/>
@@ -1575,64 +1590,64 @@
     <message>
         <location filename="../src/gui/widgets/general_settings_page.cpp" line="126"/>
         <source>Saving files</source>
-        <translation type="unfinished"></translation>
+        <translation>Datņu saglabāšana</translation>
     </message>
     <message>
         <location filename="../src/gui/widgets/general_settings_page.cpp" line="128"/>
         <source>Retain compatibility with Mapper %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Saglabā savietojamību ar Mapper %1</translation>
     </message>
     <message>
         <location filename="../src/gui/widgets/general_settings_page.cpp" line="136"/>
         <source>Save undo/redo history</source>
-        <translation type="unfinished"></translation>
+        <translation>Saglabāt atsaukšanas/atkārtošanas vēsturi</translation>
     </message>
     <message>
         <location filename="../src/gui/widgets/general_settings_page.cpp" line="139"/>
         <source>Save information for automatic recovery</source>
-        <translation type="unfinished"></translation>
+        <translation>Saglabāt automātiskās atkopšanas informāciju</translation>
     </message>
     <message>
         <location filename="../src/gui/widgets/general_settings_page.cpp" line="143"/>
         <source>Recovery information saving interval:</source>
-        <translation type="unfinished"></translation>
+        <translation>Atkopšanas informācijas saglabāšanas intervāls:</translation>
     </message>
     <message>
         <location filename="../src/gui/widgets/general_settings_page.cpp" line="142"/>
         <source>min</source>
         <comment>unit minutes</comment>
-        <translation type="unfinished"></translation>
+        <translation>min</translation>
     </message>
     <message>
         <location filename="../src/gui/widgets/general_settings_page.cpp" line="146"/>
         <source>File import and export</source>
-        <translation type="unfinished"></translation>
+        <translation>Datņu imports un eksports</translation>
     </message>
     <message>
         <location filename="../src/gui/widgets/general_settings_page.cpp" line="171"/>
         <source>8-bit encoding:</source>
-        <translation type="unfinished"></translation>
+        <translation>8-bitu kodējums:</translation>
     </message>
     <message>
         <location filename="../src/gui/widgets/general_settings_page.cpp" line="164"/>
         <location filename="../src/gui/widgets/general_settings_page.cpp" line="315"/>
         <source>More...</source>
-        <translation type="unfinished"></translation>
+        <translation>Vairāk...</translation>
     </message>
     <message>
         <location filename="../src/gui/widgets/general_settings_page.cpp" line="149"/>
         <source>Default</source>
-        <translation type="unfinished"></translation>
+        <translation>Pēc noklusējuma</translation>
     </message>
     <message>
         <location filename="../src/gui/widgets/general_settings_page.cpp" line="173"/>
         <source>Use the new OCD importer also for version 8 files</source>
-        <translation type="unfinished"></translation>
+        <translation>Izmantot jauno OCD importētāju arī 8. versijas datnēm</translation>
     </message>
     <message>
         <location filename="../src/gui/widgets/general_settings_page.cpp" line="192"/>
         <source>General</source>
-        <translation type="unfinished">Vispārīgi</translation>
+        <translation>Vispārīgi</translation>
     </message>
     <message>
         <location filename="../src/gui/widgets/general_settings_page.cpp" line="216"/>
@@ -1667,17 +1682,17 @@
     <message>
         <location filename="../src/gui/widgets/general_settings_page.cpp" line="394"/>
         <source>%1 x %2</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 x %2</translation>
     </message>
     <message>
         <location filename="../src/gui/widgets/general_settings_page.cpp" line="395"/>
         <source>Primary screen resolution in pixels:</source>
-        <translation type="unfinished"></translation>
+        <translation>Primārā ekrāna izšķirtspēja, punkti:</translation>
     </message>
     <message>
         <location filename="../src/gui/widgets/general_settings_page.cpp" line="399"/>
         <source>Primary screen size in inches (diagonal):</source>
-        <translation type="unfinished"></translation>
+        <translation>Primārā ekrāna izmērs collās (pa diagonāli):</translation>
     </message>
 </context>
 <context>
@@ -1700,7 +1715,7 @@
     <message>
         <location filename="../src/core/crs_template_implementation.cpp" line="59"/>
         <source>UTM Zone (number north/south)</source>
-        <translation type="unfinished"></translation>
+        <translation>UTM zona (numurs ziemeļi/dienvidi)</translation>
     </message>
     <message>
         <location filename="../src/core/crs_template_implementation.cpp" line="66"/>
@@ -1723,36 +1738,36 @@
         <location filename="../src/core/crs_template_implementation.cpp" line="78"/>
         <source>by EPSG code</source>
         <comment>as in: The CRS is specified by EPSG code</comment>
-        <translation type="unfinished"></translation>
+        <translation>pēc EPSG koda</translation>
     </message>
     <message>
         <location filename="../src/core/crs_template_implementation.cpp" line="80"/>
         <source>EPSG @code@ coordinates</source>
         <extracomment>Don&apos;t translate @code@. It is placeholder.</extracomment>
-        <translation type="unfinished"></translation>
+        <translation>EPSG @code@ koordinātas</translation>
     </message>
     <message>
         <location filename="../src/core/crs_template_implementation.cpp" line="91"/>
         <location filename="../src/core/georeferencing.cpp" line="562"/>
         <source>Local coordinates</source>
-        <translation type="unfinished"></translation>
+        <translation>Vietējās koordinātas</translation>
     </message>
     <message>
         <location filename="../src/core/crs_template_implementation.cpp" line="83"/>
         <source>EPSG code</source>
-        <translation type="unfinished"></translation>
+        <translation>EPSG kods</translation>
     </message>
     <message>
         <location filename="../src/core/crs_template_implementation.cpp" line="90"/>
         <source>Custom PROJ.4</source>
         <comment>PROJ.4 specification</comment>
-        <translation type="unfinished"></translation>
+        <translation>Pielāgots PROJ.4</translation>
     </message>
     <message>
         <location filename="../src/core/crs_template_implementation.cpp" line="94"/>
         <source>Specification</source>
         <comment>PROJ.4 specification</comment>
-        <translation type="unfinished"></translation>
+        <translation>Specifikācija</translation>
     </message>
     <message>
         <location filename="../src/core/georeferencing.cpp" line="258"/>
@@ -1762,7 +1777,7 @@
     <message>
         <location filename="../src/core/georeferencing.cpp" line="264"/>
         <source>Invalid grid scale factor: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Nederīgs režģa mēroga koeficients: %1</translation>
     </message>
     <message>
         <location filename="../src/core/georeferencing.cpp" line="301"/>
@@ -1827,7 +1842,7 @@
         <location filename="../src/gui/georeferencing_dialog.cpp" line="128"/>
         <source>Grid scale factor:</source>
         <extracomment>The grid scale factor is the ratio between a length in the grid plane and the corresponding length on the curved earth model. It is applied as a factor to ground distances to get grid plane distances.</extracomment>
-        <translation type="unfinished"></translation>
+        <translation>Režģa mēroga koeficients:</translation>
     </message>
     <message>
         <location filename="../src/gui/georeferencing_dialog.cpp" line="176"/>
@@ -1950,7 +1965,7 @@
         <location filename="../src/gui/georeferencing_dialog.cpp" line="207"/>
         <location filename="../src/gui/select_crs_dialog.cpp" line="93"/>
         <source>&amp;Coordinate reference system:</source>
-        <translation type="unfinished">&amp;Koordinātu references sistēma:</translation>
+        <translation>&amp;Koordinātu references sistēma:</translation>
     </message>
     <message>
         <location filename="../src/gui/georeferencing_dialog.cpp" line="214"/>
@@ -2004,7 +2019,7 @@
     <message>
         <location filename="../src/gui/georeferencing_dialog.cpp" line="528"/>
         <source>locked</source>
-        <translation type="unfinished"></translation>
+        <translation>slēgts</translation>
     </message>
     <message>
         <location filename="../src/gui/georeferencing_dialog.cpp" line="668"/>
@@ -2039,7 +2054,7 @@
     <message>
         <location filename="../src/gui/georeferencing_dialog.cpp" line="726"/>
         <source>&lt;b&gt;Click&lt;/b&gt;: Set the reference point. &lt;b&gt;Right click&lt;/b&gt;: Cancel.</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;Klikšķis&lt;/b&gt;: Iestatīt atskaites punktu. &lt;b&gt;Peles labās pogas klikšķis&lt;/b&gt;: Atcelt.</translation>
     </message>
 </context>
 <context>
@@ -2119,75 +2134,75 @@
     <message>
         <location filename="../src/gui/widgets/home_screen_widget.cpp" line="143"/>
         <source>Activities</source>
-        <translation type="unfinished">Darbības</translation>
+        <translation>Darbības</translation>
     </message>
     <message>
         <location filename="../src/gui/widgets/home_screen_widget.cpp" line="146"/>
         <source>Create a new map ...</source>
-        <translation type="unfinished">Izveidot jaunu karti...</translation>
+        <translation>Izveidot jaunu karti...</translation>
     </message>
     <message>
         <location filename="../src/gui/widgets/home_screen_widget.cpp" line="149"/>
         <source>Open map ...</source>
-        <translation type="unfinished">Atvērt karti...</translation>
+        <translation>Atvērt karti...</translation>
     </message>
     <message>
         <location filename="../src/gui/widgets/home_screen_widget.cpp" line="155"/>
         <location filename="../src/gui/widgets/home_screen_widget.cpp" line="336"/>
         <source>Settings</source>
-        <translation type="unfinished">Iestatījumi</translation>
+        <translation>Iestatījumi</translation>
     </message>
     <message>
         <location filename="../src/gui/widgets/home_screen_widget.cpp" line="158"/>
         <source>About %1</source>
         <comment>As in &apos;About OpenOrienteering Mapper&apos;</comment>
-        <translation type="unfinished">Par %1</translation>
+        <translation>Par %1</translation>
     </message>
     <message>
         <location filename="../src/gui/widgets/home_screen_widget.cpp" line="161"/>
         <location filename="../src/gui/widgets/home_screen_widget.cpp" line="338"/>
         <source>Help</source>
-        <translation type="unfinished">Palīdzība</translation>
+        <translation>Palīdzība</translation>
     </message>
     <message>
         <location filename="../src/gui/widgets/home_screen_widget.cpp" line="164"/>
         <source>Exit</source>
-        <translation type="unfinished">Iziet</translation>
+        <translation>Iziet</translation>
     </message>
     <message>
         <location filename="../src/gui/widgets/home_screen_widget.cpp" line="184"/>
         <source>Recent maps</source>
-        <translation type="unfinished">Nesenās kartes</translation>
+        <translation>Nesenās kartes</translation>
     </message>
     <message>
         <location filename="../src/gui/widgets/home_screen_widget.cpp" line="209"/>
         <source>Open most recently used file on start</source>
-        <translation type="unfinished">Startējot, atvērt nesen izmantoto datni</translation>
+        <translation>Startējot, atvērt pēdējo izmantoto datni</translation>
     </message>
     <message>
         <location filename="../src/gui/widgets/home_screen_widget.cpp" line="212"/>
         <source>Clear list</source>
-        <translation type="unfinished">Dzēst sarakstu</translation>
+        <translation>Dzēst sarakstu</translation>
     </message>
     <message>
         <location filename="../src/gui/widgets/home_screen_widget.cpp" line="231"/>
         <source>Tip of the day</source>
-        <translation type="unfinished">Dienas padoms</translation>
+        <translation>Dienas padoms</translation>
     </message>
     <message>
         <location filename="../src/gui/widgets/home_screen_widget.cpp" line="236"/>
         <source>Show tip of the day</source>
-        <translation type="unfinished">Rādīt dienas padomu</translation>
+        <translation>Rādīt dienas padomu</translation>
     </message>
     <message>
         <location filename="../src/gui/widgets/home_screen_widget.cpp" line="240"/>
         <source>Previous</source>
-        <translation type="unfinished">Iepriekšējais</translation>
+        <translation>Iepriekšējais</translation>
     </message>
     <message>
         <location filename="../src/gui/widgets/home_screen_widget.cpp" line="242"/>
         <source>Next</source>
-        <translation type="unfinished">Nākošais</translation>
+        <translation>Nākošais</translation>
     </message>
 </context>
 <context>
@@ -2195,22 +2210,22 @@
     <message>
         <location filename="../src/gui/widgets/home_screen_widget.cpp" line="334"/>
         <source>Examples</source>
-        <translation type="unfinished"></translation>
+        <translation>Piemēri</translation>
     </message>
     <message>
         <location filename="../src/gui/widgets/home_screen_widget.cpp" line="340"/>
         <source>About Mapper</source>
-        <translation type="unfinished"></translation>
+        <translation>Par Mapper</translation>
     </message>
     <message>
         <location filename="../src/gui/widgets/home_screen_widget.cpp" line="461"/>
         <source>File list</source>
-        <translation type="unfinished"></translation>
+        <translation>Datņu saraksts</translation>
     </message>
     <message>
         <location filename="../src/gui/widgets/home_screen_widget.cpp" line="545"/>
         <source>No map files found!&lt;br/&gt;&lt;br/&gt;Copy map files to a top-level folder named &apos;OOMapper&apos; on the device or a memory card.</source>
-        <translation type="unfinished"></translation>
+        <translation>Nav atrastas karšu datnes! &lt;br/&gt; &lt;br/&gt; Kopēt karšu datnes augstākā līmeņa mapē ar nosaukumu &quot;OOMapper&quot; uz ierīci vai atmiņas karti.</translation>
     </message>
 </context>
 <context>
@@ -2228,29 +2243,29 @@
     <message>
         <location filename="../src/core/symbols/symbol.cpp" line="303"/>
         <source>Error while loading a symbol of type %1 at line %2 column %3: %4</source>
-        <translation type="unfinished"></translation>
+        <translation>Kļūda, ielādējot %1 tipa simbolu %2 līnijā %3 kolonnā: %4</translation>
     </message>
     <message>
         <source>Error while loading a symbol.</source>
         <translation type="vanished">Kļūda, ielasot simbolu.</translation>
     </message>
     <message>
-        <location filename="../src/core/objects/object.cpp" line="409"/>
+        <location filename="../src/core/objects/object.cpp" line="439"/>
         <source>Error while loading an object of type %1.</source>
         <translation>Kļūda, ielasot %1 tipa objektu.</translation>
     </message>
     <message>
-        <location filename="../src/core/objects/object.cpp" line="473"/>
+        <location filename="../src/core/objects/object.cpp" line="512"/>
         <source>Error while loading an object of type %1 at %2:%3: %4</source>
-        <translation type="unfinished"></translation>
+        <translation>Kļūda, ielādējot %1 tipa objektu uz %2:%3: %4</translation>
     </message>
     <message>
-        <location filename="../src/core/objects/object.cpp" line="441"/>
+        <location filename="../src/core/objects/object.cpp" line="471"/>
         <source>Unable to find symbol for object at %1:%2.</source>
         <translation>Neizdevās atrast simbolu objektam pozīcijā %1:%2.</translation>
     </message>
     <message>
-        <location filename="../src/core/objects/object.cpp" line="453"/>
+        <location filename="../src/core/objects/object.cpp" line="483"/>
         <source>Point object with undefined or wrong symbol at %1:%2.</source>
         <translation>Punktveida objekts ar nedefinētu vai nepareizu simbolu pozīcijā %1:%2.</translation>
     </message>
@@ -2268,40 +2283,43 @@
     <message>
         <location filename="../src/fileformats/ocd_file_format.cpp" line="40"/>
         <source>OCAD</source>
-        <translation type="unfinished"></translation>
+        <translation>OCAD</translation>
     </message>
     <message>
-        <location filename="../src/util/xml_stream_util.cpp" line="201"/>
-        <location filename="../src/util/xml_stream_util.cpp" line="217"/>
+        <location filename="../src/util/xml_stream_util.cpp" line="202"/>
+        <location filename="../src/util/xml_stream_util.cpp" line="218"/>
+        <location filename="../src/util/xml_stream_util.cpp" line="265"/>
+        <location filename="../src/util/xml_stream_util.cpp" line="287"/>
         <source>Could not parse the coordinates.</source>
-        <translation type="unfinished"></translation>
+        <translation>Nevarēja nolasīt koordinātas.</translation>
     </message>
     <message>
-        <location filename="../src/util/xml_stream_util.cpp" line="241"/>
+        <location filename="../src/util/xml_stream_util.cpp" line="242"/>
+        <location filename="../src/util/xml_stream_util.cpp" line="317"/>
         <source>Expected %1 coordinates, found %2.</source>
-        <translation type="unfinished"></translation>
+        <translation>Paredzamas %1 koordinātas, konstatēts %2.</translation>
     </message>
     <message>
         <location filename="../src/fileformats/xml_file_format.cpp" line="981"/>
         <source>Error while loading the printing configuration at %1:%2: %3</source>
-        <translation type="unfinished"></translation>
+        <translation>Kļūda, ielādējot drukāšanas konfigurācijas %1:%2: %3</translation>
     </message>
     <message>
         <location filename="../src/fileformats/xml_file_format.cpp" line="1000"/>
         <location filename="../src/fileformats/xml_file_format.cpp" line="1020"/>
         <source>Error while loading the undo/redo steps at %1:%2: %3</source>
-        <translation type="unfinished"></translation>
+        <translation>Kļūda, ielādējot atsaukt/atkārtot darbības soļus %1: %2: %3</translation>
     </message>
     <message>
         <location filename="../src/fileformats/file_import_export.cpp" line="47"/>
         <source>No such option: %1</source>
         <comment>No such import / export option</comment>
-        <translation type="unfinished"></translation>
+        <translation>Šāda iespēja nepastāv: %1</translation>
     </message>
     <message>
         <location filename="../src/gdal/ogr_file_format.cpp" line="295"/>
         <source>Geospatial vector data</source>
-        <translation type="unfinished"></translation>
+        <translation>Ģeotelpisko vektoru dati</translation>
     </message>
 </context>
 <context>
@@ -2314,10 +2332,10 @@
     <message numerus="yes">
         <location filename="../src/fileformats/file_import_export.cpp" line="105"/>
         <source>Dropped %n irregular object(s).</source>
-        <translation type="unfinished">
-            <numerusform></numerusform>
-            <numerusform></numerusform>
-            <numerusform></numerusform>
+        <translation>
+            <numerusform>Atmesti %n neregulāri objekti.</numerusform>
+            <numerusform>Atmests %n neregulārs objekts.</numerusform>
+            <numerusform>Atmesti %n neregulāri objekti.</numerusform>
         </translation>
     </message>
     <message>
@@ -2334,24 +2352,25 @@
         <location filename="../src/fileformats/file_import_export.cpp" line="131"/>
         <location filename="../src/gui/widgets/template_list_widget.cpp" line="708"/>
         <source>Failed to load template &apos;%1&apos;, reason: %2</source>
-        <translation type="unfinished"></translation>
+        <translation>Neizdevās ielasīt veidni &apos;%1&apos;, iemesls: %2</translation>
     </message>
     <message>
         <location filename="../src/fileformats/file_import_export.cpp" line="148"/>
         <source>Warnings when loading template &apos;%1&apos;:
 %2</source>
-        <translation type="unfinished"></translation>
+        <translation>Brīdinājumi, ielasot veidni &apos;%1&apos;:
+%2</translation>
     </message>
     <message>
         <location filename="../src/fileformats/file_import_export.cpp" line="158"/>
         <location filename="../src/fileformats/file_import_export.cpp" line="160"/>
         <source>At least one template file could not be found.</source>
-        <translation type="unfinished"></translation>
+        <translation>Vismaz vienu veidnes datni nevar atrast.</translation>
     </message>
     <message>
         <location filename="../src/fileformats/file_import_export.cpp" line="161"/>
         <source>Click the red template name(s) in the Templates -&gt; Template setup window to locate the template file name(s).</source>
-        <translation type="unfinished"></translation>
+        <translation>Noklikšķiniet uz sarkano veidnes nosaukumu(-iem) Veidnes -&gt; Veidnes iestatīšanas logs izvēlnē, lai atrastu veidnes datnes nosaukumu(-us).</translation>
     </message>
     <message>
         <source>At least one template file could not be found. Click the red template name(s) in the Templates -&gt; Template setup window to locate the template file name(s).</source>
@@ -2360,7 +2379,7 @@
     <message>
         <location filename="../src/fileformats/native_file_format.cpp" line="126"/>
         <source>This file uses an obsolete format. Support for this format is to be removed from this program soon. To be able to open the file in the future, save it again.</source>
-        <translation type="unfinished"></translation>
+        <translation>Šī datne izmanto novecojušu formātu. Šī formāta atbalsts programmā drīz tiks atcelts. Lai varētu atvērt datni nākotnē, nepieciešams saglabāt to vēlreiz.</translation>
     </message>
     <message>
         <location filename="../src/fileformats/native_file_format.cpp" line="139"/>
@@ -2413,10 +2432,10 @@
         <location filename="../src/fileformats/ocad8_file_format.cpp" line="120"/>
         <location filename="../src/fileformats/ocad8_file_format.cpp" line="122"/>
         <location filename="../src/fileformats/ocad8_file_format.cpp" line="125"/>
-        <location filename="../src/fileformats/ocd_file_import.cpp" line="2066"/>
-        <location filename="../src/fileformats/ocd_file_import.cpp" line="2069"/>
-        <location filename="../src/fileformats/ocd_file_import.cpp" line="2073"/>
-        <location filename="../src/fileformats/ocd_file_import.cpp" line="2103"/>
+        <location filename="../src/fileformats/ocd_file_import.cpp" line="2092"/>
+        <location filename="../src/fileformats/ocd_file_import.cpp" line="2095"/>
+        <location filename="../src/fileformats/ocd_file_import.cpp" line="2099"/>
+        <location filename="../src/fileformats/ocd_file_import.cpp" line="2129"/>
         <source>Could not read file: %1</source>
         <translation>Nevar ielasīt datni: %1</translation>
     </message>
@@ -2433,14 +2452,14 @@
     <message>
         <location filename="../src/fileformats/file_format.cpp" line="76"/>
         <source>Format (%1) does not support import</source>
-        <translation type="unfinished"></translation>
+        <translation>Formāts (%1) neatbalsta importu</translation>
     </message>
     <message>
         <location filename="../src/gdal/ogr_file_format.cpp" line="416"/>
-        <location filename="../src/gdal/ogr_file_format.cpp" line="1285"/>
-        <location filename="../src/gdal/ogr_file_format.cpp" line="1338"/>
+        <location filename="../src/gdal/ogr_file_format.cpp" line="1303"/>
+        <location filename="../src/gdal/ogr_file_format.cpp" line="1356"/>
         <source>Could not read &apos;%1&apos;: %2</source>
-        <translation type="unfinished"></translation>
+        <translation>Nevar ielasīt &apos;%1&apos;:%2</translation>
     </message>
 </context>
 <context>
@@ -2690,7 +2709,7 @@
     <message>
         <location filename="../src/gui/symbols/line_symbol_settings.cpp" line="286"/>
         <source>Scale the dash symbol at corners</source>
-        <translation type="unfinished"></translation>
+        <translation>Mērogot svītras simbolu stūros</translation>
     </message>
     <message>
         <location filename="../src/gui/symbols/line_symbol_settings.cpp" line="531"/>
@@ -2726,143 +2745,143 @@
 <context>
     <name>OpenOrienteering::MainWindow</name>
     <message>
-        <location filename="../src/gui/main_window.cpp" line="273"/>
+        <location filename="../src/gui/main_window.cpp" line="294"/>
         <source>&amp;New</source>
         <translation>&amp;Jauns</translation>
     </message>
     <message>
-        <location filename="../src/gui/main_window.cpp" line="275"/>
+        <location filename="../src/gui/main_window.cpp" line="296"/>
         <source>Create a new map</source>
         <translation>Izveidot jaunu karti</translation>
     </message>
     <message>
-        <location filename="../src/gui/main_window.cpp" line="279"/>
+        <location filename="../src/gui/main_window.cpp" line="300"/>
         <source>&amp;Open...</source>
         <translation>&amp;Atvērt...</translation>
     </message>
     <message>
-        <location filename="../src/gui/main_window.cpp" line="281"/>
+        <location filename="../src/gui/main_window.cpp" line="302"/>
         <source>Open an existing file</source>
         <translation>Atvērt eksistējošu datni</translation>
     </message>
     <message>
-        <location filename="../src/gui/main_window.cpp" line="285"/>
+        <location filename="../src/gui/main_window.cpp" line="306"/>
         <source>Open &amp;recent</source>
         <translation>Atvērt &amp;nesen izmantoto</translation>
     </message>
     <message>
-        <location filename="../src/gui/main_window.cpp" line="296"/>
+        <location filename="../src/gui/main_window.cpp" line="317"/>
         <source>&amp;Save</source>
         <translation>&amp;Saglabāt</translation>
     </message>
     <message>
-        <location filename="../src/gui/main_window.cpp" line="301"/>
+        <location filename="../src/gui/main_window.cpp" line="322"/>
         <source>Save &amp;as...</source>
         <translation>Saglabāt &amp;kā...</translation>
     </message>
     <message>
-        <location filename="../src/gui/main_window.cpp" line="303"/>
+        <location filename="../src/gui/main_window.cpp" line="324"/>
         <source>Ctrl+Shift+S</source>
         <translation>Ctrl+Shift+S</translation>
     </message>
     <message>
-        <location filename="../src/gui/main_window.cpp" line="309"/>
+        <location filename="../src/gui/main_window.cpp" line="330"/>
         <source>Settings...</source>
         <translation>Iestatījumi...</translation>
     </message>
     <message>
-        <location filename="../src/gui/main_window.cpp" line="314"/>
+        <location filename="../src/gui/main_window.cpp" line="335"/>
         <location filename="../src/gui/widgets/template_list_widget.cpp" line="107"/>
         <source>Close</source>
         <translation>Aizvērt</translation>
     </message>
     <message>
-        <location filename="../src/gui/main_window.cpp" line="316"/>
+        <location filename="../src/gui/main_window.cpp" line="337"/>
         <source>Close this file</source>
         <translation>Aizvērt šo datni</translation>
     </message>
     <message>
-        <location filename="../src/gui/main_window.cpp" line="320"/>
+        <location filename="../src/gui/main_window.cpp" line="341"/>
         <source>E&amp;xit</source>
         <translation>I&amp;ziet</translation>
     </message>
     <message>
-        <location filename="../src/gui/main_window.cpp" line="322"/>
+        <location filename="../src/gui/main_window.cpp" line="343"/>
         <source>Exit the application</source>
         <translation>Iziet no programmas</translation>
     </message>
     <message>
-        <location filename="../src/gui/main_window.cpp" line="329"/>
+        <location filename="../src/gui/main_window.cpp" line="350"/>
         <source>&amp;File</source>
         <translation>&amp;Datne</translation>
     </message>
     <message>
-        <location filename="../src/gui/main_window.cpp" line="348"/>
+        <location filename="../src/gui/main_window.cpp" line="369"/>
         <source>General</source>
         <translation>Vispārīgi</translation>
     </message>
     <message>
-        <location filename="../src/gui/main_window.cpp" line="363"/>
+        <location filename="../src/gui/main_window.cpp" line="384"/>
         <source>Open &amp;Manual</source>
         <translation>Atvērt &amp;Rokasgrāmatu</translation>
     </message>
     <message>
-        <location filename="../src/gui/main_window.cpp" line="364"/>
+        <location filename="../src/gui/main_window.cpp" line="385"/>
         <source>Show the help file for this application</source>
         <translation>Parādīt palīdzības tekstu šai programmai</translation>
     </message>
     <message>
-        <location filename="../src/gui/main_window.cpp" line="368"/>
+        <location filename="../src/gui/main_window.cpp" line="389"/>
         <source>&amp;About %1</source>
         <translation>&amp;Par %1</translation>
     </message>
     <message>
-        <location filename="../src/gui/main_window.cpp" line="369"/>
+        <location filename="../src/gui/main_window.cpp" line="390"/>
         <source>Show information about this application</source>
         <translation>Parādit informāciju par šo programmu</translation>
     </message>
     <message>
-        <location filename="../src/gui/main_window.cpp" line="373"/>
+        <location filename="../src/gui/main_window.cpp" line="394"/>
         <source>About &amp;Qt</source>
         <translation>Par &amp;Qt</translation>
     </message>
     <message>
-        <location filename="../src/gui/main_window.cpp" line="374"/>
+        <location filename="../src/gui/main_window.cpp" line="395"/>
         <source>Show information about Qt</source>
         <translation>Parādit informāciju par Qt</translation>
     </message>
     <message>
-        <location filename="../src/gui/main_window.cpp" line="380"/>
+        <location filename="../src/gui/main_window.cpp" line="401"/>
         <source>&amp;Help</source>
         <translation>&amp;Palīdzība</translation>
     </message>
     <message>
-        <location filename="../src/gui/main_window.cpp" line="564"/>
+        <location filename="../src/gui/main_window.cpp" line="585"/>
         <source>Do you want to remove the autosaved version?</source>
-        <translation type="unfinished"></translation>
+        <translation>Vai vēlies atmest automātiski saglabāto versiju?</translation>
     </message>
     <message>
-        <location filename="../src/gui/main_window.cpp" line="570"/>
+        <location filename="../src/gui/main_window.cpp" line="591"/>
         <source>The file has been modified.
 Do you want to save your changes?</source>
         <translation>Datne ir modificēta.
 Vai vēlies saglabāt izmaiņas?</translation>
     </message>
     <message>
-        <location filename="../src/gui/main_window.cpp" line="401"/>
-        <location filename="../src/gui/main_window.cpp" line="712"/>
+        <location filename="../src/gui/main_window.cpp" line="422"/>
+        <location filename="../src/gui/main_window.cpp" line="733"/>
         <source>Unsaved file</source>
         <translation>Nesaglabāta datne</translation>
     </message>
     <message>
-        <location filename="../src/gui/main_window.cpp" line="684"/>
-        <location filename="../src/gui/main_window.cpp" line="979"/>
+        <location filename="../src/gui/main_window.cpp" line="705"/>
+        <location filename="../src/gui/main_window.cpp" line="1000"/>
         <location filename="../src/gui/widgets/home_screen_widget.cpp" line="445"/>
         <source>Warning</source>
         <translation>Brīdinājums</translation>
     </message>
     <message>
-        <location filename="../src/gui/main_window.cpp" line="684"/>
+        <location filename="../src/gui/main_window.cpp" line="705"/>
         <source>The selected map scale is 1:%1, but the chosen symbol set has a nominal scale of 1:%2.
 
 Do you want to scale the symbols to the selected scale?</source>
@@ -2871,60 +2890,60 @@ Do you want to scale the symbols to the selected scale?</source>
 Vai vēlies mērogot simbolus līdz atlasītajam mērogam?</translation>
     </message>
     <message>
-        <location filename="../src/gui/main_window.cpp" line="754"/>
+        <location filename="../src/gui/main_window.cpp" line="775"/>
         <source>Crash warning</source>
         <translation>Avārijas brīdinājums</translation>
     </message>
     <message>
-        <location filename="../src/gui/main_window.cpp" line="755"/>
+        <location filename="../src/gui/main_window.cpp" line="776"/>
         <source>It seems that %1 crashed the last time this file was opened:&lt;br /&gt;&lt;tt&gt;%2&lt;/tt&gt;&lt;br /&gt;&lt;br /&gt;Really retry to open it?</source>
         <translation>Izskatās, ka %1 avarēja, kad iepriekšējo reizi tika atvērts:&lt;br /&gt;&lt;tt&gt;%2&lt;/tt&gt;&lt;br /&gt;&lt;br /&gt;Vai tiešām vērsim vaļā?</translation>
     </message>
     <message>
-        <location filename="../src/gui/main_window.cpp" line="946"/>
+        <location filename="../src/gui/main_window.cpp" line="967"/>
         <source>Autosaving...</source>
-        <translation type="unfinished"></translation>
+        <translation>Autosaglabāšana...</translation>
     </message>
     <message>
-        <location filename="../src/gui/main_window.cpp" line="956"/>
+        <location filename="../src/gui/main_window.cpp" line="977"/>
         <source>Autosaving failed!</source>
-        <translation type="unfinished"></translation>
+        <translation>Neizdevās automātiski saglabāt!</translation>
     </message>
     <message>
-        <location filename="../src/gui/main_window.cpp" line="1031"/>
+        <location filename="../src/gui/main_window.cpp" line="1052"/>
         <source>All maps</source>
         <translation>Visas kartes</translation>
     </message>
     <message>
-        <location filename="../src/gui/main_window.cpp" line="1035"/>
+        <location filename="../src/gui/main_window.cpp" line="1056"/>
         <source>All files</source>
         <translation>Visas datnes</translation>
     </message>
     <message>
-        <location filename="../src/gui/main_window.cpp" line="723"/>
+        <location filename="../src/gui/main_window.cpp" line="744"/>
         <source>Open file</source>
         <translation>Atvērt datni</translation>
     </message>
     <message>
         <location filename="../src/gui/main_window.cpp" line="155"/>
         <source>You must close the current file before you can open another one.</source>
-        <translation type="unfinished"></translation>
+        <translation>Ir jāaizver pašreizējo datni, pirms atvērt citu.</translation>
     </message>
     <message>
-        <location filename="../src/gui/main_window.cpp" line="735"/>
+        <location filename="../src/gui/main_window.cpp" line="756"/>
         <location filename="../src/gui/widgets/template_list_widget.cpp" line="693"/>
         <source>Opening %1</source>
         <translation>Atver %1</translation>
     </message>
     <message>
-        <location filename="../src/gui/main_window.cpp" line="771"/>
-        <location filename="../src/gui/main_window.cpp" line="1091"/>
+        <location filename="../src/gui/main_window.cpp" line="792"/>
+        <location filename="../src/gui/main_window.cpp" line="1112"/>
         <location filename="../src/gui/widgets/template_list_widget.cpp" line="707"/>
         <source>Error</source>
         <translation>Kļūda</translation>
     </message>
     <message>
-        <location filename="../src/gui/main_window.cpp" line="771"/>
+        <location filename="../src/gui/main_window.cpp" line="792"/>
         <source>Cannot open file:
 %1
 
@@ -2935,18 +2954,19 @@ File format not recognized.</source>
 Datnes formāts ir neatpazīstams.</translation>
     </message>
     <message>
-        <location filename="../src/gui/main_window.cpp" line="848"/>
+        <location filename="../src/gui/main_window.cpp" line="869"/>
         <source>The file has been modified.
 Do you want to discard your changes?</source>
-        <translation type="unfinished"></translation>
+        <translation>Datne ir mainīta.
+Vai vēlies atmest izmaiņas?</translation>
     </message>
     <message>
-        <location filename="../src/gui/main_window.cpp" line="899"/>
+        <location filename="../src/gui/main_window.cpp" line="920"/>
         <source>&amp;%1 %2</source>
         <translation>&amp;%1 %2</translation>
     </message>
     <message>
-        <location filename="../src/gui/main_window.cpp" line="978"/>
+        <location filename="../src/gui/main_window.cpp" line="999"/>
         <source>This map is being saved as a &quot;%1&quot; file. Information may be lost.
 
 Press Yes to save in this format.
@@ -2957,22 +2977,22 @@ Spied Yes, lai saglabātu šajā formātā.
 Spied No, lai izvēlētos citu formātu.</translation>
     </message>
     <message>
-        <location filename="../src/gui/main_window.cpp" line="1071"/>
+        <location filename="../src/gui/main_window.cpp" line="1092"/>
         <source>Save file</source>
         <translation>Saglabāt datni</translation>
     </message>
     <message>
-        <location filename="../src/gui/main_window.cpp" line="1092"/>
+        <location filename="../src/gui/main_window.cpp" line="1113"/>
         <source>File could not be saved:</source>
         <translation>Datni nevar saglabāt:</translation>
     </message>
     <message>
-        <location filename="../src/gui/main_window.cpp" line="1093"/>
+        <location filename="../src/gui/main_window.cpp" line="1114"/>
         <source>There was a problem in determining the file format.</source>
         <translation>Radās problēma, nosakot datnes formātu.</translation>
     </message>
     <message>
-        <location filename="../src/gui/main_window.cpp" line="1094"/>
+        <location filename="../src/gui/main_window.cpp" line="1115"/>
         <source>Please report this as a bug.</source>
         <translation>Lūdzam ziņot par to kā par kļūdu.</translation>
     </message>
@@ -2980,21 +3000,22 @@ Spied No, lai izvēlētos citu formātu.</translation>
 <context>
     <name>OpenOrienteering::Map</name>
     <message>
-        <location filename="../src/core/map.cpp" line="665"/>
-        <location filename="../src/core/map.cpp" line="670"/>
-        <location filename="../src/core/map.cpp" line="688"/>
-        <location filename="../src/core/map.cpp" line="699"/>
-        <location filename="../src/core/map.cpp" line="723"/>
-        <location filename="../src/core/map.cpp" line="800"/>
-        <location filename="../src/core/map.cpp" line="828"/>
-        <location filename="../src/gui/map/map_editor.cpp" line="3952"/>
+        <location filename="../src/core/map.cpp" line="669"/>
+        <location filename="../src/core/map.cpp" line="674"/>
+        <location filename="../src/core/map.cpp" line="692"/>
+        <location filename="../src/core/map.cpp" line="703"/>
+        <location filename="../src/core/map.cpp" line="727"/>
+        <location filename="../src/core/map.cpp" line="804"/>
+        <location filename="../src/core/map.cpp" line="832"/>
+        <location filename="../src/gui/map/map_editor.cpp" line="3957"/>
         <location filename="../src/gui/symbols/replace_symbol_set_dialog.cpp" line="287"/>
         <location filename="../src/gui/symbols/replace_symbol_set_dialog.cpp" line="345"/>
+        <location filename="../src/templates/template_tool_paint.cpp" line="522"/>
         <source>Error</source>
         <translation>Kļūda</translation>
     </message>
     <message>
-        <location filename="../src/core/map.cpp" line="670"/>
+        <location filename="../src/core/map.cpp" line="674"/>
         <source>Cannot export the map as
 &quot;%1&quot;
 because saving as %2 (.%3) is not supported.</source>
@@ -3003,7 +3024,7 @@ because saving as %2 (.%3) is not supported.</source>
 jo saglabāšana kā %2 (.%3) netiek atbalstīta.</translation>
     </message>
     <message>
-        <location filename="../src/core/map.cpp" line="665"/>
+        <location filename="../src/core/map.cpp" line="669"/>
         <source>Cannot export the map as
 &quot;%1&quot;
 because the format is unknown.</source>
@@ -3018,31 +3039,31 @@ jo formāts ir nezināms.</translation>
 %1</translation>
     </message>
     <message>
-        <location filename="../src/core/map.cpp" line="706"/>
-        <location filename="../src/core/map.cpp" line="768"/>
+        <location filename="../src/core/map.cpp" line="710"/>
+        <location filename="../src/core/map.cpp" line="772"/>
         <source>Warning</source>
         <translation>Brīdinājums</translation>
     </message>
     <message>
-        <location filename="../src/core/map.cpp" line="707"/>
+        <location filename="../src/core/map.cpp" line="711"/>
         <source>The map export generated warnings.</source>
         <translation>Kartes eksportā izveidotie brīdinājumi.</translation>
     </message>
     <message>
-        <location filename="../src/core/map.cpp" line="688"/>
+        <location filename="../src/core/map.cpp" line="692"/>
         <source>Internal error while saving:
 %1</source>
         <translation>Iekšēja kļūda, saglabājot:
 %1</translation>
     </message>
     <message>
-        <location filename="../src/core/map.cpp" line="769"/>
+        <location filename="../src/core/map.cpp" line="773"/>
         <source>The map import generated warnings.</source>
         <translation>Kartes importā izveidotie brīdinājumi.</translation>
     </message>
     <message>
-        <location filename="../src/core/map.cpp" line="724"/>
-        <location filename="../src/gui/map/map_editor.cpp" line="3953"/>
+        <location filename="../src/core/map.cpp" line="728"/>
+        <location filename="../src/gui/map/map_editor.cpp" line="3958"/>
         <source>Cannot open file:
 %1
 for reading.</source>
@@ -3051,12 +3072,12 @@ for reading.</source>
 lasīšanai.</translation>
     </message>
     <message>
-        <location filename="../src/core/map.cpp" line="738"/>
+        <location filename="../src/core/map.cpp" line="742"/>
         <source>Invalid file type.</source>
         <translation>Nepieļaujams datnes tips.</translation>
     </message>
     <message>
-        <location filename="../src/core/map.cpp" line="801"/>
+        <location filename="../src/core/map.cpp" line="805"/>
         <source>Cannot open file:
 %1
 
@@ -3067,24 +3088,27 @@ lasīšanai.</translation>
 %2</translation>
     </message>
     <message>
-        <location filename="../src/core/map.cpp" line="700"/>
+        <location filename="../src/core/map.cpp" line="704"/>
+        <location filename="../src/templates/template_tool_paint.cpp" line="565"/>
         <source>Cannot save file
 %1:
 %2</source>
-        <translation type="unfinished"></translation>
+        <translation>Nevar saglabāt datni
+%1:
+%2</translation>
     </message>
     <message>
-        <location filename="../src/core/map.cpp" line="828"/>
+        <location filename="../src/core/map.cpp" line="832"/>
         <source>Nothing to import.</source>
         <translation>Nav ko importēt.</translation>
     </message>
     <message>
-        <location filename="../src/core/map.cpp" line="837"/>
+        <location filename="../src/core/map.cpp" line="841"/>
         <source>Question</source>
         <translation>Jautājums</translation>
     </message>
     <message>
-        <location filename="../src/core/map.cpp" line="838"/>
+        <location filename="../src/core/map.cpp" line="842"/>
         <source>The scale of the imported data is 1:%1 which is different from this map&apos;s scale of 1:%2.
 
 Rescale the imported data?</source>
@@ -3093,7 +3117,7 @@ Rescale the imported data?</source>
 Mainīt importējamo datu mērogu?</translation>
     </message>
     <message>
-        <location filename="../src/core/map.cpp" line="500"/>
+        <location filename="../src/core/map.cpp" line="504"/>
         <source>default part</source>
         <translation>noklusējuma daļa</translation>
     </message>
@@ -3104,15 +3128,16 @@ Mainīt importējamo datu mērogu?</translation>
         <translation>Jauna krāsa</translation>
     </message>
     <message>
-        <location filename="../src/gui/map/map_editor.cpp" line="3959"/>
+        <location filename="../src/gui/map/map_editor.cpp" line="3964"/>
         <source>Import...</source>
-        <translation type="unfinished">Importēt...</translation>
+        <translation>Importēt...</translation>
     </message>
     <message>
-        <location filename="../src/gui/map/map_editor.cpp" line="3960"/>
+        <location filename="../src/gui/map/map_editor.cpp" line="3965"/>
         <source>Symbol replacement was canceled.
 Import the data anyway?</source>
-        <translation type="unfinished"></translation>
+        <translation>Simbola aizvietošana tika atcelta.
+Vai tomēr importēt datus?</translation>
     </message>
 </context>
 <context>
@@ -3120,7 +3145,7 @@ Import the data anyway?</source>
     <message>
         <location filename="../src/core/map_color.cpp" line="79"/>
         <source>Registration black (all printed colors)</source>
-        <translation type="unfinished"></translation>
+        <translation>Reģistrācijas melna (visas izdrukas krāsas)</translation>
     </message>
 </context>
 <context>
@@ -3128,65 +3153,65 @@ Import the data anyway?</source>
     <message>
         <location filename="../src/core/map_coord.cpp" line="182"/>
         <source>Coordinates are out-of-bounds.</source>
-        <translation type="unfinished"></translation>
+        <translation>Koordinātas ir ārpus robežām.</translation>
     </message>
 </context>
 <context>
     <name>OpenOrienteering::MapEditorController</name>
     <message>
-        <location filename="../src/gui/map/map_editor.cpp" line="845"/>
+        <location filename="../src/gui/map/map_editor.cpp" line="846"/>
         <source>Print...</source>
         <translation>Drukāt...</translation>
     </message>
     <message>
-        <location filename="../src/gui/map/map_editor.cpp" line="857"/>
+        <location filename="../src/gui/map/map_editor.cpp" line="858"/>
         <source>Undo</source>
         <translation>Atsaukt</translation>
     </message>
     <message>
-        <location filename="../src/gui/map/map_editor.cpp" line="857"/>
+        <location filename="../src/gui/map/map_editor.cpp" line="858"/>
         <source>Undo the last step</source>
         <translation>Atsaukt pēdējo soli</translation>
     </message>
     <message>
-        <location filename="../src/gui/map/map_editor.cpp" line="858"/>
+        <location filename="../src/gui/map/map_editor.cpp" line="859"/>
         <source>Redo</source>
         <translation>Izdarīt atkārtoti</translation>
     </message>
     <message>
-        <location filename="../src/gui/map/map_editor.cpp" line="858"/>
+        <location filename="../src/gui/map/map_editor.cpp" line="859"/>
         <source>Redo the last step</source>
         <translation>Izdarīt atkārtoti pēdējo soli</translation>
     </message>
     <message>
-        <location filename="../src/gui/map/map_editor.cpp" line="859"/>
+        <location filename="../src/gui/map/map_editor.cpp" line="860"/>
         <source>Cu&amp;t</source>
         <translation>Griez&amp;t</translation>
     </message>
     <message>
-        <location filename="../src/gui/map/map_editor.cpp" line="860"/>
+        <location filename="../src/gui/map/map_editor.cpp" line="861"/>
         <source>C&amp;opy</source>
         <translation>K&amp;opēt</translation>
     </message>
     <message>
-        <location filename="../src/gui/map/map_editor.cpp" line="861"/>
+        <location filename="../src/gui/map/map_editor.cpp" line="862"/>
         <source>&amp;Paste</source>
         <translation>&amp;Ielīmēt</translation>
     </message>
     <message>
-        <location filename="../src/gui/map/map_editor.cpp" line="863"/>
-        <source>Select all</source>
-        <translation type="unfinished">Atlasīt visu</translation>
-    </message>
-    <message>
         <location filename="../src/gui/map/map_editor.cpp" line="864"/>
-        <source>Select nothing</source>
-        <translation type="unfinished"></translation>
+        <source>Select all</source>
+        <translation>Atlasīt visu</translation>
     </message>
     <message>
         <location filename="../src/gui/map/map_editor.cpp" line="865"/>
+        <source>Select nothing</source>
+        <translation>Neko neatlasīt</translation>
+    </message>
+    <message>
+        <location filename="../src/gui/map/map_editor.cpp" line="866"/>
         <source>Invert selection</source>
-        <translation type="unfinished">Invertēt atlasi</translation>
+        <translation>Invertēt atlasi</translation>
     </message>
     <message>
         <location filename="../src/gui/map/map_editor.cpp" line="877"/>
@@ -3343,44 +3368,44 @@ Import the data anyway?</source>
         <translation>Mērīt garumus un laukumus</translation>
     </message>
     <message>
-        <location filename="../src/gui/map/map_editor.cpp" line="982"/>
+        <location filename="../src/gui/map/map_editor.cpp" line="980"/>
         <source>Import...</source>
         <translation>Importēt...</translation>
     </message>
     <message>
-        <location filename="../src/gui/map/map_editor.cpp" line="1034"/>
+        <location filename="../src/gui/map/map_editor.cpp" line="1032"/>
         <location filename="../src/gui/widgets/color_list_widget.cpp" line="113"/>
         <location filename="../src/gui/widgets/template_list_widget.cpp" line="241"/>
         <source>&amp;Edit</source>
         <translation>R&amp;ediģēt</translation>
     </message>
     <message>
-        <location filename="../src/gui/map/map_editor.cpp" line="1055"/>
+        <location filename="../src/gui/map/map_editor.cpp" line="1053"/>
         <source>&amp;View</source>
         <translation>&amp;Skats</translation>
     </message>
     <message>
-        <location filename="../src/gui/map/map_editor.cpp" line="1084"/>
+        <location filename="../src/gui/map/map_editor.cpp" line="1082"/>
         <source>&amp;Tools</source>
         <translation>&amp;Rīki</translation>
     </message>
     <message>
-        <location filename="../src/gui/map/map_editor.cpp" line="1137"/>
+        <location filename="../src/gui/map/map_editor.cpp" line="1135"/>
         <source>Sy&amp;mbols</source>
         <translation>Si&amp;mboli</translation>
     </message>
     <message>
-        <location filename="../src/gui/map/map_editor.cpp" line="1119"/>
+        <location filename="../src/gui/map/map_editor.cpp" line="1117"/>
         <source>M&amp;ap</source>
         <translation>K&amp;arte</translation>
     </message>
     <message>
-        <location filename="../src/gui/map/map_editor.cpp" line="1149"/>
+        <location filename="../src/gui/map/map_editor.cpp" line="1147"/>
         <source>&amp;Templates</source>
         <translation>Ša&amp;bloni</translation>
     </message>
     <message>
-        <location filename="../src/gui/map/map_editor.cpp" line="1205"/>
+        <location filename="../src/gui/map/map_editor.cpp" line="1203"/>
         <source>Drawing</source>
         <translation>Zīmējums</translation>
     </message>
@@ -3390,13 +3415,13 @@ Import the data anyway?</source>
         <translation>Zīmēt uz šablona</translation>
     </message>
     <message>
-        <location filename="../src/gui/map/map_editor.cpp" line="871"/>
+        <location filename="../src/gui/map/map_editor.cpp" line="872"/>
         <source>Show grid</source>
         <translation>Rādīt režģi</translation>
     </message>
     <message>
-        <location filename="../src/gui/map/map_editor.cpp" line="872"/>
-        <location filename="../src/gui/map/map_editor.cpp" line="1180"/>
+        <location filename="../src/gui/map/map_editor.cpp" line="873"/>
+        <location filename="../src/gui/map/map_editor.cpp" line="1178"/>
         <source>Configure grid...</source>
         <translation>Konfigurēt režģi...</translation>
     </message>
@@ -3485,27 +3510,27 @@ Import the data anyway?</source>
         <translation>Laukumu XOR</translation>
     </message>
     <message>
-        <location filename="../src/gui/map/map_editor.cpp" line="984"/>
+        <location filename="../src/gui/map/map_editor.cpp" line="982"/>
         <source>Map coordinates</source>
         <translation>Kartes koordinātes</translation>
     </message>
     <message>
-        <location filename="../src/gui/map/map_editor.cpp" line="986"/>
+        <location filename="../src/gui/map/map_editor.cpp" line="984"/>
         <source>Projected coordinates</source>
         <translation>Projicētās koordinātes</translation>
     </message>
     <message>
-        <location filename="../src/gui/map/map_editor.cpp" line="988"/>
+        <location filename="../src/gui/map/map_editor.cpp" line="986"/>
         <source>Latitude/Longitude (Dec)</source>
         <translation>Platums/Garums (Dec)</translation>
     </message>
     <message>
-        <location filename="../src/gui/map/map_editor.cpp" line="990"/>
+        <location filename="../src/gui/map/map_editor.cpp" line="988"/>
         <source>Latitude/Longitude (DMS)</source>
         <translation>Platums/Garums (GMS)</translation>
     </message>
     <message>
-        <location filename="../src/gui/map/map_editor.cpp" line="1069"/>
+        <location filename="../src/gui/map/map_editor.cpp" line="1067"/>
         <source>Display coordinates as...</source>
         <translation>Rādīt koordinātes kā...</translation>
     </message>
@@ -3519,43 +3544,43 @@ Import the data anyway?</source>
         <translation type="vanished">Fiktīvs</translation>
     </message>
     <message>
-        <location filename="../src/gui/map/map_editor.cpp" line="1173"/>
+        <location filename="../src/gui/map/map_editor.cpp" line="1171"/>
         <source>View</source>
         <translation>Skats</translation>
     </message>
     <message>
-        <location filename="../src/gui/map/map_editor.cpp" line="1223"/>
+        <location filename="../src/gui/map/map_editor.cpp" line="1221"/>
         <source>Select template...</source>
         <translation>Atlasīt šablonu...</translation>
     </message>
     <message>
-        <location filename="../src/gui/map/map_editor.cpp" line="1229"/>
+        <location filename="../src/gui/map/map_editor.cpp" line="1227"/>
         <source>Editing</source>
         <translation>Rediģēšana</translation>
     </message>
     <message>
-        <location filename="../src/gui/map/map_editor.cpp" line="1254"/>
+        <location filename="../src/gui/map/map_editor.cpp" line="1252"/>
         <source>Advanced editing</source>
         <translation>Paplašināta rediģēšana</translation>
     </message>
     <message>
-        <location filename="../src/gui/map/map_editor.cpp" line="1589"/>
-        <location filename="../src/gui/map/map_editor.cpp" line="1609"/>
-        <location filename="../src/gui/map/map_editor.cpp" line="1666"/>
-        <location filename="../src/gui/map/map_editor.cpp" line="1686"/>
-        <location filename="../src/gui/map/map_editor.cpp" line="1699"/>
-        <location filename="../src/gui/map/map_editor.cpp" line="3077"/>
-        <location filename="../src/gui/map/map_editor.cpp" line="3083"/>
-        <location filename="../src/gui/map/map_editor.cpp" line="3089"/>
-        <location filename="../src/gui/map/map_editor.cpp" line="3095"/>
-        <location filename="../src/gui/map/map_editor.cpp" line="3104"/>
-        <location filename="../src/gui/map/map_editor.cpp" line="3911"/>
-        <location filename="../src/gui/map/map_editor.cpp" line="3918"/>
+        <location filename="../src/gui/map/map_editor.cpp" line="1601"/>
+        <location filename="../src/gui/map/map_editor.cpp" line="1621"/>
+        <location filename="../src/gui/map/map_editor.cpp" line="1678"/>
+        <location filename="../src/gui/map/map_editor.cpp" line="1698"/>
+        <location filename="../src/gui/map/map_editor.cpp" line="1711"/>
+        <location filename="../src/gui/map/map_editor.cpp" line="3108"/>
+        <location filename="../src/gui/map/map_editor.cpp" line="3114"/>
+        <location filename="../src/gui/map/map_editor.cpp" line="3120"/>
+        <location filename="../src/gui/map/map_editor.cpp" line="3126"/>
+        <location filename="../src/gui/map/map_editor.cpp" line="3135"/>
+        <location filename="../src/gui/map/map_editor.cpp" line="3916"/>
+        <location filename="../src/gui/map/map_editor.cpp" line="3923"/>
         <source>Error</source>
         <translation>Kļūda</translation>
     </message>
     <message>
-        <location filename="../src/gui/map/map_editor.cpp" line="1609"/>
+        <location filename="../src/gui/map/map_editor.cpp" line="1621"/>
         <source>No undo steps available.</source>
         <translation>Atsaukšanas soļi vairs nav.</translation>
     </message>
@@ -3565,8 +3590,8 @@ Import the data anyway?</source>
         <translation type="vanished">Griezt %1 objektu(s)</translation>
     </message>
     <message>
-        <location filename="../src/gui/map/map_editor.cpp" line="1666"/>
-        <location filename="../src/gui/map/map_editor.cpp" line="1699"/>
+        <location filename="../src/gui/map/map_editor.cpp" line="1678"/>
+        <location filename="../src/gui/map/map_editor.cpp" line="1711"/>
         <source>An internal error occurred, sorry!</source>
         <translation>Radās iekšēja kļūda, atvainojamies!</translation>
     </message>
@@ -3575,7 +3600,7 @@ Import the data anyway?</source>
         <translation type="vanished">Kopēti %1 objekti</translation>
     </message>
     <message>
-        <location filename="../src/gui/map/map_editor.cpp" line="1686"/>
+        <location filename="../src/gui/map/map_editor.cpp" line="1698"/>
         <source>There are no objects in clipboard which could be pasted!</source>
         <translation>Starpliktuvē nav objekti, kurus varētu ielīmēt!</translation>
     </message>
@@ -3584,233 +3609,233 @@ Import the data anyway?</source>
         <translation type="vanished">Ielīmēti %1 objekti</translation>
     </message>
     <message>
-        <location filename="../src/gui/map/map_editor.cpp" line="1774"/>
+        <location filename="../src/gui/map/map_editor.cpp" line="1795"/>
         <source>Set custom zoom factor</source>
         <translation>Uzstādīt izvēles tuvināšanas koeficientu</translation>
     </message>
     <message>
-        <location filename="../src/gui/map/map_editor.cpp" line="1774"/>
+        <location filename="../src/gui/map/map_editor.cpp" line="1795"/>
         <source>Zoom factor:</source>
         <translation>Tuvināšanas koeficients:</translation>
     </message>
     <message>
-        <location filename="../src/gui/map/map_editor.cpp" line="1848"/>
+        <location filename="../src/gui/map/map_editor.cpp" line="1869"/>
         <source>Symbols</source>
         <translation>Simboli</translation>
     </message>
     <message>
-        <location filename="../src/gui/map/map_editor.cpp" line="1862"/>
+        <location filename="../src/gui/map/map_editor.cpp" line="1883"/>
         <source>Colors</source>
         <translation>Krāsas</translation>
     </message>
     <message>
-        <location filename="../src/gui/map/map_editor.cpp" line="1911"/>
+        <location filename="../src/gui/map/map_editor.cpp" line="1932"/>
         <source>Scale all symbols</source>
         <translation>Mērogot visus simbolus</translation>
     </message>
     <message>
-        <location filename="../src/gui/map/map_editor.cpp" line="1911"/>
+        <location filename="../src/gui/map/map_editor.cpp" line="1932"/>
         <source>Scale to percentage:</source>
         <translation>Mērogot līdz procentiem:</translation>
     </message>
     <message>
-        <location filename="../src/gui/map/map_editor.cpp" line="1935"/>
+        <location filename="../src/gui/map/map_editor.cpp" line="1956"/>
         <source>Map notes</source>
         <translation>Kartes piezīmes</translation>
     </message>
     <message>
-        <location filename="../src/gui/map/map_editor.cpp" line="1940"/>
+        <location filename="../src/gui/map/map_editor.cpp" line="1961"/>
         <source>Cancel</source>
         <translation>Atcelt</translation>
     </message>
     <message>
-        <location filename="../src/gui/map/map_editor.cpp" line="1941"/>
+        <location filename="../src/gui/map/map_editor.cpp" line="1962"/>
         <source>OK</source>
         <translation>OK</translation>
     </message>
     <message>
-        <location filename="../src/gui/map/map_editor.cpp" line="1981"/>
+        <location filename="../src/gui/map/map_editor.cpp" line="2002"/>
         <source>Templates</source>
         <translation>Šabloni</translation>
     </message>
     <message>
-        <location filename="../src/gui/map/map_editor.cpp" line="2195"/>
+        <location filename="../src/gui/map/map_editor.cpp" line="2226"/>
         <source>Place point objects on the map.</source>
         <translation>Izvietot punkta objektus uz kartes.</translation>
     </message>
     <message>
-        <location filename="../src/gui/map/map_editor.cpp" line="2195"/>
+        <location filename="../src/gui/map/map_editor.cpp" line="2226"/>
         <source>Select a point symbol to be able to use this tool.</source>
         <translation>Atlasīt punkta objektu, lai to varētu lietot.</translation>
     </message>
     <message>
-        <location filename="../src/gui/map/map_editor.cpp" line="2197"/>
+        <location filename="../src/gui/map/map_editor.cpp" line="2228"/>
         <source>Draw polygonal and curved lines.</source>
         <translation>Zīmēt lauztas vai līkas līnijas.</translation>
     </message>
     <message>
-        <location filename="../src/gui/map/map_editor.cpp" line="2197"/>
-        <location filename="../src/gui/map/map_editor.cpp" line="2199"/>
-        <location filename="../src/gui/map/map_editor.cpp" line="2201"/>
-        <location filename="../src/gui/map/map_editor.cpp" line="2203"/>
-        <location filename="../src/gui/map/map_editor.cpp" line="2205"/>
+        <location filename="../src/gui/map/map_editor.cpp" line="2228"/>
+        <location filename="../src/gui/map/map_editor.cpp" line="2230"/>
+        <location filename="../src/gui/map/map_editor.cpp" line="2232"/>
+        <location filename="../src/gui/map/map_editor.cpp" line="2234"/>
+        <location filename="../src/gui/map/map_editor.cpp" line="2236"/>
         <source>Select a line, area or combined symbol to be able to use this tool.</source>
         <translation>Atlasīt līniju, laukumu vai kombinētu simbolu, lai to varētu lietot.</translation>
     </message>
     <message>
-        <location filename="../src/gui/map/map_editor.cpp" line="2199"/>
+        <location filename="../src/gui/map/map_editor.cpp" line="2230"/>
         <source>Draw circles and ellipses.</source>
         <translation>Zīmēt riņķus un elipses.</translation>
     </message>
     <message>
-        <location filename="../src/gui/map/map_editor.cpp" line="2310"/>
+        <location filename="../src/gui/map/map_editor.cpp" line="2341"/>
         <source>Set the direction of area fill patterns or point objects.</source>
         <translation>Iestatīt laukuma aizpildījuma paraugu vai punktveida objektu virzienu.</translation>
     </message>
     <message>
-        <location filename="../src/gui/map/map_editor.cpp" line="2310"/>
+        <location filename="../src/gui/map/map_editor.cpp" line="2341"/>
         <source>Select an area object with rotatable fill pattern or a rotatable point object to activate this tool.</source>
         <translation>Atlasīt laukuma objektu ar pagriežamu aizpildījuma paraugu vai pagriežamu punktveida objektu, lai aktivizētu šo rīku.</translation>
     </message>
     <message>
-        <location filename="../src/gui/map/map_editor.cpp" line="2340"/>
+        <location filename="../src/gui/map/map_editor.cpp" line="2371"/>
         <source>Resulting symbol: %1 %2.</source>
-        <translation type="unfinished"></translation>
+        <translation>Iegūtais simbols: %1 %2.</translation>
     </message>
     <message>
-        <location filename="../src/gui/map/map_editor.cpp" line="2341"/>
+        <location filename="../src/gui/map/map_editor.cpp" line="2372"/>
         <source>Select at least two area or path objects activate this tool.</source>
-        <translation type="unfinished"></translation>
+        <translation>Izvēlieties vismaz divus laukuma vai līnijas objektus, lai aktivizētu šo rīku.</translation>
     </message>
     <message>
-        <location filename="../src/gui/map/map_editor.cpp" line="2343"/>
+        <location filename="../src/gui/map/map_editor.cpp" line="2374"/>
         <source>Unify overlapping objects.</source>
-        <translation type="unfinished"></translation>
+        <translation>Apvienot pārklājošos objektus.</translation>
     </message>
     <message>
-        <location filename="../src/gui/map/map_editor.cpp" line="2345"/>
+        <location filename="../src/gui/map/map_editor.cpp" line="2376"/>
         <source>Remove all parts which are not overlaps with the first selected object.</source>
-        <translation type="unfinished"></translation>
+        <translation>Noņemt visas daļas, kas nepārklājas ar pirmo izvēlēto objektu.</translation>
     </message>
     <message>
-        <location filename="../src/gui/map/map_editor.cpp" line="2347"/>
+        <location filename="../src/gui/map/map_editor.cpp" line="2378"/>
         <source>Remove overlapped parts of the first selected object.</source>
-        <translation type="unfinished"></translation>
+        <translation>Noņemt pārklātās daļas pirmajam atlasītajam objektam.</translation>
     </message>
     <message>
-        <location filename="../src/gui/map/map_editor.cpp" line="2349"/>
+        <location filename="../src/gui/map/map_editor.cpp" line="2380"/>
         <source>Remove all parts which overlap the first selected object.</source>
-        <translation type="unfinished"></translation>
+        <translation>Noņemt visas daļas, kas pārklāj pirmo atlasīto objektu.</translation>
     </message>
     <message>
-        <location filename="../src/gui/map/map_editor.cpp" line="2353"/>
+        <location filename="../src/gui/map/map_editor.cpp" line="2384"/>
         <source>Merge area holes together, or merge holes with the object boundary to cut out this part.</source>
-        <translation type="unfinished"></translation>
+        <translation>Sapludināt apgabala caurumus vai apvienot caurumus ar objekta robežu, lai izgrieztu šo daļu.</translation>
     </message>
     <message>
-        <location filename="../src/gui/map/map_editor.cpp" line="2353"/>
+        <location filename="../src/gui/map/map_editor.cpp" line="2384"/>
         <source>Select one area object with holes to activate this tool.</source>
-        <translation type="unfinished"></translation>
+        <translation>Atlasīt vienu laukuma objektu ar caurumiem, lai aktivizētu šo rīku.</translation>
     </message>
     <message>
-        <location filename="../src/gui/map/map_editor.cpp" line="3104"/>
+        <location filename="../src/gui/map/map_editor.cpp" line="3135"/>
         <source>Merging holes failed.</source>
-        <translation type="unfinished"></translation>
+        <translation>Caurumu sapludināšana neizdevās.</translation>
     </message>
     <message>
-        <location filename="../src/gui/map/map_editor.cpp" line="3388"/>
+        <location filename="../src/gui/map/map_editor.cpp" line="3403"/>
         <source>Clear temporary markers</source>
-        <translation type="unfinished"></translation>
+        <translation>Dzēst pagaidu iezīmes</translation>
     </message>
     <message>
-        <location filename="../src/gui/map/map_editor.cpp" line="3388"/>
+        <location filename="../src/gui/map/map_editor.cpp" line="3403"/>
         <source>Are you sure you want to delete all temporary GPS markers? This cannot be undone.</source>
-        <translation type="unfinished"></translation>
+        <translation>Vai esi pārliecināts, ka vēlies dzēst visas pagaidu GPS iezīmes? To nevar atsaukt.</translation>
     </message>
     <message>
-        <location filename="../src/gui/map/map_editor.cpp" line="3502"/>
+        <location filename="../src/gui/map/map_editor.cpp" line="3517"/>
         <source>Merge this part with</source>
-        <translation type="unfinished"></translation>
+        <translation>Sapludināt šo daļu ar</translation>
     </message>
     <message>
-        <location filename="../src/gui/map/map_editor.cpp" line="3508"/>
+        <location filename="../src/gui/map/map_editor.cpp" line="3523"/>
         <source>Move selected objects to</source>
-        <translation type="unfinished"></translation>
+        <translation>Pārvietot atlasītos objektus uz</translation>
     </message>
     <message>
-        <location filename="../src/gui/map/map_editor.cpp" line="3562"/>
-        <location filename="../src/gui/map/map_editor.cpp" line="3622"/>
+        <location filename="../src/gui/map/map_editor.cpp" line="3577"/>
+        <location filename="../src/gui/map/map_editor.cpp" line="3637"/>
         <source>Enter the name of the map part:</source>
-        <translation type="unfinished"></translation>
+        <translation>Ievadiet kartes daļas nosaukumu:</translation>
     </message>
     <message>
-        <location filename="../src/gui/map/map_editor.cpp" line="3638"/>
+        <location filename="../src/gui/map/map_editor.cpp" line="3653"/>
         <source>Switched to map part &apos;%1&apos;.</source>
-        <translation type="unfinished"></translation>
+        <translation>Pārslēgts uz kartes daļu &apos;%1&apos;.</translation>
     </message>
     <message>
-        <location filename="../src/gui/map/map_editor.cpp" line="3660"/>
-        <location filename="../src/gui/map/map_editor.cpp" line="3692"/>
+        <location filename="../src/gui/map/map_editor.cpp" line="3675"/>
+        <location filename="../src/gui/map/map_editor.cpp" line="3707"/>
         <source>Merge map parts</source>
-        <translation type="unfinished"></translation>
+        <translation>Sapludināt kartes daļas</translation>
     </message>
     <message>
-        <location filename="../src/gui/map/map_editor.cpp" line="3661"/>
+        <location filename="../src/gui/map/map_editor.cpp" line="3676"/>
         <source>Do you want to move all objects from map part &quot;%1&quot; to &quot;%2&quot;, and to remove &quot;%1&quot;?</source>
-        <translation type="unfinished"></translation>
+        <translation>Vai vēlies pārvietot visus objektus no kartes daļas &quot;%1&quot; uz &quot;%2&quot;, un aizvākt &quot;%1&quot;?</translation>
     </message>
     <message>
-        <location filename="../src/gui/map/map_editor.cpp" line="3693"/>
+        <location filename="../src/gui/map/map_editor.cpp" line="3708"/>
         <source>Do you want to move all objects to map part &quot;%1&quot;, and to remove all other map parts?</source>
-        <translation type="unfinished"></translation>
+        <translation>Vai vēlies pārvietot visus objektus uz kartes daļu &quot;%1&quot;, un aizvākt visas citas kartes daļas?</translation>
     </message>
     <message>
-        <location filename="../src/gui/map/map_editor.cpp" line="3918"/>
+        <location filename="../src/gui/map/map_editor.cpp" line="3923"/>
         <source>Cannot import the selected map file because it could not be loaded.</source>
         <translation>Nevar importēt atlasīto kartes datni, jo to nevar ielasīt.</translation>
     </message>
     <message>
-        <location filename="../src/gui/map/map_editor.cpp" line="2201"/>
+        <location filename="../src/gui/map/map_editor.cpp" line="2232"/>
         <source>Draw rectangles.</source>
         <translation>Zīmēt taisnstūrus.</translation>
     </message>
     <message>
-        <location filename="../src/gui/map/map_editor.cpp" line="550"/>
+        <location filename="../src/gui/map/map_editor.cpp" line="551"/>
         <source>Editing in progress</source>
         <translation>Notiek rediģēšana</translation>
     </message>
     <message>
-        <location filename="../src/gui/map/map_editor.cpp" line="550"/>
+        <location filename="../src/gui/map/map_editor.cpp" line="551"/>
         <source>The map is currently being edited. Please finish the edit operation before saving.</source>
         <translation>Karte tiek rediģēta. Lūdzu, pabeidz rediģēšanas operāciju, pirms saglabāt.</translation>
     </message>
     <message>
-        <location filename="../src/gui/map/map_editor.cpp" line="555"/>
+        <location filename="../src/gui/map/map_editor.cpp" line="556"/>
         <source>Map saved</source>
-        <translation type="unfinished"></translation>
+        <translation>Karte saglabāta</translation>
     </message>
     <message>
-        <location filename="../src/gui/map/map_editor.cpp" line="847"/>
+        <location filename="../src/gui/map/map_editor.cpp" line="848"/>
         <source>&amp;Image</source>
         <translation>&amp;Attēls</translation>
     </message>
     <message>
-        <location filename="../src/gui/map/map_editor.cpp" line="849"/>
+        <location filename="../src/gui/map/map_editor.cpp" line="850"/>
         <source>&amp;PDF</source>
         <translation>&amp;PDF</translation>
     </message>
     <message>
-        <location filename="../src/gui/map/map_editor.cpp" line="869"/>
+        <location filename="../src/gui/map/map_editor.cpp" line="870"/>
         <source>Clear undo / redo history</source>
         <translation>Dzēst atsaukumu / atkārtojumu vēsturi</translation>
     </message>
     <message>
-        <location filename="../src/gui/map/map_editor.cpp" line="869"/>
+        <location filename="../src/gui/map/map_editor.cpp" line="870"/>
         <source>Clear the undo / redo history to reduce map file size.</source>
         <translation>Dzēst atsaukumu / atkārtojumu vēsturi, lai samazinātu kartes datnes izmēru.</translation>
     </message>
     <message>
-        <location filename="../src/gui/map/map_editor.cpp" line="876"/>
+        <location filename="../src/gui/map/map_editor.cpp" line="874"/>
         <source>Pan</source>
         <translation>Pārvietošana</translation>
     </message>
@@ -3827,12 +3852,12 @@ Import the data anyway?</source>
     <message>
         <location filename="../src/gui/map/map_editor.cpp" line="907"/>
         <source>Tag editor</source>
-        <translation type="unfinished"></translation>
+        <translation>Birku redaktors</translation>
     </message>
     <message>
         <location filename="../src/gui/map/map_editor.cpp" line="907"/>
         <source>Show/Hide the tag editor window</source>
-        <translation type="unfinished"></translation>
+        <translation>Parādīt/Slēpt birku redaktora logu</translation>
     </message>
     <message>
         <location filename="../src/gui/map/map_editor.cpp" line="910"/>
@@ -3842,172 +3867,177 @@ Import the data anyway?</source>
     <message>
         <location filename="../src/gui/map/map_editor.cpp" line="915"/>
         <source>Draw free-handedly</source>
-        <translation type="unfinished"></translation>
+        <translation>Zīmēt brīvrokas režīmā</translation>
     </message>
     <message>
         <location filename="../src/gui/map/map_editor.cpp" line="916"/>
         <source>Fill bounded areas</source>
-        <translation type="unfinished"></translation>
+        <translation>Aizpildīt norobežotos laukumus</translation>
     </message>
     <message>
-        <location filename="../src/gui/map/map_editor.cpp" line="862"/>
+        <location filename="../src/gui/map/map_editor.cpp" line="863"/>
         <source>Delete</source>
-        <translation type="unfinished">Dzēst</translation>
-    </message>
-    <message>
-        <location filename="../src/gui/map/map_editor.cpp" line="798"/>
-        <source>Ctrl+A</source>
-        <translation type="unfinished"></translation>
+        <translation>Dzēst</translation>
     </message>
     <message>
         <location filename="../src/gui/map/map_editor.cpp" line="799"/>
-        <source>Ctrl+Shift+A</source>
-        <translation type="unfinished"></translation>
+        <source>Ctrl+A</source>
+        <translation>Ctrl+A</translation>
     </message>
     <message>
         <location filename="../src/gui/map/map_editor.cpp" line="800"/>
+        <source>Ctrl+Shift+A</source>
+        <translation>Ctrl+Shift+A</translation>
+    </message>
+    <message>
+        <location filename="../src/gui/map/map_editor.cpp" line="801"/>
         <source>Ctrl+I</source>
-        <translation type="unfinished"></translation>
+        <translation>Ctrl+I</translation>
     </message>
     <message>
-        <location filename="../src/gui/map/map_editor.cpp" line="802"/>
+        <location filename="../src/gui/map/map_editor.cpp" line="803"/>
         <source>G</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../src/gui/map/map_editor.cpp" line="815"/>
-        <source>E</source>
-        <translation type="unfinished">A</translation>
+        <translation>G</translation>
     </message>
     <message>
         <location filename="../src/gui/map/map_editor.cpp" line="816"/>
-        <source>L</source>
-        <translation type="unfinished"></translation>
+        <source>E</source>
+        <translation>A</translation>
     </message>
     <message>
         <location filename="../src/gui/map/map_editor.cpp" line="817"/>
-        <source>S</source>
-        <translation type="unfinished"></translation>
+        <source>L</source>
+        <translation>L</translation>
     </message>
     <message>
         <location filename="../src/gui/map/map_editor.cpp" line="818"/>
-        <source>P</source>
-        <translation type="unfinished"></translation>
+        <source>S</source>
+        <translation>S</translation>
     </message>
     <message>
         <location filename="../src/gui/map/map_editor.cpp" line="819"/>
-        <source>O</source>
-        <translation type="unfinished"></translation>
+        <source>P</source>
+        <translation>Lpp</translation>
     </message>
     <message>
         <location filename="../src/gui/map/map_editor.cpp" line="820"/>
-        <source>Ctrl+R</source>
-        <translation type="unfinished"></translation>
+        <source>O</source>
+        <translation>O</translation>
     </message>
     <message>
         <location filename="../src/gui/map/map_editor.cpp" line="821"/>
-        <source>F</source>
-        <translation type="unfinished"></translation>
+        <source>Ctrl+R</source>
+        <translation>Ctrl+R</translation>
     </message>
     <message>
         <location filename="../src/gui/map/map_editor.cpp" line="822"/>
-        <source>T</source>
-        <translation type="unfinished"></translation>
+        <source>F</source>
+        <translation>F</translation>
     </message>
     <message>
-        <location filename="../src/gui/map/map_editor.cpp" line="824"/>
-        <source>D</source>
-        <translation type="unfinished"></translation>
+        <location filename="../src/gui/map/map_editor.cpp" line="823"/>
+        <source>T</source>
+        <translation>T</translation>
     </message>
     <message>
         <location filename="../src/gui/map/map_editor.cpp" line="825"/>
-        <source>Ctrl+G</source>
-        <translation type="unfinished"></translation>
+        <source>D</source>
+        <translation>D</translation>
     </message>
     <message>
         <location filename="../src/gui/map/map_editor.cpp" line="826"/>
-        <source>Ctrl+F</source>
-        <translation type="unfinished"></translation>
+        <source>Ctrl+G</source>
+        <translation>Ctrl+G</translation>
     </message>
     <message>
         <location filename="../src/gui/map/map_editor.cpp" line="827"/>
-        <source>Ctrl+D</source>
-        <translation type="unfinished"></translation>
+        <source>Ctrl+F</source>
+        <translation>Ctrl+F</translation>
     </message>
     <message>
         <location filename="../src/gui/map/map_editor.cpp" line="828"/>
-        <source>C</source>
-        <translation type="unfinished"></translation>
+        <source>Ctrl+D</source>
+        <translation>Ctrl+D</translation>
     </message>
     <message>
         <location filename="../src/gui/map/map_editor.cpp" line="829"/>
-        <source>R</source>
-        <translation type="unfinished"></translation>
+        <source>C</source>
+        <translation>C</translation>
     </message>
     <message>
         <location filename="../src/gui/map/map_editor.cpp" line="830"/>
-        <source>Z</source>
-        <translation type="unfinished"></translation>
+        <source>R</source>
+        <translation>R</translation>
     </message>
     <message>
         <location filename="../src/gui/map/map_editor.cpp" line="831"/>
-        <source>K</source>
-        <translation type="unfinished"></translation>
+        <source>Z</source>
+        <translation>Z</translation>
     </message>
     <message>
         <location filename="../src/gui/map/map_editor.cpp" line="832"/>
-        <source>H</source>
-        <translation type="unfinished"></translation>
+        <source>K</source>
+        <translation>K</translation>
     </message>
     <message>
         <location filename="../src/gui/map/map_editor.cpp" line="833"/>
-        <source>M</source>
-        <translation type="unfinished"></translation>
+        <source>H</source>
+        <translation>H</translation>
     </message>
     <message>
         <location filename="../src/gui/map/map_editor.cpp" line="834"/>
-        <source>U</source>
-        <translation type="unfinished"></translation>
+        <source>M</source>
+        <translation>M</translation>
     </message>
     <message>
         <location filename="../src/gui/map/map_editor.cpp" line="835"/>
-        <source>N</source>
-        <translation type="unfinished">Z</translation>
+        <source>U</source>
+        <translation>U</translation>
     </message>
     <message>
         <location filename="../src/gui/map/map_editor.cpp" line="836"/>
+        <source>N</source>
+        <translation>Z</translation>
+    </message>
+    <message>
+        <location filename="../src/gui/map/map_editor.cpp" line="837"/>
         <source>Ctrl+M</source>
-        <translation type="unfinished"></translation>
+        <translation>Ctrl+M</translation>
+    </message>
+    <message>
+        <location filename="../src/gui/map/map_editor.cpp" line="875"/>
+        <source>Move to my location</source>
+        <translation>Pārvietot uz manu atrašanās vietu</translation>
     </message>
     <message>
         <location filename="../src/gui/map/map_editor.cpp" line="890"/>
         <source>Symbol set ID...</source>
-        <translation type="unfinished"></translation>
+        <translation>Simbolu kopas ID....</translation>
     </message>
     <message>
         <location filename="../src/gui/map/map_editor.cpp" line="890"/>
         <source>Edit the symbol set ID</source>
-        <translation type="unfinished"></translation>
+        <translation>Rediģēt simbolu kopas ID</translation>
     </message>
     <message>
         <location filename="../src/gui/map/map_editor.cpp" line="892"/>
         <source>Load CRT file...</source>
-        <translation type="unfinished"></translation>
+        <translation>Ielasīt CRT datni...</translation>
     </message>
     <message>
         <location filename="../src/gui/map/map_editor.cpp" line="892"/>
         <source>Assign new symbols by cross-reference table</source>
-        <translation type="unfinished"></translation>
+        <translation>Piešķirt jaunu simbolu no savstarpējo atsauču tabulas</translation>
     </message>
     <message>
         <location filename="../src/gui/map/map_editor.cpp" line="940"/>
         <source>Cut away from area</source>
-        <translation type="unfinished"></translation>
+        <translation>Izgriezt no laukuma</translation>
     </message>
     <message>
         <location filename="../src/gui/map/map_editor.cpp" line="942"/>
         <source>Merge area holes</source>
-        <translation type="unfinished"></translation>
+        <translation>Sapludināt laukuma caurumus</translation>
     </message>
     <message>
         <location filename="../src/gui/map/map_editor.cpp" line="943"/>
@@ -4032,172 +4062,186 @@ Import the data anyway?</source>
     <message>
         <location filename="../src/gui/map/map_editor.cpp" line="947"/>
         <source>Distribute points along path</source>
-        <translation type="unfinished"></translation>
+        <translation>Izkliedēt punktus pa līniju</translation>
     </message>
     <message>
         <location filename="../src/gui/map/map_editor.cpp" line="954"/>
         <source>Paint on template settings</source>
-        <translation type="unfinished"></translation>
+        <translation>Krāsot uz veidnes iestatījumiem</translation>
     </message>
     <message>
-        <location filename="../src/gui/map/map_editor.cpp" line="960"/>
+        <location filename="../src/gui/map/map_editor.cpp" line="958"/>
         <source>Enable touch cursor</source>
-        <translation type="unfinished"></translation>
+        <translation>Aktivizēt skāriena vietrādi</translation>
+    </message>
+    <message>
+        <location filename="../src/gui/map/map_editor.cpp" line="959"/>
+        <source>Enable GPS display</source>
+        <translation>Iespējot GPS displeju</translation>
     </message>
     <message>
         <location filename="../src/gui/map/map_editor.cpp" line="961"/>
-        <source>Enable GPS display</source>
-        <translation type="unfinished"></translation>
+        <source>Enable GPS distance rings</source>
+        <translation>Iespējot GPS attāluma gredzenus</translation>
     </message>
     <message>
         <location filename="../src/gui/map/map_editor.cpp" line="963"/>
-        <source>Enable GPS distance rings</source>
-        <translation type="unfinished"></translation>
+        <source>Set point object at GPS position</source>
+        <translation>Ievietot punktveida objektu GPS pozīcijā</translation>
     </message>
     <message>
         <location filename="../src/gui/map/map_editor.cpp" line="965"/>
-        <source>Set point object at GPS position</source>
-        <translation type="unfinished"></translation>
+        <source>Set temporary marker at GPS position</source>
+        <translation>Iestatīt pagaidu iezīmi GPS pozīcijā</translation>
     </message>
     <message>
         <location filename="../src/gui/map/map_editor.cpp" line="967"/>
-        <source>Set temporary marker at GPS position</source>
-        <translation type="unfinished"></translation>
+        <source>Create temporary path at GPS position</source>
+        <translation>Izveidot pagaidu līniju GPS pozīcijā</translation>
     </message>
     <message>
         <location filename="../src/gui/map/map_editor.cpp" line="969"/>
-        <source>Create temporary path at GPS position</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../src/gui/map/map_editor.cpp" line="971"/>
         <source>Clear temporary GPS markers</source>
-        <translation type="unfinished"></translation>
+        <translation>Dzēst pagaidu GPS iezīmes</translation>
     </message>
     <message>
-        <location filename="../src/gui/map/map_editor.cpp" line="974"/>
+        <location filename="../src/gui/map/map_editor.cpp" line="972"/>
         <source>Enable compass display</source>
-        <translation type="unfinished"></translation>
+        <translation>Iespējot kompasa displeju</translation>
+    </message>
+    <message>
+        <location filename="../src/gui/map/map_editor.cpp" line="973"/>
+        <source>Align map with north</source>
+        <translation>Līdzināt karti uz ziemeļiem</translation>
     </message>
     <message>
         <location filename="../src/gui/map/map_editor.cpp" line="975"/>
-        <source>Align map with north</source>
-        <translation type="unfinished"></translation>
+        <location filename="../src/gui/map/map_editor.cpp" line="3576"/>
+        <source>Add new part...</source>
+        <translation>Pievienot jaunu daļu...</translation>
+    </message>
+    <message>
+        <location filename="../src/gui/map/map_editor.cpp" line="976"/>
+        <location filename="../src/gui/map/map_editor.cpp" line="3636"/>
+        <source>Rename current part...</source>
+        <translation>Pārdēvēt pašreizējo daļu...</translation>
     </message>
     <message>
         <location filename="../src/gui/map/map_editor.cpp" line="977"/>
-        <location filename="../src/gui/map/map_editor.cpp" line="3561"/>
-        <source>Add new part...</source>
-        <translation type="unfinished"></translation>
+        <location filename="../src/gui/map/map_editor.cpp" line="3597"/>
+        <source>Remove current part</source>
+        <translation>Aizvākt pašreizējo daļu</translation>
     </message>
     <message>
         <location filename="../src/gui/map/map_editor.cpp" line="978"/>
-        <location filename="../src/gui/map/map_editor.cpp" line="3621"/>
-        <source>Rename current part...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../src/gui/map/map_editor.cpp" line="979"/>
-        <location filename="../src/gui/map/map_editor.cpp" line="3582"/>
-        <source>Remove current part</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../src/gui/map/map_editor.cpp" line="980"/>
         <source>Merge all parts</source>
-        <translation type="unfinished"></translation>
+        <translation>Sapludināt visas daļas</translation>
     </message>
     <message>
-        <location filename="../src/gui/map/map_editor.cpp" line="1002"/>
+        <location filename="../src/gui/map/map_editor.cpp" line="1000"/>
         <source>Copy position</source>
-        <translation type="unfinished"></translation>
+        <translation>Kopēt pozīciju</translation>
     </message>
     <message>
-        <location filename="../src/gui/map/map_editor.cpp" line="1002"/>
+        <location filename="../src/gui/map/map_editor.cpp" line="1000"/>
         <source>Copy position to clipboard.</source>
-        <translation type="unfinished"></translation>
+        <translation>Kopēt pozīciju uz starpliktuvi.</translation>
     </message>
     <message>
-        <location filename="../src/gui/map/map_editor.cpp" line="1026"/>
+        <location filename="../src/gui/map/map_editor.cpp" line="1024"/>
         <source>&amp;Export as...</source>
         <translation>&amp;Eksportēt kā...</translation>
     </message>
     <message>
-        <location filename="../src/gui/map/map_editor.cpp" line="1191"/>
-        <location filename="../src/gui/map/map_editor.cpp" line="1196"/>
-        <location filename="../src/gui/map/map_editor.cpp" line="1328"/>
-        <location filename="../src/gui/map/map_editor.cpp" line="3496"/>
+        <location filename="../src/gui/map/map_editor.cpp" line="1189"/>
+        <location filename="../src/gui/map/map_editor.cpp" line="1194"/>
+        <location filename="../src/gui/map/map_editor.cpp" line="1326"/>
+        <location filename="../src/gui/map/map_editor.cpp" line="3511"/>
         <source>Map parts</source>
-        <translation type="unfinished"></translation>
+        <translation>Kartes daļas</translation>
     </message>
     <message>
-        <location filename="../src/gui/map/map_editor.cpp" line="1281"/>
+        <location filename="../src/gui/map/map_editor.cpp" line="1279"/>
         <source>Select symbol</source>
-        <translation type="unfinished"></translation>
+        <translation>Atlasīt simbolu</translation>
     </message>
     <message>
-        <location filename="../src/gui/map/map_editor.cpp" line="1321"/>
+        <location filename="../src/gui/map/map_editor.cpp" line="1319"/>
         <source>Hide top bar</source>
-        <translation type="unfinished"></translation>
+        <translation>Augšējās joslas paslēpšana</translation>
     </message>
     <message>
-        <location filename="../src/gui/map/map_editor.cpp" line="1324"/>
+        <location filename="../src/gui/map/map_editor.cpp" line="1322"/>
         <source>Show top bar</source>
-        <translation type="unfinished"></translation>
+        <translation>Augšējās joslas parādīšana</translation>
     </message>
     <message>
-        <location filename="../src/gui/map/map_editor.cpp" line="1589"/>
+        <location filename="../src/gui/map/map_editor.cpp" line="1369"/>
+        <source>1x zoom</source>
+        <translation>1x tālummaiņa</translation>
+    </message>
+    <message>
+        <location filename="../src/gui/map/map_editor.cpp" line="1373"/>
+        <source>2x zoom</source>
+        <translation>2 x tālummaiņa</translation>
+    </message>
+    <message>
+        <location filename="../src/gui/map/map_editor.cpp" line="1601"/>
         <source>Print / Export is not available in this program version!</source>
-        <translation type="unfinished"></translation>
+        <translation>Iespēja Drukāt / Eksportēt šajā programmas versijā nav pieejama!</translation>
     </message>
     <message>
-        <location filename="../src/gui/map/map_editor.cpp" line="1883"/>
+        <location filename="../src/gui/map/map_editor.cpp" line="1904"/>
         <source>Symbol set ID</source>
-        <translation type="unfinished"></translation>
+        <translation>Simbolu kopas ID</translation>
     </message>
     <message>
-        <location filename="../src/gui/map/map_editor.cpp" line="1884"/>
+        <location filename="../src/gui/map/map_editor.cpp" line="1905"/>
         <source>Edit the symbol set ID:</source>
-        <translation type="unfinished"></translation>
+        <translation>Rediģēt simbolu kopas ID:</translation>
     </message>
     <message>
-        <location filename="../src/gui/map/map_editor.cpp" line="2043"/>
+        <location filename="../src/gui/map/map_editor.cpp" line="2064"/>
         <source>Tag Editor</source>
-        <translation type="unfinished"></translation>
+        <translation>Birku redaktors</translation>
     </message>
     <message>
-        <location filename="../src/gui/map/map_editor.cpp" line="2106"/>
+        <location filename="../src/gui/map/map_editor.cpp" line="2128"/>
         <source>No
 symbol
 selected</source>
-        <comment>Keep it short. Should not be much longer per line than the longest word in the original.</comment>
-        <translation type="unfinished"></translation>
+        <extracomment>Keep it short. Should not be much longer per line than the longest word in the original.</extracomment>
+        <translation>Nav
+atlasīts
+simbols</translation>
     </message>
     <message>
-        <location filename="../src/gui/map/map_editor.cpp" line="2107"/>
+        <location filename="../src/gui/map/map_editor.cpp" line="2130"/>
         <source>Multiple
 symbols
 selected</source>
-        <comment>Keep it short. Should not be much longer per line than the longest word in the original.</comment>
-        <translation type="unfinished"></translation>
+        <extracomment>Keep it short. Should not be much longer per line than the longest word in the original.</extracomment>
+        <translation>Vairāki
+simboli
+atlasīti</translation>
     </message>
     <message>
-        <location filename="../src/gui/map/map_editor.cpp" line="2203"/>
+        <location filename="../src/gui/map/map_editor.cpp" line="2234"/>
         <source>Draw paths free-handedly.</source>
-        <translation type="unfinished"></translation>
+        <translation>Zīmēt brīvrokas līnijas.</translation>
     </message>
     <message>
-        <location filename="../src/gui/map/map_editor.cpp" line="2205"/>
+        <location filename="../src/gui/map/map_editor.cpp" line="2236"/>
         <source>Fill bounded areas.</source>
-        <translation type="unfinished"></translation>
+        <translation>Aizpildīt norobežotos laukumus.</translation>
     </message>
     <message>
-        <location filename="../src/gui/map/map_editor.cpp" line="2207"/>
+        <location filename="../src/gui/map/map_editor.cpp" line="2238"/>
         <source>Write text on the map.</source>
         <translation>Raksīt tekstu uz kartes.</translation>
     </message>
     <message>
-        <location filename="../src/gui/map/map_editor.cpp" line="2207"/>
+        <location filename="../src/gui/map/map_editor.cpp" line="2238"/>
         <source>Select a text symbol to be able to use this tool.</source>
         <translation>Atlasīt teksta simbolu, lai varētu lietot šo rīku.</translation>
     </message>
@@ -4206,26 +4250,26 @@ selected</source>
         <translation type="vanished">Dublicēt atlasīto(s) simbolu(s).</translation>
     </message>
     <message>
-        <location filename="../src/gui/map/map_editor.cpp" line="2299"/>
-        <location filename="../src/gui/map/map_editor.cpp" line="2301"/>
-        <location filename="../src/gui/map/map_editor.cpp" line="2303"/>
-        <location filename="../src/gui/map/map_editor.cpp" line="2305"/>
+        <location filename="../src/gui/map/map_editor.cpp" line="2330"/>
+        <location filename="../src/gui/map/map_editor.cpp" line="2332"/>
+        <location filename="../src/gui/map/map_editor.cpp" line="2334"/>
+        <location filename="../src/gui/map/map_editor.cpp" line="2336"/>
         <source>Select at least one object to activate this tool.</source>
         <translation>Atlasīt vismaz vienu simbolu, lai aktivizētu šo rīku.</translation>
     </message>
     <message>
-        <location filename="../src/gui/map/map_editor.cpp" line="2314"/>
+        <location filename="../src/gui/map/map_editor.cpp" line="2345"/>
         <source>Switch the direction of symbols on line objects.</source>
         <translation>Pārslēgt simbolu virzienu līniju objektos.</translation>
     </message>
     <message>
-        <location filename="../src/gui/map/map_editor.cpp" line="2314"/>
-        <location filename="../src/gui/map/map_editor.cpp" line="2316"/>
+        <location filename="../src/gui/map/map_editor.cpp" line="2345"/>
+        <location filename="../src/gui/map/map_editor.cpp" line="2347"/>
         <source>Select at least one line object to activate this tool.</source>
         <translation>Atlasīt vismaz vienu simbolu, lai lietotu šo rīku.</translation>
     </message>
     <message>
-        <location filename="../src/gui/map/map_editor.cpp" line="2316"/>
+        <location filename="../src/gui/map/map_editor.cpp" line="2347"/>
         <source>Connect endpoints of paths which are close together.</source>
         <translation>Savienot līniju galus, kas ir tuvu kopā.</translation>
     </message>
@@ -4234,17 +4278,17 @@ selected</source>
         <translation type="vanished">Griezt atlasīto(s) objektu(s) sīkākās daļās.</translation>
     </message>
     <message>
-        <location filename="../src/gui/map/map_editor.cpp" line="2320"/>
+        <location filename="../src/gui/map/map_editor.cpp" line="2351"/>
         <source>Select at least one line or area object to activate this tool.</source>
         <translation>Atlasīt vismaz vienu līnijas vai laukuma objektu, lai lietotu šo rīku.</translation>
     </message>
     <message>
-        <location filename="../src/gui/map/map_editor.cpp" line="2329"/>
+        <location filename="../src/gui/map/map_editor.cpp" line="2360"/>
         <source>Cut a hole into the selected area object.</source>
         <translation>Izgriezt caurumu atlasītajā laukuma objektā.</translation>
     </message>
     <message>
-        <location filename="../src/gui/map/map_editor.cpp" line="2329"/>
+        <location filename="../src/gui/map/map_editor.cpp" line="2360"/>
         <source>Select a single area object to activate this tool.</source>
         <translation>Atlasīt vienu laukuma objektu, lai lietotu šo rīku.</translation>
     </message>
@@ -4281,34 +4325,34 @@ selected</source>
         <translation type="vanished">Aprēķināt laukumu nepārklājošās daļas.</translation>
     </message>
     <message>
-        <location filename="../src/gui/map/map_editor.cpp" line="2322"/>
+        <location filename="../src/gui/map/map_editor.cpp" line="2353"/>
         <source>Turn paths made of straight segments into smooth bezier splines.</source>
         <translation>Pārveidot līnijas, kuras veido taisni segmenti, par gludu līkņu posmiem.</translation>
     </message>
     <message>
-        <location filename="../src/gui/map/map_editor.cpp" line="2322"/>
-        <location filename="../src/gui/map/map_editor.cpp" line="2324"/>
+        <location filename="../src/gui/map/map_editor.cpp" line="2353"/>
+        <location filename="../src/gui/map/map_editor.cpp" line="2355"/>
         <source>Select a path object to activate this tool.</source>
         <translation>Atlasīt līnijveida objektu, lai aktivizētu šo rīku.</translation>
     </message>
     <message>
-        <location filename="../src/gui/map/map_editor.cpp" line="2324"/>
+        <location filename="../src/gui/map/map_editor.cpp" line="2355"/>
         <source>Reduce the number of points in path objects while trying to retain their shape.</source>
         <translation>Samazināt punktu skaitu līnijveida objektos, mēģinot saglabāt to formu.</translation>
     </message>
     <message>
-        <location filename="../src/gui/map/map_editor.cpp" line="2358"/>
+        <location filename="../src/gui/map/map_editor.cpp" line="2389"/>
         <source>Create a cutout of some objects or the whole map.</source>
         <translation>Izveidot dažu objektu vai visas kartes izgriezumu.</translation>
     </message>
     <message>
-        <location filename="../src/gui/map/map_editor.cpp" line="2358"/>
-        <location filename="../src/gui/map/map_editor.cpp" line="2360"/>
+        <location filename="../src/gui/map/map_editor.cpp" line="2389"/>
+        <location filename="../src/gui/map/map_editor.cpp" line="2391"/>
         <source>Select a closed path object as cutout shape to activate this tool.</source>
         <translation>Atlasīt noslēgtu līnijveida objektu izgriezuma formai, lai aktivizētu šo rīku.</translation>
     </message>
     <message>
-        <location filename="../src/gui/map/map_editor.cpp" line="2360"/>
+        <location filename="../src/gui/map/map_editor.cpp" line="2391"/>
         <source>Cut away some objects or everything in a limited area.</source>
         <translation>Izgriezt dažus objektus vai visu ierobežotajā laukumā.</translation>
     </message>
@@ -4317,8 +4361,8 @@ selected</source>
         <translation type="vanished">Maina atlasīto objektu simbolu uz atlasīto simbolu.</translation>
     </message>
     <message>
-        <location filename="../src/gui/map/map_editor.cpp" line="2374"/>
-        <location filename="../src/gui/map/map_editor.cpp" line="2376"/>
+        <location filename="../src/gui/map/map_editor.cpp" line="2405"/>
+        <location filename="../src/gui/map/map_editor.cpp" line="2407"/>
         <source>Select at least one object and a fitting, different symbol to activate this tool.</source>
         <translation>Atlasīt vismaz vienu objektu un atbilstošu citu simbolu, lai lietotu šo rīku.</translation>
     </message>
@@ -4327,21 +4371,21 @@ selected</source>
         <translation type="vanished">Aizpildīt atlasītās līnijas vai izveidot robežu atlasītajiem laukumiem.</translation>
     </message>
     <message>
-        <location filename="../src/gui/map/map_editor.cpp" line="2379"/>
+        <location filename="../src/gui/map/map_editor.cpp" line="2410"/>
         <source>Places evenly spaced point objects along an existing path object</source>
-        <translation type="unfinished"></translation>
+        <translation>Vienmērīgi izvieto punktu objektus gar eksistējošu līnijas objektu</translation>
     </message>
     <message>
-        <location filename="../src/gui/map/map_editor.cpp" line="2379"/>
+        <location filename="../src/gui/map/map_editor.cpp" line="2410"/>
         <source>Select at least one path object and a single point symbol to activate this tool.</source>
-        <translation type="unfinished"></translation>
+        <translation>Atlasi vismaz vienu līnijas objektu un vienu punkta simbolu, lai aktivizētu šo rīku.</translation>
     </message>
     <message>
         <source>%1 object(s) duplicated</source>
         <translation type="vanished">%1 objekts(i) tika dublicēti</translation>
     </message>
     <message>
-        <location filename="../src/gui/map/map_editor.cpp" line="2705"/>
+        <location filename="../src/gui/map/map_editor.cpp" line="2736"/>
         <source>Object selection</source>
         <translation>Objektu atlasīšana</translation>
     </message>
@@ -4350,151 +4394,141 @@ selected</source>
         <translation type="vanished">Neviens objekts netika atlasīts, jo objekti ar atlasīto simbolu(iem) neeksistē.</translation>
     </message>
     <message>
-        <location filename="../src/gui/map/map_editor.cpp" line="3063"/>
+        <location filename="../src/gui/map/map_editor.cpp" line="3094"/>
         <source>Measure</source>
         <translation>Mērīt</translation>
     </message>
     <message>
-        <location filename="../src/gui/map/map_editor.cpp" line="3077"/>
+        <location filename="../src/gui/map/map_editor.cpp" line="3108"/>
         <source>Unification failed.</source>
         <translation>Apvienojums bija nesekmīgs.</translation>
     </message>
     <message>
-        <location filename="../src/gui/map/map_editor.cpp" line="3083"/>
+        <location filename="../src/gui/map/map_editor.cpp" line="3114"/>
         <source>Intersection failed.</source>
         <translation>Šķēlums bija nesekmīgs.</translation>
     </message>
     <message>
-        <location filename="../src/gui/map/map_editor.cpp" line="3089"/>
+        <location filename="../src/gui/map/map_editor.cpp" line="3120"/>
         <source>Difference failed.</source>
         <translation>Diference bija nesekmīga.</translation>
     </message>
     <message>
-        <location filename="../src/gui/map/map_editor.cpp" line="3095"/>
+        <location filename="../src/gui/map/map_editor.cpp" line="3126"/>
         <source>XOr failed.</source>
         <translation>XOR bija nesekmīga.</translation>
     </message>
     <message>
-        <location filename="../src/gui/map/map_editor.cpp" line="3583"/>
+        <location filename="../src/gui/map/map_editor.cpp" line="3598"/>
         <source>Do you want to remove map part &quot;%1&quot; and all its objects?</source>
-        <translation type="unfinished"></translation>
+        <translation>Vai vēlies aizvākt kartes daļu &quot;%1&quot; un visus tās objektus?</translation>
     </message>
     <message>
-        <location filename="../src/gui/map/map_editor.cpp" line="3747"/>
         <source>Paint free-handedly on a template</source>
-        <translation>Zīmēt brīvrokā uz šablona</translation>
+        <translation type="vanished">Zīmēt brīvrokā uz šablona</translation>
     </message>
     <message>
-        <location filename="../src/gui/map/map_editor.cpp" line="3749"/>
         <source>Paint free-handedly on a template. Create or load a template which can be drawn onto to activate this button</source>
-        <translation>Zīmēt brīvrokā uz šablona. Izveidot vai ielasīt šablonu, uz kura var zīmēt, lai lietotu šo rīku</translation>
+        <translation type="vanished">Zīmēt brīvrokā uz šablona. Izveidot vai ielasīt šablonu, uz kura var zīmēt, lai lietotu šo rīku</translation>
     </message>
     <message>
-        <location filename="../src/gui/map/map_editor.cpp" line="3878"/>
+        <location filename="../src/gui/map/map_editor.cpp" line="3883"/>
         <source>Import %1, GPX, OSM or DXF file</source>
         <translation>Importēt %1, GPX, OSM vai DXF datni</translation>
     </message>
     <message>
-        <location filename="../src/gui/map/map_editor.cpp" line="3882"/>
+        <location filename="../src/gui/map/map_editor.cpp" line="3887"/>
         <source>Importable files</source>
         <translation>Importējamās datnes</translation>
     </message>
     <message>
-        <location filename="../src/gui/map/map_editor.cpp" line="3882"/>
+        <location filename="../src/gui/map/map_editor.cpp" line="3887"/>
         <source>All files</source>
         <translation>Visas datnes</translation>
     </message>
     <message>
-        <location filename="../src/gui/map/map_editor.cpp" line="3911"/>
+        <location filename="../src/gui/map/map_editor.cpp" line="3916"/>
         <source>Cannot import the selected file because its file format is not supported.</source>
         <translation>Nevar importēt atlasīto datni, jo tās formāts netiek atbalstīts.</translation>
     </message>
     <message>
         <location filename="../src/gui/map/map_editor.cpp" line="934"/>
         <source>Rotate objects</source>
-        <translation type="unfinished"></translation>
+        <translation>Pagriezt objektus</translation>
     </message>
     <message>
         <location filename="../src/gui/map/map_editor.cpp" line="936"/>
         <source>Scale objects</source>
-        <translation type="unfinished"></translation>
+        <translation>Mērogot objektus</translation>
     </message>
     <message numerus="yes">
-        <location filename="../src/gui/map/map_editor.cpp" line="1623"/>
+        <location filename="../src/gui/map/map_editor.cpp" line="1635"/>
         <source>Cut %n object(s)</source>
         <extracomment>Past tense. Displayed when an Edit &gt; Cut operation is completed.</extracomment>
-        <translation type="unfinished">
-            <numerusform></numerusform>
-            <numerusform></numerusform>
-            <numerusform></numerusform>
-        </translation>
-    </message>
+        <translation><numerusform>Griezt %1 objektus</numerusform>
+        <numerusform>Griezt %1 objektu</numerusform>
+        <numerusform>Griezt %1 objektus</numerusform>
+        </translation></message>
     <message numerus="yes">
-        <location filename="../src/gui/map/map_editor.cpp" line="1676"/>
+        <location filename="../src/gui/map/map_editor.cpp" line="1688"/>
         <source>Copied %n object(s)</source>
-        <translation type="unfinished">
-            <numerusform></numerusform>
-            <numerusform></numerusform>
-            <numerusform></numerusform>
-        </translation>
-    </message>
+        <translation><numerusform>Kopēt %n objektus</numerusform>
+        <numerusform>Kopēt %n objektu</numerusform>
+        <numerusform>Kopēt %n objektus</numerusform>
+        </translation></message>
     <message numerus="yes">
-        <location filename="../src/gui/map/map_editor.cpp" line="1716"/>
+        <location filename="../src/gui/map/map_editor.cpp" line="1728"/>
         <source>Pasted %n object(s)</source>
-        <translation type="unfinished">
-            <numerusform></numerusform>
-            <numerusform></numerusform>
-            <numerusform></numerusform>
-        </translation>
-    </message>
+        <translation><numerusform>Ielīmēt %n objektus</numerusform>
+        <numerusform>Ielīmēt %n objektu</numerusform>
+        <numerusform>Ielīmēt %n objektus</numerusform>
+        </translation></message>
     <message>
-        <location filename="../src/gui/map/map_editor.cpp" line="2299"/>
+        <location filename="../src/gui/map/map_editor.cpp" line="2330"/>
         <source>Deletes the selected objects.</source>
-        <translation type="unfinished"></translation>
+        <translation>Dzēš atlasītos objektus.</translation>
     </message>
     <message>
-        <location filename="../src/gui/map/map_editor.cpp" line="2301"/>
+        <location filename="../src/gui/map/map_editor.cpp" line="2332"/>
         <source>Duplicate the selected objects.</source>
-        <translation type="unfinished"></translation>
+        <translation>Dublicēt atlasītos objektus.</translation>
     </message>
     <message>
-        <location filename="../src/gui/map/map_editor.cpp" line="2303"/>
+        <location filename="../src/gui/map/map_editor.cpp" line="2334"/>
         <source>Rotate the selected objects.</source>
-        <translation type="unfinished"></translation>
+        <translation>Pagriezt atlasītos objektus.</translation>
     </message>
     <message>
-        <location filename="../src/gui/map/map_editor.cpp" line="2305"/>
+        <location filename="../src/gui/map/map_editor.cpp" line="2336"/>
         <source>Scale the selected objects.</source>
-        <translation type="unfinished"></translation>
+        <translation>Mērogot atlasītos objektus.</translation>
     </message>
     <message>
-        <location filename="../src/gui/map/map_editor.cpp" line="2320"/>
+        <location filename="../src/gui/map/map_editor.cpp" line="2351"/>
         <source>Cut the selected objects into smaller parts.</source>
-        <translation type="unfinished"></translation>
+        <translation>Griezt atlasītos objektus mazākās daļās.</translation>
     </message>
     <message>
-        <location filename="../src/gui/map/map_editor.cpp" line="2374"/>
+        <location filename="../src/gui/map/map_editor.cpp" line="2405"/>
         <source>Switches the symbol of the selected objects to the selected symbol.</source>
-        <translation type="unfinished"></translation>
+        <translation>Atlasītos objektus pārveido par atlasītā simbola objektiem.</translation>
     </message>
     <message>
-        <location filename="../src/gui/map/map_editor.cpp" line="2376"/>
+        <location filename="../src/gui/map/map_editor.cpp" line="2407"/>
         <source>Fill the selected lines or create a border for the selected areas.</source>
-        <translation type="unfinished"></translation>
+        <translation>Aizpildīt atlasītās līnijas vai izveidot atlasītā laukuma robežu.</translation>
     </message>
     <message numerus="yes">
-        <location filename="../src/gui/map/map_editor.cpp" line="2495"/>
+        <location filename="../src/gui/map/map_editor.cpp" line="2526"/>
         <source>Duplicated %n object(s)</source>
-        <translation type="unfinished">
-            <numerusform></numerusform>
-            <numerusform></numerusform>
-            <numerusform></numerusform>
-        </translation>
-    </message>
+        <translation><numerusform>Dublēti %n objekti</numerusform>
+        <numerusform>Dublēts %n objekts</numerusform>
+        <numerusform>Dublēti %n objekti</numerusform>
+        </translation></message>
     <message>
-        <location filename="../src/gui/map/map_editor.cpp" line="2705"/>
+        <location filename="../src/gui/map/map_editor.cpp" line="2736"/>
         <source>No objects were selected because there are no objects with the selected symbols.</source>
-        <translation type="unfinished"></translation>
+        <translation>Neviens objekts netika atlasīts, jo nav objektu ar atlasītajiem simboliem.</translation>
     </message>
 </context>
 <context>
@@ -4513,7 +4547,7 @@ selected</source>
         <location filename="../src/tools/draw_path_tool.cpp" line="1245"/>
         <location filename="../src/tools/draw_rectangle_tool.cpp" line="720"/>
         <location filename="../src/tools/draw_rectangle_tool.cpp" line="721"/>
-        <location filename="../src/tools/edit_point_tool.cpp" line="765"/>
+        <location filename="../src/tools/edit_point_tool.cpp" line="766"/>
         <source>More: %1, %2</source>
         <translation>Vairāk: %1, %2</translation>
     </message>
@@ -4535,32 +4569,32 @@ selected</source>
     <message>
         <location filename="../src/gui/map/map_find_feature.cpp" line="55"/>
         <source>&amp;Find...</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Atrast...</translation>
     </message>
     <message>
         <location filename="../src/gui/map/map_find_feature.cpp" line="62"/>
         <source>Find &amp;next</source>
-        <translation type="unfinished"></translation>
+        <translation>Atrast &amp;nākamo</translation>
     </message>
     <message>
         <location filename="../src/gui/map/map_find_feature.cpp" line="92"/>
         <source>Find objects</source>
-        <translation type="unfinished"></translation>
+        <translation>Atrast objektus</translation>
     </message>
     <message>
         <location filename="../src/gui/map/map_find_feature.cpp" line="99"/>
         <source>&amp;Find next</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Atrast nākamo</translation>
     </message>
     <message>
         <location filename="../src/gui/map/map_find_feature.cpp" line="102"/>
         <source>Find &amp;all</source>
-        <translation type="unfinished"></translation>
+        <translation>Atrast &amp;visus</translation>
     </message>
     <message>
         <location filename="../src/gui/map/map_find_feature.cpp" line="105"/>
         <source>Query editor</source>
-        <translation type="unfinished"></translation>
+        <translation>Vaicājumu redaktors</translation>
     </message>
 </context>
 <context>
@@ -4568,32 +4602,32 @@ selected</source>
     <message>
         <location filename="../src/core/map_printer.cpp" line="490"/>
         <source>- Map -</source>
-        <translation type="unfinished">- Karte -</translation>
+        <translation>- Karte -</translation>
     </message>
     <message>
         <location filename="../src/core/map_printer.cpp" line="1241"/>
         <source>Processing separations of page %1...</source>
-        <translation type="unfinished"></translation>
+        <translation>Apstrādā krāsdali lapā %1 ...</translation>
     </message>
     <message>
         <location filename="../src/core/map_printer.cpp" line="1242"/>
         <source>Processing page %1...</source>
-        <translation type="unfinished"></translation>
+        <translation>Apstrādā lapu %1 ...</translation>
     </message>
     <message>
         <location filename="../src/core/map_printer.cpp" line="1292"/>
         <source>Canceled</source>
-        <translation type="unfinished"></translation>
+        <translation>Atcelts</translation>
     </message>
     <message>
         <location filename="../src/core/map_printer.cpp" line="1296"/>
         <source>Error</source>
-        <translation type="unfinished">Kļūda</translation>
+        <translation>Kļūda</translation>
     </message>
     <message>
         <location filename="../src/core/map_printer.cpp" line="1301"/>
         <source>Finished</source>
-        <translation type="unfinished"></translation>
+        <translation>Pabeigts</translation>
     </message>
 </context>
 <context>
@@ -4602,13 +4636,13 @@ selected</source>
         <location filename="../src/gui/color_dialog.cpp" line="275"/>
         <location filename="../src/gui/symbols/symbol_properties_widget.cpp" line="83"/>
         <source>Text source:</source>
-        <translation type="unfinished"></translation>
+        <translation>Teksta avots:</translation>
     </message>
     <message>
         <location filename="../src/gui/color_dialog.cpp" line="517"/>
         <location filename="../src/gui/symbols/symbol_properties_widget.cpp" line="325"/>
         <source>Map (%1)</source>
-        <translation type="unfinished"></translation>
+        <translation>Karte (%1)</translation>
     </message>
     <message>
         <location filename="../src/gui/color_dialog.cpp" line="518"/>
@@ -4616,25 +4650,25 @@ selected</source>
         <location filename="../src/gui/symbols/symbol_properties_widget.cpp" line="326"/>
         <location filename="../src/gui/symbols/symbol_properties_widget.cpp" line="339"/>
         <source>undefined language</source>
-        <translation type="unfinished"></translation>
+        <translation>nedefinēta valoda</translation>
     </message>
     <message>
         <location filename="../src/gui/color_dialog.cpp" line="536"/>
         <location filename="../src/gui/symbols/symbol_properties_widget.cpp" line="342"/>
         <source>Translation (%1)</source>
-        <translation type="unfinished"></translation>
+        <translation>Tulkošana (%1)</translation>
     </message>
     <message>
         <location filename="../src/gui/color_dialog.cpp" line="588"/>
         <location filename="../src/gui/symbols/symbol_properties_widget.cpp" line="216"/>
         <source>Before editing, the stored text will be replaced with the current translation. Do you want to continue?</source>
-        <translation type="unfinished"></translation>
+        <translation>Pirms rediģēšanas saglabātais teksts tiks aizstāts ar pašreizējo tulkojumu. Vai jūs vēlaties turpināt?</translation>
     </message>
     <message>
         <location filename="../src/gui/color_dialog.cpp" line="595"/>
         <location filename="../src/gui/symbols/symbol_properties_widget.cpp" line="223"/>
         <source>After modifying the stored text, the translation may no longer be found. Do you want to continue?</source>
-        <translation type="unfinished"></translation>
+        <translation>Pēc saglabātā teksta izmaiņām tulkojums, iespējams, vairs nebūs atrodams. Vai jūs vēlaties turpināt?</translation>
     </message>
 </context>
 <context>
@@ -4880,7 +4914,7 @@ tuvini, lietojot peles riteni, ja pieejams.</translation>
     <message>
         <location filename="../src/fileformats/ocad8_file_format.cpp" line="1608"/>
         <source>Registration black is exported as a regular color.</source>
-        <translation type="unfinished"></translation>
+        <translation>Reģistrācijas melno eksportē kā parastu krāsu.</translation>
     </message>
     <message>
         <location filename="../src/fileformats/ocad8_file_format.cpp" line="1716"/>
@@ -4896,12 +4930,12 @@ tuvini, lietojot peles riteni, ja pieejams.</translation>
         <location filename="../src/fileformats/ocad8_file_format.cpp" line="1889"/>
         <location filename="../src/fileformats/ocad8_file_format.cpp" line="1900"/>
         <source>Coordinates are adjusted to fit into the OCAD 8 drawing area (-2 m ... 2 m).</source>
-        <translation type="unfinished"></translation>
+        <translation>Koordinātas tiek pielāgotas, lai ietilptu OCAD 8 zīmēšanas laukumā (-2 m... 2 m).</translation>
     </message>
     <message>
         <location filename="../src/fileformats/ocad8_file_format.cpp" line="1911"/>
         <source>Some coordinates remain outside of the OCAD 8 drawing area. They might be unreachable in OCAD.</source>
-        <translation type="unfinished"></translation>
+        <translation>Dažas koordinātes paliek ārpus OCAD 8 zīmēšanas laukuma. Tās varētu būt nesasniedzamas OCAD.</translation>
     </message>
     <message>
         <location filename="../src/fileformats/ocad8_file_format.cpp" line="2182"/>
@@ -4974,21 +5008,19 @@ tuvini, lietojot peles riteni, ja pieejams.</translation>
     <message numerus="yes">
         <location filename="../src/fileformats/ocad8_file_format.cpp" line="149"/>
         <source>%n color separation(s) were skipped, reason: Import disabled.</source>
-        <translation type="unfinished">
-            <numerusform></numerusform>
-            <numerusform></numerusform>
-            <numerusform></numerusform>
-        </translation>
-    </message>
+        <translation><numerusform>%n krāsdales tika izlaistas, iemesls: Imports ir atspējots.</numerusform>
+        <numerusform>%n krāsdale tika izlaista, iemesls: Imports ir atspējots.</numerusform>
+        <numerusform>%n krāsdales tika izlaistas, iemesls: Imports ir atspējots.</numerusform>
+        </translation></message>
     <message>
         <location filename="../src/fileformats/ocad8_file_format.cpp" line="154"/>
         <source>Could not load the spot color definitions, error: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Nevarēja ielādēt īpatkrāsu definīcijas, kļūda: %1</translation>
     </message>
     <message>
         <location filename="../src/fileformats/ocad8_file_format.cpp" line="215"/>
         <source>Color &quot;Registration black&quot; is imported as a special color.</source>
-        <translation type="unfinished"></translation>
+        <translation>Krāsa &quot;Reģistrācijas melnā&quot; tiek importēta kā īpaša krāsa.</translation>
     </message>
     <message>
         <location filename="../src/fileformats/ocad8_file_format.cpp" line="279"/>
@@ -5028,7 +5060,7 @@ tuvini, lietojot peles riteni, ja pieejams.</translation>
     <message>
         <location filename="../src/fileformats/ocad8_file_format.cpp" line="620"/>
         <source>Line symbol %1: suppressing dash symbol at line ends.</source>
-        <translation type="unfinished"></translation>
+        <translation>Līnijas simbols %1: neizmanto svītras simbolu līnijas galos.</translation>
     </message>
     <message>
         <location filename="../src/fileformats/ocad8_file_format.cpp" line="758"/>
@@ -5102,55 +5134,55 @@ tuvini, lietojot peles riteni, ja pieejams.</translation>
         <location filename="../src/core/objects/object_query.cpp" line="295"/>
         <source>is</source>
         <extracomment>Very short label</extracomment>
-        <translation type="unfinished"></translation>
+        <translation>ir</translation>
     </message>
     <message>
         <location filename="../src/core/objects/object_query.cpp" line="298"/>
         <source>is not</source>
         <extracomment>Very short label</extracomment>
-        <translation type="unfinished"></translation>
+        <translation>nav</translation>
     </message>
     <message>
         <location filename="../src/core/objects/object_query.cpp" line="301"/>
         <source>contains</source>
         <extracomment>Very short label</extracomment>
-        <translation type="unfinished"></translation>
+        <translation>satur</translation>
     </message>
     <message>
         <location filename="../src/core/objects/object_query.cpp" line="304"/>
         <source>Search</source>
         <extracomment>Very short label</extracomment>
-        <translation type="unfinished">Meklēt</translation>
+        <translation>Meklēt</translation>
     </message>
     <message>
         <location filename="../src/core/objects/object_query.cpp" line="307"/>
         <source>Text</source>
         <extracomment>Very short label</extracomment>
-        <translation type="unfinished">Teksts</translation>
+        <translation>Teksts</translation>
     </message>
     <message>
         <location filename="../src/core/objects/object_query.cpp" line="311"/>
         <source>and</source>
         <extracomment>Very short label</extracomment>
-        <translation type="unfinished"></translation>
+        <translation>un</translation>
     </message>
     <message>
         <location filename="../src/core/objects/object_query.cpp" line="314"/>
         <source>or</source>
         <extracomment>Very short label</extracomment>
-        <translation type="unfinished"></translation>
+        <translation>vai</translation>
     </message>
     <message>
         <location filename="../src/core/objects/object_query.cpp" line="318"/>
         <source>Symbol</source>
         <extracomment>Very short label</extracomment>
-        <translation type="unfinished"></translation>
+        <translation>Simbols</translation>
     </message>
     <message>
         <location filename="../src/core/objects/object_query.cpp" line="322"/>
         <source>invalid</source>
         <extracomment>Very short label</extracomment>
-        <translation type="unfinished"></translation>
+        <translation>nederīgs</translation>
     </message>
 </context>
 <context>
@@ -5158,173 +5190,178 @@ tuvini, lietojot peles riteni, ja pieejams.</translation>
     <message>
         <location filename="../src/fileformats/ocd_file_import.cpp" line="148"/>
         <source>In line symbol %1 &apos;%2&apos;: %3</source>
-        <translation type="unfinished"></translation>
+        <translation>Līnijas simbolā %1 &apos;%2&apos;: %3</translation>
     </message>
     <message>
         <location filename="../src/fileformats/ocd_file_import.cpp" line="154"/>
         <source>In text symbol %1 &apos;%2&apos;: %3</source>
-        <translation type="unfinished"></translation>
+        <translation>Teksta simbolā %1 &apos;%2&apos;: %3</translation>
     </message>
     <message>
         <location filename="../src/fileformats/ocd_file_import.cpp" line="412"/>
         <source>Could not load the coordinate reference system &apos;%1&apos;.</source>
-        <translation type="unfinished"></translation>
+        <translation>Nevarēja ielasīt koordinātu atskaites sistēmu &apos;%1&apos;.</translation>
     </message>
     <message>
         <location filename="../src/fileformats/ocd_file_import.cpp" line="446"/>
         <location filename="../src/fileformats/ocd_file_import.cpp" line="453"/>
         <source>Spot color information was ignored.</source>
-        <translation type="unfinished"></translation>
+        <translation>Speckrāsas informācija tika ignorēta.</translation>
     </message>
     <message>
         <location filename="../src/fileformats/ocd_file_import.cpp" line="581"/>
         <source>Unable to import symbol %1.%2 &quot;%3&quot;: %4</source>
-        <translation type="unfinished"></translation>
+        <translation>Neizdevās importēt simbolu %1. %2 &quot;%3&quot;: %4</translation>
     </message>
     <message>
         <location filename="../src/fileformats/ocd_file_import.cpp" line="585"/>
         <source>Unsupported type &quot;%1&quot;.</source>
-        <translation type="unfinished"></translation>
+        <translation>Neatbalstīts tips &quot;%1&quot;.</translation>
     </message>
     <message>
         <location filename="../src/fileformats/ocd_file_import.cpp" line="678"/>
         <source>Unable to import template: &quot;%1&quot; is not a supported template type.</source>
-        <translation type="unfinished"></translation>
+        <translation>Neizdevās importēt veidni: &quot;%1&quot; ir neatbalstīts veidnes tips.</translation>
     </message>
     <message>
         <location filename="../src/fileformats/ocd_file_import.cpp" line="926"/>
         <location filename="../src/fileformats/ocd_file_import.cpp" line="988"/>
         <source>Unsupported line style &apos;%1&apos;.</source>
-        <translation type="unfinished"></translation>
+        <translation>Neatbalstīts līnijas stils &apos;%1&apos;.</translation>
     </message>
     <message>
         <location filename="../src/fileformats/ocd_file_import.cpp" line="1025"/>
         <source>Different lengths for pointed caps at begin (%1 mm) and end (%2 mm) are not supported. Using %3 mm.</source>
-        <translation type="unfinished"></translation>
+        <translation>Netiek atbalstīti dažāda garuma līnijas gali (%1 mm) sākumā un beigās (%2 mm). Tiks lietots %3 mm.</translation>
     </message>
     <message>
         <location filename="../src/fileformats/ocd_file_import.cpp" line="1041"/>
         <source>The dash pattern cannot be imported correctly.</source>
-        <translation type="unfinished"></translation>
+        <translation>Svītrlīnijas paraugs nevar tikt pareizi importēts.</translation>
     </message>
     <message>
         <location filename="../src/fileformats/ocd_file_import.cpp" line="1056"/>
         <location filename="../src/fileformats/ocd_file_import.cpp" line="1088"/>
         <source>The dash pattern&apos;s end length (%1 mm) cannot be imported correctly. Using %2 mm.</source>
-        <translation type="unfinished"></translation>
+        <translation>Svītrlīnijas parauga gala garums (%1 mm) nevar tikt pareizi importēts. Tiks izmantots %2 mm.</translation>
     </message>
     <message>
         <location filename="../src/fileformats/ocd_file_import.cpp" line="1063"/>
         <location filename="../src/fileformats/ocd_file_import.cpp" line="1103"/>
         <source>The dash pattern&apos;s end gap (%1 mm) cannot be imported correctly. Using %2 mm.</source>
-        <translation type="unfinished"></translation>
+        <translation>Svītrlīnijas parauga gala atstarpe (%1 mm) nevar tikt pareizi importēta. Tiks izmantots %2 mm.</translation>
     </message>
     <message>
         <location filename="../src/fileformats/ocd_file_import.cpp" line="1145"/>
         <source>Unsupported framing line style &apos;%1&apos;.</source>
-        <translation type="unfinished"></translation>
+        <translation>Neatbalstīts ierāmēšanas līnijas stils &apos;%1&apos;.</translation>
     </message>
     <message>
         <location filename="../src/fileformats/ocd_file_import.cpp" line="1217"/>
         <source>Skipped secondary point symbol.</source>
-        <translation type="unfinished"></translation>
+        <translation>Izlaists sekundārā punkta simbols.</translation>
     </message>
     <message>
         <location filename="../src/fileformats/ocd_file_import.cpp" line="1253"/>
         <source>Suppressing dash symbol at line ends.</source>
-        <translation type="unfinished"></translation>
+        <translation>Neizmantot svītru līnijas sākumā un beigās.</translation>
     </message>
     <message>
         <location filename="../src/fileformats/ocd_file_import.cpp" line="969"/>
-        <location filename="../src/fileformats/ocd_file_import.cpp" line="1322"/>
+        <location filename="../src/fileformats/ocd_file_import.cpp" line="1331"/>
         <source>This symbol cannot be saved as a proper OCD symbol again.</source>
-        <translation type="unfinished"></translation>
+        <translation>Šis simbols nevar tikt saglabāts kā pareizs OCD simbols vēlreiz.</translation>
     </message>
     <message>
-        <location filename="../src/fileformats/ocd_file_import.cpp" line="1977"/>
+        <location filename="../src/fileformats/ocd_file_import.cpp" line="2003"/>
         <source>Justified alignment is not supported.</source>
-        <translation type="unfinished"></translation>
+        <translation>Abpusējs izlīdzinājums netiek atbalstīts.</translation>
     </message>
     <message>
-        <location filename="../src/fileformats/ocd_file_import.cpp" line="1992"/>
+        <location filename="../src/fileformats/ocd_file_import.cpp" line="2018"/>
         <source>Vertical alignment &apos;%1&apos; is not supported.</source>
-        <translation type="unfinished"></translation>
+        <translation>Vertikālais līdzinājums &apos;%1&apos; netiek atbalstīts.</translation>
     </message>
     <message>
-        <location filename="../src/fileformats/ocd_file_import.cpp" line="1964"/>
+        <location filename="../src/fileformats/ocd_file_import.cpp" line="1990"/>
         <source>Ignoring custom weight (%1).</source>
-        <translation type="unfinished"></translation>
+        <translation>Ignorē pielāgoto svaru (%1).</translation>
     </message>
     <message>
-        <location filename="../src/fileformats/ocd_file_import.cpp" line="2001"/>
+        <location filename="../src/fileformats/ocd_file_import.cpp" line="2027"/>
         <source>Custom character spacing may be incorrect.</source>
-        <translation type="unfinished"></translation>
+        <translation>Pielāgoto rakstzīmju retinājums, iespējams, ir nepareizs.</translation>
     </message>
     <message>
-        <location filename="../src/fileformats/ocd_file_import.cpp" line="2006"/>
+        <location filename="../src/fileformats/ocd_file_import.cpp" line="2032"/>
         <source>Ignoring custom word spacing (%1 %).</source>
-        <translation type="unfinished"></translation>
+        <translation>Ignorē pielāgotās vārdu atstarpes (%1 %).</translation>
     </message>
     <message>
-        <location filename="../src/fileformats/ocd_file_import.cpp" line="2030"/>
+        <location filename="../src/fileformats/ocd_file_import.cpp" line="2056"/>
         <source>Ignoring custom indents (%1/%2).</source>
-        <translation type="unfinished"></translation>
+        <translation>Ignorē pielāgotās atkāpes (%1/ %2).</translation>
     </message>
     <message>
-        <location filename="../src/fileformats/ocd_file_import.cpp" line="2052"/>
+        <location filename="../src/fileformats/ocd_file_import.cpp" line="2078"/>
         <source>Ignoring text framing (mode %1).</source>
-        <translation type="unfinished"></translation>
+        <translation>Ignorē teksta ierāmēšanu (režīms %1).</translation>
     </message>
     <message>
-        <location filename="../src/fileformats/ocd_file_import.cpp" line="1411"/>
+        <location filename="../src/fileformats/ocd_file_import.cpp" line="1418"/>
         <source>Line text symbols are not yet supported. Marking the symbol as hidden.</source>
-        <translation type="unfinished"></translation>
+        <translation>Teksta rindas simboli vēl netiek atbalstīti. Marķē simbolu kā slēptu.</translation>
     </message>
     <message>
         <location filename="../src/fileformats/ocd_file_import.cpp" line="105"/>
         <source>Encoding &apos;%1&apos; is not available. Check the settings.</source>
-        <translation type="unfinished"></translation>
+        <translation>Kodējums &apos;%1&apos; nav pieejams. Pārbaudiet iestatījumus.</translation>
     </message>
     <message>
         <location filename="../src/fileformats/ocd_file_import.cpp" line="142"/>
         <source>In area symbol %1 &apos;%2&apos;: %3</source>
-        <translation type="unfinished"></translation>
+        <translation>Laukuma simbolā %1 &apos;%2&apos;: %3</translation>
     </message>
     <message>
-        <location filename="../src/fileformats/ocd_file_import.cpp" line="1588"/>
+        <location filename="../src/fileformats/ocd_file_import.cpp" line="1318"/>
+        <source>The border of this symbol could not be loaded.</source>
+        <translation>Šī simbola robežu nevar ielasīt.</translation>
+    </message>
+    <message>
+        <location filename="../src/fileformats/ocd_file_import.cpp" line="1614"/>
         <source>Unable to load object</source>
-        <translation type="unfinished">Nav iespējams ielasīt objektu</translation>
+        <translation>Nav iespējams ielasīt objektu</translation>
     </message>
     <message>
-        <location filename="../src/fileformats/ocd_file_import.cpp" line="1598"/>
+        <location filename="../src/fileformats/ocd_file_import.cpp" line="1624"/>
         <source>Unable to import rectangle object</source>
-        <translation type="unfinished">Nav iespējams ielasīt taisnstūrveida objektu</translation>
+        <translation>Nav iespējams ielasīt taisnstūrveida objektu</translation>
     </message>
     <message>
-        <location filename="../src/fileformats/ocd_file_import.cpp" line="1639"/>
+        <location filename="../src/fileformats/ocd_file_import.cpp" line="1665"/>
         <source>Not importing text symbol, couldn&apos;t figure out path&apos; (npts=%1): %2</source>
-        <translation type="unfinished">Teksta simbols nav importēts, nav iespējams noskaidrot sekošanas līniju (npts=%1): %2</translation>
+        <translation>Teksta simbols nav importēts, nav iespējams noskaidrot sekošanas līniju (npts=%1): %2</translation>
     </message>
     <message>
-        <location filename="../src/fileformats/ocd_file_import.cpp" line="1939"/>
+        <location filename="../src/fileformats/ocd_file_import.cpp" line="1965"/>
         <source>Trying to import a text object with unknown coordinate format</source>
-        <translation type="unfinished">Mēģinājums importēt teksta objektu ar nezināmu koordinātu formātu</translation>
+        <translation>Mēģinājums importēt teksta objektu ar nezināmu koordinātu formātu</translation>
     </message>
     <message>
-        <location filename="../src/fileformats/ocd_file_import.cpp" line="2069"/>
-        <location filename="../src/fileformats/ocd_file_import.cpp" line="2073"/>
+        <location filename="../src/fileformats/ocd_file_import.cpp" line="2095"/>
+        <location filename="../src/fileformats/ocd_file_import.cpp" line="2099"/>
         <source>Invalid data.</source>
-        <translation type="unfinished"></translation>
+        <translation>Nederīgi dati.</translation>
     </message>
     <message>
-        <location filename="../src/fileformats/ocd_file_import.cpp" line="2104"/>
+        <location filename="../src/fileformats/ocd_file_import.cpp" line="2130"/>
         <source>OCD files of version %1 are not supported!</source>
-        <translation type="unfinished"></translation>
+        <translation>Versijas %1 OCD faili netiek atbalstīti!</translation>
     </message>
     <message>
         <location filename="../src/fileformats/ocd_file_import.h" line="455"/>
         <source>Color id not found: %1, ignoring this color</source>
-        <translation type="unfinished">Krāsa %1 netika atrasta, ignorējam to</translation>
+        <translation>Krāsas id nav atrasts: %1, ignorējam šo krāsu</translation>
     </message>
 </context>
 <context>
@@ -5332,37 +5369,37 @@ tuvini, lietojot peles riteni, ja pieejams.</translation>
     <message>
         <location filename="../src/gdal/ogr_file_format.cpp" line="392"/>
         <source>Unable to setup &quot;%1&quot; SRS for GDAL: %2</source>
-        <translation type="unfinished"></translation>
+        <translation>Nevar iestatīt &quot;%1&quot; SRS priekš GDAL: %2</translation>
     </message>
     <message>
         <location filename="../src/gdal/ogr_file_format.cpp" line="326"/>
         <source>Purple</source>
-        <translation type="unfinished"></translation>
+        <translation>Purpurs</translation>
     </message>
     <message>
         <location filename="../src/gdal/ogr_file_format.cpp" line="339"/>
         <source>Point</source>
-        <translation type="unfinished">Punkts</translation>
+        <translation>Punkts</translation>
     </message>
     <message>
         <location filename="../src/gdal/ogr_file_format.cpp" line="346"/>
         <source>Line</source>
-        <translation type="unfinished">Līnija</translation>
+        <translation>Līnija</translation>
     </message>
     <message>
         <location filename="../src/gdal/ogr_file_format.cpp" line="355"/>
         <source>Area</source>
-        <translation type="unfinished">Laukums</translation>
+        <translation>Laukums</translation>
     </message>
     <message>
         <location filename="../src/gdal/ogr_file_format.cpp" line="361"/>
         <source>Text</source>
-        <translation type="unfinished">Teksts</translation>
+        <translation>Teksts</translation>
     </message>
     <message>
         <location filename="../src/gdal/ogr_file_format.cpp" line="452"/>
         <source>Unable to load layer %1.</source>
-        <translation type="unfinished"></translation>
+        <translation>Nevar ielasīt slāni %1.</translation>
     </message>
     <message numerus="yes">
         <location filename="../src/gdal/ogr_file_format.cpp" line="500"/>
@@ -5371,76 +5408,80 @@ tuvini, lietojot peles riteni, ja pieejams.</translation>
         <location filename="../src/gdal/ogr_file_format.cpp" line="515"/>
         <location filename="../src/gdal/ogr_file_format.cpp" line="520"/>
         <source>Unable to load %n objects, reason: %1</source>
-        <translation type="unfinished">
-            <numerusform></numerusform>
-            <numerusform></numerusform>
-            <numerusform></numerusform>
-        </translation>
-    </message>
+        <translation><numerusform>Nevar ielasīt %n objektus, cēlonis: %1</numerusform>
+        <numerusform>Nevar ielasīt %n objektu, cēlonis: %1</numerusform>
+        <numerusform>Nevar ielasīt %n objektus, cēlonis: %1</numerusform>
+        </translation></message>
     <message>
         <location filename="../src/gdal/ogr_file_format.cpp" line="501"/>
         <source>Empty geometry.</source>
-        <translation type="unfinished"></translation>
+        <translation>Tukša ģeometrija.</translation>
     </message>
     <message>
         <location filename="../src/gdal/ogr_file_format.cpp" line="506"/>
         <source>Can&apos;t determine the coordinate transformation: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Nevar noteikt koordinātu transformācijas: %1</translation>
     </message>
     <message>
         <location filename="../src/gdal/ogr_file_format.cpp" line="511"/>
         <source>Failed to transform the coordinates.</source>
-        <translation type="unfinished"></translation>
+        <translation>Neizdevās pārveidot koordinātas.</translation>
     </message>
     <message>
         <location filename="../src/gdal/ogr_file_format.cpp" line="516"/>
         <source>Unknown or unsupported geometry type.</source>
-        <translation type="unfinished"></translation>
+        <translation>Nav zināms vai neatbalstīts ģeometrijas tips.</translation>
     </message>
     <message>
         <location filename="../src/gdal/ogr_file_format.cpp" line="521"/>
         <source>Not enough coordinates.</source>
-        <translation type="unfinished"></translation>
+        <translation>Nav pietiekami daudz koordinātas.</translation>
     </message>
     <message>
         <location filename="../src/gdal/ogr_file_format.cpp" line="564"/>
         <source>Cannot use this spatial reference:
 %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Nevar lietot šo telpisko atsauci: 
+%1</translation>
     </message>
     <message>
         <location filename="../src/gdal/ogr_file_format.cpp" line="623"/>
         <source>The geospatial data has no suitable spatial reference.</source>
-        <translation type="unfinished"></translation>
+        <translation>Ģeotelpiskajiem datiem neeksistē piemērota telpiskā atsauce.</translation>
     </message>
 </context>
 <context>
     <name>OpenOrienteering::PaintOnTemplateSelectDialog</name>
     <message>
-        <location filename="../src/templates/template_tool_paint.cpp" line="350"/>
+        <location filename="../src/templates/template_tool_paint.cpp" line="453"/>
         <source>Select template to draw onto</source>
         <translation>Atlasīt šablonu, uz kura zīmēt</translation>
     </message>
     <message>
-        <location filename="../src/templates/template_tool_paint.cpp" line="364"/>
+        <location filename="../src/templates/template_tool_paint.cpp" line="480"/>
         <source>Cancel</source>
         <translation>Atcelt</translation>
     </message>
     <message>
-        <location filename="../src/templates/template_tool_paint.cpp" line="365"/>
+        <location filename="../src/templates/template_tool_paint.cpp" line="481"/>
         <source>Draw</source>
         <translation>Zīmēt</translation>
+    </message>
+    <message>
+        <location filename="../src/templates/template_tool_paint.cpp" line="551"/>
+        <source>Template file exists: &apos;%1&apos;</source>
+        <translation>Veidnes fails jau eksistē: &apos;%1&apos;</translation>
     </message>
 </context>
 <context>
     <name>OpenOrienteering::PaintOnTemplateTool</name>
     <message>
-        <location filename="../src/templates/template_tool_paint.cpp" line="74"/>
+        <location filename="../src/templates/template_tool_paint.cpp" line="154"/>
         <source>&lt;b&gt;Click and drag&lt;/b&gt;: Paint. &lt;b&gt;Right click and drag&lt;/b&gt;: Erase. </source>
         <translation>&lt;b&gt;Klikšķis un vilkt&lt;/b&gt;: Krāsot. &lt;b&gt;Labais klikšķis un vilkt&lt;/b&gt;: Dzēst. </translation>
     </message>
     <message>
-        <location filename="../src/templates/template_tool_paint.cpp" line="77"/>
+        <location filename="../src/templates/template_tool_paint.cpp" line="157"/>
         <source>Color selection</source>
         <translation>Krāsu atlasīšana</translation>
     </message>
@@ -5459,7 +5500,7 @@ tuvini, lietojot peles riteni, ja pieejams.</translation>
         <location filename="../src/util/item_delegates.cpp" line="155"/>
         <location filename="../src/util/item_delegates.cpp" line="162"/>
         <source>%</source>
-        <translation type="unfinished">%</translation>
+        <translation>%</translation>
     </message>
 </context>
 <context>
@@ -5643,13 +5684,13 @@ tuvini, lietojot peles riteni, ja pieejams.</translation>
         <location filename="../src/gui/print_progress_dialog.cpp" line="58"/>
         <source>Printing</source>
         <comment>PrintWidget</comment>
-        <translation type="unfinished"></translation>
+        <translation>Drukāšana</translation>
     </message>
     <message>
         <location filename="../src/gui/print_progress_dialog.cpp" line="59"/>
         <source>An error occurred during processing.</source>
         <comment>PrintWidget</comment>
-        <translation type="unfinished"></translation>
+        <translation>Apstrādes laikā radās kļūda.</translation>
     </message>
 </context>
 <context>
@@ -5662,29 +5703,29 @@ tuvini, lietojot peles riteni, ja pieejams.</translation>
         <location filename="../src/gui/print_tool.cpp" line="59"/>
         <location filename="../src/gui/print_tool.cpp" line="371"/>
         <source>&lt;b&gt;Drag&lt;/b&gt;: Move the map, the print area or the area&apos;s borders. </source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;Vilkt&lt;/b&gt;: Pārvietot karti, drukas apgabalu vai apgabala robežas. </translation>
     </message>
     <message>
         <location filename="../src/gui/print_tool.cpp" line="343"/>
         <source>&lt;b&gt;Drag&lt;/b&gt;: Move the print area. </source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;Vilkt&lt;/b&gt;: Pārvietot drukas apgabalu. </translation>
     </message>
     <message>
         <location filename="../src/gui/print_tool.cpp" line="347"/>
         <source>&lt;b&gt;Drag&lt;/b&gt;: Move the map. </source>
-        <translation type="unfinished">&lt;b&gt;Vilkt&lt;/b&gt;: Pārvietot karti. </translation>
+        <translation>&lt;b&gt;Vilkt&lt;/b&gt;: Pārvietot karti. </translation>
     </message>
     <message>
         <location filename="../src/gui/print_tool.cpp" line="352"/>
         <location filename="../src/gui/print_tool.cpp" line="357"/>
         <source>&lt;b&gt;Drag&lt;/b&gt;: Move the print area&apos;s border. </source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;Vilkt&lt;/b&gt;: Pārvietot drukas apgabalu robežu. </translation>
     </message>
     <message>
         <location filename="../src/gui/print_tool.cpp" line="362"/>
         <location filename="../src/gui/print_tool.cpp" line="367"/>
         <source>&lt;b&gt;Drag&lt;/b&gt;: Move the print area&apos;s borders. </source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;Vilkt&lt;/b&gt;: Pārvietot drukas apgabala robežas. </translation>
     </message>
 </context>
 <context>
@@ -5694,351 +5735,359 @@ tuvini, lietojot peles riteni, ja pieejams.</translation>
         <translation type="vanished">Eksportēt kā PDF vai PS</translation>
     </message>
     <message>
-        <location filename="../src/gui/print_widget.cpp" line="251"/>
+        <location filename="../src/gui/print_widget.cpp" line="253"/>
         <source>Show templates</source>
         <translation>Rādīt šablonus</translation>
     </message>
     <message>
-        <location filename="../src/gui/print_widget.cpp" line="262"/>
+        <location filename="../src/gui/print_widget.cpp" line="264"/>
         <source>Show grid</source>
         <translation>Rādīt režģi</translation>
     </message>
     <message>
-        <location filename="../src/gui/print_widget.cpp" line="175"/>
+        <location filename="../src/gui/print_widget.cpp" line="177"/>
         <source>Page orientation:</source>
         <translation>Lapas orientācija:</translation>
     </message>
     <message>
-        <location filename="../src/gui/print_widget.cpp" line="135"/>
+        <location filename="../src/gui/print_widget.cpp" line="137"/>
         <source>Printer:</source>
         <translation>Printeris:</translation>
     </message>
     <message>
-        <location filename="../src/gui/print_widget.cpp" line="168"/>
+        <location filename="../src/gui/print_widget.cpp" line="170"/>
         <source>Portrait</source>
         <translation>Portrets</translation>
     </message>
     <message>
-        <location filename="../src/gui/print_widget.cpp" line="170"/>
+        <location filename="../src/gui/print_widget.cpp" line="172"/>
         <source>Landscape</source>
         <translation>Ainava</translation>
     </message>
     <message>
-        <location filename="../src/gui/print_widget.cpp" line="149"/>
+        <location filename="../src/gui/print_widget.cpp" line="151"/>
         <source>Page format:</source>
         <translation>Lapas formāts:</translation>
     </message>
     <message>
-        <location filename="../src/gui/print_widget.cpp" line="178"/>
+        <location filename="../src/gui/print_widget.cpp" line="180"/>
         <source>Copies:</source>
         <translation>Kopijas:</translation>
     </message>
     <message>
-        <location filename="../src/gui/print_widget.cpp" line="191"/>
+        <location filename="../src/gui/print_widget.cpp" line="193"/>
         <source>Left:</source>
         <translation>Kreisais:</translation>
     </message>
     <message>
-        <location filename="../src/gui/print_widget.cpp" line="194"/>
+        <location filename="../src/gui/print_widget.cpp" line="196"/>
         <source>Top:</source>
         <translation>Augša:</translation>
     </message>
     <message>
-        <location filename="../src/gui/print_widget.cpp" line="197"/>
+        <location filename="../src/gui/print_widget.cpp" line="199"/>
         <source>Width:</source>
         <translation>Platums:</translation>
     </message>
     <message>
-        <location filename="../src/gui/print_widget.cpp" line="200"/>
+        <location filename="../src/gui/print_widget.cpp" line="202"/>
         <source>Height:</source>
         <translation>Augstums:</translation>
     </message>
     <message>
-        <location filename="../src/gui/print_widget.cpp" line="294"/>
+        <location filename="../src/gui/print_widget.cpp" line="300"/>
         <source>Preview...</source>
         <translation>Priekšskats...</translation>
     </message>
     <message>
-        <location filename="../src/gui/print_widget.cpp" line="183"/>
+        <location filename="../src/gui/print_widget.cpp" line="185"/>
         <source>Single page</source>
         <translation>Viena lapa</translation>
     </message>
     <message>
-        <location filename="../src/gui/print_widget.cpp" line="184"/>
+        <location filename="../src/gui/print_widget.cpp" line="186"/>
         <source>Custom area</source>
         <translation>Izvēles apgabals</translation>
     </message>
     <message>
-        <location filename="../src/gui/print_widget.cpp" line="185"/>
+        <location filename="../src/gui/print_widget.cpp" line="187"/>
         <source>Map area:</source>
         <translation>Kartes apgabals:</translation>
     </message>
     <message>
-        <location filename="../src/gui/print_widget.cpp" line="187"/>
+        <location filename="../src/gui/print_widget.cpp" line="189"/>
         <source>Center print area</source>
         <translation>Centrēt drukas apgabalu</translation>
     </message>
     <message>
-        <location filename="../src/gui/print_widget.cpp" line="155"/>
-        <location filename="../src/gui/print_widget.cpp" line="159"/>
-        <location filename="../src/gui/print_widget.cpp" line="190"/>
-        <location filename="../src/gui/print_widget.cpp" line="193"/>
-        <location filename="../src/gui/print_widget.cpp" line="196"/>
-        <location filename="../src/gui/print_widget.cpp" line="199"/>
-        <location filename="../src/gui/print_widget.cpp" line="202"/>
+        <location filename="../src/gui/print_widget.cpp" line="157"/>
+        <location filename="../src/gui/print_widget.cpp" line="161"/>
+        <location filename="../src/gui/print_widget.cpp" line="192"/>
+        <location filename="../src/gui/print_widget.cpp" line="195"/>
+        <location filename="../src/gui/print_widget.cpp" line="198"/>
+        <location filename="../src/gui/print_widget.cpp" line="201"/>
+        <location filename="../src/gui/print_widget.cpp" line="204"/>
         <source>mm</source>
         <translation>mm</translation>
     </message>
     <message>
-        <location filename="../src/gui/print_widget.cpp" line="140"/>
+        <location filename="../src/gui/print_widget.cpp" line="142"/>
         <source>Properties</source>
-        <translation type="unfinished"></translation>
+        <translation>Rekvizīti</translation>
     </message>
     <message>
-        <location filename="../src/gui/print_widget.cpp" line="203"/>
+        <location filename="../src/gui/print_widget.cpp" line="205"/>
         <source>Page overlap:</source>
         <translation>Lappušu pārklājums:</translation>
     </message>
     <message>
-        <location filename="../src/gui/print_widget.cpp" line="207"/>
+        <location filename="../src/gui/print_widget.cpp" line="209"/>
         <source>Options</source>
         <translation>Opcijas</translation>
     </message>
     <message>
-        <location filename="../src/gui/print_widget.cpp" line="235"/>
+        <location filename="../src/gui/print_widget.cpp" line="237"/>
         <source>Resolution:</source>
         <translation>Izšķirtspēja:</translation>
     </message>
     <message>
-        <location filename="../src/gui/print_widget.cpp" line="237"/>
+        <location filename="../src/gui/print_widget.cpp" line="239"/>
         <source>Print in different scale:</source>
         <translation>Drukāt citā mērogā:</translation>
     </message>
     <message>
-        <location filename="../src/gui/print_widget.cpp" line="258"/>
+        <location filename="../src/gui/print_widget.cpp" line="260"/>
         <source>Template appearance may differ.</source>
-        <translation type="unfinished"></translation>
+        <translation>Veidnes izskats var atšķirties.</translation>
     </message>
     <message>
-        <location filename="../src/gui/print_widget.cpp" line="265"/>
+        <location filename="../src/gui/print_widget.cpp" line="267"/>
         <source>Simulate overprinting</source>
         <translation>Simulēt virsdruku</translation>
     </message>
     <message>
         <location filename="../src/gui/print_widget.cpp" line="270"/>
+        <source>Save world file</source>
+        <translation>Saglabāt globālo datni</translation>
+    </message>
+    <message>
+        <location filename="../src/gui/print_widget.cpp" line="276"/>
         <source>Default</source>
-        <translation type="unfinished"></translation>
+        <translation>Pēc noklusējuma</translation>
     </message>
     <message>
-        <location filename="../src/gui/print_widget.cpp" line="271"/>
-        <source>Device CMYK (experimental)</source>
-        <translation type="unfinished"></translation>
+        <location filename="../src/gui/print_widget.cpp" line="277"/>
+        <source>Device CMYK</source>
+        <translation>Ierīces CMYK</translation>
     </message>
     <message>
-        <location filename="../src/gui/print_widget.cpp" line="272"/>
+        <location filename="../src/gui/print_widget.cpp" line="278"/>
         <source>Color mode:</source>
-        <translation type="unfinished"></translation>
+        <translation>Krāsu režīms:</translation>
     </message>
     <message>
-        <location filename="../src/gui/print_widget.cpp" line="296"/>
-        <location filename="../src/gui/print_widget.cpp" line="402"/>
+        <location filename="../src/gui/print_widget.cpp" line="302"/>
+        <location filename="../src/gui/print_widget.cpp" line="408"/>
         <source>Print</source>
         <translation>Druka</translation>
     </message>
     <message>
-        <location filename="../src/gui/print_widget.cpp" line="300"/>
+        <location filename="../src/gui/print_widget.cpp" line="306"/>
         <source>Export...</source>
         <translation>Eksports...</translation>
     </message>
     <message>
-        <location filename="../src/gui/print_widget.cpp" line="407"/>
+        <location filename="../src/gui/print_widget.cpp" line="413"/>
         <source>PDF export</source>
         <translation>PDF eksports</translation>
     </message>
     <message>
-        <location filename="../src/gui/print_widget.cpp" line="418"/>
+        <location filename="../src/gui/print_widget.cpp" line="424"/>
         <source>Image export</source>
         <translation>Attēla eksports</translation>
     </message>
     <message>
-        <location filename="../src/gui/print_widget.cpp" line="524"/>
+        <location filename="../src/gui/print_widget.cpp" line="530"/>
         <source>Save to PDF</source>
         <translation>Saglabāt uz PDF</translation>
     </message>
     <message>
-        <location filename="../src/gui/print_widget.cpp" line="233"/>
-        <location filename="../src/gui/print_widget.cpp" line="928"/>
-        <location filename="../src/gui/print_widget.cpp" line="969"/>
+        <location filename="../src/gui/print_widget.cpp" line="235"/>
+        <location filename="../src/gui/print_widget.cpp" line="939"/>
+        <location filename="../src/gui/print_widget.cpp" line="980"/>
         <source>dpi</source>
         <translation>dpi</translation>
     </message>
     <message>
-        <location filename="../src/gui/print_widget.cpp" line="1099"/>
+        <location filename="../src/gui/print_widget.cpp" line="1110"/>
         <source>Not supported on Android.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../src/gui/print_widget.cpp" line="1107"/>
-        <source>Failed to prepare the preview.</source>
-        <translation type="unfinished"></translation>
+        <translation>Nav atbalstīts uz Android.</translation>
     </message>
     <message>
         <location filename="../src/gui/print_widget.cpp" line="1118"/>
-        <source>Print Preview Progress</source>
-        <translation type="unfinished"></translation>
+        <source>Failed to prepare the preview.</source>
+        <translation>Neizdevās sagatavot priekšskatījumu.</translation>
     </message>
     <message>
-        <location filename="../src/gui/print_widget.cpp" line="1135"/>
+        <location filename="../src/gui/print_widget.cpp" line="1129"/>
+        <source>Print Preview Progress</source>
+        <translation>Notiek drukas priekšskatījuma izveide</translation>
+    </message>
+    <message>
+        <location filename="../src/gui/print_widget.cpp" line="1146"/>
         <source>Warning</source>
         <translation>Brīdinājums</translation>
     </message>
     <message>
-        <location filename="../src/gui/print_widget.cpp" line="1136"/>
+        <location filename="../src/gui/print_widget.cpp" line="1147"/>
         <source>A non-standard view mode is activated. Are you sure to print / export the map like this?</source>
         <translation>Aktivizēts nestandarta skata veids. Vai tiešām gribi drukāt/eksportēt karti tādā veidā?</translation>
     </message>
     <message>
-        <location filename="../src/gui/print_widget.cpp" line="1153"/>
+        <location filename="../src/gui/print_widget.cpp" line="1164"/>
         <source>PNG</source>
-        <translation type="unfinished"></translation>
+        <translation>PNG</translation>
     </message>
     <message>
-        <location filename="../src/gui/print_widget.cpp" line="1154"/>
+        <location filename="../src/gui/print_widget.cpp" line="1165"/>
         <source>BMP</source>
-        <translation type="unfinished"></translation>
+        <translation>BMP</translation>
     </message>
     <message>
-        <location filename="../src/gui/print_widget.cpp" line="1155"/>
+        <location filename="../src/gui/print_widget.cpp" line="1166"/>
         <source>TIFF</source>
-        <translation type="unfinished"></translation>
+        <translation>TIFF</translation>
     </message>
     <message>
-        <location filename="../src/gui/print_widget.cpp" line="1156"/>
+        <location filename="../src/gui/print_widget.cpp" line="1167"/>
         <source>JPEG</source>
-        <translation type="unfinished"></translation>
+        <translation>JPEG</translation>
     </message>
     <message>
-        <location filename="../src/gui/print_widget.cpp" line="1210"/>
+        <location filename="../src/gui/print_widget.cpp" line="1243"/>
         <source>Failed to prepare the PDF export.</source>
-        <translation type="unfinished"></translation>
+        <translation>Neizdevās sagatavot PDF eksportu.</translation>
     </message>
     <message>
-        <location filename="../src/gui/print_widget.cpp" line="1220"/>
+        <location filename="../src/gui/print_widget.cpp" line="1253"/>
         <source>PDF</source>
-        <translation type="unfinished"></translation>
+        <translation>PDF</translation>
     </message>
     <message>
-        <location filename="../src/gui/print_widget.cpp" line="1273"/>
+        <location filename="../src/gui/print_widget.cpp" line="1306"/>
         <source>An error occurred during printing.</source>
-        <translation type="unfinished"></translation>
+        <translation>Drukāšanas laikā radās kļūda.</translation>
     </message>
     <message>
-        <location filename="../src/gui/print_widget.cpp" line="1158"/>
-        <location filename="../src/gui/print_widget.cpp" line="1186"/>
-        <location filename="../src/gui/print_widget.cpp" line="1222"/>
-        <location filename="../src/gui/print_widget.cpp" line="1234"/>
+        <location filename="../src/gui/print_widget.cpp" line="1169"/>
+        <location filename="../src/gui/print_widget.cpp" line="1197"/>
+        <location filename="../src/gui/print_widget.cpp" line="1255"/>
+        <location filename="../src/gui/print_widget.cpp" line="1267"/>
         <source>Export map ...</source>
         <translation>Kartes eksports...</translation>
     </message>
     <message>
-        <location filename="../src/gui/print_widget.cpp" line="1157"/>
-        <location filename="../src/gui/print_widget.cpp" line="1221"/>
+        <location filename="../src/gui/print_widget.cpp" line="1168"/>
+        <location filename="../src/gui/print_widget.cpp" line="1254"/>
         <source>All files (*.*)</source>
         <translation>Visas datnes (*.*)</translation>
     </message>
     <message>
-        <location filename="../src/gui/print_widget.cpp" line="1259"/>
+        <location filename="../src/gui/print_widget.cpp" line="1292"/>
         <source>Failed to prepare the printing.</source>
-        <translation type="unfinished"></translation>
+        <translation>Neizdevās sagatavot izdruku.</translation>
     </message>
     <message>
-        <location filename="../src/gui/print_widget.cpp" line="1268"/>
+        <location filename="../src/gui/print_widget.cpp" line="1301"/>
         <source>Printing Progress</source>
-        <translation type="unfinished"></translation>
+        <translation>Notiek druka</translation>
     </message>
     <message>
-        <location filename="../src/gui/print_widget.cpp" line="1099"/>
-        <location filename="../src/gui/print_widget.cpp" line="1107"/>
-        <location filename="../src/gui/print_widget.cpp" line="1176"/>
-        <location filename="../src/gui/print_widget.cpp" line="1195"/>
-        <location filename="../src/gui/print_widget.cpp" line="1210"/>
-        <location filename="../src/gui/print_widget.cpp" line="1240"/>
-        <location filename="../src/gui/print_widget.cpp" line="1259"/>
+        <location filename="../src/gui/print_widget.cpp" line="1110"/>
+        <location filename="../src/gui/print_widget.cpp" line="1118"/>
+        <location filename="../src/gui/print_widget.cpp" line="1187"/>
+        <location filename="../src/gui/print_widget.cpp" line="1206"/>
+        <location filename="../src/gui/print_widget.cpp" line="1243"/>
         <location filename="../src/gui/print_widget.cpp" line="1273"/>
-        <location filename="../src/gui/print_widget.cpp" line="1286"/>
-        <location filename="../src/gui/print_widget.cpp" line="1350"/>
+        <location filename="../src/gui/print_widget.cpp" line="1292"/>
+        <location filename="../src/gui/print_widget.cpp" line="1306"/>
+        <location filename="../src/gui/print_widget.cpp" line="1319"/>
+        <location filename="../src/gui/print_widget.cpp" line="1383"/>
         <source>Error</source>
         <translation>Kļūda</translation>
     </message>
     <message>
-        <location filename="../src/gui/print_widget.cpp" line="214"/>
+        <location filename="../src/gui/print_widget.cpp" line="216"/>
         <source>Vector
 graphics</source>
-        <translation type="unfinished"></translation>
+        <translation>Vektoru
+grafika</translation>
     </message>
     <message>
-        <location filename="../src/gui/print_widget.cpp" line="215"/>
+        <location filename="../src/gui/print_widget.cpp" line="217"/>
         <source>Raster
 graphics</source>
-        <translation type="unfinished"></translation>
+        <translation>Rastra
+grafika</translation>
     </message>
     <message>
-        <location filename="../src/gui/print_widget.cpp" line="216"/>
+        <location filename="../src/gui/print_widget.cpp" line="218"/>
         <source>Color
 separations</source>
-        <translation type="unfinished"></translation>
+        <translation>Krāsu
+dalījumi</translation>
     </message>
     <message>
-        <location filename="../src/gui/print_widget.cpp" line="229"/>
+        <location filename="../src/gui/print_widget.cpp" line="231"/>
         <source>Mode:</source>
-        <translation type="unfinished"></translation>
+        <translation>Režīms:</translation>
     </message>
     <message>
-        <location filename="../src/gui/print_widget.cpp" line="1176"/>
+        <location filename="../src/gui/print_widget.cpp" line="1187"/>
         <source>Failed to prepare the image. Not enough memory.</source>
-        <translation type="unfinished"></translation>
+        <translation>Neizdevās sagatavot attēlu. Nepietiek atmiņas.</translation>
     </message>
     <message>
-        <location filename="../src/gui/print_widget.cpp" line="1195"/>
+        <location filename="../src/gui/print_widget.cpp" line="1206"/>
         <source>Failed to save the image. Does the path exist? Do you have sufficient rights?</source>
         <translation>Zīmējuma saglabāšana neveiksmīga. Vai vietne eksistē? Vai ir pietiekamas tiesības?</translation>
     </message>
     <message>
-        <location filename="../src/gui/print_widget.cpp" line="1199"/>
-        <location filename="../src/gui/print_widget.cpp" line="1244"/>
+        <location filename="../src/gui/print_widget.cpp" line="1210"/>
+        <location filename="../src/gui/print_widget.cpp" line="1277"/>
         <source>Exported successfully to %1</source>
         <translation>Sekmīgs eksports uz %1</translation>
     </message>
     <message>
-        <location filename="../src/gui/print_widget.cpp" line="1240"/>
+        <location filename="../src/gui/print_widget.cpp" line="1273"/>
         <source>Failed to finish the PDF export.</source>
-        <translation type="unfinished"></translation>
+        <translation>Neizdevās pabeigt PDF eksportu.</translation>
     </message>
     <message>
-        <location filename="../src/gui/print_widget.cpp" line="1250"/>
-        <location filename="../src/gui/print_widget.cpp" line="1282"/>
+        <location filename="../src/gui/print_widget.cpp" line="1283"/>
+        <location filename="../src/gui/print_widget.cpp" line="1315"/>
         <source>Canceled.</source>
-        <translation type="unfinished"></translation>
+        <translation>Atcelts.</translation>
     </message>
     <message>
-        <location filename="../src/gui/print_widget.cpp" line="1286"/>
+        <location filename="../src/gui/print_widget.cpp" line="1319"/>
         <source>The print job could not be stopped.</source>
-        <translation type="unfinished"></translation>
+        <translation>Nevar apturēt drukas darbu.</translation>
     </message>
     <message>
-        <location filename="../src/gui/print_widget.cpp" line="1277"/>
+        <location filename="../src/gui/print_widget.cpp" line="1310"/>
         <source>Successfully created print job</source>
         <translation>Drukas uzdevums izveidots sekmīgi</translation>
     </message>
     <message>
-        <location filename="../src/gui/print_widget.cpp" line="1334"/>
-        <location filename="../src/gui/print_widget.cpp" line="1342"/>
+        <location filename="../src/gui/print_widget.cpp" line="1367"/>
+        <location filename="../src/gui/print_widget.cpp" line="1375"/>
         <source>Unknown</source>
         <comment>Paper size</comment>
         <translation>Nezināms</translation>
     </message>
     <message>
-        <location filename="../src/gui/print_widget.cpp" line="1350"/>
+        <location filename="../src/gui/print_widget.cpp" line="1383"/>
         <source>The map area is empty. Output canceled.</source>
         <translation>Kartes apgabals ir tukšs. Izvads atcelts.</translation>
     </message>
@@ -6118,7 +6167,7 @@ separations</source>
     <message>
         <location filename="../src/gui/symbols/replace_symbol_set_dialog.cpp" line="114"/>
         <source>Keep the symbols&apos; hidden / protected states of the old symbol set</source>
-        <translation type="unfinished"></translation>
+        <translation>Saglabāt simbolu neredzamo / aizsargāto vecās simbolu kopas statusu</translation>
     </message>
     <message>
         <location filename="../src/gui/symbols/replace_symbol_set_dialog.cpp" line="137"/>
@@ -6133,7 +6182,7 @@ separations</source>
     <message>
         <location filename="../src/gui/symbols/replace_symbol_set_dialog.cpp" line="132"/>
         <source>Edit the symbol set ID:</source>
-        <translation type="unfinished"></translation>
+        <translation>Rediģēt simbolu kopas ID:</translation>
     </message>
     <message>
         <location filename="../src/gui/symbols/replace_symbol_set_dialog.cpp" line="135"/>
@@ -6144,50 +6193,50 @@ separations</source>
     <message>
         <location filename="../src/gui/symbols/replace_symbol_set_dialog.cpp" line="139"/>
         <source>Match by symbol name</source>
-        <translation type="unfinished"></translation>
+        <translation>Saskaņot ar simbolu nosaukumu</translation>
     </message>
     <message>
         <location filename="../src/gui/symbols/replace_symbol_set_dialog.cpp" line="144"/>
         <source>Assign new symbols</source>
-        <translation type="unfinished"></translation>
+        <translation>Piešķirt jaunus simbolus</translation>
     </message>
     <message>
         <location filename="../src/gui/symbols/replace_symbol_set_dialog.cpp" line="145"/>
         <source>Pattern</source>
-        <translation type="unfinished"></translation>
+        <translation>Paraugs</translation>
     </message>
     <message>
         <location filename="../src/gui/symbols/replace_symbol_set_dialog.cpp" line="157"/>
         <source>Clear replacements</source>
-        <translation type="unfinished"></translation>
+        <translation>Notīrīt aizstāšanas operācijas</translation>
     </message>
     <message>
         <location filename="../src/gui/symbols/replace_symbol_set_dialog.cpp" line="160"/>
         <location filename="../src/gui/symbols/replace_symbol_set_dialog.cpp" line="236"/>
         <source>Open CRT file...</source>
-        <translation type="unfinished"></translation>
+        <translation>Ielasīt CRT datni...</translation>
     </message>
     <message>
         <location filename="../src/gui/symbols/replace_symbol_set_dialog.cpp" line="162"/>
         <location filename="../src/gui/symbols/replace_symbol_set_dialog.cpp" line="332"/>
         <source>Save CRT file...</source>
-        <translation type="unfinished"></translation>
+        <translation>Saglabāt CRT datni...</translation>
     </message>
     <message>
         <location filename="../src/gui/symbols/replace_symbol_set_dialog.cpp" line="167"/>
         <source>Symbol mapping</source>
-        <translation type="unfinished"></translation>
+        <translation>Simbolu atbilstība</translation>
     </message>
     <message>
         <location filename="../src/gui/symbols/replace_symbol_set_dialog.cpp" line="235"/>
         <location filename="../src/gui/symbols/replace_symbol_set_dialog.cpp" line="331"/>
         <source>CRT file</source>
-        <translation type="unfinished"></translation>
+        <translation>CRT datne</translation>
     </message>
     <message>
         <location filename="../src/gui/symbols/replace_symbol_set_dialog.cpp" line="285"/>
         <source>There are multiple replacements for symbol %1.</source>
-        <translation type="unfinished"></translation>
+        <translation>Pastāv vairāki simbola %1 aizstājēji.</translation>
     </message>
     <message>
         <location filename="../src/gui/symbols/replace_symbol_set_dialog.cpp" line="288"/>
@@ -6195,7 +6244,7 @@ separations</source>
 %1
 
 %2</source>
-        <translation type="unfinished">Nevar atvērt datni:
+        <translation>Nevar atvērt datni:
 %1
 
 %2</translation>
@@ -6206,13 +6255,17 @@ separations</source>
 %1
 
 %2</source>
-        <translation type="unfinished"></translation>
+        <translation>Nevar saglabāt datni:
+%1
+
+%2</translation>
     </message>
     <message>
         <location filename="../src/gui/symbols/replace_symbol_set_dialog.cpp" line="362"/>
         <source>The cross reference table has been modified.
 Do you want to save your changes?</source>
-        <translation type="unfinished"></translation>
+        <translation>Krustenisko atsauču tabulā ir izmaiņas.
+Vai vēlaties saglabāt savas izmaiņas?</translation>
     </message>
     <message>
         <location filename="../src/gui/symbols/replace_symbol_set_dialog.cpp" line="519"/>
@@ -6248,7 +6301,7 @@ Do you want to save your changes?</source>
     <message>
         <location filename="../src/gui/symbols/replace_symbol_set_dialog.cpp" line="657"/>
         <source>Cannot load CRT file, aborting.</source>
-        <translation type="unfinished"></translation>
+        <translation>Nevar ielasīt CRT datni, darbības atcelšana.</translation>
     </message>
 </context>
 <context>
@@ -6492,7 +6545,7 @@ Do you want to save your changes?</source>
     <message>
         <location filename="../src/gui/select_crs_dialog.cpp" line="71"/>
         <source>Same as map</source>
-        <translation type="unfinished"></translation>
+        <translation>Tāpat kā kartē</translation>
     </message>
     <message>
         <location filename="../src/gui/select_crs_dialog.cpp" line="77"/>
@@ -6544,22 +6597,22 @@ Do you want to save your changes?</source>
     <message>
         <location filename="../src/core/storage_location.cpp" line="288"/>
         <source>&apos;%1&apos; is stored in a regular location.</source>
-        <translation type="unfinished"></translation>
+        <translation>&apos;%1&apos; atrodas parastajā vietnē.</translation>
     </message>
     <message>
         <location filename="../src/core/storage_location.cpp" line="291"/>
         <source>&apos;%1&apos; is located in app storage. The files will be removed when uninstalling the app.</source>
-        <translation type="unfinished"></translation>
+        <translation>&apos;%1&apos; atrodas programmas vietnē. Datnes tiks noņemtas, noņemot programmu.</translation>
     </message>
     <message>
         <location filename="../src/core/storage_location.cpp" line="294"/>
         <source>&apos;%1&apos; is not writable. Changes cannot be saved.</source>
-        <translation type="unfinished"></translation>
+        <translation>&apos;%1&apos; nav rakstāms. Izmaiņas nevar saglabāt.</translation>
     </message>
     <message>
         <location filename="../src/core/storage_location.cpp" line="297"/>
         <source>&apos;%1&apos; is not a valid storage location.</source>
-        <translation type="unfinished"></translation>
+        <translation>&apos;%1&apos; nav derīga krātuves atrašanās vietne.</translation>
     </message>
 </context>
 <context>
@@ -6588,7 +6641,7 @@ Do you want to save your changes?</source>
     <message>
         <location filename="../src/gui/symbols/symbol_properties_widget.cpp" line="85"/>
         <source>Edit</source>
-        <translation type="unfinished">Rediģēt</translation>
+        <translation>Rediģēt</translation>
     </message>
     <message>
         <location filename="../src/gui/symbols/symbol_properties_widget.cpp" line="86"/>
@@ -6613,83 +6666,83 @@ Do you want to save your changes?</source>
     <message>
         <location filename="../src/gui/symbols/symbol_properties_widget.cpp" line="228"/>
         <source>Warning</source>
-        <translation type="unfinished">Brīdinājums</translation>
+        <translation>Brīdinājums</translation>
     </message>
     <message>
-        <location filename="../src/gui/map/map_editor.cpp" line="1286"/>
+        <location filename="../src/gui/map/map_editor.cpp" line="1284"/>
         <source>Description</source>
-        <translation type="unfinished"></translation>
+        <translation>Apraksts</translation>
     </message>
 </context>
 <context>
     <name>OpenOrienteering::SymbolRenderWidget</name>
     <message>
-        <location filename="../src/gui/widgets/symbol_render_widget.cpp" line="249"/>
+        <location filename="../src/gui/widgets/symbol_render_widget.cpp" line="104"/>
         <source>For symbols with description, press F1 while the tooltip is visible to show it</source>
         <translation>Simboliem, kuriem ir apraksts, nospiežot F1, kad ir redzams paskaidrojums, apraksts tiks parādīts</translation>
     </message>
     <message>
-        <location filename="../src/gui/widgets/symbol_render_widget.cpp" line="253"/>
+        <location filename="../src/gui/widgets/symbol_render_widget.cpp" line="108"/>
         <source>New symbol</source>
         <translation>Jauns simbols</translation>
     </message>
     <message>
         <location filename="../src/gui/symbols/replace_symbol_set_dialog.cpp" line="440"/>
-        <location filename="../src/gui/widgets/symbol_render_widget.cpp" line="255"/>
+        <location filename="../src/gui/widgets/symbol_render_widget.cpp" line="110"/>
         <source>Point</source>
         <translation>Punkts</translation>
     </message>
     <message>
         <location filename="../src/gui/symbols/replace_symbol_set_dialog.cpp" line="435"/>
-        <location filename="../src/gui/widgets/symbol_render_widget.cpp" line="256"/>
+        <location filename="../src/gui/widgets/symbol_render_widget.cpp" line="111"/>
         <source>Line</source>
         <translation>Līnija</translation>
     </message>
     <message>
         <location filename="../src/gui/symbols/replace_symbol_set_dialog.cpp" line="425"/>
-        <location filename="../src/gui/widgets/symbol_render_widget.cpp" line="257"/>
+        <location filename="../src/gui/widgets/symbol_render_widget.cpp" line="112"/>
         <source>Area</source>
         <translation>Laukums</translation>
     </message>
     <message>
         <location filename="../src/gui/symbols/replace_symbol_set_dialog.cpp" line="445"/>
-        <location filename="../src/gui/widgets/symbol_render_widget.cpp" line="258"/>
+        <location filename="../src/gui/widgets/symbol_render_widget.cpp" line="113"/>
         <source>Text</source>
         <translation>Teksts</translation>
     </message>
     <message>
         <location filename="../src/gui/symbols/replace_symbol_set_dialog.cpp" line="430"/>
-        <location filename="../src/gui/widgets/symbol_render_widget.cpp" line="259"/>
+        <location filename="../src/gui/widgets/symbol_render_widget.cpp" line="114"/>
         <source>Combined</source>
         <translation>Kombinēts</translation>
     </message>
     <message>
-        <location filename="../src/gui/widgets/symbol_render_widget.cpp" line="262"/>
+        <location filename="../src/gui/widgets/symbol_render_widget.cpp" line="117"/>
         <source>Edit</source>
         <translation>Rediģēt</translation>
     </message>
     <message>
-        <location filename="../src/gui/widgets/symbol_render_widget.cpp" line="263"/>
+        <location filename="../src/gui/widgets/symbol_render_widget.cpp" line="118"/>
         <source>Duplicate</source>
         <translation>Dublicēt</translation>
     </message>
     <message>
-        <location filename="../src/gui/widgets/symbol_render_widget.cpp" line="264"/>
+        <location filename="../src/gui/widgets/symbol_render_widget.cpp" line="119"/>
         <source>Delete</source>
         <translation>Dzēst</translation>
     </message>
     <message>
-        <location filename="../src/gui/widgets/symbol_render_widget.cpp" line="265"/>
+        <location filename="../src/gui/widgets/symbol_render_widget.cpp" line="120"/>
         <source>Scale...</source>
         <translation>Mērogot...</translation>
     </message>
     <message>
-        <location filename="../src/gui/widgets/symbol_render_widget.cpp" line="267"/>
+        <location filename="../src/gui/widgets/symbol_render_widget.cpp" line="122"/>
         <source>Copy</source>
         <translation>Kopēt</translation>
     </message>
     <message>
-        <location filename="../src/gui/widgets/symbol_render_widget.cpp" line="268"/>
+        <location filename="../src/gui/widgets/symbol_render_widget.cpp" line="123"/>
         <source>Paste</source>
         <translation>Ielīmēt</translation>
     </message>
@@ -6702,113 +6755,113 @@ Do you want to save your changes?</source>
         <translation type="vanished">Aizpildīt / Izveidot robežu atlasītajam objektam</translation>
     </message>
     <message>
-        <location filename="../src/gui/widgets/symbol_render_widget.cpp" line="283"/>
+        <location filename="../src/gui/widgets/symbol_render_widget.cpp" line="138"/>
         <source>Select symbols</source>
         <translation>Atlasīt simbolus</translation>
     </message>
     <message>
-        <location filename="../src/gui/widgets/symbol_render_widget.cpp" line="294"/>
+        <location filename="../src/gui/widgets/symbol_render_widget.cpp" line="149"/>
         <source>Enable drag and drop</source>
-        <translation type="unfinished"></translation>
+        <translation>Iespējo vilkšanu un nomešanu</translation>
     </message>
     <message>
-        <location filename="../src/gui/widgets/symbol_render_widget.cpp" line="1021"/>
-        <location filename="../src/gui/widgets/symbol_render_widget.cpp" line="1036"/>
-        <location filename="../src/gui/widgets/symbol_render_widget.cpp" line="1049"/>
+        <location filename="../src/gui/widgets/symbol_render_widget.cpp" line="876"/>
+        <location filename="../src/gui/widgets/symbol_render_widget.cpp" line="891"/>
+        <location filename="../src/gui/widgets/symbol_render_widget.cpp" line="904"/>
         <source>Error</source>
         <translation>Kļūda</translation>
     </message>
     <message>
-        <location filename="../src/gui/widgets/symbol_render_widget.cpp" line="1021"/>
-        <location filename="../src/gui/widgets/symbol_render_widget.cpp" line="1049"/>
+        <location filename="../src/gui/widgets/symbol_render_widget.cpp" line="876"/>
+        <location filename="../src/gui/widgets/symbol_render_widget.cpp" line="904"/>
         <source>An internal error occurred, sorry!</source>
         <translation>Atvainojiet, radās iekšēja kļūda!</translation>
     </message>
     <message>
-        <location filename="../src/gui/widgets/symbol_render_widget.cpp" line="1036"/>
+        <location filename="../src/gui/widgets/symbol_render_widget.cpp" line="891"/>
         <source>There are no symbols in clipboard which could be pasted!</source>
         <translation>Starpliktuvē nav simboli, kurus varētu ielīmēt!</translation>
     </message>
     <message>
-        <location filename="../src/gui/widgets/symbol_render_widget.cpp" line="1206"/>
+        <location filename="../src/gui/widgets/symbol_render_widget.cpp" line="1061"/>
         <source>Select all objects with this symbol</source>
         <translation>Atlasīt visus objektus ar šo simbolu</translation>
     </message>
     <message>
-        <location filename="../src/gui/widgets/symbol_render_widget.cpp" line="1208"/>
+        <location filename="../src/gui/widgets/symbol_render_widget.cpp" line="1063"/>
         <source>Remove all objects with this symbol from selection</source>
-        <translation type="unfinished"></translation>
+        <translation>Izņemt no atlases visus objektus ar šo simbolu</translation>
     </message>
     <message>
-        <location filename="../src/gui/map/map_editor.cpp" line="1299"/>
-        <location filename="../src/gui/widgets/symbol_render_widget.cpp" line="1209"/>
+        <location filename="../src/gui/map/map_editor.cpp" line="1297"/>
+        <location filename="../src/gui/widgets/symbol_render_widget.cpp" line="1064"/>
         <source>Hide objects with this symbol</source>
         <translation>Slēpt objektus ar šo simbolu</translation>
     </message>
     <message>
-        <location filename="../src/gui/map/map_editor.cpp" line="1310"/>
-        <location filename="../src/gui/widgets/symbol_render_widget.cpp" line="1210"/>
+        <location filename="../src/gui/map/map_editor.cpp" line="1308"/>
+        <location filename="../src/gui/widgets/symbol_render_widget.cpp" line="1065"/>
         <source>Protect objects with this symbol</source>
         <translation>Aizsargāt objektus ar šo simbolu</translation>
     </message>
     <message>
-        <location filename="../src/gui/widgets/symbol_render_widget.cpp" line="1215"/>
+        <location filename="../src/gui/widgets/symbol_render_widget.cpp" line="1070"/>
         <source>Add all objects with selected symbols to selection</source>
         <translation>Pievienot atlasei visus objektus ar atlasītajiem simboliem</translation>
     </message>
     <message>
-        <location filename="../src/gui/widgets/symbol_render_widget.cpp" line="1216"/>
+        <location filename="../src/gui/widgets/symbol_render_widget.cpp" line="1071"/>
         <source>Remove all objects with selected symbols from selection</source>
-        <translation type="unfinished"></translation>
+        <translation>Izņemt no atlases visus objektus ar izvēlētajiem simboliem</translation>
     </message>
     <message>
-        <location filename="../src/gui/widgets/symbol_render_widget.cpp" line="1217"/>
+        <location filename="../src/gui/widgets/symbol_render_widget.cpp" line="1072"/>
         <source>Hide objects with selected symbols</source>
         <translation>Slēpt objektus ar atlasītajiem simboliem</translation>
     </message>
     <message>
-        <location filename="../src/gui/widgets/symbol_render_widget.cpp" line="1218"/>
+        <location filename="../src/gui/widgets/symbol_render_widget.cpp" line="1073"/>
         <source>Protect objects with selected symbols</source>
         <translation>Aizsargāt objektus ar atlasītajiem simboliem</translation>
     </message>
     <message>
-        <location filename="../src/gui/widgets/symbol_render_widget.cpp" line="287"/>
+        <location filename="../src/gui/widgets/symbol_render_widget.cpp" line="142"/>
         <source>Invert selection</source>
         <translation>Invertēt atlasi</translation>
     </message>
     <message>
-        <location filename="../src/gui/widgets/symbol_render_widget.cpp" line="244"/>
+        <location filename="../src/gui/widgets/symbol_render_widget.cpp" line="99"/>
         <source>F1</source>
         <comment>Shortcut for displaying the symbol&apos;s description</comment>
-        <translation type="unfinished"></translation>
+        <translation>F1</translation>
     </message>
     <message>
-        <location filename="../src/gui/widgets/symbol_render_widget.cpp" line="284"/>
+        <location filename="../src/gui/widgets/symbol_render_widget.cpp" line="139"/>
         <source>Select all</source>
         <translation>Atlasīt visu</translation>
     </message>
     <message>
-        <location filename="../src/gui/widgets/symbol_render_widget.cpp" line="285"/>
+        <location filename="../src/gui/widgets/symbol_render_widget.cpp" line="140"/>
         <source>Select unused</source>
         <translation>Atlasīt neizmantotos</translation>
     </message>
     <message>
-        <location filename="../src/gui/widgets/symbol_render_widget.cpp" line="290"/>
+        <location filename="../src/gui/widgets/symbol_render_widget.cpp" line="145"/>
         <source>Sort symbols</source>
         <translation>Sakārtot simbolus</translation>
     </message>
     <message>
-        <location filename="../src/gui/widgets/symbol_render_widget.cpp" line="291"/>
+        <location filename="../src/gui/widgets/symbol_render_widget.cpp" line="146"/>
         <source>Sort by number</source>
         <translation>Sakārtot pēc numura</translation>
     </message>
     <message>
-        <location filename="../src/gui/widgets/symbol_render_widget.cpp" line="292"/>
+        <location filename="../src/gui/widgets/symbol_render_widget.cpp" line="147"/>
         <source>Sort by primary color</source>
         <translation>Sakārtot pēc primārās krāsas</translation>
     </message>
     <message>
-        <location filename="../src/gui/widgets/symbol_render_widget.cpp" line="293"/>
+        <location filename="../src/gui/widgets/symbol_render_widget.cpp" line="148"/>
         <source>Sort by primary color priority</source>
         <translation>Sakārtot pēc primārās krāsas prioritātes</translation>
     </message>
@@ -6817,45 +6870,45 @@ Do you want to save your changes?</source>
         <translation type="obsolete">Mērogot simbolu %1</translation>
     </message>
     <message>
-        <location filename="../src/gui/widgets/symbol_render_widget.cpp" line="953"/>
+        <location filename="../src/gui/widgets/symbol_render_widget.cpp" line="808"/>
         <source>Scale to percentage:</source>
         <translation>Mērogot līdz procentiem:</translation>
     </message>
     <message>
-        <location filename="../src/gui/widgets/symbol_render_widget.cpp" line="983"/>
+        <location filename="../src/gui/widgets/symbol_render_widget.cpp" line="838"/>
         <source>Confirmation</source>
         <translation>Apstiprinājums</translation>
     </message>
     <message>
-        <location filename="../src/gui/widgets/symbol_render_widget.cpp" line="983"/>
+        <location filename="../src/gui/widgets/symbol_render_widget.cpp" line="838"/>
         <source>The map contains objects with the symbol &quot;%1&quot;. Deleting it will delete those objects and clear the undo history! Do you really want to do that?</source>
         <translation>Karte satur objektus ar simbolu &quot;%1&quot;. Dzēšot to, šie objekti un atsaukšanas vēsture tiks dzēsti! Vai tiešām to vēlies darit?</translation>
     </message>
     <message>
-        <location filename="../src/gui/widgets/symbol_render_widget.cpp" line="1207"/>
+        <location filename="../src/gui/widgets/symbol_render_widget.cpp" line="1062"/>
         <source>Add all objects with this symbol to selection</source>
         <translation>Pievienot atlasei visus objektus ar šo simbolu</translation>
     </message>
     <message>
-        <location filename="../src/gui/map/map_editor.cpp" line="866"/>
-        <location filename="../src/gui/widgets/symbol_render_widget.cpp" line="1214"/>
+        <location filename="../src/gui/map/map_editor.cpp" line="867"/>
+        <location filename="../src/gui/widgets/symbol_render_widget.cpp" line="1069"/>
         <source>Select all objects with selected symbols</source>
         <translation>Atlasīt visus objektus ar atlasītajiem simboliem</translation>
     </message>
     <message>
-        <location filename="../src/gui/widgets/symbol_render_widget.cpp" line="270"/>
+        <location filename="../src/gui/widgets/symbol_render_widget.cpp" line="125"/>
         <source>Switch symbol of selected objects</source>
-        <translation type="unfinished"></translation>
+        <translation>Pārslēgt atlasīto objektu simbolu</translation>
     </message>
     <message>
-        <location filename="../src/gui/widgets/symbol_render_widget.cpp" line="271"/>
+        <location filename="../src/gui/widgets/symbol_render_widget.cpp" line="126"/>
         <source>Fill / Create border for selected objects</source>
-        <translation type="unfinished"></translation>
+        <translation>Aizpildīt / Izveidot robežu atlasītajiem objektiem</translation>
     </message>
     <message>
-        <location filename="../src/gui/widgets/symbol_render_widget.cpp" line="953"/>
+        <location filename="../src/gui/widgets/symbol_render_widget.cpp" line="808"/>
         <source>Scale symbols</source>
-        <translation type="unfinished"></translation>
+        <translation>Mērogot simbolus</translation>
     </message>
 </context>
 <context>
@@ -6868,7 +6921,7 @@ Do you want to save your changes?</source>
     <message>
         <location filename="../src/gui/symbols/symbol_setting_dialog.cpp" line="104"/>
         <source>Template:</source>
-        <translation type="unfinished"></translation>
+        <translation>Veidne:</translation>
     </message>
     <message>
         <location filename="../src/gui/symbols/symbol_setting_dialog.cpp" line="105"/>
@@ -6911,15 +6964,12 @@ Do you want to save your changes?</source>
 takes the routechoice
 to jump over the lazy dog
 1234567890</source>
-        <translation>The quick brown fox
-takes the routechoice
-to jump over the lazy dog
-1234567890</translation>
+        <translation>Glāžšķūņa rūķīši griež šķiņķi ar šķērēm</translation>
     </message>
     <message>
         <location filename="../src/gui/symbols/symbol_setting_dialog.cpp" line="495"/>
         <source>- unnamed -</source>
-        <translation type="unfinished"></translation>
+        <translation>- nenosaukts -</translation>
     </message>
 </context>
 <context>
@@ -6935,42 +6985,42 @@ to jump over the lazy dog
     <message>
         <location filename="../src/gui/widgets/tag_select_widget.cpp" line="62"/>
         <source>Relation</source>
-        <translation type="unfinished"></translation>
+        <translation>Saistība</translation>
     </message>
     <message>
         <location filename="../src/gui/widgets/tag_select_widget.cpp" line="62"/>
         <source>Key</source>
-        <translation type="unfinished"></translation>
+        <translation>Atslēga</translation>
     </message>
     <message>
         <location filename="../src/gui/widgets/tag_select_widget.cpp" line="62"/>
         <source>Comparison</source>
-        <translation type="unfinished"></translation>
+        <translation>Salīdzinājums</translation>
     </message>
     <message>
         <location filename="../src/gui/widgets/tag_select_widget.cpp" line="62"/>
         <source>Value</source>
-        <translation type="unfinished">Vērtība</translation>
+        <translation>Vērtība</translation>
     </message>
     <message>
         <location filename="../src/gui/widgets/tag_select_widget.cpp" line="90"/>
         <source>Add Row</source>
-        <translation type="unfinished"></translation>
+        <translation>Pievienot rindu</translation>
     </message>
     <message>
         <location filename="../src/gui/widgets/tag_select_widget.cpp" line="91"/>
         <source>Remove Row</source>
-        <translation type="unfinished"></translation>
+        <translation>Aizvākt rindu</translation>
     </message>
     <message>
         <location filename="../src/gui/widgets/tag_select_widget.cpp" line="97"/>
         <source>Move Up</source>
-        <translation type="unfinished">Pārvietot augstāk</translation>
+        <translation>Pārvietot augstāk</translation>
     </message>
     <message>
         <location filename="../src/gui/widgets/tag_select_widget.cpp" line="99"/>
         <source>Move Down</source>
-        <translation type="unfinished">Pārvietot zemāk</translation>
+        <translation>Pārvietot zemāk</translation>
     </message>
     <message>
         <source>Select</source>
@@ -6983,17 +7033,15 @@ to jump over the lazy dog
     <message numerus="yes">
         <location filename="../src/gui/map/map_find_feature.cpp" line="231"/>
         <source>%n object(s) selected</source>
-        <translation type="unfinished">
-            <numerusform></numerusform>
-            <numerusform></numerusform>
-            <numerusform></numerusform>
-        </translation>
-    </message>
+        <translation><numerusform>Atlasīti %n objekti</numerusform>
+        <numerusform>Atlasīts %n objekts</numerusform>
+        <numerusform>Atlasīti %n objekti</numerusform>
+        </translation></message>
     <message>
         <location filename="../src/gui/map/map_find_feature.cpp" line="177"/>
         <location filename="../src/gui/map/map_find_feature.cpp" line="223"/>
         <source>Invalid query</source>
-        <translation type="unfinished"></translation>
+        <translation>Nederīgs vaicājums</translation>
     </message>
 </context>
 <context>
@@ -7008,27 +7056,27 @@ to jump over the lazy dog
     <message>
         <location filename="../src/gui/widgets/tags_widget.cpp" line="55"/>
         <source>Key</source>
-        <translation type="unfinished"></translation>
+        <translation>Atslēga</translation>
     </message>
     <message>
         <location filename="../src/gui/widgets/tags_widget.cpp" line="55"/>
         <source>Value</source>
-        <translation type="unfinished">Vērtība</translation>
+        <translation>Vērtība</translation>
     </message>
     <message>
         <location filename="../src/gui/widgets/tags_widget.cpp" line="65"/>
         <source>Help</source>
-        <translation type="unfinished">Palīdzība</translation>
+        <translation>Palīdzība</translation>
     </message>
     <message>
         <location filename="../src/gui/widgets/tags_widget.cpp" line="233"/>
         <source>Key exists</source>
-        <translation type="unfinished"></translation>
+        <translation>Atslēga pastāv</translation>
     </message>
     <message>
         <location filename="../src/gui/widgets/tags_widget.cpp" line="234"/>
         <source>The key &quot;%1&quot; already exists and must not be used twice.</source>
-        <translation type="unfinished"></translation>
+        <translation>Atslēga &quot;%1&quot; jau pastāv un to nedrīkst izmantot divas reizes.</translation>
     </message>
 </context>
 <context>
@@ -7052,17 +7100,17 @@ to jump over the lazy dog
         <location filename="../src/templates/template.cpp" line="578"/>
         <location filename="../src/templates/template.cpp" line="607"/>
         <source>No such file.</source>
-        <translation type="unfinished"></translation>
+        <translation>Šāda datne nepastāv.</translation>
     </message>
     <message>
         <location filename="../src/templates/template.cpp" line="621"/>
         <source>Is the format of the file correct for this template type?</source>
-        <translation type="unfinished"></translation>
+        <translation>Vai datnes formāts šim veidnes tipam ir korekts?</translation>
     </message>
     <message>
         <location filename="../src/templates/template.cpp" line="628"/>
         <source>Not enough free memory.</source>
-        <translation type="unfinished"></translation>
+        <translation>Nav pietiekami daudz brīvas atmiņas.</translation>
     </message>
     <message>
         <source>Cannot change the template to this file! Is the format of the file correct for this template type?</source>
@@ -7189,7 +7237,7 @@ to jump over the lazy dog
     <message>
         <location filename="../src/templates/template_image.cpp" line="162"/>
         <source>Not enough free memory (image size: %1x%2 pixels)</source>
-        <translation type="unfinished"></translation>
+        <translation>Nav pietiekami daudz brīvas atmiņas (attēla izmērs: %1x%2 pikseļi)</translation>
     </message>
     <message>
         <location filename="../src/templates/template_image.cpp" line="202"/>
@@ -7235,8 +7283,8 @@ Ja uz šī šablona netiks zīmēts, tā nav problēma.</translation>
     </message>
     <message>
         <location filename="../src/templates/template_image.cpp" line="584"/>
-        <source>GeoTiff</source>
-        <translation>GeoTiff</translation>
+        <source>GeoTIFF</source>
+        <translation>GeoTIFF</translation>
     </message>
     <message>
         <location filename="../src/templates/template_image.cpp" line="586"/>
@@ -7363,13 +7411,14 @@ Ja uz šī šablona netiks zīmēts, tā nav problēma.</translation>
     </message>
     <message>
         <location filename="../src/gui/widgets/template_list_widget.cpp" line="203"/>
+        <location filename="../src/templates/template_tool_paint.cpp" line="458"/>
         <source>Add template...</source>
-        <translation type="unfinished"></translation>
+        <translation>Pievienot veidni...</translation>
     </message>
     <message>
         <location filename="../src/gui/widgets/template_list_widget.cpp" line="207"/>
         <source>Remove</source>
-        <translation type="unfinished">Aizvākt</translation>
+        <translation>Aizvākt</translation>
     </message>
     <message>
         <location filename="../src/gui/widgets/template_list_widget.cpp" line="213"/>
@@ -7384,7 +7433,7 @@ Ja uz šī šablona netiks zīmēts, tā nav problēma.</translation>
     <message>
         <location filename="../src/gui/widgets/template_list_widget.cpp" line="238"/>
         <source>Import and remove</source>
-        <translation type="unfinished"></translation>
+        <translation>Importēt un noņemt</translation>
     </message>
     <message>
         <location filename="../src/gui/widgets/template_list_widget.cpp" line="271"/>
@@ -7450,12 +7499,12 @@ Ja uz šī šablona netiks zīmēts, tā nav problēma.</translation>
     <message>
         <location filename="../src/gui/widgets/template_list_widget.cpp" line="998"/>
         <source>Don&apos;t scale</source>
-        <translation type="unfinished"></translation>
+        <translation>Nemērogot</translation>
     </message>
     <message>
         <location filename="../src/gui/widgets/template_list_widget.cpp" line="993"/>
         <source>Scale by nominal map scale ratio (%1 %)</source>
-        <translation type="unfinished"></translation>
+        <translation>Mērogot pēc kartes nominālā mēroga attiecības (%1 %)</translation>
     </message>
     <message>
         <location filename="../src/gui/widgets/template_list_widget.cpp" line="393"/>
@@ -7470,23 +7519,23 @@ Ja uz šī šablona netiks zīmēts, tā nav problēma.</translation>
     <message>
         <location filename="../src/gui/widgets/template_list_widget.cpp" line="995"/>
         <source>Scale by current template scaling (%1 %)</source>
-        <translation type="unfinished"></translation>
+        <translation>Mērogot pēc patreizējās veidnes mēroga (%1 %)</translation>
     </message>
     <message>
         <location filename="../src/gui/widgets/template_list_widget.cpp" line="1000"/>
         <location filename="../src/gui/widgets/template_list_widget.cpp" line="1032"/>
         <source>Template import</source>
-        <translation type="unfinished"></translation>
+        <translation>Veidnes imports</translation>
     </message>
     <message>
         <location filename="../src/gui/widgets/template_list_widget.cpp" line="1001"/>
         <source>How shall the symbols of the imported template map be scaled?</source>
-        <translation type="unfinished"></translation>
+        <translation>Kā mērogot importējamās veidnes kartes simbolus?</translation>
     </message>
     <message>
         <location filename="../src/gui/widgets/template_list_widget.cpp" line="1033"/>
         <source>The template will be invisible in the overprinting simulation. Switch to normal view?</source>
-        <translation type="unfinished"></translation>
+        <translation>Veidne būs neredzama virsiespieduma imitācijā. Pārslēgt uz normālskatu?</translation>
     </message>
     <message>
         <location filename="../src/gui/widgets/template_list_widget.cpp" line="1166"/>
@@ -7545,17 +7594,17 @@ Ja uz šī šablona netiks zīmēts, tā nav problēma.</translation>
     <message>
         <location filename="../src/templates/template_positioning_dialog.cpp" line="47"/>
         <source>Coordinate system</source>
-        <translation type="unfinished"></translation>
+        <translation>Koordinātu sistēma</translation>
     </message>
     <message>
         <location filename="../src/templates/template_positioning_dialog.cpp" line="48"/>
         <source>Real</source>
-        <translation type="unfinished"></translation>
+        <translation>Reāls</translation>
     </message>
     <message>
         <location filename="../src/templates/template_positioning_dialog.cpp" line="49"/>
         <source>Map</source>
-        <translation type="unfinished"></translation>
+        <translation>Karte</translation>
     </message>
     <message>
         <location filename="../src/templates/template_positioning_dialog.cpp" line="52"/>
@@ -7584,7 +7633,7 @@ Ja uz šī šablona netiks zīmēts, tā nav problēma.</translation>
     <message>
         <location filename="../src/templates/template_track.cpp" line="141"/>
         <source>This template must be loaded with GDAL/OGR.</source>
-        <translation type="unfinished"></translation>
+        <translation>Šo veidni jāielasa ar GDAL/OGR.</translation>
     </message>
     <message>
         <location filename="../src/templates/template_track.cpp" line="190"/>
@@ -7658,9 +7707,9 @@ Ja uz šī šablona netiks zīmēts, tā nav problēma.</translation>
         <location filename="../src/templates/template_track.cpp" line="532"/>
         <source>%n path object(s) could not be imported (reason: missing coordinates).</source>
         <translation>
-            <numerusform>%n līnijveida objektu neizdevās importēt (cēlonis: trūkstošas koordinātes).</numerusform>
             <numerusform>%n līnijveida objektus neizdevās importēt (cēlonis: trūkstošas koordinātes).</numerusform>
             <numerusform>%n līnijveida objektu neizdevās importēt (cēlonis: trūkstošas koordinātes).</numerusform>
+            <numerusform>%n līnijveida objektus neizdevās importēt (cēlonis: trūkstošas koordinātes).</numerusform>
         </translation>
     </message>
     <message>
@@ -7681,15 +7730,16 @@ Ja uz šī šablona netiks zīmēts, tā nav problēma.</translation>
         <source>There was an error reading the DXF file %1:
 
 %2</source>
-        <translation type="unfinished">Kļūda ielasot DXF datni %2:
+        <translation>Kļūda ielasot DXF datni %1:
 
-%2 {1:?}</translation>
+%2</translation>
     </message>
     <message>
         <location filename="../src/sensors/gps_track.cpp" line="497"/>
         <source>%1:
 Not an OSM file.</source>
-        <translation type="unfinished"></translation>
+        <translation>%1:
+Nav OSM datne.</translation>
     </message>
     <message>
         <location filename="../src/sensors/gps_track.cpp" line="507"/>
@@ -7946,7 +7996,7 @@ Maksimālā atbalstītā versija ir %2.</translation>
     <message>
         <location filename="../src/gui/widgets/crs_param_widgets.cpp" line="67"/>
         <source>Calculate</source>
-        <translation type="unfinished"></translation>
+        <translation>Aprēķināt</translation>
     </message>
 </context>
 <context>
@@ -7996,13 +8046,13 @@ Maksimālā atbalstītā versija ir %2.</translation>
         <location filename="../src/tools/tool_helpers.cpp" line="622"/>
         <source>%1°</source>
         <comment>degree</comment>
-        <translation type="unfinished">%1°</translation>
+        <translation>%1°</translation>
     </message>
     <message>
         <location filename="../src/tools/tool_helpers.cpp" line="623"/>
         <source>%1 m</source>
         <comment>meter</comment>
-        <translation type="unfinished"></translation>
+        <translation>%1 m</translation>
     </message>
 </context>
 <context>
@@ -8012,28 +8062,28 @@ Maksimālā atbalstītā versija ir %2.</translation>
         <location filename="../src/gui/util_gui.cpp" line="151"/>
         <location filename="../src/gui/util_gui.cpp" line="185"/>
         <source>Error</source>
-        <translation type="unfinished">Kļūda</translation>
+        <translation>Kļūda</translation>
     </message>
     <message>
         <location filename="../src/gui/util_gui.cpp" line="137"/>
         <source>Failed to locate the help files.</source>
-        <translation type="unfinished">Neizdevās atrast palīdzības datni.</translation>
+        <translation>Neizdevās atrast palīdzības datnes.</translation>
     </message>
     <message>
         <location filename="../src/gui/util_gui.cpp" line="151"/>
         <source>Failed to locate the help browser (&quot;Qt Assistant&quot;).</source>
-        <translation type="unfinished">Neizdevās atrast palīdzības pārlūku (&quot;Qt Assistant&quot;).</translation>
+        <translation>Neizdevās atrast palīdzības pārlūku (&quot;Qt Assistant&quot;).</translation>
     </message>
     <message>
         <location filename="../src/gui/util_gui.cpp" line="186"/>
         <source>Failed to launch the help browser (&quot;Qt Assistant&quot;).</source>
-        <translation type="unfinished">Neizdevās palaist palīdzības pārlūku (&quot;Qt Assistant&quot;).</translation>
+        <translation>Neizdevās startēt palīdzības pārlūku (&quot;Qt Assistant&quot;).</translation>
     </message>
     <message>
         <location filename="../src/gui/util_gui.cpp" line="204"/>
         <source>See more...</source>
         <extracomment>This &quot;See more&quot; is displayed as a link to the manual in What&apos;s-this tooltips.</extracomment>
-        <translation type="unfinished"></translation>
+        <translation>Skatīt vairāk...</translation>
     </message>
 </context>
 <context>
@@ -8041,7 +8091,7 @@ Maksimālā atbalstītā versija ir %2.</translation>
     <message>
         <location filename="../src/fileformats/xml_file_format.cpp" line="208"/>
         <source>Older versions of Mapper do not support multiple map parts. To save the map in compatibility mode, you must first merge all map parts.</source>
-        <translation type="unfinished"></translation>
+        <translation>Vecākas Mapper versijas neatbalsta vairākas kartes daļas. Lai saglabātu karti saderīgā formātā, vispirms jāsapludina visas kartes daļas.</translation>
     </message>
 </context>
 <context>
@@ -8054,44 +8104,44 @@ Maksimālā atbalstītā versija ir %2.</translation>
     <message>
         <location filename="../src/fileformats/xml_file_format.cpp" line="523"/>
         <source>Some coordinates were out of bounds for printing. Map content was adjusted.</source>
-        <translation type="unfinished"></translation>
+        <translation>Dažas koordinātes bija ārpus robežām drukāšanai. Kartes saturs tika koriģēts.</translation>
     </message>
     <message>
         <location filename="../src/fileformats/xml_file_format.cpp" line="573"/>
         <source>unknown</source>
-        <translation type="unfinished">nezināms</translation>
+        <translation>nezināms</translation>
     </message>
     <message>
         <location filename="../src/fileformats/xml_file_format.cpp" line="574"/>
         <source>Parts of this file cannot be read by this version of Mapper. Minimum required version: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Datnes daļas nevar ielasīt ar šo Mapper versiju. Minimālā nepieciešamā versija: %1</translation>
     </message>
     <message>
         <location filename="../src/fileformats/xml_file_format.cpp" line="608"/>
         <source>Error at line %1 column %2: %3</source>
-        <translation type="unfinished"></translation>
+        <translation>Kļūda rindā %1 ailē %2: %3</translation>
     </message>
     <message>
         <location filename="../src/fileformats/xml_file_format.cpp" line="620"/>
         <location filename="../src/fileformats/xml_file_format.cpp" line="877"/>
         <source>Some invalid characters had to be removed.</source>
-        <translation type="unfinished"></translation>
+        <translation>Dažas nederīgas rakstzīmes bija jāatmet.</translation>
     </message>
     <message>
         <location filename="../src/fileformats/xml_file_format.cpp" line="638"/>
         <source>Unknown error</source>
-        <translation type="unfinished">Nezināma kļūda</translation>
+        <translation>Nezināma kļūda</translation>
     </message>
     <message>
         <location filename="../src/fileformats/xml_file_format.cpp" line="639"/>
         <source>Unsupported or invalid georeferencing specification &apos;%1&apos;: %2</source>
-        <translation type="unfinished"></translation>
+        <translation>Neatbalstīta vai nederīga georeferenču specifikācija &apos;%1&apos;: %2</translation>
     </message>
     <message>
         <location filename="../src/fileformats/xml_file_format.cpp" line="770"/>
         <location filename="../src/fileformats/xml_file_format.cpp" line="823"/>
         <source>Could not set knockout property of color &apos;%1&apos;.</source>
-        <translation type="unfinished"></translation>
+        <translation>Nevarēja iestatīt bloķējošo īpašību krāsai &apos;%1&apos;.</translation>
     </message>
     <message>
         <location filename="../src/fileformats/xml_file_format.cpp" line="783"/>

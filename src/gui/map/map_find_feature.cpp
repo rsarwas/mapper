@@ -1,5 +1,5 @@
 /*
- *    Copyright 2017 Kai Pastor
+ *    Copyright 2017, 2018 Kai Pastor
  *
  *    This file is part of OpenOrienteering.
  *
@@ -53,6 +53,7 @@ MapFindFeature::MapFindFeature(MapEditorController& controller)
 , controller{controller}
 {
 	show_action = new QAction(tr("&Find..."), this);
+	show_action->setMenuRole(QAction::NoRole);
 	// QKeySequence::Find may be Ctrl+F, which conflicts with "Fill / Create Border"
 	//show_action->setShortcut(QKeySequence::Find);
 	//action->setStatusTip(tr_tip);
@@ -60,6 +61,7 @@ MapFindFeature::MapFindFeature(MapEditorController& controller)
 	connect(show_action, &QAction::triggered, this, &MapFindFeature::showDialog);
 	
 	find_next_action = new QAction(tr("Find &next"), this);
+	find_next_action->setMenuRole(QAction::NoRole);
 	// QKeySequence::FindNext may be F3, which conflicts with "Baseline view"
 	//find_next_action->setShortcut(QKeySequence::FindNext);
 	//action->setStatusTip(tr_tip);
@@ -238,10 +240,7 @@ void MapFindFeature::findAll()
 
 void MapFindFeature::showHelp() const
 {
-	if (find_dialog && editor_stack->currentIndex() == 1)
-		Util::showHelp(controller.getWindow(), "tag_selector.html");
-	else
-		Util::showHelp(controller.getWindow(), "search_dialog.html");
+	Util::showHelp(controller.getWindow(), "find_objects.html");
 }
 
 
