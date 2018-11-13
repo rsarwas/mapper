@@ -19,6 +19,8 @@
 
 #include "gdal_manager.h"
 
+#include <cstddef>
+
 #include <cpl_conv.h>
 #include <gdal.h> // IWYU pragma: keep
 #include <ogr_api.h>
@@ -104,7 +106,7 @@ public:
 		}
 		QSettings settings;
 		settings.beginGroup(gdal_manager_group);
-		return !settings.contains(key) || settings.value(key).toBool();
+		return settings.value(key, true).toBool();
 	}
 	
 	const std::vector<QByteArray>& supportedRasterExtensions() const
@@ -185,11 +187,11 @@ private:
 				auto extension = extensions.mid(start, pos - start);
 				if (extension.isEmpty())
 					continue;
-				if (extension == "dxf" && !settings.value(gdal_dxf_key).toBool())
+				if (extension == "dxf" && !settings.value(gdal_dxf_key, true).toBool())
 					continue;
-				if (extension == "gpx" && !settings.value(gdal_gpx_key).toBool())
+				if (extension == "gpx" && !settings.value(gdal_gpx_key, true).toBool())
 					continue;
-				if (extension == "osm" && !settings.value(gdal_osm_key).toBool())
+				if (extension == "osm" && !settings.value(gdal_osm_key, true).toBool())
 					continue;
 				enabled_vector_extensions.emplace_back(extension);
 			}
@@ -207,11 +209,11 @@ private:
 		enabled_vector_extensions = default_extensions;
 		
 		settings.beginGroup(gdal_manager_group);
-		if (settings.value(gdal_dxf_key).toBool())
+		if (settings.value(gdal_dxf_key, true).toBool())
 			enabled_vector_extensions.push_back("dxf");
-		if (settings.value(gdal_gpx_key).toBool())
+		if (settings.value(gdal_gpx_key, true).toBool())
 			enabled_vector_extensions.push_back("gpx");
-		if (settings.value(gdal_osm_key).toBool())
+		if (settings.value(gdal_osm_key, true).toBool())
 			enabled_vector_extensions.push_back("osm");
 		settings.endGroup();
 #endif

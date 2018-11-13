@@ -23,6 +23,7 @@
 
 #include <QApplication>
 #include <QFile>
+#include <QFileInfo>  // IWYU pragma: keep
 #include <QHash>
 #include <QMessageBox>
 #include <QXmlStreamReader>
@@ -30,6 +31,7 @@
 // IWYU pragma: no_include <qxmlstream.h>
 
 #include "core/georeferencing.h"
+#include "core/storage_location.h"  // IWYU pragma: keep
 #include "templates/template_track.h"
 #include "util/dxfparser.h"
 
@@ -220,6 +222,10 @@ bool Track::saveTo(const QString& path) const
 	stream.writeEndDocument();
 	
 	file.close();
+#ifdef Q_OS_ANDROID
+	// Make the MediaScanner aware of the *updated* file.
+	Android::mediaScannerScanFile(QFileInfo(path).absolutePath());
+#endif
 	return true;
 }
 
@@ -483,7 +489,7 @@ bool Track::loadFromOSM(QFile* file, bool project_points, QWidget* dialog_parent
 	track_crs->setTransformationDirectly(QTransform());
 	
 	// Basic OSM file support
-	// Reference: http://wiki.openstreetmap.org/wiki/OSM_XML
+	// Reference: https://wiki.openstreetmap.org/wiki/OSM_XML
 	const double min_supported_version = 0.5;
 	const double max_supported_version = 0.6;
 	QHash<QString, TrackPoint> nodes;

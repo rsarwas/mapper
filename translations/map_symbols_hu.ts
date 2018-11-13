@@ -262,17 +262,18 @@
             <source>Distinct earth wall. Minimum height is 1 m.</source>
             <comment>Description of symbol 105</comment>
             <translation>Megkülönböztethető földfal, töltés. A minimális magasság 1 méter.</translation>
-    </message>
+        </message>
         <message>
-            <source>Small earth wall</source>
+            <source>Ruined earth wall</source>
             <comment>Name of symbol 106</comment>
-            <translation>Kis föld fal, kis töltés sánc</translation>
-    </message>
+            <translation type="unfinished">Kis föld fal, kis töltés sánc</translation>
+        </message>
         <message>
-            <source>A small or partly ruined earth wall shall be shown with a dashed line. Minimum height is 0.5 m.</source>
+            <source>A ruined or less distinct earth wall. Minimum height: 0.5 m.
+Minimum length: two dashes (footprint 55 m). If shorter, the symbol must be exaggerated to the minimum length or changed to symbol 105 (earth wall).</source>
             <comment>Description of symbol 106</comment>
-            <translation>A kis vagy részben romos földfalat, töltést szaggatott vonallal kell ábrázolni. A minimális magasság 0,5 méter.</translation>
-    </message>
+            <translation type="unfinished">A kis vagy részben romos földfalat, töltést szaggatott vonallal kell ábrázolni. A minimális magasság 0,5 méter.</translation>
+        </message>
         <message>
             <source>Erosion gully</source>
             <comment>Name of symbol 107</comment>
@@ -456,8 +457,8 @@ When an impassable cliff drops straight into water, making it impossible to pass
         <message>
             <source>For vertical rock faces the tags may be omitted if space is short, e.g. narrow passages between cliffs (the passage should be drawn with a width of at least 0.3 mm).</source>
             <comment>Description of symbol 201.3</comment>
-            <translation type="unfinished">Függőleges sziklafalaknál kicsi lehet a hely, a fogak elhagyhatók, pl. keskeny sziklakapu esetében. ( az átjáró legalább 0.3 mm-es szélességgel kellene rajzolni)</translation>
-        </message>
+            <translation>Függőleges sziklafalaknál kicsi lehet a hely, a fogak elhagyhatók, pl. keskeny sziklakapu esetében. ( az átjáró legalább 0.3 mm-es szélességgel kellene rajzolni).</translation>
+    </message>
         <message>
             <source>Impassable cliff, tag line</source>
             <comment>Name of symbol 201.4</comment>
@@ -752,10 +753,10 @@ To avoid confusion with symbol 416 (distinct vegetation boundary), the dots shou
             <translation type="unfinished"></translation>
         </message>
         <message>
-            <source>Open sandy ground</source>
+            <source>Sandy ground</source>
             <comment>Name of symbol 213</comment>
-            <translation>Nyílt homokos talaj</translation>
-    </message>
+            <translation type="unfinished">Nyílt homokos talaj</translation>
+        </message>
         <message>
             <source>An area of soft sandy ground where runnability is reduced to less than 80% of normal speed.</source>
             <comment>Description of symbol 213</comment>
@@ -798,7 +799,7 @@ Az áthatolhatatlan árkokat a 201 (áthatolhatatlan sziklafal) jellel kell ábr
         <message>
             <source>The black bank line emphasises that the feature is uncrossable. Dominant areas of water may be shown with 70% colour. Small areas of water and bodies of water that have narrow parts shall always be shown with full colour.</source>
             <comment>Description of symbol 301</comment>
-            <translation>A partnál húzott fekete vonal jelzi, hogy a tereptárgy áthatolhatatlan. Nagyobb vízfelület ábrázolásánál 70%-os színt lehet használni, kisebb vizes tereptárgyakat és a vízfelületek keskenyebb részeit mindig teljes kék szinnel kell jelölni.</translation>
+            <translation>A partnál húzott fekete vonal jelzi, hogy a tereptárgy áthatolhatatlan. Nagyobb vízfelület ábrázolásánál 70%-os színt lehet használni, kisebb vizes tereptárgyakat és a vízfelületek keskenyebb részeit mindig teljes kék színnel kell jelölni.</translation>
     </message>
         <message>
             <source>Uncrossable body of water</source>
@@ -874,12 +875,13 @@ Az áthatolhatatlan árkokat a 201 (áthatolhatatlan sziklafal) jellel kell ábr
             <source>Crossable watercourse</source>
             <comment>Name of symbol 304</comment>
             <translation>Áthatolható vízfolyás</translation>
-    </message>
+        </message>
         <message>
-            <source>A crossable watercourse, minimum 2 m wide. The width of watercourses over 5 m wide should be shown to scale.</source>
+            <source>Should be at least 2 m wide.
+Minimum length (isolated): footprint 15 m.</source>
             <comment>Description of symbol 304</comment>
-            <translation>Áthatolható vízfolyás, minimum 2m szélességű. Az 5 méternél szélesebb vízfolyásokat méretarányosan kell ábrázolni.</translation>
-    </message>
+            <translation type="unfinished">Áthatolható vízfolyás, minimum 2m szélességű. Az 5 méternél szélesebb vízfolyásokat méretarányosan kell ábrázolni.</translation>
+        </message>
         <message>
             <source>Small crossable watercourse</source>
             <comment>Name of symbol 305</comment>
@@ -1268,8 +1270,8 @@ Minimális szélesség: 0.35 mm (terepi méret 5 m).</translation>
 Minimum width: 0.35 mm</source>
             <comment>Description of symbol 411.2</comment>
             <translation>Nagyon sűrűn benőtt terület (fák vagy aljnövényzet), amely teljes mértékben áthatolhatatlan. Leginkább keskeny vagy kis területek ábrázolására használható térképjel.
-Minimális szélesség: 0.35 mm (terepi méret 5 m).</translation>
-        </message>
+Minimális szélesség: 0.35 mm (terepi méret 5 m)</translation>
+    </message>
         <message>
             <source>Cultivated land</source>
             <comment>Name of symbol 412</comment>
@@ -1625,12 +1627,12 @@ If it is forbidden to run along the railway, it shall be combined with the overp
 Amennyiben tilos a sínpálya mentén futni, a 711 (Tiltott útvonal) térképjellel együtt kell használni. Abban az esetben, ha tilos a sínpályát keresztezni, az 520 (Tiltott terület) vagy a 709 (Tiltott terület) térképjelekkel együtt kell alkalmazni.
 Minimális hosszúság: 5 mm (terepi méret 75 m).
 Színe: fekete.</translation>
-    </message>
+        </message>
         <message>
-            <source>Power line</source>
+            <source>Power line, cableway or skilift</source>
             <comment>Name of symbol 510</comment>
-            <translation>Légvezeték, villamos távvezeték, vagy sílift</translation>
-    </message>
+            <translation>Légvezeték, kötélpálya vagy sílift</translation>
+        </message>
         <message>
             <source>Power line, cableway or skilift. The bars show the exact location of the pylons. The line may be broken to improve legibility.</source>
             <comment>Description of symbol 510</comment>
@@ -1720,10 +1722,10 @@ Note: if the stream is wider than 0.25mm, adjust this symbol so it extends 0.5mm
             <translation type="unfinished"></translation>
         </message>
         <message>
-            <source>Ruined stone wall</source>
+            <source>Ruined wall</source>
             <comment>Name of symbol 514</comment>
-            <translation>Romos kőfal</translation>
-    </message>
+            <translation type="unfinished">Romos kőfal</translation>
+        </message>
         <message>
             <source>A ruined or less distinct wall. Minimum height 0.5 m.</source>
             <comment>Description of symbol 514</comment>
@@ -2662,8 +2664,8 @@ Minimális magassága 0,5 m.</translation>
         <message>
             <source>For vertical rock faces the tags may be omitted if space is short, e.g. narrow passages between cliffs (the passage should be drawn with a width of at least 0.3 mm).</source>
             <comment>Description of symbol 201.1</comment>
-            <translation type="unfinished">Függőleges sziklafalaknál kicsi lehet a hely, a fogak elhagyhatók, pl. keskeny sziklakapu esetében. ( az átjáró legalább 0.3 mm-es szélességgel kellene rajzolni)</translation>
-        </message>
+            <translation>Függőleges sziklafalaknál kicsi lehet a hely, a fogak elhagyhatók, pl. keskeny sziklakapu esetében. ( az átjáró legalább 0.3 mm-es szélességgel kellene rajzolni).</translation>
+    </message>
         <message>
             <source>Impassable cliff, tag line</source>
             <comment>Name of symbol 201.2</comment>
@@ -4380,8 +4382,8 @@ A szabályt megszegő versenyzőket ki kell zárni.&lt;/span&gt;</translation>
         <message>
             <source>For vertical rock faces the tags may be omitted if space is short, e.g. narrow passages between cliffs (the passage should be drawn with a width of at least 0.3 mm).</source>
             <comment>Description of symbol 201.1</comment>
-            <translation type="unfinished">Függőleges sziklafalaknál kicsi lehet a hely, a fogak elhagyhatók, pl. keskeny sziklakapu esetében. ( az átjáró legalább 0.3 mm-es szélességgel kellene rajzolni)</translation>
-        </message>
+            <translation>Függőleges sziklafalaknál kicsi lehet a hely, a fogak elhagyhatók, pl. keskeny sziklakapu esetében. ( az átjáró legalább 0.3 mm-es szélességgel kellene rajzolni).</translation>
+    </message>
         <message>
             <source>Impassable cliff, no tags, minimum size &lt;span style=&quot;color:magenta&quot;&gt;(forbidden to cross)&lt;/span&gt;</source>
             <comment>Name of symbol 201.1.1</comment>
@@ -4390,8 +4392,8 @@ A szabályt megszegő versenyzőket ki kell zárni.&lt;/span&gt;</translation>
         <message>
             <source>For vertical rock faces the tags may be omitted if space is short, e.g. narrow passages between cliffs (the passage should be drawn with a width of at least 0.3 mm).</source>
             <comment>Description of symbol 201.1.1</comment>
-            <translation type="unfinished">Függőleges sziklafalaknál kicsi lehet a hely, a fogak elhagyhatók, pl. keskeny sziklakapu esetében. ( az átjáró legalább 0.3 mm-es szélességgel kellene rajzolni)</translation>
-        </message>
+            <translation>Függőleges sziklafalaknál kicsi lehet a hely, a fogak elhagyhatók, pl. keskeny sziklakapu esetében. ( az átjáró legalább 0.3 mm-es szélességgel kellene rajzolni).</translation>
+    </message>
         <message>
             <source>Impassable cliff, tag line</source>
             <comment>Name of symbol 201.2</comment>
